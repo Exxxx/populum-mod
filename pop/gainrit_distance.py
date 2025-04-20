@@ -1,11 +1,12 @@
-"Tool to find the offset distance between two rituals for moving rituals around."
-
+"""
+Tool to find the offset distance between two rituals for moving rituals around.
+"""
 import re
 import tkinter as tk
 from tkinter import ttk
 
 # Specify the file path
-filename = "E:/dev/populum/mod/populum.c5m"
+filename = "~/mod/populum.c5m"
 
 # Read all lines from the file
 with open(filename, 'r', encoding='utf-8') as f:

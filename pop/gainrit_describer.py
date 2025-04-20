@@ -5,7 +5,7 @@ Goes through a mod file with "gainrit" commands and puts the associated ritual t
 import re
  
 # Specify the file path
-filename = "E:/dev/populum/mod/populum.c5m"
+filename = "~/mod/populum.c5m"
 
 # Read all lines from the file
 with open(filename, 'r', encoding='utf-8') as f:
