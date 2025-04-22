@@ -78253,7 +78253,7 @@ ironbonus 0
 addcomrec "Clipper" 100 1000 0 100
 reclimiter "+Sea Captain"
 recterr -93
-selectclass 29 #adven comp
+selectclass 30 #adven comp
 goldbonus 5
 ironbonus 0
 addcomrec "Clipper" 100 1000 0 100
@@ -78409,6 +78409,10 @@ selectclass 29
 recwizchance -100
 recherochance -100
 recasschance -100
+selectclass 30
+recwizchance -100
+recherochance -100
+recasschance -100
 
 #Class Descriptions
 selectclass 1  # Baron
@@ -78495,7 +78499,7 @@ selectclass 24  # Dryad
 classdescr "Totalitarian democracy refers to a system of government in which lawfully elected representatives maintain the integrity of a nation state whose citizens, while granted the right to vote, have little or no participation in the decision-making process of the government.^^In the wild forests of Elysium strange half-men roam. Since time immemorial they have lived untamed and free. But when men came to Elysium the old ways changed. The wild half-men were exposed to the gifts of civilization and some of them embraced this new order. Centaurs, once wild and quarrelsome, are now heralds of civilization and try to impose a culture not theirs on their brethren. Scripture, metal working and less useful traits of human culture have diluted the ancient ways of the half-men. Now the Queen of the WIld, a Dryad priestess of remarkable power is gathering her flock, regardless of the wishes of the Centaur Sages, to expel the humans and make Elysium what it once was, beautiful and untamed.^^In the sacred groves of Gaia wild half-men appear. They are wild and undisciplined, but they can be armed and trained to fight in an orderly fashion. most of them are prone to go beserk and centaurs often abandon their bows to fight in melee if wounded. Most of the armies of the Dryad Queen is comprised of animals and wild half-men barely able to tell one end of a spear from the other."
 classabdescr "Satyrs and Harpies appear for free in sacred groves.^Centaurs and Minotaurs appear for free in sacred groves if a centaur or minotaur commander is present.^The Dryad Queen collects herbs from forests and weed from other locations.^The Dryad Queen uses herbs to create and upgrade sacred groves and summon animals.^New Sacred Groves can only be created within a certain distance of an existing Sacred Grove."
 
-selectclass 29 # "Adventuring Company"
+selectclass 30 # "Adventuring Company"
 classdescr "The Adventuring Company is a very weak start with only a farm but a large band of diverse adventurers and a sizable purse to sustain. It will take everything you have to survive as an adventuring company in the harsh world of Elysium."
 classabdescr "Can recruit from a small standard roster at any human settlement location including farms.^Large starting retinue of diverse apprentice commanders.^Extensive starting treasury of many resource types."
 
