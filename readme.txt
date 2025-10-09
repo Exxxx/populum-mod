@@ -29,7 +29,7 @@ Content Warning: This mod contains content (textual and game mechanics, not imag
 [url=https://docs.google.com/spreadsheets/d/1A-hHWlm9upzErIxri1FpvsxphE6p8dKdkk98Tplqq_c/edit?usp=sharing]Change log 0.9 and older (to be updated)[/url]
 
 [b]Install[/b]
-1. Use the Workshop to install
+1. Use the Steam Workshop to install
 2. Run Conquest of Elysium 5
 3. Select "Mods" and activate the the Populum module.
 
@@ -48,6 +48,8 @@ The Game of Thrones map (GOT) is a fixed starting location map due to the densit
 
 [b]Technical Note:[/b]
 [i]Populum's turn processing time should be more reasonable than previous versions given the reduction and removal of many events. Multiplayer games should always be hosted on the best CPU.[/i]
+
+[url=https://github.com/Exxxx/populum-mod]Populum MOD Github[/url]
 
 [url=https://drive.google.com/open?id=19h6MOrRvle8WhzF8QrCkJ9l9ULZuMctE]Map of Populum Paths(Old Reference)[/url]
 [i]Dotted lines indicates a connected person that is required to be present or may cast the ritual required.[/i]
