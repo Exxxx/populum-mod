@@ -3307,22 +3307,22 @@ selectmonster "Satyr"
 hp 16
 
 selectmonster "Satyr Javelinist"
-hp 17
-
-selectmonster "Satyr Warrior"
 hp 18
 
+selectmonster "Satyr Warrior"
+hp 17
+
 selectmonster "Satyr Hoplite"
-hp 19
+hp 17
 
 selectmonster "Satyr Commander"
 hp 20
 
 selectmonster "Steel Hoplite"
-hp 20
+hp 17
 
 selectmonster "Satyr Sniper"
-hp 16
+hp 15
 
 selectmonster "Hoplite Commander"
 hp 23
@@ -10030,14 +10030,22 @@ newweapon "Large Illusory Bow"
 range 5
 init 2
 dmgtype 3 
+
 dmg 3
 mr 
+
 arrow 
+
 lob 
+
 rangepen 
+
 flymode 1 
+
 flylook 0 
+
 flysound 14 
+
 sound -1 
 
 newweapon "Large Illusory Dagger" 
@@ -21382,28 +21390,22 @@ addterr 83 # Capitolium
 addterr 207 # Capital
 addterr 243 # Capitolium
 
-#volcanic terrains
-#selectterrgroup -1033
-#setname "Volcanoes and like"
-#addterr 102 #Volcano#addterr 52 #magma river#addterr 53 #magma
 #selectterrgroup -1033
 #setname "Ancient temple or Ziggurats"
 #addterr 39 # Ancient temple
 #addterr 167 # Ziggurat
 
-selectterrgroup -1034
-addterr 44 # "Tundra"
-addterr 54 # "Frozen Waste"
-addterr 75 # "Frozen River"
-addterr 132 # "Frozen Lake"
-addterr 133 # "Frozen Lake"
-addterr 139 # "Fimbul Fortress"
-addterr 346 # "Frozen Sea"
-addterr 347 # "Frozen Sea"
-
 #selectterrgroup ????
 #setname "Earth locations"
 #addterr 12
+
+#volcanic terrains
+#selectterrgroup -1012
+#setname "Volcanic and Magma"
+#addterr 102 #Volcano
+#addterr 52 #magma river
+#addterr 53 #magma
+
 
 #Consider new groups
 #Pillage vs Slaughter (*4 multiplier bonus, 100% chance to reduce settlement)
@@ -27767,8 +27769,8 @@ meleeweapon       17  "Large Claw"
 selectmonster "Ziz"
 clearweapons
 frontpos
-siegeweapon  40 "Huge Drop Boulder"  
-rangedweapon 40 "Huge Drop Boulder"
+siegeweapon  40 "Drop Huge Boulder"  
+rangedweapon 40 "Drop Huge Boulder"
 meleeweapon 20  "Large Talon" 
 meleeweapon 20  "Large Talon" 
 meleeweapon 25  "Large Beak" 
@@ -29366,7 +29368,7 @@ meleeweaponspec   10  13
 meleeweapon       -1   8  
 meleeweapon       -1   8  
 meleeweaponbonus   4  37  
-selectmonster 0:"Little Longdead"                                         
+selectmonster "Little Longdead"                                         
 clearweapons
 meleeweapon -1   0   
 selectmonster 1:"Little Longdead"                                          
@@ -32223,7 +32225,7 @@ selectmonster "Grand Wizard"
 gatheranygems
 power 18 1
 power 19 1
-classcost 100
+classcost 5
 limitgold 8
 
 selectmonster "Old Wizard"
@@ -33648,7 +33650,6 @@ fastheal
 selectmonster "Champion of Waves"
 name " Champion of Waves"
 swamp
-
 newmonster "Champion of Waves"
 descr "The Champion of Waves is a being native to the Elemental Plane of Water.  It manifests as an armored knight mounted on an azure steed of water and kelp.  The champion can cast hydromantic spells and summon elementals.  It can enter the sea."
 copystats " Champion of Waves"
@@ -37227,7 +37228,6 @@ selectmonster "Crystal Priestess"
 str 3
 awe 1
 gathersacr
-gatheranygems
 shockres 25
 fireres  25
 coldres  25
@@ -37266,7 +37266,6 @@ gatherweed
 swamp
 fastheal
 prebatweapon 1 "Summon Serpent"
-
 selectmonster "Jade Sorceress"
 poisonres 100
 awe 2
@@ -37276,7 +37275,6 @@ swamp
 fastheal
 prebatweapon 1 "Summon Serpent"
 selectmonster "Jade Amazon"
-
 clearweapons
 poisonres 75
 swamp
@@ -37525,12 +37523,16 @@ copystats "Hoburg Slinger"
 clearweapons
 rank -1
 rearpos
+nozoc
 hp 1
 mor 1
 str 1
 mr 3
 slow
 gold -1
+nozoc
+immobile
+
 
 
 
@@ -38579,8 +38581,8 @@ meleeweaponbonus           4  93 # Beak: d4 Slash damage.
 selectmonster    "Solar Eagle"    # 1322
 # sprite number            38022
 clearweapons
-siegeweapon               40  "Huge Drop Boulder"
-rangedweapon              40  "Huge Drop Boulder"
+siegeweapon               40  "Drop Huge Boulder"
+rangedweapon              40  "Drop Huge Boulder"
 spellweapon               19   2 # Solar Magic at level 2.
 meleeweapon               20  94 # Talon: d20 Slash damage.
 meleeweapon               20  94 # Talon: d20 Slash damage.
@@ -39394,7 +39396,6 @@ armor                          0 # Armor.
 hp                            10 # Hit Points.
 awe 1
 gathersacr
-gatheranygems
 fast
 shockres 30
 fireres  30
@@ -39543,473 +39544,7 @@ mountain
 prebatweapon 2 "Summon Longdead"
 hadesres 90
 awe 1
-
-
-
-selectmonster    "Sending"                                                  # 1630
-hp                             2 # Hit Points.
-selectmonster    "Giant Locust"                                             # 1631
-hp                             10 # Hit Points.
-selectmonster    "Vassal Unicorn Knight"                                    # 1632
-hp                            24 # Hit Points.
-airshield 25
-selectmonster    "Ice"                                                      # 1633
-hp                            22 # Hit Points.
-coldres                      100 # Cold immunity.
-selectmonster    "Cabbage"                                                  # 1634
-hp                             4 # Hit Points.
-selectmonster    "Atavi Chief"                                              # 1635
-hp                            15 # Hit Points.
-airshield 25
-selectmonster    "Atavi Archer"                                             # 1636
-hp                             10 # Hit Points.
-selectmonster    "Atavi Warrior"                                            # 1637
-hp                             12 # Hit Points.
-airshield 25
-selectmonster    "Vanara Captain"                                           # 1638
-hp                            15 # Hit Points.
-airshield 25
-selectmonster    "Vanara Scout"                                             # 1639
-hp                             10 # Hit Points.
-selectmonster    "Vanara Archer"                                            # 1640
-hp                             10 # Hit Points.
-selectmonster    "Vanara Soldier"                                           # 1641
-hp                             12 # Hit Points.
-airshield 25
-selectmonster    "Vanara Swordsman"                                         # 1642
-hp                             16 # Hit Points.
-airshield 25
-selectmonster    "Markata"                                                  # 1643
-hp                             4 # Hit Points.
-rank 1
-frontpos
-selectmonster    "Markata Archer"                                           # 1644
-hp                             4 # Hit Points.
-rank 1
-rearpos
-selectmonster    "Bandar Archer"                                            # 1645
-hp                            21 # Hit Points.
-selectmonster    "Bandar Warrior"                                           # 1646
-hp                            24 # Hit Points.
-airshield 25
-selectmonster    "Heavy Bandar Archer"                                      # 1647
-hp                            22 # Hit Points.
-selectmonster    "Heavy Bandar Warrior"                                     # 1648
-hp                            24 # Hit Points.
-selectmonster    "Bandar Swordsman"                                         # 1649
-hp                            24 # Hit Points.
-airshield 25
-selectmonster    "Bandaraja"                                                # 1650
-hp                            27 # Hit Points.
-selectmonster    "Yogi"                                                     # 1651
-hp                             10 # Hit Points.
-selectmonster    "Guru"                                                     # 1652
-hp                             10 # Hit Points.
-selectmonster    "Rishi"                                                    # 1653
-hp                             10 # Hit Points.
-selectmonster    "Guhyaka"                                                  # 1654
-hp                            18 # Hit Points.
-selectmonster    "Yavana"                                                   # 1655
-hp                            21 # Hit Points.
-airshield 25
-selectmonster    "Yavana Archer"                                            # 1656
-hp                            20 # Hit Points.
-selectmonster    "Gandharva"                                                # 1657
-hp                            26 # Hit Points.
-airshield 25
-selectmonster    "Yaksha"                                                   # 1658
-hp                            24 # Hit Points.
-selectmonster    "Steward of the Earth"                                     # 1659
-hp                            24 # Hit Points.
-selectmonster    "Yakshini"                                                 # 1660
-hp                            21 # Hit Points.
-selectmonster    "Stewardess of the Lake"                                   # 1661
-hp                            21 # Hit Points.
-selectmonster    "Apsara"                                                   # 1662
-hp                            16 # Hit Points.
-selectmonster    "Vidyadhara"                                               # 1663
-hp                            20 # Hit Points.
-selectmonster    "Garuda"                                                   # 1664
-airshield 25
-hp                            22 # Hit Points.
-selectmonster    "Kinnara"                                                  # 1665
-hp                            27 # Hit Points.
-selectmonster    "Siddha"                                                   # 1666
-hp                            27 # Hit Points.
-selectmonster    "Immortal Siddha"                                          # 1667
-hp                            27 # Hit Points.
-selectmonster    "Devala"                                                   # 1668
-hp                            26 # Hit Points.
-selectmonster    "Devata"                                                   # 1669
-hp                            30 # Hit Points.
-airshield 25
-selectmonster    "Angiri"                                                   # 1670
-hp                            18 # Hit Points.
-airshield 25
-selectmonster    "Kimpurusha"                                               # 1671
-hp                            26 # Hit Points.
-airshield 25
-selectmonster    "Marut"                                                    # 1672
-hp                            26 # Hit Points.
-selectmonster    "Marut General"                                            # 1673
-hp                            28 # Hit Points.
-selectmonster    "Rudra"                                                    # 1674
-hp                            34 # Hit Points.
-airshield 25
-selectmonster    "Naga"                                                     # 1675
-hp                            12 # Hit Points.
-airshield 25
-name "Naga "
-regeneration
-swamp               # Swamp Move
-wall                # Wall Climbing
-winteridle          # Doesn't move on the map during winter
-coldblood           # Gets -1 to its strength in snow
-poisonres 100
-coldres -25
-nobootslots
-water
-gold -1
-diseaseres
-unaging
-
-selectmonster    "Naga Warrior"                                             # 1676
-hp                            15 # Hit Points.
-regeneration
-swamp               # Swamp Move
-wall                # Wall Climbing
-winteridle          # Doesn't move on the map during winter
-coldblood           # Gets -1 to its strength in snow
-poisonres 100
-coldres -25
-nobootslots
-water
-gold -1
-diseaseres
-unaging
-airshield 25
-
-selectmonster    "Nagaraja"                                                 # 1677
-hp                            26 # Hit Points.
-airshield 25
-
-selectmonster    "Nagini"                                                   # 1678
-hp                            12 # Hit Points.
-name "Nagini "
-regeneration
-varregen 10
-swamp               # Swamp Move
-wall                # Wall Climbing
-winteridle          # Doesn't move on the map during winter
-coldblood           # Gets -1 to its strength in snow
-poisonres 100
-coldres -25
-nobootslots
-water
-gold -2
-
-selectmonster    "Nagarishi"                                                # 1679
-hp                            21 # Hit Points.
-regeneration
-varregen 10
-swamp               # Swamp Move
-wall                # Wall Climbing
-winteridle          # Doesn't move on the map during winter
-coldblood           # Gets -1 to its strength in snow
-poisonres 100
-coldres -25
-nobootslots
-water
-gold -2
-
-selectmonster    "Nataraja"                                                 # 1680
-hp                           149 # Hit Points.
-
-
-selectmonster    "Devi of Darkness"                                         # 1681
-hp                           155 # Hit Points.
-selectmonster    "Devi of Harmony"                                          # 1682
-hp                           142 # Hit Points.
-selectmonster    "Destroyer of Worlds"                                      # 1683
-hp                           177 # Hit Points.
-selectmonster    "Cow of Plenty"                                            # 1684
-hp                           168 # Hit Points.
-selectmonster    "Manifestation of Maya"                                    # 1685
-hp                             16 # Hit Points.
-airshield 25
-selectmonster    "Erinye"                                                   # 1686
-hp                            45 # Hit Points.
-selectmonster    "Erinye"                                                   # 1687
-hp                            45 # Hit Points.
-selectmonster    "Gorgon"                                                   # 1688
-hp                            42 # Hit Points.
-selectmonster    "Kelp"                                                     # 1689
-hp                             4 # Hit Points.
-selectmonster    "Kelp"                                                     # 1690
-hp                             4 # Hit Points.
-selectmonster    "Rakshasa General"                                         # 1691
-hp                            34 # Hit Points.
-airshield 25
-selectmonster    "Raksharaja"                                               # 1692
-hp                            36 # Hit Points.
-airshield 25
-selectmonster    "Raksharishi"                                              # 1693
-hp                            38 # Hit Points.
-selectmonster    "Yogini"                                                   # 1694
-hp                            18 # Hit Points.
-selectmonster    "Raktapata"                                                # 1695
-hp                            20 # Hit Points.
-selectmonster    "Kala-Mukha"                                               # 1696
-airshield 25
-hp                            26 # Hit Points.
-selectmonster    "Kala-Mukha Warrior"                                       # 1697
-hp                            28 # Hit Points.
-selectmonster    "Asara"                                                    # 1698
-hp                            30 # Hit Points.
-selectmonster    "Anusara"                                                  # 1699
-hp                            29 # Hit Points.
-airshield 25
-selectmonster    "Palankasha"                                               # 1700
-hp                            31 # Hit Points.
-airshield 25
-selectmonster    "Praghasa"                                                 # 1701
-hp                            34 # Hit Points.
-selectmonster    "Rakshasa"                                                 # 1702
-hp                            32 # Hit Points.
-selectmonster    "Rakshasa Warrior"                                         # 1703
-hp                            35 # Hit Points.
-selectmonster    "Sandhyabala"                                              # 1704
-hp                            36 # Hit Points.
-airshield 25
-selectmonster    "Samanishada"                                              # 1705
-hp                            34 # Hit Points.
-selectmonster    "Rakshasi"                                                 # 1706
-hp                            29 # Hit Points.
-selectmonster    "Manushya Rakshasi"                                        # 1707
-hp                            26 # Hit Points.
-selectmonster    "Asrapa"                                                   # 1709
-hp                            20 # Hit Points.
-selectmonster    "Dakini"                                                   # 1710
-hp                            27 # Hit Points.
-selectmonster    "Pisacha"                                                  # 1711
-hp                            28 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Vetala Vessel"                                            # 1712
-hp                            28 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Vetala"                                                   # 1713
-hp                            22 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    0:"Possessed Soulless Bandar"                                # 1714
-hp                            28 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    1:"Possessed Soulless Bandar"                                # 1715
-hp                            28 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Possessed Armored Soulless Bandar"                        # 1716
-hp                            28 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    "Possessed Soulless Vanara"                                # 1717
-hp                            15 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Possessed Soulless Vanara Soldier"                        # 1718
-hp                            15 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    0:"Possessed Longdead Bandar"                                # 1719
-hp                             16 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    1:"Possessed Longdead Bandar"                                # 1720
-hp                             16 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Possessed Longdead Bandar Warrior"                        # 1721
-hp                             16 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    "Possessed Longdead Heavy Bandar Warrior"                  # 1722
-hp                             16 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    0:"Possessed Longdead Vanara"                                # 1723
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    1:"Possessed Longdead Vanara"                                # 1724
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Possessed Longdead Vanara Soldier"                        # 1725
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    "Bhuta"                                                    # 1726
-hp                             12 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Preta"                                                    # 1727
-hp                            15 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Failed Reincarnation"                                     # 1728
-hp                             2 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Soulless Bandar"                                          # 1729
-hp                            28 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Soulless Bandar"                                          # 1730
-hp                            28 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Armored Soulless Bandar"                                  # 1731
-hp                            28 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    "Soulless Vanara"                                          # 1732
-hp                            15 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Soulless Vanara Soldier"                                  # 1733
-hp                            15 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    "Soulless Markata"                                         # 1734
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    0:"Longdead Bandar"                                          # 1735
-hp                             16 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    1:"Longdead Bandar"                                          # 1736
-hp                             16 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Longdead Bandar Warrior"                                  # 1737
-hp                             16 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    "Longdead Heavy Bandar Warrior"                            # 1738
-hp                             16 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    0:"Longdead Vanara"                                          # 1739
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    1:"Longdead Vanara"                                          # 1740
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Armored Longdead Vanara"                                  # 1741
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    "Longdead Markata"                                         # 1742
-hp                             2 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Mandeha"                                                  # 1743
-hp                            91 # Hit Points.
-selectmonster    "Mandeha"                                                  # 1744
-hp                            91 # Hit Points.
-selectmonster    "Mandeha"                                                  # 1745
-hp                            91 # Hit Points.
-selectmonster    "Danava"                                                   # 1746
-hp                           161 # Hit Points.
-airshield 25
-selectmonster    "Daitya"                                                   # 1747
-hp                           101 # Hit Points.
-selectmonster    "Asura"                                                    # 1748
-hp                           166 # Hit Points.
-selectmonster    "Asura"                                                    # 1749
-hp                           166 # Hit Points.
-selectmonster    "Asura"                                                    # 1750
-hp                           166 # Hit Points.
-selectmonster    "Possessed Soulless"                                       # 1751
-hp                            15 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Possessed Soulless Giant"                                 # 1752
-hp                            60 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Possessed Little Soulless"                                # 1753
-hp                             8 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    0:"Possessed Longdead"                                       # 1754
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    1:"Possessed Longdead"                                       # 1755
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    2:"Possessed Longdead"                                       # 1756
-hp                             8 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    3:"Possessed Longdead"                                       # 1757
-hp                             8 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    4:"Possessed Longdead"                                       # 1758
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    5:"Possessed Longdead"                                       # 1759
-hp                             8 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    6:"Possessed Longdead"                                       # 1760
-hp                             8 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    7:"Possessed Longdead"                                       # 1761
-hp                             10 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    8:"Possessed Longdead"                                       # 1762
-hp                             8 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    9:"Possessed Longdead"                                       # 1763
-hp                             6 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    0:"Possessed Longdead Giant"                                 # 1764
-hp                            25 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    1:"Possessed Longdead Giant"                                 # 1765
-hp                            25 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    2:"Possessed Longdead Giant"                                 # 1766
-hp                            25 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    3:"Possessed Longdead Giant"                                 # 1767
-hp                            25 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    4:"Possessed Longdead Giant"                                 # 1768
-hp                            25 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    5:"Possessed Longdead Giant"                                 # 1769
-hp                            25 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    6:"Possessed Longdead Giant"                                 # 1770
-hp                            25 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    7:"Possessed Longdead Giant"                                 # 1771
-hp                            25 # Hit Points.
-coldres                       99 # Cold immunity.
-airshield 25
-selectmonster    0:"Possessed Little Longdead"                                # 1772
-hp                             4 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    1:"Possessed Little Longdead"                                # 1773
-hp                             4 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    2:"Possessed Little Longdead"                                # 1774
-hp                             4 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    3:"Possessed Little Longdead"                                # 1775
-hp                             4 # Hit Points.
-coldres                       99 # Cold immunity.
-selectmonster    "Debug Sensei"                                             # 1776
-hp                            15 # Hit Points.
-selectmonster    "Debug Sensei II"                                          # 1777
-hp                            15 # Hit Points.
-selectmonster    "Debug Sensei III"                                         # 1778
-hp                            15 # Hit Points.
-
-
-
 #end01
-
-
-
 
 
 #Building modifications selections for resistance reduction
@@ -40713,7 +40248,7 @@ charmres
 sleepres
 diseaseres  
 unaging
-nametype 60
+nametype 58
 stationary
 immobile
 nozoc
@@ -40890,7 +40425,7 @@ name " Dryad"
 allitemslots
 
 newmonster "Rare Dryad Offspring"
-descr "A rare manifestation of a Dryad's life-giving magic. This immobile seedling is not a creature, but the heart of a future sacred grove. If allowed to mature, it will transform the very land it's on, creating a bastion of primeval forest magic."
+descr "."
 copystats "Offspring Base"
 spr1 "pop/monster/ygmaenad01.tga"
 spr2 "pop/monster/ygmaenad02.tga"
@@ -40900,10 +40435,9 @@ growtime 12
 gold -2
 ctrlchance 100
 immobile
-nocombat
 
 newmonster "Dryad"
-descr "A powerful spirit of the ancient forests, a Dryad is intrinsically linked to the life force of the woods. She is a potent spellcaster, her mere presence inspiring awe, and her wounds heal with supernatural speed. Dryads can give birth to lesser fey creatures, seeding the forests with their wild and unpredictable offspring."
+descr "."
 copystats " Dryad"
 copyspr " Dryad"
 rearpos
@@ -40928,7 +40462,7 @@ nobootslots
 power 47 1
 
 newmonster "Dryad Offspring"
-descr "A young fey creature, born of a Dryad's magic. In time, it will mature into a wild and frenzied Maenad, a devotee of ecstatic ritual."
+descr "."
 copystats "Offspring Base"
 spr1 "pop/monster/ygmaenad01.tga"
 spr2 "pop/monster/ygmaenad02.tga"
@@ -40938,10 +40472,9 @@ foreststealth
 growtime 12
 ctrlchance 100
 descr "A Dryad offspring that will grow into a Maenad."
-nocombat
 
 newmonster "Maenad"
-descr "Maenads are the frenzied female followers of the wild gods. Giving themselves over to ecstatic rage, they enter a berserker fury in battle, tearing at their enemies with sharp claws."
+descr "."
 copyspr "Maenad"
 copystats "Maenad"
 clearspec
@@ -40961,7 +40494,7 @@ berserker
 foreststealth
 
 newmonster "Dryad Offspring"
-descr "A young fey creature, born of a Dryad's magic. In time, it will mature into a rowdy and hedonistic Satyr, a wild spirit of the untamed woods."
+descr "."
 copystats "Offspring Base"
 spr1 "pop/monster/ygsatyr01.tga"
 spr2 "pop/monster/ygsatyr02.tga"
@@ -40970,10 +40503,9 @@ nobootslots
 growtime 12
 ctrlchance 100
 descr "A Dryad offspring that will grow into a Satyr."
-nocombat
 
 newmonster "Satyr"
-descr "Satyrs are wild, capricious spirits of the untamed forest. Part man, part goat, they are fiercely territorial and hedonistic. In battle, they are surprisingly fast, fighting with a berserker's fury and goring their foes with powerful hooves."
+descr "."
 copyspr "Satyr"
 copystats "Satyr"
 clearspec
@@ -43753,7 +43285,7 @@ hadesres 100
 
 newmonster "Onyx Dead Rider"
 descr "Onyx Dead Riders are trained to create and bind personal undead mounts from the remains of equine. They are the least durable and must be remade each time they are destroyed but are very easy to rebuild only taking about two months to find spare parts no matter where they are. ^^A settlement of village or larger will allow them to quickly find parts to make a new mount."
-#copystats "Onyx Amazon"
+copystats "Onyx Amazon"
 clearweapons
 clearspec
 spr1 "pop/monster/onyxcav01.tga"
@@ -43764,63 +43296,48 @@ armor            3
 mr               7  # Magic Resistance
 mor             99  # Morale
 str              6  # Strength
-meleeweapon 0 "Obsidian Spear"
-armor 2
-mountain
-prebatweapon 1 "Summon Longdead"
-hadesres 100
-#spellweaponsingle 15 1 #Onyx sorc
+meleeweapon  1   4  # Spear
+spellweaponsingle 15 1 #Onyx sorc
 fast
 battlefast
-human
+undead
 shield
 airshield 25 #shieldpass
 noheal
 pierceres
 allitemslots
-female                           # Female.
-nametype                      35 # Amazon.
+# Bitflag38         # Female
+nametype        35  # Amazon
 gold -1
 shrinkhp 11
 hadesres 95
-shockres 40
-fireres  0
-coldres  99
-poisonres 100
 
 newmonster "Dismounted Onyx Dead Rider"
 descr "Onyx Dead Riders are trained to create and bind personal undead mounts from the remains of equine. They are the least durable and must be remade each time they are destroyed but are very easy to rebuild only taking about two months to find spare parts no matter where they are. ^^A settlement of village or larger will allow them to quickly find parts to make a new mount."
-#copystats "Onyx Amazon"
+copystats "Onyx Amazon"
 clearweapons
 copyspr "Onyx Amazon"
 rank             0  # Mid
 hp              10
+armor            2
 mr               6  # Magic Resistance
 mor              5  # Morale
 str              5  # Strength
-meleeweapon 0 "Obsidian Spear"
-armor 2
-mountain
-prebatweapon 1 "Summon Longdead"
-hadesres 80
-#spellweaponsingle 15 1 #Onyx sorc
+meleeweapon  0   4  # Spear
+spellweaponsingle 15 1 #Onyx sorc
 slow
 human
 shield
 airshield 25 #shieldpass
 allitemslots
-female                           # Female.
-nametype                      35 # Amazon.
+# Bitflag38         # Female
+nametype        35  # Amazon
 gold -1
 growoffs -1
 growtime 1
 growterr -32
 fear 1
 hadesres 90
-shockres 20
-fireres  15
-coldres  15
-poisonres 20
 
 #New demonlord
 newmonster "Pazuzu the Demon Lord"
@@ -46088,10 +45605,6 @@ unaging
 trample
 noslots
 
-# Hide the old engineer for now, maybe do something different with that one later
-selectmonster "Engineer"
-name "Engineer "
-
 newmonster "Engineer"
 descr "Engineers may build roads on various terrains."
 spr1 "pop/monster/engineer01.tga"
@@ -46673,8 +46186,8 @@ localleadership  1
 
 newmonster "Defiant Heroine"
 descr "Heroes have need of gold too and sometimes even a well known Hero sells his services for the right price.  Heroes are not only skillful, but often loaded with magic items too."
-copystats "Archer Adventurer"
-copyspr "Archer Adventurer"
+copystats "Heroine"
+copyspr "Heroine"
 ctrlchance -100
 
 newmonster "Defiant Hero"
@@ -48155,8 +47668,7 @@ fireres 100
 berserker
 fireaura 1
 fireexpl 1
-dmgonterr -1034
-dmgonterrbonus 15
+melt -12
 diseaseres
 unaging
 fastheal
@@ -48211,8 +47723,7 @@ fireres 90
 berserker
 #fireaura 1
 #fireexpl 1
-dmgonterr -1034
-dmgonterrbonus 15
+melt -2
 diseaseres
 #unaging
 #fastheal
@@ -48235,8 +47746,7 @@ str              6  # Strength
 meleeweapon  2  "Axe"
 largeshield
 airshield 50
-dmgonterr -1034
-dmgonterrbonus 15
+
 
 newmonster "Abysian Offspring"
 descr "This is the offspring of an Abysian."
@@ -48250,8 +47760,7 @@ fireres 80
 #berserker
 #fireaura 1
 #fireexpl 1
-dmgonterr -1034
-dmgonterrbonus 15
+melt -1
 diseaseres
 #unaging
 #fastheal
@@ -48285,8 +47794,7 @@ fireres 90
 berserker
 #fireaura 1
 #fireexpl 1
-dmgonterr -1034
-dmgonterrbonus 15
+melt -2
 diseaseres
 #unaging
 #fastheal
@@ -48309,8 +47817,6 @@ str              6  # Strength
 meleeweapon  2  "Flail"
 largeshield
 airshield 50 #shieldpass
-dmgonterr -1034
-dmgonterrbonus 15
 
 newmonster "Abysian Warlord"
 descr "Abysian Warlords are some of the strongest and smartest of the warrior caste in Abysian culture. They take slaves and are noticeable by dual-wielding axes."
@@ -48334,8 +47840,6 @@ localleadership 2
 leadership 1
 #slavehunt 0
 gold -3
-dmgonterr -1034
-dmgonterrbonus 15
 
 newmonster "Burning One"
 descr "Burning Ones may not be the smartest but they are the strongest in the Warrior caste. They take slaves and are noticeable by dual-wielding maces."
@@ -48356,8 +47860,7 @@ fireaura 2
 burnforest 5
 #slavehunt 0
 gold -3
-dmgonterr -1034
-dmgonterrbonus 15
+
 
 newmonster "Humanbred"
 descr "Abysian children and people that have more human traits than the 'pure' Abysians are called 'Humanbred', a derogatory term in ancient Abysian culture to coincide with their low social status. Humanbred males with average and low intellect are usually relegated to the front-line of the Abysian Legion to absorb the first wave of anyone foolish enough to invade their territory."
@@ -48403,8 +47906,6 @@ diseaseres
 #burnforest 1
 #mountain
 #aggressive
-dmgonterr -1034
-dmgonterrbonus 1
 
 newmonster "Abysian Trainee"
 descr "This young Abysian is marked for a life as a soldier when coming to adulthood."
@@ -48432,8 +47933,7 @@ fireres 89
 #berserker
 #fireaura 1
 #fireexpl 1
-dmgonterr -1034
-dmgonterrbonus 1
+melt -1
 diseaseres
 #unaging
 #fastheal
@@ -48456,8 +47956,6 @@ meleeweapon 1 "Axe"
 largeshield
 airshield 50 #shieldpass
 armor 1
-dmgonterr -1034
-dmgonterrbonus 1
 
 
 newmonster "Abysian Offspring"
@@ -48480,8 +47978,6 @@ diseaseres
 #burnforest 1
 #mountain
 #aggressive
-dmgonterr -1034
-dmgonterrbonus 1
 
 newmonster "Abysian Trainee"
 descr "This young Abysian is marked for a life as a soldier when coming to adulthood."
@@ -48509,8 +48005,7 @@ fireres 89
 #berserker
 #fireaura 1
 #fireexpl 1
-dmgonterr -1034
-dmgonterrbonus 1
+melt -1
 diseaseres
 #unaging
 #fastheal
@@ -48534,12 +48029,10 @@ meleeweapon 1 "Spear"
 largeshield
 airshield 50 #shieldpass
 armor 1
-dmgonterr -1034
-dmgonterrbonus 1
 
 
 newmonster "Abysian Offspring"
-descr "This is the offspring of an Abysian. There's something different about this one."
+descr "This is the offspring of an Abysian."
 copystats "Offspring Base"
 spr1 "pop/monster/babyaby.tga"
 spr2 "pop/monster/babyaby.tga"
@@ -51783,7 +51276,6 @@ wander 19
 lovesterr -14
 likesterr -58
 localleadership  -1
-noleader
 descr "Knights are elite troops, higher in station and far better trained than normal soldiers. They are of noble birth or at least ennobled land owners, and of sufficient wealth to provide themselves with the finest armour and steeds. The abundance of unclaimed land in Elysium makes it possible for the Baron to create many new nobles who in turn will provide him with knights and soldiers. Knights have differing personality following your orders most of the time while others will do their own thing roaming the countryside.^^A new mount can be found in any village sized settlement or larger.^^Loner Knights will wander by themselves if they are not under leadership.^^Personality: Work best when I am alone. Am wary of others. Want things done my way."
 
 #2
@@ -51816,7 +51308,6 @@ wandermaxdist 6
 wander 19
 lovesterr -32
 localleadership  -1
-noleader
 descr "Knights are elite troops, higher in station and far better trained than normal soldiers. They are of noble birth or at least ennobled land owners, and of sufficient wealth to provide themselves with the finest armour and steeds. The abundance of unclaimed land in Elysium makes it possible for the Baron to create many new nobles who in turn will provide him with knights and soldiers. Knights have differing personality following your orders most of the time while others will do their own thing roaming the countryside.^^Loner Knights will wander by themselves if they are not under leadership.^^Personality: Work best when I am alone. Am wary of others. Want things done my way."
 
 newmonster "Dai Bakemono Samurai"
@@ -52741,7 +52232,7 @@ coldres    5
 shockres   5
 
 newmonster "Young Anakite"
-descr "An adolescent Anakite, already displaying the prodigious strength and resilience of its lineage. These six-fingered giants are trained for war from a young age, wielding massive broadswords with ease. In time, they will grow into the full might of the Anakim, the terror of lesser races."
+descr "."
 spr1 "pop/monster/yganakite01.tga"
 spr2 "pop/monster/yganakite02.tga"
 rank             1  # front
@@ -52786,7 +52277,7 @@ largeshield
 airshield 50 #shieldpass
 
 newmonster "Avvim Offspring"
-descr "The smallest of the giant-kin, an Avvim Offspring is little more than an infant. Though possessing the innate resilience of its kind, it is slow, weak, and utterly dependent on its elders for survival. It will eventually grow into a Young Gibbor."
+descr "."
 spr1 "pop/monster/babygiant0.tga"
 spr2 "pop/monster/babygiant0.tga"
 rank            -1  # rear
@@ -52811,7 +52302,7 @@ coldres    5
 shockres   5
 
 newmonster "Young Gibbor"
-descr "A Gibbor in its adolescence, this young giant is already a formidable warrior, stronger than many mortal men. Though still growing into its full power, it has been trained to fight with spear and shield. Given enough time, it will mature into a mighty Gibborim warrior."
+descr "."
 spr1 "pop/monster/yggibbor01.tga"
 spr2 "pop/monster/yggibbor02.tga"
 rank             1  # front
@@ -54203,6 +53694,8 @@ hp 12
 selectmonster "Enchanter's Forge"
 hp 33
 
+selectmonster "Engineer"
+hp 8
 
 selectmonster "Enslaved Princess"
 hp 6
@@ -56066,8 +55559,6 @@ frontpos
 rank 0
 dmgonterr -1012
 dmgonterrbonus 1
-hp 10
-allitemslots
 
 newmonster "Onyx Mummy"
 copystats "Mummy"
@@ -56761,7 +56252,7 @@ allitemslots
 spellweapon 26   1 
 gatherrelics
 female
-shield
+nametype                      32 # Early Germanic female.
 
 selectmonster "Gryphon Lord"
 name "Gryphon Lord "
@@ -57593,9 +57084,6 @@ aiapprspam 50
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (summoning).
 terr 105       # Coal Mine
 cost 16  5 
-promotion 1
-addstring "Slave"
-addstring "Slave"
 killtarg 9999
 ornext   80
 alterloc 105 #Coal Mine
@@ -60814,7 +60302,7 @@ scryloc 1000
 
 
 newritual     "Master of Magic"
-descr "A Grand Wizard becomes an Archmage at a magic library."
+descr "An Old Wizard becomes an Archmage at a magic library."
 level                  2
 levelreq 2
 cost 0  1000
@@ -60933,7 +60421,7 @@ addstring "(-56)c*Warlock's Apprentice"#14
 addstring "(-56)c*Witch's Apprentice"#15
 
 selectmonster "Grand Wizard"
-power 0 2
+power 0 1
 
 selectmonster "Old Wizard"
 power 0 2
@@ -61908,7 +61396,7 @@ free
 gainrit 1   # "Garnet Secrets"
 newspell1  3
 newspell1 13
-newspell2 3
+#newspell2 13
 
 
 selectmonster "Heroine"
@@ -62759,7 +62247,7 @@ power 0 1
 
 newritpow 
 newritual     "Magical Equine Training"
-descr "The Unicorn Knight trains Cavalrymen to befriend, tend, and ride magical Unicorn mounts."
+descr "The Unicorn Knight trains Knights to befriend, tend, and ride magical Unicorn mounts."
 level                  1
 cost 2  100 # Herbs
 cost 6   25 # Weed
@@ -62770,8 +62258,8 @@ apcost 0
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (summoning).
 promotion              1 # promotion units and set target unit to a promotiond unit. Valid promotions are in paired strings not beginning with "(-)".
 #free                     # This ritual is learned for free and everyone will know it from the start if able to.
-#addstring     "Knight"
-#addstring     "Unicorn Knight"
+addstring     "Knight"
+addstring     "Unicorn Knight"
 addstring     "Cavalryman"
 addstring     "Unicorn Rider"
 
@@ -64807,6 +64295,7 @@ defctrl              100 # % default control chance for promotions. Can be overr
 summoning                
 addstring "1*Trebuchet"
 
+
 selectmonster "Engineer"
 power 0 2
 
@@ -65923,7 +65412,7 @@ power 0 3
 
 
 newritual     "Greedy Betrothal (Senatorial)"
-descr "The Emperor offers a great sum to secretly buy the Princess's hand at any proper mine given as a dowry. A Master Enchanter is required to conduct the wedding and enchants the consummation ceremony giving birth to a new species.^^You must have a master Enchanter variant and Princess at the location."
+descr "The Emperor offers a great sum to secretly buy the Princess's hand at any proper mine given as a dowry. A Master Enchanter is required to conduct the wedding and enchants the consummation ceremony giving birth to a new species."
 ritpow                31
 level                  3
 cost 0  5000
@@ -65989,7 +65478,7 @@ addstring "(&)Alteration Doyen"
 addstring "(&)Master Organic Enchanter" 
 addstring "(&)Master Inorganic Enchanter" 
 addstring "(&)Svartalf Enchanter" 
-descr "The Baron or King offers a great sum to secretly buy a Princess's hand at any proper mine given as a dowry. A Master Enchanter is required to conduct the wedding and enchants the consummation ceremony giving birth to a new species.^^You must have a master Enchanter variant and Princess at the location."
+descr "The Baron or King offers a great sum to secretly buy a Princess's hand at any proper mine given as a dowry. A Master Enchanter is required to conduct the wedding and enchants the consummation ceremony giving birth to a new species."
 
 #Remove the below until I can figure out a way to remove various minor and major summonings.
 newritual     "Major Swamp Summoning"
@@ -67012,12 +66501,14 @@ level                  1
 terr 12 
 # Any mountain
 soundfx               26 
+# Sound effect
+#cost 15 80
 apcost 3 
 # Actual AP cost: cost+1
 free                     
 # This ritual is free
 airare 2
-cost 15 10 #10 any gems
+cost 10 10 #10 earth gems
 setplayer 24
 sum0chance 0
 sum1chance 0
@@ -67975,8 +67466,7 @@ addstring     "(115)1d2*Iron Scorpion"
 newritual     "Enchant Ruby Iron Dragon"  
 descr "Enchant a Ruby Iron Dragon.^^This process is certain to destroy the nearby forest or jungle."
 level                  3
-#cost 7  50 # Rubies
-cost 15  50 # Any
+cost 7  50 # Rubies
 cost 1  400
 terr -6 # Required terrain: forests/jungles.
 terrboost 4
@@ -68092,8 +67582,7 @@ addstring     "1d4+2*Diamond Clockwork Horror"
 newritual     "Enchant Emerald Iron Dragon"
 descr "Enchant Emerald Iron Dragon."
 level                  3
-#cost 10  50  # Emeralds
-cost 15 50 # Any gems
+cost 10  50  # Emeralds
 cost 1  400 #Iron
 terrboost 4
 terr -6 # Required terrain: forests/jungles.
@@ -68105,8 +67594,7 @@ nexttoo
 newritual     "Rapid Enchant Emerald Constructs"
 descr "Enchanter uses emeralds and local forests to create clockwork soldiers and clockwork horrors, this spell has a 20 percent chance to destroy the forest or jungle."
 level                  2
-#cost 10   10 # Emeralds
-cost 15 10 # Any gems
+cost 10   10 # Emeralds
 cost 1   60 #Iron
 terrboost 4
 terrscale50 4
@@ -68120,8 +67608,7 @@ nexttoo
 newritual     "Enchant Emerald Construct"  
 descr "Enchanter uses emeralds and local forests to create clockwork soldiers and clockwork horrors."
 level                  1
-#cost 10    5 # Emeralds
-cost 15 5 # any gems
+cost 10    5 # Emeralds
 cost 1    30 # Iron
 terrboost 4
 terrscale50 4
@@ -70858,7 +70345,7 @@ addstring "(-)Watcher"
 
 #Dryad Orgy rituals to increase spawn
 newritual     "Orgy"
-descr "The Dryad enters a human settlement and rounds up a number of willing people to participate in a drug fueled orgy. The Dryad enchants the women to carry her brood and will quickly gestate in a month but will take about a year for each offspring to reach adulthood. This process is harmful to the Dryad's body."
+descr "The Dryad enters a human settlement and rounds up a number of willing people to participate in a drug fueled orgy. The Dryad enchants the women to carry her brood and will quickly gestate in a month but will take about a year for each offspring to reach adulthood. On occasion the people will react badly to the Dryad."
 ritpow 47
 level                  1
 #levelreq 2
@@ -70869,26 +70356,25 @@ start
 cost 6   10 # Weed
 cost 2    5 # Herbs
 soundfx  32
+#defctrl              -100 # % default control chance for summonings. Can be overridden by monster's own ctrlchance.
+#failplayer 25 # Failed summons will be owned by this player: Special Monsters
 castertarg
-killtarg 2
-sum0chance 97  # Normal offspring chance  
-sum1chance 99  # Normal offspring twins
-sum2chance 98  #New Dryad (twins is very small chance that remains)
+sum0chance 3  #Twins+
+sum1chance 1  #New Dryad
 summoning
-addstring "1d2+1*Dryad Offspring"
-addstring "1d3+1*Dryad Offspring"
-addstring "c*Rare Dryad Offspring"
 addstring "c*Rare Dryad Offspring & c*Rare Dryad Offspring"
+addstring "c*Rare Dryad Offspring"
+addstring "1d4+1*Dryad Offspring"
 #addstring "2d5+3*Angry Person"
 
 
 newritual     "Great Orgy"
-descr "The Dryad enters a human settlement and rounds up a massive amount of people using magic to manipulate a great number to participate in a great drug fueled orgy. The Dryad enchants the women to carry her brood and will quickly gestate in a month but will take about a year for each offspring to reach adulthood. This is even more harmful to the Dryad's body."
+descr "The Dryad enters a human settlement and rounds up a massive amount of people using magic to manipulate a great number to participate in a great drug fueled orgy. The Dryad enchants the women to carry her brood and will quickly gestate in a month but will take about a year for each offspring to reach adulthood. On occasion the people will react badly to the Dryad."
 ritpow 47
 level                  2
 #levelreq 2
 terr -1013 # Required terrain: human settlement
-apcost 3
+apcost 2
 free
 cost 6   50 # Weed
 cost 2   25 # Herbs
@@ -70897,15 +70383,13 @@ castertarg
 #failplayer 25 # Failed summons will be owned by this player: Special Monsters
 killtarg 5
 soundfx  32
-sum0chance 97  # Normal offspring chance  
-sum1chance 99  # Normal offspring twins
-sum2chance 98  #New Dryad (twins is very small chance that remains)
+sum0chance 3  #Twins-triplets+
+sum1chance 1  #New Dryad
 summoning
-addstring "2d4+2*Dryad Offspring"
-addstring "3d4+3*Dryad Offspring"
+addstring "c*Rare Dryad Offspring & c*Rare Dryad Offspring & c*Rare Dryad Offspring"
 addstring "c*Rare Dryad Offspring"
-addstring "c*Rare Dryad Offspring & c*Rare Dryad Offspring"
-#addstring "2d5+3*Angry Person"
+addstring "5d4+2*Dryad Offspring"
+#addstring "4d5+5*Angry Person"
 
 
 
@@ -71381,7 +70865,6 @@ addstring     "(-27)Water Elemental"
 addstring     "(-27)1d4+1*Lesser Water"
 
 selectritual "Summon Champion of Water"
-level 9
 terr -17 # Near water
 cost 8   70 # 70 Sapphires
 
@@ -75083,22 +74566,21 @@ newritual     "Buy a round for all and listen."
 level                  1
 #terr -1013
 apcost 2
-cost 0 150
+cost 0 75
 free
 airestrig 1000
 airare 8
-#defctrl              100 # % default control chance for summonings. Can be overridden by monster's own ctrlchance.
+defctrl              100 # % default control chance for summonings. Can be overridden by monster's own ctrlchance.
 #terr -1013 # Required terrain: human settlement
 free
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (summoning).
-sum0chance 70
-sum1chance 5
+sum0chance 50
 summoning                # The ritual will summon the monsters specified in a random string.
 addstring     "!Error"                #
 addstring     "c*Person"                   #
 addstring     "(-32)1d4*Militia"                 #  village and larger
 addstring     "(-32)c*Heroine"                 #  village and larger
-addstring     "(-32)c*Bard" # village and larger
+addstring     "(-32)c*Bard"# village and larger
 addstring     "(-32)c*Hero"              #
 addstring     "(-32)c*Peddlar"              #
 addstring     "(-28)c*Peddlar"              #
@@ -75109,9 +74591,11 @@ addstring     "(-2)c*Priestess"               #
 addstring     "(-2)c*Unknown Priest"               #
 addstring     "(-2)c*Monk"                #
 addstring     "(-64)c*Reveler"        #
+addstring     "(-64)c*Unexpected Hero"         #
 addstring     "(-1028)c*Renata"              #
+addstring     "(-2)c*Monk"         #
 addstring     "(-2)Sicarii"           #
-addstring     "(-3)c*Hedge Wizard" 
+#addstring     "(-3)c*Hedge Wizard" 
 addstring     "(-3)c*Alchemist"               #
 addstring     "(-1026)c*Princess"
 descr "Buy a round and listen for tales of heroes, magic, bandits, fanatics; careful who wanders into the Inn they may not get along with people already at the tile. A hero or magic-user may join your cause but usually it just results in drunkards bashing their own heads in on your coin. An Inn can be built in settlements with populations, some locations such as those with a library or temple may result in different people stopping by.^Amazons, Militia, Heros, Heroine may appear at any settlement; a farmer, reveler or Unexpected hero if settlement is more rural in a farm or a hamlet. If settlement is town or larger a Peddlar may join you. A temple will attract priests and monks while a library hedge wizards may show. In a capital a Renata or Heliodromus may join you.^^Keywords:Human settlement, Farms and Hamlets, Towns+, Libraries, Temples, Trade District, Capitals."
@@ -75120,7 +74604,7 @@ descr "Buy a round and listen for tales of heroes, magic, bandits, fanatics; car
 newritual     "Buy a round for magic-users."
 level                  2
 apcost 2
-cost 0 400
+cost 0 200
 airestrig 2000
 airare 5
 free
@@ -75129,7 +74613,7 @@ terr -3 # Required terrain: library1
 free
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (summoning).
 sum0chance 50
-sum1chance 10
+sum1chance 1
 sum2chance 1
 summoning                # The ritual will summon the monsters specified in a random string.
 addstring     "!Error"#
@@ -75583,18 +75067,7 @@ level                  4
 apcost -1
 free                     # This ritual is learned for free and everyone will know it from the start if able to.
 summoning
-#addstring    "c*3:Hedge Wizard" # Elements
-#addstring    "c*4:Hedge Wizard"
-#addstring    "c*5:Hedge Wizard" #Necromancer
-#addstring    "c*6:Hedge Wizard"  #Illusionism
-#addstring    "c*7:Hedge Wizard"
-#addstring    "c*8:Hedge Wizard" 
-#addstring     "c*Person"                   #
-#addstring     "c*0:Renata"                   #
-addstring     "5*Abysian"                   #
-#addstring     "c*Rare Dryad Offspring"                   #
-
-
+addstring "c*0:Bard"                        
 
 
 descr "Tests a particular ritual function used in modding and testing. Likely whatever the last thing tested."
@@ -75775,7 +75248,7 @@ level                  2
 cost 0  1000 
 # Gold
 cost 1    50# Iron
-terr -1004 #plain-like terrain
+terr -103 #plain-like terrain
 #rebateterr20 -103
 # Any village
 alterloc              92 
@@ -76067,13 +75540,14 @@ descr "A rank of Baron or higher may bestow land and sacred title unto a holy pe
 
 newclass
 setclassname     "Adventuring Company"
+otherplanar
 clearrec
 clearstartunits
 clearstartterr
 nostdtroops
 
 
-setmaincom "Hero"
+setmaincom "Peddlar"
 hometerr 5
 addstartunits "Swordsman" 5
 addstartunits "Spearman"  10
@@ -76084,7 +75558,7 @@ addstartcom "Knight"
 addstartcom "Knight"
 addstartcom "Unexpected Hero"
 addstartcom "Heroine"
-addstartcom "Peddlar"
+addstartcom "Hero"
 addstartcom "Monk"
 addstartcom "Hedge Wizard"
 addstartcom "Cultist"
@@ -76103,7 +75577,9 @@ addstartcom "Hedge Wizard"
 #templebonusdescr "none"
 classcitterr -1013
 aiclass -1
+otherplanar
 addcomrec "Peddlar" 5 150 10 5
+
 addmercrec  "Spearman"               60  5   100   0    0
 addmercrec  "Archer"                 60  5   100   0    0
 addmercrec  "Swordsman"                 40  5   100   0    5
@@ -76385,6 +75861,8 @@ clearstartunits
 clearrec
 setclassname     "Republic" #
 nostdtroops
+
+#end testing
 recwizchance 0
 recherochance 1
 recasschance 2
@@ -77279,15 +76757,6 @@ addcomrec   "Champion of Flames"                1       0   0    0 # once per of
 reclimiter "+Great Warlock of Fire"
 recxcost 7 50
 libraryrec
-addunitrec  "Ember Warrior"                    75  2  0   0    0
-recterr      102
-recxcost     7  10                            # 10 Rubies additional cost.
-addunitrec  "Flame Spirit"                     25  1  0   0    0 # once per offer.
-recterr      102
-recxcost     7  10                            # 10 Rubies additional cost.
-addunitrec  "Magma Child"                      50  1   0   0    0 # once per offer.
-recterr      102
-recxcost     7  10                            # 10 Rubies additional cost.
 
 
 selectclass 13  
@@ -78578,158 +78047,10 @@ templebonusdescr       ""
 
 
 #To Do...
-selectclass 28
-setclassname "Monkey Kingdom"
-classdescr "Deep within the verdant, ancient jungles of southern Elysium, the Monkey Kingdom thrives—a complex society of simian beings gifted with surprising cunning and wisdom. Their civilization is structured by a caste system where physical prowess and spiritual insight determine one's place. From the numerous, agile Markatas forming the base of their society, to the human-sized Vanara warriors and artisans, and finally the imposing Bandar, whose strength and leadership are legendary. Apart from this hierarchy, the revered White Ones—pale-furred Vanara sages—guide the kingdom with their profound knowledge of jungle magic and ancient lore. The Monkey Kingdom is ruled by a Maharaja, a Bandar of exceptional stature and wisdom, who balances the primal strength of his people with the spiritual guidance of the White Ones."
-classabdescr "Small Markatas can be recruited in great numbers, forming the backbone of the workforce and light skirmishers. Bandars are large, powerful apes, serving as elite warriors and leaders. Bandarajas can recruit heavily armed Bandars. Atavi villages, when allied or conquered, will provide Markatas and Atavi tribesmen over time. White One Yogis, Gurus, and Rishis are powerful casters who collect gems. Gems are crucial for invoking ancient jungle spirits and performing potent nature rituals. Can build unique jungle-themed fortifications and shrines."
-addstartterr      348 # Atavi Tribe Village
-setmaincom             "Bandaraja"
-addstartunits          "Markata"                  15
-addstartunits          "Markata Archer"           12
-addstartunits          "Vanara Archer"             8
-addstartunits          "Vanara Soldier"            8
-addstartcom            "Yogi" # Added a starting caster
-likessouth          2
-likesnorth         -3
-humancost         175
-# fx247             1 # Enables Atavi village growth
-townbonusdescr         "Limited trade, few mercenaries"
-libbonusdescr          "No human wizards, relies on White Ones"
-templebonusdescr       "White One recruitment, Jungle Shrines enhance rituals"
-otherplanar
-clearrec
-addunitrec  "Markata"                     100 30   10  1  0
-addunitrec  "Markata Archer"                100 25   12  1  0
-addunitrec  "Vanara Soldier"                 80 10   25  2  1
-addunitrec  "Vanara Archer"                  80 10   25  2  0
-addunitrec  "Bandar"                         40  5  100  5  5
-reclimiter "+Bandaraja"
-addmercrec  "Atavi Warrior"                  30 10   15  1  0
-recterr 348 # Only in Atavi Villages
-addmercrec  "Atavi Archer"                   30 10   15  1  0
-recterr 348
-addcomrec   "Vanara Captain"                 30     100 10  5
-addcomrec   "Bandar Chief"                   15     200 15 10
-reclimiter "+Bandaraja"
-addcomrec   "White One Yogi"                 20     150 10  0
-recxcost 15 2 # Gems
-templerec
-addcomrec   "White One Guru"                 10     250 15  0
-recxcost 15 5
-templerec
-addcomrec   "White One Rishi"                 5     400 20  0
-recxcost 15 10
-templerec
-#                                              %  Nbr Gold GD Iron
-addunitrec  "Markata"                         100 15   10   0  0
-addunitrec  "Markata Archer"                  100 15   12   0  0
-addunitrec  "Atavi Archer"                    100  5   15   0  0
-addunitrec  "Atavi Warrior"                   100  5   15   0  0
-addunitrec  "Vanara Archer"                   100  5   25   0  5
-addunitrec  "Vanara Soldier"                  100  5   25   0  5
-addunitrec  "Vanara Swordsman"                100  5   30   0  8
-addunitrec  "Bandar Archer"                   100  3   45   0  0
-addunitrec  "Bandar Warrior"                  100  3   50   0 10
-addunitrec  "Heavy Bandar Archer"             100  3   60   0 15
-reclimiter  "+Bandaraja"
-addunitrec  "Heavy Bandar Warrior"            100  3   70   0 20
-reclimiter  "+Bandaraja"
-addunitrec  "Bandar Swordsman"                100  3   65   0 18
-reclimiter  "+Bandaraja"
-addcomrec   "Bandaraja"                        10    250   0 15
-recxcost    15 5 # Gems for spiritual leadership
-reclimiter  "-Bandaraja"
-addcomrec   "Atavi Chief"                      10     60   0  5
-addcomrec   "Vanara Captain"                   25     70   0  8
-addmercrec  "Vanara Scout"                     10  1   25   5  0
-addcomrec   "Yogi"                              4    100   0  0 
-recxcost    15 10 # Gems for magic
-libraryrec
-addunitrec  "War Elephant"                     20  1  180   0 25
-addunitrec  "Catapult"                        100  1  120   0 30
-libraryrec
+selectclass 28 # Monkey Mah
 
-# --- Rakshasa Raj (Rethemed from Raksharaja, Class 29) ---
-selectclass 29
-setclassname "Rakshasa Raj"
-classdescr "From shadowed jungles and hidden lairs in southern Elysium, the Rakshasa Raj extends its influence. These are not mere monkey-folk, but beings touched by demonic power, masters of illusion and manipulation. The Rakshasas, ancient spirits of deceit, have subverted the natural order, turning the jungle's denizens into their pawns and fodder for their dark rituals. The Raksharaja, a being of immense power and cunning, leads this shadowy kingdom, their true form often veiled behind layers of illusion. The Rakshasa Raj commands armies that are rarely what they seem, their warriors blending demonic strength with illusory tactics. They collect sacrifices to fuel their potent magic, summoning demonic entities, raising the dead under their sway, and weaving powerful illusions to confound their enemies and conceal their true holdings."
-classabdescr "Markatas and other lesser monkey-folk serve as numerous but expendable troops. Bandars, corrupted by demonic influence, become fearsome half-demon warriors. Raksharajas and their inner circle (Rakshasa Generals, Raktapatas, Kala-Mukhas) are powerful casters collecting sacrifices. Sacrifices fuel potent rituals: summoning demonic Rakshasas, reanimating the dead as loyal servants, and casting grand illusions to deceive and demoralize foes. Can use Maya to shroud their armies and settlements, making them appear as simple monkey tribes or uninhabited jungle. Access to unique Rakshasa units with illusionary and fear-inducing abilities."
-hometerr          114 # Maharaja's Palace (now a corrupted palace)
-setmaincom             "Raksharaja"
-addstartunits          "Markata"                  20
-addstartunits          "Raktapata"    			   8
-addstartunits          "Markata Archer"   		  32
-likessouth          2
-likesnorth         -3
-humancost         250
-# fx247             1 # Enables (corrupted) Atavi village growth
-# fx248             1 # Another related fx
-townbonusdescr         "No mercenaries; terrorized populace offers little."
-libbonusdescr          "No human wizards; relies on Rakshasa sorcery."
-templebonusdescr       "Sacrificial sites enhance dark rituals."
-otherplanar
-clearrec
-#addunitrec  "Markata"                       100 40   5  1  0
-#addunitrec  "Corrupted Atavi Archer"          80 15  10  1  0   # Assuming defined
-#addunitrec  "Corrupted Atavi Warrior"         80 15  10  1  1   # Assuming defined
-#addunitrec  "Half-Demon Bandar"               50  8  75  5  5   # Assuming defined
-#reclimiter "+Raksharaja"
-#addunitrec  "Rakshasa Skirmisher"             30  5  120 10  2  # Assuming defined
-#recxcost 4 5 # Sacrifices
-#addcomrec   "Rakshasa Initiate"              30     100  5  0  # Assuming defined
-#recxcost 4 2
-#templerec
-addcomrec   "Raktapata"                      20     200 10  0
-recxcost 4 10
-templerec
-addcomrec   "Kala-Mukha"                     15     250 15  0
-recxcost 4 15
-templerec
-addcomrec   "Rakshasa General"               10     400 20  5
-recxcost 4 25
-templerec
-reclimiter "+Raksharaja"
-# Corrupted/enslaved units might be slightly cheaper in gold or have other costs
-#                                               %  Nbr Gold GD Iron
-addunitrec  "Markata"                         100 15    8   0  0 # Cheaper fodder
-addunitrec  "Markata Archer"                  100 15   10   0  0
-addunitrec  "Atavi Archer"                    100  5   12   0  0 # Renamed to Corrupted Atavi Archer in concept
-addunitrec  "Atavi Warrior"                   100  5   12   0  0 # Renamed to Corrupted Atavi Warrior in concept
-addunitrec  "Vanara Archer"                   100  5   20   0  3 # Renamed to Corrupted Vanara Archer in concept
-addunitrec  "Vanara Soldier"                  100  5   20   0  3 # Renamed to Corrupted Vanara Soldier in concept
-addunitrec  "Vanara Swordsman"                100  5   25   0  6
-addunitrec  "Bandar Archer"                   100  3   40   0  0 # Renamed to Half-Demon Bandar Archer
-addunitrec  "Bandar Warrior"                  100  3   45   0  8 # Renamed to Half-Demon Bandar Warrior
-addunitrec  "Kala-Mukha Warrior"              100  3   75   0 10
-recxcost    4 5 # Sacrifices
-reclimiter  "+Raksharaja"
-reclimiter  "+Raksharishi"
-addcomrec   "Rakshasa General"                 10    300   0 20
-recxcost    4 15 # Sacrifices
-reclimiter  "-Raksharaja"
-addcomrec   "Yogini"                            4     90   0  0
-recxcost    4 8  # Sacrifices for dark magic
-atavirec
-addcomrec   "Raktapata"                         3    120   0  0
-recxcost    4 10 # Sacrifices for blood magic
-libraryrec
-addcomrec   "Kala-Mukha"                        1    150   0 10
-recxcost    4 10 # Sacrifices
-libraryrec
-reclimiter  "+Raksharaja"
-reclimiter  "+Raksharishi"
-addcomrec   "Atavi Chief"                      10     50   0  3 # Corrupted
-addcomrec   "Vanara Captain"                   25     60   0  5 # Corrupted
-addmercrec  "Vanara Scout"                     10  1   20   5  0 # Corrupted Merc
-addunitrec  "Catapult"                        100  1  120   0 30
-addunitrec  "Possessed Soulless Vanara Soldier"100  5    0   0   10 # Upgrade cost, iron for armor
-reclimiter  "=Possessed Soulless Vanara"
-addunitrec  "Possessed Longdead Vanara Soldier"100  5    0   0   10 # Upgrade cost, iron for armor
-reclimiter  "=Possessed Longdead Vanara"
-addunitrec  "Possessed Armored Soulless Bandar"100  3    0   0   10 # Upgrade cost, iron for armor
-reclimiter  "=Possessed Soulless Bandar"
-addunitrec  "Possessed Longdead Bandar Warrior"100  3    0   0   10 # Upgrade cost, iron for armor
-reclimiter  "=Possessed Longdead Bandar"
+
+selectclass 29 # Raksharaja
 
 
 selectclass 30 # Guildmaster
@@ -84090,7 +83411,7 @@ nosight
 selectterr 201
 ownable
 sacr 10 #
-name "Infernal Gate"
+#
 
 nosight
 #bonusrelics -2
@@ -85045,26 +84366,9 @@ endevent
 
 playerevent
 +turnnbr -1
-+class -2 "Corporatocracy"
-addresources -2 0 950 #Gold treasury
-addresources -2 1  70  #Iron treasury
-endevent
-
-playerevent
-+turnnbr -1
-+class -2 "Monkey Kingdom"
++class -2 "Monkey Maharaja"
 addresources -2 0 800 #Gold treasury
 addresources -2 1  25 #Iron treasury
-addresources -2 15 15 # gems
-endevent
-
-playerevent
-+turnnbr -1
-+class -2 "Rakshasa Raj"
-addresources -2 0 500 #Gold treasury
-addresources -2 1  25 #Iron treasury
-addresources -2 15 10 # gems
-addresources -2 4  5  # sacr
 endevent
 
 #end bonus resources
@@ -87949,7 +87253,7 @@ descr "Raises dead faster."
 selectritual     "Embrace Death"
 descr "Death Knight's may turn heavy infantry into Banes in a Citadel in Hades"
 selectritual     "Magical Equine Training"
-descr "The Unicorn Knight trains Cavalrymen to befriend, tend, and ride magical Unicorn mounts."
+descr "The Unicorn Knight trains Knights to befriend, tend, and ride magical Unicorn mounts."
 selectritual     "Bloodsworn Pact"
 descr "A Demon Knight may turn heavy infantry into Bloodsworn at a Citadel in Inferno."
 selectritual     "Demonic Order"
