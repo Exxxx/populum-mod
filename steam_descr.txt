@@ -40,8 +40,7 @@ If you would like to play more freely then I would recommend you enable the CHEA
 [i]Note: You need to have both populum.c5m and popCHEAT.c5m activated at same time on.[/i]
 
 [b]Custom Maps[/b]
-The Game of Thrones map (GOT) is a fixed starting location map due to the density of resources and lots of geographic choke-points. A list of starting locations is available in the map description. v2.06
-[url=https://steamcommunity.com/app/1606340/discussions/1/3037103480427771444/]See here for a port of this map converted into COE5. Thanks to Wankovich.[/url]
+The Game of Thrones map (GOT) is a fixed starting location map due to the density of resources and lots of geographic choke-points. Thanks to Wankovich for porting from COE4 to COE5.[/url]
 
 [b]Known quirks:[/b]
 > Immortality is tied to the plane the monster becomes immortal. Dieing on another plane will result in permanent death.

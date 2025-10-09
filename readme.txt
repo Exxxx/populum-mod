@@ -74,10 +74,9 @@ If you would like to play more freely, it is recommended you enable the CHEAT mo
 
 ## Custom Maps
 
-### Game of Thrones Map
+### Game of Thrones Map Added
 The Game of Thrones map (GOT) is a fixed starting location map due to the density of resources and lots of geographic choke-points. A list of starting locations is available in the map description (v2.06).
-[See here for a port of this map converted into CoE5. Thanks to Wankovich.](https://steamcommunity.com/app/1606340/discussions/1/3037103480427771444/)
-
+Thanks to Wankovich for the port from COE4 to COE5.
 ---
 
 ## Known Quirks
