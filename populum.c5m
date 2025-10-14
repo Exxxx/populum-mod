@@ -77947,17 +77947,18 @@ addstartunits    "Dwarf Arbalest Guard"   20
 addstartcom      "Dwarf Commander"
 addstartcom      "Peddlar"
 #addstartcom      "Young Dvala"
+addstartcom  "Red Kobold Sorcerer" #For Testing Only
 addcomrec "Young Dvala" 5 0 0 0
 reclimiter "-Young Dvala"
 reclimiter "-Dvala"
 reclimiter "-Daughter of Dvalin"
-addmercrec  "Dwarf"                           50  5    0   0   10
+addunitrec  "Dwarf"                           50  5    0   0   10
 reclimiter  "=Dwarf Worker"                                         
-addmercrec  "Dwarf Warrior"                   50  5    0   0   15
+addunitrec  "Dwarf Warrior"                   50  5    0   0   15
 reclimiter  "=Dwarf Worker"                   
-addmercrec  "Dwarf Guard"                     50  5    0   0   20
+addunitrec  "Dwarf Guard"                     50  5    0   0   20
 reclimiter  "=Dwarf Worker"                   
-addmercrec  "Dwarf Arbalest"                  50  5    0   0   15
+addunitrec  "Dwarf Arbalest"                  50  5    0   0   15
 reclimiter  "=Dwarf Worker"                   
 addmercrec  "Outdoor Dwarf"                   50  2   10   0    2
 reclimiter  "=Dwarf Worker"                   
@@ -77966,7 +77967,19 @@ reclimiter  "=Dwarf Worker"
 addmercrec  "Dwarven Ballista"                50  1  300   0   25
 reclimiter  "=Dwarf Worker"                   
 addcomrec   "Dwarf Commander"                  5     150   0   10 
-reclimiter  "=Dwarf Worker"                   
+reclimiter  "=Dwarf Worker"
+addcomrec  "Red Kobold Sorcerer"             10  1    0   0   10
+reclimiter  "+Red Kobold"
+libraryrec
+addcomrec  "Blue Kobold Sorcerer"             10  1    0   0   10
+reclimiter  "+Blue Kobold"
+libraryrec
+addcomrec  "Green Kobold Sorcerer"             10  1    0   0   10
+reclimiter  "+Green Kobold"
+libraryrec
+addcomrec  "White Kobold Sorcerer"             10  1    0   0   10
+reclimiter  "+White Kobold"
+libraryrec
 
 selectclass 21  
 # Voice of El
@@ -78567,6 +78580,30 @@ addstartunits          "Red Kobold Warrior Guard"       8
 addstartunits          "Red Kobold Slinger Guard"       20
 addstartunits          "Fire Drake"                1
 addstartcom            "Red Kobold Chief"
+addunitrec  "Dwarf"                           50  5    0   0   10
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                                         
+addunitrec  "Dwarf Warrior"                   50  5    0   0   15
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Dwarf Guard"                     50  5    0   0   20
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Dwarf Arbalest"                  50  5    0   0   15
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Outdoor Dwarf"                   50  2   10   0    2
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Dwarf Sapper"                    50  5    0   0   10
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Dwarven Ballista"                50  1  300   0   25
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec   "Dwarf Commander"                  5     150   0   10 
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"             
 recherochance       0 # Chance for recruitment offers from human heroes.
 #reqterr -2 # Re-rolls the map until there is at least one square of the following terrain: temples.
 # fx240             1 # Unhandled trait 240 with argument 1.
