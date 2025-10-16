@@ -32761,7 +32761,7 @@ fastheal
 foreststealth
 
 
-#moving her rank rear of mid rank, she's to squishy to be front.
+#moving her rank rear of mid rank, she's too squishy to be front.
 selectmonster "Mother of Monsters"
 rank
 rearpos
@@ -40762,6 +40762,11 @@ rangedweapon 1 "Summon Retiarius"
 gold -20
 pierceres
 
+newmonster "Dwarven Armory"
+copystats "Garrison Template"
+spr1 "pop/monster/garrison/mountainlair.tga"
+spr2 "pop/monster/garrison/mountainlair.tga"
+prebatweapon 4 "Summon Dwarf Guard"
 
 #Monsoon monster that will automatically convert plains and farms into swamps
 #This monster will spawn by having a Water Warlock cast a ritual where Perpetual storm exists creating an immobile generator that lasts for some time, such as one year. How to implement: we could use events with a variable that triggers changing Storm Elemental and Clouds into ones that can make swamp colonies of farms and plains.
@@ -58100,6 +58105,59 @@ defctrl 100
 killtarg 9999
 free 
 
+newritual "Teach Magic to Green Kobolds"
+descr "Teach magic to a group of 5 Green Kobolds. After finishing, you notice there are 6 kobolds now, one of which is a Green Kobold Sorcerer"
+level 1
+free
+apcost 2
+cost 10 20
+airare 20
+minmonreq 5
+addstring "(&)Green Kobold"
+sum0chance 100
+summoning
+addstring     "c*Green Kobold Sorcerer"
+
+newritual "Teach Magic to Blue Kobold"
+descr "Teach magic to a group of 5 Blue Kobolds. After finishing, you notice there are 6 kobolds now, one of which is a Blue Kobold Sorcerer"
+level 1
+free
+apcost 2
+cost 10 20
+airare 20
+minmonreq 5
+addstring "(&)Blue Kobold"
+sum0chance 100
+summoning
+addstring     "c*Blue Kobold Sorcerer"
+
+newritual "Teach Magic to Red Kobold"
+descr "Teach magic to a group of 5 Red Kobolds. After finishing, you notice there are 6 kobolds now, one of which is a Red Kobold Sorcerer"
+level 1
+free
+apcost 2
+cost 10 20
+airare 20
+minmonreq 5
+addstring "(&)Red Kobold"
+sum0chance 100
+summoning
+addstring     "c*Red Kobold Sorcerer"
+
+newritual "Teach Magic to White Kobold"
+descr "Teach magic to a group of 5 White Kobolds. After finishing, you notice there are 6 kobolds now, one of which is a White Kobold Sorcerer"
+level 1
+free
+apcost 2
+cost 10 20
+airare 20
+minmonreq 5
+addstring "(&)White Kobold"
+sum0chance 100
+summoning
+addstring     "c*White Kobold Sorcerer"
+
+
 selectmonster "Black Kobold Settler"
 power 0 1
 
@@ -63801,6 +63859,27 @@ addstring "Senator"
 free
 newrit 2
 newrit 1
+
+newritpow
+newritual "Found Dwarven Armory (Unit Recruitment)"
+descr "Found a Dwarven Armory that will allow upgrading dwarfs"
+free
+apcost -1
+summoning
+addstring "c*Dwarven Armory"
+level 1
+forgetcurrit
+nomonreq 
+addstring "(-)Dwarven Armory"
+
+selectmonster "Young Dvala"
+power 0 1
+
+selectmonster "Dvala"
+power 0 1
+
+selectmonster "Daughter of Dvalin"
+power 0 1
 
 newritpow
 newritual "Incorporate Inn"
@@ -70698,6 +70777,20 @@ closewin                 # Closes cast ritual window.
 scryloc 1000
 free
 
+newritual     "Create Iron and Gems"
+descr "Use your divine power to create Iron and Gems"
+level                  1
+#cost 0 -1000
+cost 1  -50
+#cost 2  -100
+#cost 3  -100
+#cost 4  -100
+#cost 5  -100
+#cost 6  -100
+cost 15  -100
+apcost -1
+free
+
 newritual     "Travel"
 descr "Teleport anywhere"
 level                  2
@@ -75106,7 +75199,71 @@ power 0 3
 
 #End Ritual Modding
 
+### Dwarven Access ###
+newritpow
 
+newritual "Promote Dwarfs"
+descr "Promote 5 Dwarf Workers into Dwarfs"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 10
+airare 20
+promotion 5
+addstring "Dwarf Worker"
+addstring "Dwarf"
+
+newritual "Promote Dwarf Warriors"
+descr "Promote 5 Dwarf Workers into Dwarf Warriors"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 15
+airare 20
+promotion 5
+addstring "Dwarf Worker"
+addstring "Dwarf Warrior"
+
+newritual "Promote Dwarf Guards"
+descr "Promote 5 Dwarf Workers into Dwarf Guards"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 20
+airare 20
+promotion 5
+addstring "Dwarf Worker"
+addstring "Dwarf Guard"
+
+newritual "Promote Dwarf Arbalest"
+descr "Promote 5 Dwarf Workers into Dwarf Arbalests"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 15
+airare 20
+promotion 5
+addstring "Dwarf Worker"
+addstring "Dwarf Arbalest"
+
+newritual "Promote Dwarf Commander"
+descr "Promote 1 Dwarf Worker into a Dwarf Commander"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 15
+airare 20
+promotion 1
+addstring "Dwarf Worker"
+addstring "Dwarf Commander"
+
+selectmonster "Dwarven Armory"
+power 0 3
 
 #Inn
 
