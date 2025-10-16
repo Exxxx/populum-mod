@@ -56866,7 +56866,10 @@ growoffs -1
 growterr -1021
 growtime 3
 
-
+newmonster   "Black Kobold Settler"
+copyspr "Black Kobold Scout"
+copystats "Black Kobold Scout"
+descr "Some Kobolds explore the world, looking for a place to settle before embracing their magic capabilities. This kobold is looking for that opportunity."
 
 #End monsters
 
@@ -57958,9 +57961,6 @@ gainrit -1   # "Study Faery Witch Magic"
 newspell2 36
 #heroine has ability to become... amazonians?, lion tribe=lion queen, valkarie=cloud castle
 
-
-
-
 #Add enchantments
 
 newritual     "Troll Wards"    # 176
@@ -58076,6 +58076,32 @@ promotion -1
 addstring "Dwarf"
 addstring "Dwarf Commander"
 
+###---Expand Access to kobolds---###
+
+newritpow
+newritual "Reveal Magic"
+descr "While the kobold has hidden his magic abilities so far, it is time to embrace his potential."
+level 1
+levelreq 1
+apcost 2
+terr -12 #Greater Mines
+airare 25
+soundfx 57
+cost 15 30 #Gems
+cost 0 50
+castertarg
+sum0chance 100
+summoning
+addstring     "c*Red Kobold Sorcerer"
+addstring     "c*Blue Kobold Sorcerer"
+addstring     "c*Green Kobold Sorcerer"
+addstring     "c*White Kobold Sorcerer"
+defctrl 100
+killtarg 9999
+free 
+
+selectmonster "Black Kobold Settler"
+power 0 1
 
 newritpow
 newritual "Troll King's Court"
@@ -59774,18 +59800,19 @@ free
 addstring     "(&)Baron"
 
 newritual "Head Hunting"
-descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from humans settlements, to hoburgs, and even goblins."
+descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from humans settlements, to hoburgs, goblins, and even kobolds. A councilor will not be able to search for new talent when a Dvala is present"
 ritpow                30 # Dwarf Councilor
 level 1
-cost 0 50
+cost 0 50 
 cost 15 2
 rebateterr50 126
+nomonreq 
 free
 airare 5
 sum0chance 15
 summoning
 addstring "!Error"
-addstring "!Error"
+addstring "(-12)c*Black Kobold Settler" #Greater Mines
 addstring "(-1029)Dwarf Commander"
 addstring "(-28)c*Heroine"    # Towns+
 addstring "(-28)c*Peddlar"
@@ -59799,6 +59826,9 @@ addstring "(-6)c*Goblin Hero"        # 12       Forest
 addstring "(-3)c*Hedge Wizard"       # 13       Libs
 addstring "(-64)c*Reveler"           # 14       Farms-hamlets
 addstring "(-2)c*Priest"    		 # 15       Temple
+addstring "(-)Young Dvala"          # This string will only be used by nomonreq or nomonworldreq.
+addstring "(-)Dvala"                # This string will only be used by nomonreq or nomonworldreq.
+addstring "(-)Daughter of Dvalin"   # This string will only be used by nomonreq or nomonworldreq.
 
 newritual "Develop Coal Mine"
 descr "Construct a coal mine in any mountain using Dwarf Workers. Doing will attract animals, creatures, and locals depending on terrain and climate. Coal is cheapest and easiest mineral resource to develop though it can be dangerous as the creatures living in the area will likely attack. Councilor's have estimated that a coal mine is developed usually within a year's time."
@@ -77947,18 +77977,17 @@ addstartunits    "Dwarf Arbalest Guard"   20
 addstartcom      "Dwarf Commander"
 addstartcom      "Peddlar"
 #addstartcom      "Young Dvala"
-addstartcom  "Red Kobold Sorcerer" #For Testing Only
 addcomrec "Young Dvala" 5 0 0 0
 reclimiter "-Young Dvala"
 reclimiter "-Dvala"
 reclimiter "-Daughter of Dvalin"
-addunitrec  "Dwarf"                           50  5    0   0   10
+addunitrec  "Dwarf"                           100  5    0   0   10
 reclimiter  "=Dwarf Worker"                                         
-addunitrec  "Dwarf Warrior"                   50  5    0   0   15
+addunitrec  "Dwarf Warrior"                   100  5    0   0   15
 reclimiter  "=Dwarf Worker"                   
-addunitrec  "Dwarf Guard"                     50  5    0   0   20
+addunitrec  "Dwarf Guard"                     100  5    0   0   20
 reclimiter  "=Dwarf Worker"                   
-addunitrec  "Dwarf Arbalest"                  50  5    0   0   15
+addunitrec  "Dwarf Arbalest"                  100  5    0   0   15
 reclimiter  "=Dwarf Worker"                   
 addmercrec  "Outdoor Dwarf"                   50  2   10   0    2
 reclimiter  "=Dwarf Worker"                   
@@ -77968,16 +77997,16 @@ addmercrec  "Dwarven Ballista"                50  1  300   0   25
 reclimiter  "=Dwarf Worker"                   
 addcomrec   "Dwarf Commander"                  5     150   0   10 
 reclimiter  "=Dwarf Worker"
-addcomrec  "Red Kobold Sorcerer"             10  1    0   0   10
+addcomrec  "Red Kobold Sorcerer"             10  100   100   0   10
 reclimiter  "+Red Kobold"
 libraryrec
-addcomrec  "Blue Kobold Sorcerer"             10  1    0   0   10
+addcomrec  "Blue Kobold Sorcerer"             10  100   100  0   10
 reclimiter  "+Blue Kobold"
 libraryrec
-addcomrec  "Green Kobold Sorcerer"             10  1    0   0   10
+addcomrec  "Green Kobold Sorcerer"             10  100   100  0   10
 reclimiter  "+Green Kobold"
 libraryrec
-addcomrec  "White Kobold Sorcerer"             10  1    0   0   10
+addcomrec  "White Kobold Sorcerer"             10  100   100  0   10
 reclimiter  "+White Kobold"
 libraryrec
 
