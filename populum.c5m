@@ -32761,7 +32761,7 @@ fastheal
 foreststealth
 
 
-#moving her rank rear of mid rank, she's to squishy to be front.
+#moving her rank rear of mid rank, she's too squishy to be front.
 selectmonster "Mother of Monsters"
 rank
 rearpos
@@ -40762,6 +40762,11 @@ rangedweapon 1 "Summon Retiarius"
 gold -20
 pierceres
 
+newmonster "Dwarven Armory"
+copystats "Garrison Template"
+spr1 "pop/monster/garrison/mountainlair.tga"
+spr2 "pop/monster/garrison/mountainlair.tga"
+prebatweapon 4 "Summon Dwarf Guard"
 
 #Monsoon monster that will automatically convert plains and farms into swamps
 #This monster will spawn by having a Water Warlock cast a ritual where Perpetual storm exists creating an immobile generator that lasts for some time, such as one year. How to implement: we could use events with a variable that triggers changing Storm Elemental and Clouds into ones that can make swamp colonies of farms and plains.
@@ -56866,7 +56871,10 @@ growoffs -1
 growterr -1021
 growtime 3
 
-
+newmonster   "Black Kobold Settler"
+copyspr "Black Kobold Scout"
+copystats "Black Kobold Scout"
+descr "Some Kobolds explore the world, looking for a place to settle before embracing their magic capabilities. This kobold is looking for that opportunity."
 
 #End monsters
 
@@ -57958,9 +57966,6 @@ gainrit -1   # "Study Faery Witch Magic"
 newspell2 36
 #heroine has ability to become... amazonians?, lion tribe=lion queen, valkarie=cloud castle
 
-
-
-
 #Add enchantments
 
 newritual     "Troll Wards"    # 176
@@ -58076,6 +58081,85 @@ promotion -1
 addstring "Dwarf"
 addstring "Dwarf Commander"
 
+###---Expand Access to kobolds---###
+
+newritpow
+newritual "Reveal Magic"
+descr "While the kobold has hidden his magic abilities so far, it is time to embrace his potential."
+level 1
+levelreq 1
+apcost 2
+terr -12 #Greater Mines
+airare 25
+soundfx 57
+cost 15 30 #Gems
+cost 0 50
+castertarg
+sum0chance 100
+summoning
+addstring     "c*Red Kobold Sorcerer"
+addstring     "c*Blue Kobold Sorcerer"
+addstring     "c*Green Kobold Sorcerer"
+addstring     "c*White Kobold Sorcerer"
+defctrl 100
+killtarg 9999
+free 
+
+newritual "Teach Magic to Green Kobolds"
+descr "Teach magic to a group of 5 Green Kobolds. After finishing, you notice there are 6 kobolds now, one of which is a Green Kobold Sorcerer"
+level 1
+free
+apcost 2
+cost 10 20
+airare 20
+minmonreq 5
+addstring "(&)Green Kobold"
+sum0chance 100
+summoning
+addstring     "c*Green Kobold Sorcerer"
+
+newritual "Teach Magic to Blue Kobold"
+descr "Teach magic to a group of 5 Blue Kobolds. After finishing, you notice there are 6 kobolds now, one of which is a Blue Kobold Sorcerer"
+level 1
+free
+apcost 2
+cost 10 20
+airare 20
+minmonreq 5
+addstring "(&)Blue Kobold"
+sum0chance 100
+summoning
+addstring     "c*Blue Kobold Sorcerer"
+
+newritual "Teach Magic to Red Kobold"
+descr "Teach magic to a group of 5 Red Kobolds. After finishing, you notice there are 6 kobolds now, one of which is a Red Kobold Sorcerer"
+level 1
+free
+apcost 2
+cost 10 20
+airare 20
+minmonreq 5
+addstring "(&)Red Kobold"
+sum0chance 100
+summoning
+addstring     "c*Red Kobold Sorcerer"
+
+newritual "Teach Magic to White Kobold"
+descr "Teach magic to a group of 5 White Kobolds. After finishing, you notice there are 6 kobolds now, one of which is a White Kobold Sorcerer"
+level 1
+free
+apcost 2
+cost 10 20
+airare 20
+minmonreq 5
+addstring "(&)White Kobold"
+sum0chance 100
+summoning
+addstring     "c*White Kobold Sorcerer"
+
+
+selectmonster "Black Kobold Settler"
+power 0 1
 
 newritpow
 newritual "Troll King's Court"
@@ -59774,18 +59858,19 @@ free
 addstring     "(&)Baron"
 
 newritual "Head Hunting"
-descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from humans settlements, to hoburgs, and even goblins."
+descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from humans settlements, to hoburgs, goblins, and even kobolds. A councilor will not be able to search for new talent when a Dvala is present"
 ritpow                30 # Dwarf Councilor
 level 1
-cost 0 50
+cost 0 50 
 cost 15 2
 rebateterr50 126
+nomonreq 
 free
 airare 5
 sum0chance 15
 summoning
 addstring "!Error"
-addstring "!Error"
+addstring "(-12)c*Black Kobold Settler" #Greater Mines
 addstring "(-1029)Dwarf Commander"
 addstring "(-28)c*Heroine"    # Towns+
 addstring "(-28)c*Peddlar"
@@ -59799,6 +59884,9 @@ addstring "(-6)c*Goblin Hero"        # 12       Forest
 addstring "(-3)c*Hedge Wizard"       # 13       Libs
 addstring "(-64)c*Reveler"           # 14       Farms-hamlets
 addstring "(-2)c*Priest"    		 # 15       Temple
+addstring "(-)Young Dvala"          # This string will only be used by nomonreq or nomonworldreq.
+addstring "(-)Dvala"                # This string will only be used by nomonreq or nomonworldreq.
+addstring "(-)Daughter of Dvalin"   # This string will only be used by nomonreq or nomonworldreq.
 
 newritual "Develop Coal Mine"
 descr "Construct a coal mine in any mountain using Dwarf Workers. Doing will attract animals, creatures, and locals depending on terrain and climate. Coal is cheapest and easiest mineral resource to develop though it can be dangerous as the creatures living in the area will likely attack. Councilor's have estimated that a coal mine is developed usually within a year's time."
@@ -63771,6 +63859,27 @@ addstring "Senator"
 free
 newrit 2
 newrit 1
+
+newritpow
+newritual "Found Dwarven Armory (Unit Recruitment)"
+descr "Found a Dwarven Armory that will allow upgrading dwarfs"
+free
+apcost -1
+summoning
+addstring "c*Dwarven Armory"
+level 1
+forgetcurrit
+nomonreq 
+addstring "(-)Dwarven Armory"
+
+selectmonster "Young Dvala"
+power 0 1
+
+selectmonster "Dvala"
+power 0 1
+
+selectmonster "Daughter of Dvalin"
+power 0 1
 
 newritpow
 newritual "Incorporate Inn"
@@ -70668,6 +70777,20 @@ closewin                 # Closes cast ritual window.
 scryloc 1000
 free
 
+newritual     "Create Iron and Gems"
+descr "Use your divine power to create Iron and Gems"
+level                  1
+#cost 0 -1000
+cost 1  -50
+#cost 2  -100
+#cost 3  -100
+#cost 4  -100
+#cost 5  -100
+#cost 6  -100
+cost 15  -100
+apcost -1
+free
+
 newritual     "Travel"
 descr "Teleport anywhere"
 level                  2
@@ -75076,7 +75199,71 @@ power 0 3
 
 #End Ritual Modding
 
+### Dwarven Access ###
+newritpow
 
+newritual "Promote Dwarfs"
+descr "Promote 5 Dwarf Workers into Dwarfs"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 10
+airare 20
+promotion 5
+addstring "Dwarf Worker"
+addstring "Dwarf"
+
+newritual "Promote Dwarf Warriors"
+descr "Promote 5 Dwarf Workers into Dwarf Warriors"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 15
+airare 20
+promotion 5
+addstring "Dwarf Worker"
+addstring "Dwarf Warrior"
+
+newritual "Promote Dwarf Guards"
+descr "Promote 5 Dwarf Workers into Dwarf Guards"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 20
+airare 20
+promotion 5
+addstring "Dwarf Worker"
+addstring "Dwarf Guard"
+
+newritual "Promote Dwarf Arbalest"
+descr "Promote 5 Dwarf Workers into Dwarf Arbalests"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 15
+airare 20
+promotion 5
+addstring "Dwarf Worker"
+addstring "Dwarf Arbalest"
+
+newritual "Promote Dwarf Commander"
+descr "Promote 1 Dwarf Worker into a Dwarf Commander"
+level 1
+free
+apcost 2
+cost 0 100
+cost 1 15
+airare 20
+promotion 1
+addstring "Dwarf Worker"
+addstring "Dwarf Commander"
+
+selectmonster "Dwarven Armory"
+power 0 3
 
 #Inn
 
@@ -77951,13 +78138,13 @@ addcomrec "Young Dvala" 5 0 0 0
 reclimiter "-Young Dvala"
 reclimiter "-Dvala"
 reclimiter "-Daughter of Dvalin"
-addmercrec  "Dwarf"                           50  5    0   0   10
+addunitrec  "Dwarf"                           100  5    0   0   10
 reclimiter  "=Dwarf Worker"                                         
-addmercrec  "Dwarf Warrior"                   50  5    0   0   15
+addunitrec  "Dwarf Warrior"                   100  5    0   0   15
 reclimiter  "=Dwarf Worker"                   
-addmercrec  "Dwarf Guard"                     50  5    0   0   20
+addunitrec  "Dwarf Guard"                     100  5    0   0   20
 reclimiter  "=Dwarf Worker"                   
-addmercrec  "Dwarf Arbalest"                  50  5    0   0   15
+addunitrec  "Dwarf Arbalest"                  100  5    0   0   15
 reclimiter  "=Dwarf Worker"                   
 addmercrec  "Outdoor Dwarf"                   50  2   10   0    2
 reclimiter  "=Dwarf Worker"                   
@@ -77966,7 +78153,19 @@ reclimiter  "=Dwarf Worker"
 addmercrec  "Dwarven Ballista"                50  1  300   0   25
 reclimiter  "=Dwarf Worker"                   
 addcomrec   "Dwarf Commander"                  5     150   0   10 
-reclimiter  "=Dwarf Worker"                   
+reclimiter  "=Dwarf Worker"
+addcomrec  "Red Kobold Sorcerer"             10  100   100   0   10
+reclimiter  "+Red Kobold"
+libraryrec
+addcomrec  "Blue Kobold Sorcerer"             10  100   100  0   10
+reclimiter  "+Blue Kobold"
+libraryrec
+addcomrec  "Green Kobold Sorcerer"             10  100   100  0   10
+reclimiter  "+Green Kobold"
+libraryrec
+addcomrec  "White Kobold Sorcerer"             10  100   100  0   10
+reclimiter  "+White Kobold"
+libraryrec
 
 selectclass 21  
 # Voice of El
@@ -78567,6 +78766,30 @@ addstartunits          "Red Kobold Warrior Guard"       8
 addstartunits          "Red Kobold Slinger Guard"       20
 addstartunits          "Fire Drake"                1
 addstartcom            "Red Kobold Chief"
+addunitrec  "Dwarf"                           50  5    0   0   10
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                                         
+addunitrec  "Dwarf Warrior"                   50  5    0   0   15
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Dwarf Guard"                     50  5    0   0   20
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Dwarf Arbalest"                  50  5    0   0   15
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Outdoor Dwarf"                   50  2   10   0    2
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Dwarf Sapper"                    50  5    0   0   10
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec  "Dwarven Ballista"                50  1  300   0   25
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"                   
+addunitrec   "Dwarf Commander"                  5     150   0   10 
+reclimiter  "+Dwarf Worker"   
+reclimiter  "=Dwarf Worker"             
 recherochance       0 # Chance for recruitment offers from human heroes.
 #reqterr -2 # Re-rolls the map until there is at least one square of the following terrain: temples.
 # fx240             1 # Unhandled trait 240 with argument 1.
