@@ -20770,16 +20770,6 @@ selectweapon 861 #Wind guide
 aoe 50
 range 16
 
-#Do a pass and check to make sure the other large and giants of Ba'alites have bleeding version of weapons.
-
-# Consider splitting the performances up by instruments affecting range
-#|Instrument|range_multi|aoe_multi|other_effects
-#|Percussion instruments (membranophones)|1.0|+50%|buff nearby friends 512 #str / dmg +2
-#|Wind instruments (aerophones)|2|+25%|large cone, very weak stun on low str enemies
-#|Stringed instruments (chordophones)|1.0|0|buff more distant friends 512 #str / dmg +2
-#|Electronic instruments (electrophones)|1.25|-50%|confusion single enemy within medium range
-
-
 #End
 
 #icon "pop/popbanner6.tga"
@@ -36540,277 +36530,277 @@ selectmonster "Cat Illusion"
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Rabbit Illusion"                           
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Frog Illusion"                             
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Snake Illusion"                            
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Troll Illusion"                            
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Giant Illusion"                            
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Drake Illusion"                            
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Monster Illusion"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Hydra Illusion"                            
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Chimaera Illusion"                         
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Manticore Illusion"                        
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Dragon Illusion"                           
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Sirrush Illusion"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Roc Illusion"                              
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Beholder Illusion"                         
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Archer"                         
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Spearman"                       
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Swordsman"                      
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Halberdier"                     
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Pikeneer"                       
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Zweihander"                     
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Captain"                        
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Knight"                         
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Wolf"                           
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Deer"                           
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Moose"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Bear"                           
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Boar"                           
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Lion"                           
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Fiend"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Demon"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Devil"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Greater Devil"                  
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Angel"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Arch Angel"                     
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Horror"                         
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Great Horror"                   
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Insect"                         
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Bug"                            
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Ant"                            
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Cat"                            
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Rabbit"                         
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Frog"                           
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Snake"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Troll"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Giant"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Drake"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Monster"                        
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Hydra"                          
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Chimaera"                       
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Manticore"                      
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Dragon"                         
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Sirrush"                        
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Roc"                            
 unaging
 affres 100
 water
-#riverdmg 1
+
 selectmonster "Phantasmal Beholder"                       
 unaging
 affres 100
 water
-#riverdmg 1                    
+                    
 selectmonster "Float Cat Horror"                           
 unaging
 affres 100
@@ -46114,7 +46104,6 @@ meleeweapon -1   5
 noleader
 human
 #water
-#riverdmg 3
 gold -2
 mastery 1
 prebatweapon 4 "Summon Person"
@@ -46137,7 +46126,6 @@ spellweapon 55   1
 human
 water
 #noleader
-#riverdmg 3
 gold -3
 prebatweapon 8 "Summon Person"
 aipowcom2 -1
@@ -58793,9 +58781,6 @@ selectmonster "King of the Deep"
 power 0 3
 
 
-#Working...
-#Add in making Ratling (Subservient obsessed skaven-like rats) and Rodentia (Forest type creatures, squirrel knights) factions. Connect to the Druid lines.
-
 
 #Druid expansion
 newritual     "Scry Nature"
@@ -59165,7 +59150,6 @@ addstring     "(-13)1d2*Militia" #farms
 
 
 
-#population mechanics involve senator increasing or decreasing a settlement size and getting a unit called a population. A population may be used to increase a settlement size.
 newritual "Seek Fame and Glory"
 descr "The tribune seeks greater fame and glory as Legate giving greater leadership over armies controlled directly by the Legate but temporarily less political power. A Legate who becomes respected has the chance to gain greater political power for oneself."
 ritpow 31
@@ -59357,24 +59341,6 @@ selectmonster "Heliodromus"
 power 0 2
 
 
-#Knight to Manflayer? How to create Manflayers via rituals...
-#Working...
-#Captain to Androphag Lord
-#addstring "c*Manflayer"
-#addstring "c*Androphag Lord"
-
-
-
-
-#Bandit King recruitment
-#
-#cost 0 100#cost 3 5
-#addstring "5*Brigand"
-#
-#
-#cost 0 60#cost 3 5              
-#addstring "5*Bandit"
-
 
 #Barbarian forced conscription variants
 #These are modeled on the conscription of tribals and baron but always reduce size working like slavery. These rituals get 2 summoning per use.
@@ -59559,9 +59525,6 @@ killtarg 9999
 soundfx               22 # Sound effect when the ritual is cast: fear    
 soundfx               44 # Sound effect when the ritual is cast: luck
 
-#Some potential high end rituals:
-# Proposed Barbarian Godking expansion, becomes a war god incarnation
-
 
 selectmonster "Mounted Chief"
 power 0 1
@@ -59611,8 +59574,6 @@ addstring "(-110)Beast Camel Cavalry"  # Desert-like terrains
 addstring "(-110)Beast Camel Cavalry"  # Desert-like terrains
 addstring "(-110)Beast Elephant Cavalry"  # Desert-like terrains
 
-
-#Hobmarks (Markgraf)#I think I may want to merge the Hobmarks and Hoburgs and have them split via the game mechanics in some ways.
 
 #The German word Burgermeister often spelled in English as Burgomaster or Burgomeister means master of the citizens. 
 # The lord or military governor of a medieval German border province.
@@ -66750,7 +66711,6 @@ closewin
 selectmonster 0:"Hedge Wizard"
 power 0 1
 
-#How to do this?
 newritual "Study Basic Enchanting"
 descr "Gain knowledge sufficient for a Hedge Enchanter such as how to make tools and brooms. This type of work is beneath the more experienced and specialized Enchanters."
 ritpow 11
@@ -69920,7 +69880,7 @@ newrit 1
 
 #Monk to Priest begins the path toward theocracy and El religion more varied, unfortunately I'm limited because EL rituals arn't mod-able so I'll have to do it creatively.
 
-#New El rituals, El is suppose to be a theocracy and connects to Senator if cultists and such are not present. I want El to be racist (dwarves), anti-magic (cultist, witch, etc).
+#New El rituals, El is suppose to be a theocracy and connects to Senator if cultists and such are not present. El faction / hates witches, dwarves, anti-magic (cultist, witch, etc).
 
 
 newritual "Visions"
@@ -78043,7 +78003,6 @@ nostdtroops
 aiclass -1
 otherplanar
 
-#redesign the high cultist to start with a port and can sacr their port (turning it into a deserted port)
 selectclass 19  
 # High Cultist
 clearrec
