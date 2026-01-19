@@ -20780,7 +20780,7 @@ range 16
 #cave wall terrain group for pale ones underground advantage
 selectterrgroup -1000
 setname "Caves"
-addterr 51
+#addterr 51 #Remove cave walls
 addterr 103
 addterr 106
 addterr 121
@@ -30405,7 +30405,7 @@ female
 goldcarrier     150
 gatherfungus
 gathersacr
-gatheranygems
+gathergems
 spellweaponbonus 40 1  # Witchery at level 1
 spellweapon 40 2  # Witchery at level 2
 more1spells 2
@@ -30512,7 +30512,7 @@ weaponslots         # Item slots for a weapon and two misc items, no more
 fireres        -25  # Resistance or vulnerability to fire
 troll            1
 allitemslots
-gatheranygems
+gathergems
 
 selectmonster "Rock Troll"
 fireres -25
@@ -30937,7 +30937,7 @@ spellweapon 43   2  # Illusionism at level 2
 meleeweaponbonus 3 "Grapple"
 #slavehunt
 mastery 1
-gatheranygems
+gathergems
 gathersacr
 diseaseres
 unaging
@@ -30968,7 +30968,7 @@ invisible
 saner 2
 voidsanity 50
 #slavehunt
-gatheranygems
+gathergems
 gathersacr
 classcost -30
 more1spells                    2 # Starts with 1 extra level 1 spell of each known school.
@@ -31959,7 +31959,7 @@ spellweapon 51   2  # High Arcana at level 2
 shockres 30
 fireres  30
 coldres  30
-gatheranygems
+gathergems
 power 18 1
 power 19 1
 power 26 1  # Illusionist at level 1
@@ -32076,7 +32076,7 @@ airshield 50
 
 #Gatherpass and power pass
 selectmonster "Earth Gnome"
-gatheranygems
+gathergems
 
 
 selectmonster "Dryad"
@@ -32093,7 +32093,7 @@ gatherherbs
 
 
 selectmonster "High Magus"
-gatheranygems
+gathergems
 
 
 selectmonster "Master Animist"
@@ -32103,7 +32103,7 @@ power 5 2
 #classcost 25
 
 selectmonster "Grandfather of the Sea"
-gatheranygems 
+gathergems 
 power 19 2
 classcost 10
 
@@ -32115,7 +32115,7 @@ classcost 20
 
 #connected units
 selectmonster "Great Sorceress"
-gatheranygems
+gathergems
 spellweapon  5 2 
 # Storm Magic at level 2
 power 20 2 
@@ -32142,7 +32142,7 @@ limitiron 3
 spellrange 2
 
 selectmonster "Master Alchemist"
-gatheranygems
+gathergems
 power 21 1  
 # Warlock of Earth 1
 classcost 20
@@ -32156,7 +32156,7 @@ classcost 5
 limitgold 3
 
 selectmonster "Frost Father"
-gatheranygems
+gathergems
 gatherherbs
 power 5 2
 iceprot 2
@@ -32172,7 +32172,7 @@ classcost 5
 limitgold 5
 
 selectmonster "Frost Hag"
-gatheranygems
+gathergems
 gatherfungus
 iceprot 2
 power 4 2
@@ -32190,7 +32190,7 @@ power 8 2
 classcost 10
 
 selectmonster "High Enchantress"
-gatheranygems
+gathergems
 power 5   2  # Druidism at level 2
 classcost -5
 
@@ -32212,7 +32212,7 @@ limitgold 5
 spellrange 1
 
 selectmonster "Grand Wizard"
-gatheranygems
+gathergems
 power 18 1
 power 19 1
 classcost 100
@@ -32224,7 +32224,7 @@ power 19 1
 limitgold 10
 
 selectmonster "Master Arch Wizard"
-gatheranygems
+gathergems
 gatherrelics
 clearweapons
 meleeweapon  676  # Magic Scepter
@@ -32245,7 +32245,7 @@ limitiron 1
 spellrange 2
 
 selectmonster "Master of the Silver Order"
-gatheranygems
+gathergems
 coldres 95
 fireres 50
 shockres 30
@@ -32304,23 +32304,23 @@ coldres 25
 shockres 25
 limitgold 12
 selectmonster "Master of the Golden Order"
-gatheranygems
+gathergems
 fireres 95
 coldres 50
 shockres 30
 limitgold 20
 
 selectmonster "Master of the Iron Order"
-gatheranygems
+gathergems
 fireres  60
 coldres  60
 shockres 60
 selectmonster "Enarie"
-gatheranygems
+gathergems
 
 selectmonster "Elder Enarie"
 gatherherbs
-gatheranygems
+gathergems
 
 selectmonster "Emperor"
 gatherrelics
@@ -32359,7 +32359,7 @@ gathersacr
 
 selectmonster "Ancient Troll"
 gatherfungus
-gatheranygems
+gathergems
 gathersacr
 
 selectmonster "Troll Shaman"
@@ -33090,17 +33090,17 @@ hp 12
 
 #gather resource pass
 selectmonster "High Priest of the Rain" 
-gatheranygems
+gathergems
 
 selectmonster "High Priest of the Sun"
 gatherweed
-gatheranygems
+gathergems
 
 selectmonster "High Priest of the Bloody Mother"
 gathersacr
 
 selectmonster "High Priest of the Sky"
-gatheranygems
+gathergems
 
 selectmonster "High Priest of the Night"
 gatherhands
@@ -33109,7 +33109,7 @@ selectmonster "High Priest of the Dead"
 gatherhands
 
 selectmonster "High Magus"
-gatheranygems
+gathergems
 power 26 1
 classcost 10
 
@@ -33117,7 +33117,7 @@ selectmonster "Master of Darkness"
 gatherhands
 
 selectmonster "Adept of Pyriphlegeton"
-gatheranygems
+gathergems
 power 18 2
 classcost 10
 
@@ -33129,20 +33129,20 @@ selectmonster "High Astrologer"
 gathersacr
 
 selectmonster "Grand Wizard"
-gatheranygems
+gathergems
 
 selectmonster "Master Arch Wizard"
-gatheranygems
+gathergems
 gatherrelics
 
 selectmonster "Master of the Silver Order"
-gatheranygems
+gathergems
 
 selectmonster "Master of the Golden Order"
-gatheranygems
+gathergems
 
 selectmonster "Master of the Iron Order"
-gatheranygems
+gathergems
 
 selectmonster "Elder Enarie"
 gatherherbs
@@ -33222,12 +33222,12 @@ power 5 1
 spellrange 1
 
 selectmonster "Oracle of Rhuax"
-gatheranygems
+gathergems
 power 18 1
 power 21 1
 spellrange 1
 selectmonster "Oracle of Apsu"            
-gatheranygems
+gathergems
 power 19 1
 power 21 1
 spellrange 1
@@ -33239,7 +33239,7 @@ saner 1
 spellrange 1
 selectmonster "Oracle of Allatu"          
 gatherhands
-gatheranygems
+gathergems
 power 1 2
 power 2 1
 power 21 1
@@ -37202,7 +37202,7 @@ classcost 10
 selectmonster "Merchant"
 gatherherbs
 gatherweed
-gatheranygems
+gathergems
 gatherfungus
 gatherrelics
 
@@ -37211,7 +37211,7 @@ gatherrelics
 selectmonster "Crystal Sorceress"
 str 3
 awe 2
-gatheranygems
+gathergems
 shockres 25
 fireres  25
 coldres  25
@@ -37219,7 +37219,7 @@ selectmonster "Crystal Priestess"
 str 3
 awe 1
 gathersacr
-gatheranygems
+gathergems
 shockres 25
 fireres  25
 coldres  25
@@ -37240,11 +37240,11 @@ voidsanity 1
 selectmonster "Garnet Priestess"
 fireres 50
 awe 1
-gatheranygems
+gathergems
 selectmonster "Garnet Sorceress"
 fireres 50
 awe 2
-gatheranygems
+gathergems
 selectmonster  "Garnet Amazon"
 rangedweapon 1 "Throwing Axe"
 rangedweaponbonus 10 "Garnet Flame"
@@ -37631,13 +37631,13 @@ deployoutside 1
 #
 
 selectmonster "Bakemono Sorceror"                                          
-gatheranygems
+gathergems
 selectmonster "Bakemono Great Sorceror"                                    
-gatheranygems
+gathergems
 selectmonster "Bakemono Kunshu"                                            
-gatheranygems 
+gathergems 
 selectmonster "Bakemono O Kunshu"                                          
-gatheranygems
+gathergems
 
 
 selectmonster "Effigy"
@@ -39373,7 +39373,7 @@ selectmonster    "Painted Crystal Sorceress"
 armor                          0 # Armor.
 hp                            10 # Hit Points.
 awe 2
-gatheranygems
+gathergems
 fast
 shockres 30
 fireres  30
@@ -39386,7 +39386,7 @@ armor                          0 # Armor.
 hp                            10 # Hit Points.
 awe 1
 gathersacr
-gatheranygems
+gathergems
 fast
 shockres 30
 fireres  30
@@ -39421,7 +39421,7 @@ armor                          0 # Armor.
 hp                            10 # Hit Points.
 #fireres 100
 awe 2
-gatheranygems
+gathergems
 selectmonster  "Garnet Amazon"
 rangedweapon 1 "Throwing Axe"
 rangedweaponbonus 10 "Garnet Flame"
@@ -39434,7 +39434,7 @@ armor                          0 # Armor.
 hp                            10 # Hit Points.
 fireres 50
 awe 1
-gatheranygems
+gathergems
 terrstealth -5
 power 59 1
 
@@ -41036,7 +41036,7 @@ displaced 1
 voidsanity 50
 saner 2
 mastery 2
-gatheranygems
+gathergems
 gatherherbs
 gatherfungus
 immortal
@@ -41125,7 +41125,7 @@ immortalap 36
 reformloc 1000
 voidsanity 90
 saner 4
-gatheranygems
+gathergems
 gatherherbs
 gatherfungus
 gathersacr
@@ -41176,7 +41176,7 @@ ethereal
 displaced 1
 saner 1
 mastery 2
-gatheranygems
+gathergems
 gatherherbs
 gatherfungus
 immortal
@@ -41262,7 +41262,7 @@ immortalap 36
 reformloc 1000 #Faery circle
 voidsanity 50
 saner 3
-gatheranygems
+gathergems
 gatherherbs
 gatherfungus
 gathersacr
@@ -43235,7 +43235,7 @@ allitemslots
 # Bitflag38         # Female
 nametype        35  # Amazon
 gold -5
-gatheranygems
+gathergems
 awe 2
 power 59 3
 
@@ -43271,7 +43271,7 @@ allitemslots
 # Bitflag38         # Female
 nametype        35  # Amazon
 gold -2
-gatheranygems
+gathergems
 awe 2
 power 59 2
 
@@ -44626,7 +44626,7 @@ shockres       99
 inanimate           
 voidsanity 100
 noslots
-gatheranygems
+gathergems
 stonebeing
 nozoc
 neverturn
@@ -44669,7 +44669,7 @@ displaced
 power       20   3  
 nametype        56  
 airshield       90
-gatheranygems
+gathergems
 allrit 20
 teleport
 water
@@ -44776,7 +44776,7 @@ copyspr "Red Dragon"
 gatherrelics
 gatherfungus
 gatherherbs
-gatheranygems
+gathergems
 spellweapon 3   3  
 spellweaponbonus  3   1
 more1spells 3
@@ -44821,7 +44821,7 @@ copyspr "Blue Dragon"
 gatherrelics
 gatherfungus
 gatherherbs
-gatheranygems
+gathergems
 spellweaponbonus 26   3  
 spellweapon50 27   3
 more1spells 3
@@ -44927,7 +44927,7 @@ unaging
 gatherrelics
 gatherfungus
 gatherherbs
-gatheranygems
+gathergems
 more1spells 3
 more2spells 2
 more3spells 1
@@ -45019,7 +45019,7 @@ inanimate
 gatherrelics
 gatherfungus
 gatherherbs
-gatheranygems
+gathergems
 spellweaponbonus 26   3  
 spellweaponbonus  60   1  # Tree Magic at level 1
 spellweaponbonus  60   1  # Tree Magic at level 1
@@ -45125,7 +45125,7 @@ gold -1
 gatherrelics
 poisonres      25   
 power 11 1
-gatheranygems
+gathergems
 
 newmonster "Master Inorganic Enchanter"
 descr "Many consider the Enchanter to be a combination of craftsman, artist and charlatan rather than a true mage.  He forms objects by hand and then tricks them to start moving around and when an object has started moving, it will never go back to being an inanimate object again.  If Enchanters were allowed to spread, Elysium would soon be thrown into chaos with ordinary objects trying to take the place of the living and not staying still like they are supposed to.  Even if the Enchanter is not a respected mage, you should be vary of his creations.  A walking iron mine is just as hard to destroy as you might imagine, and it will destroy everything that tries to hinder it."
@@ -45151,7 +45151,7 @@ fireres        75
 coldres        75  
 poisonres     100
 shockres       75
-gatheranygems
+gathergems
 
 newmonster "Adept Inorganic Enchanter"
 descr "Many consider the Enchanter to be a combination of craftsman, artist and charlatan rather than a true mage.  He forms objects by hand and then tricks them to start moving around and when an object has started moving, it will never go back to being an inanimate object again.  If Enchanters were allowed to spread, Elysium would soon be thrown into chaos with ordinary objects trying to take the place of the living and not staying still like they are supposed to.  Even if the Enchanter is not a respected mage, you should be vary of his creations.  A walking iron mine is just as hard to destroy as you might imagine, and it will destroy everything that tries to hinder it."
@@ -45178,7 +45178,7 @@ fireres        50
 coldres        50  
 poisonres      75
 shockres       50
-gatheranygems
+gathergems
 
 newmonster "Apprentice Inorganic Enchanter"
 descr "Many consider the Enchanter to be a combination of craftsman, artist and charlatan rather than a true mage.  He forms objects by hand and then tricks them to start moving around and when an object has started moving, it will never go back to being an inanimate object again.  If Enchanters were allowed to spread, Elysium would soon be thrown into chaos with ordinary objects trying to take the place of the living and not staying still like they are supposed to.  Even if the Enchanter is not a respected mage, you should be vary of his creations.  A walking iron mine is just as hard to destroy as you might imagine, and it will destroy everything that tries to hinder it."
@@ -45202,7 +45202,7 @@ fireres        25
 coldres        25  
 poisonres      50
 shockres       25
-gatheranygems
+gathergems
 
 newmonster "Master Organic Enchanter"
 descr "Many consider the Enchanter to be a combination of craftsman, artist and charlatan rather than a true mage.  He forms objects by hand and then tricks them to start moving around and when an object has started moving, it will never go back to being an inanimate object again.  If Enchanters were allowed to spread, Elysium would soon be thrown into chaos with ordinary objects trying to take the place of the living and not staying still like they are supposed to.  Even if the Enchanter is not a respected mage, you should be vary of his creations.  A walking forest is just as hard to destroy as you might imagine, and it will destroy everything that tries to hinder it."
@@ -45308,7 +45308,7 @@ nametype        31
 indepitem      100
 gold -5
 gatherrelics
-gatheranygems
+gathergems
 more3spells 1
 lucky
 displaced 1
@@ -45341,7 +45341,7 @@ mastery         -1
 indepitem       50
 gold -3
 gatherrelics
-gatheranygems
+gathergems
 more2spells 1
 coldres   50
 fireres   50
@@ -45369,7 +45369,7 @@ nametype        31
 mastery         -1  
 gold -2
 gatherrelics
-gatheranygems
+gathergems
 more1spells 1
 #ethereal
 coldres   25
@@ -47725,7 +47725,7 @@ fireres         50
 randomitem      5
 #montag 10
 water
-gatheranygems
+gathergems
 watershape 1
 power       19   1  # Warlock of Water at level 1
 classcost 5
@@ -47754,7 +47754,7 @@ fireres         50
 randomitem      5
 #montag 10
 water
-gatheranygems
+gathergems
 landshape -1
 float
 power       19   1  # Warlock of Water at level 1
@@ -47955,7 +47955,6 @@ nonmaginvul
 lucky
 reformloc     1000  
 nametype 62
-stationary
 immobile
 nocombat
 
@@ -48605,7 +48604,7 @@ spellweapon 3 1
 meleeweapon 1 "Dagger"
 #classcost 1
 mastery 1
-gatheranygems
+gathergems
 fastheal
 spellrange 1
 #saner 1
@@ -48631,7 +48630,7 @@ spellweapon 3 1
 meleeweapon 1 "Mace"
 #classcost 1
 mastery 1
-gatheranygems
+gathergems
 fastheal
 spellrange 2
 #saner 1
@@ -48654,7 +48653,7 @@ spellweapon   3 3
 spellweapon   3 1
 spellweapon50 3 1
 meleeweapon 2 "Fist"
-gatheranygems
+gathergems
 fastheal
 spellrange 2
 #saner 1
@@ -48758,7 +48757,7 @@ mastery 1
 prebatweapon 3 "Summon Person"
 limitgold 3
 limitiron 2
-gatheranygems
+gathergems
 
 newmonster "Merchant"
 descr "The traditional Peddlar travels between villages and sells and buys goods to make money and to supply the villages with items they cannot make themselves.  Being a Peddlar in Elysium is extremely dangerous, because bears, deer and brigands are very real dangers for anyone who tries to travel between different settlements.  In order to survive the Peddlar has a quite a lot of guards and many rulers have mistaken a successful merchant for an invading army."
@@ -48782,7 +48781,7 @@ prebatweapon 2 "Summon Spearman"
 prebatweapon 2 "Summon Crossbowman"
 limitgold 10
 limitiron 3
-gatheranygems
+gathergems
 
 newmonster "Controlled Active Volcano"
 descr "This active volcano has been enchanted by a powerful fire warlock who has turned it into a weapon of war for those foolish enough to assault this deadly fortress."
@@ -48818,7 +48817,7 @@ allitemslots
 foreststealth
 ainofollower
 aigoldrally 1
-gatheranygems
+gathergems
 
 newmonster "Goblin Emperor"
 descr "The Goblin Emperor is the one and a million idiot goblin scavenges the corpse of some treasure hunter once adorned in magical equipment. The Goblin Emperor has put it to use subjugating those who do not fall in line by burning them to a crisp. The Emperor's elven armor keeps him safe, his crown exudes an aura of intimidation, and a ring of infinite gold keeps him from ever going broke."
@@ -48841,7 +48840,7 @@ startitem "Ring of Infinite Gold"
 noleader
 stationary
 gold -4
-gatheranygems
+gathergems
 
 newmonster "Unfinished Ruby Iron Dragon"
 descr "This Iron Dragon is unfinished and will become functional in about a three months.^^Iron Dragons are powerful constructs that are just as hard to kill as the material they are made from.  Iron Dragons have special abilities that are inherent to their building material."
@@ -49119,7 +49118,7 @@ classcost 5
 newmonster "Red Dragon Human Form"
 copyspr "Great Warlock of Fire"
 copystats "Great Warlock of Fire"
-gatheranygems
+gathergems
 firstshape 1
 spellweapon       3   3 
 spellweapon		  3   2  
@@ -49133,7 +49132,7 @@ newmonster "Red Dragon Form"
 descr "This Warlock has transformed its body into a nearly immortal Dragonic form.^^The Dragon is perfection of mutagenic magic; Dragons are enormous, scaly, winged beasts capable of breathing fire, poisonous gas, supernatural frost upon enemies. Dragons are usually attuned to a specific magic and are highly resistant to many forms of attack on top of their cellular senescence. Staying in Dragon form causes loss of sanity and humanity, revert to human form to regain it."   
 copystats "Red Dragon"
 copyspr "Red Dragon"
-gatheranygems
+gathergems
 spellweapon       3   3 
 spellweaponbonus  3   2
 spellweaponbonus  3   1
@@ -49190,7 +49189,7 @@ gatherfungus
 newmonster "Garnet Dragon Human Form"
 copyspr "Garnet Princess"
 copystats "Garnet Princess"
-gatheranygems
+gathergems
 firstshape 1
 spellweapon 3    3  # Pyromancy 3
 spellweaponbonus 3    2  # Pyromancy 2
@@ -49204,7 +49203,7 @@ newmonster "Garnet Dragon Form"
 descr "This Warlock has transformed its body into a nearly immortal Dragonic form.^^The Dragon is perfection of mutagenic magic; Dragons are enormous, scaly, winged beasts capable of breathing fire, poisonous gas, supernatural frost upon enemies. Dragons are usually attuned to a specific magic and are highly resistant to many forms of attack on top of their cellular senescence. Staying in Dragon form causes loss of sanity and humanity, revert to human form to regain it."   
 copystats "Red Dragon"
 copyspr "Red Dragon"
-gatheranygems
+gathergems
 spellweapon 3    3  # Pyromancy 3
 spellweaponbonus 3    2  # Pyromancy 2
 spellweaponbonus 3    2  # Pyromancy 1
@@ -53481,7 +53480,7 @@ rearpos
 clearweapons
 meleeweapon 15 "Large Death Blade"  # Death Blade (value 15: D27 slash damage)
 spellweapon 11   3  # Blood Magic at level 3
-gatheranygems
+gathergems
 aggressive
 
 
@@ -53496,7 +53495,7 @@ spellweapon 11   3  # Blood Magic at level 3
 nocombat
 invisible
 lookslike -467
-gatheranygems
+gathergems
 
 
 selectmonster "Succubus"
@@ -53506,7 +53505,7 @@ newmonster "Succubus"
 descr "The Succubus has the shape of a young naked woman and looks remarkably beautiful for a being with wyvern-like wings on her back.  A Succubus is able to enter the dreams of any male to seduce and corrupt his soul.  Only those of the highest moral character will be able to resist the Succubus once she has entered their dreams."
 copystats " Succubus"
 copyspr " Succubus"
-gatheranygems
+gathergems
 gathersacr
 gatherweed
 
@@ -53517,7 +53516,7 @@ copystats " Succubus"
 nocombat
 invisible
 #lookslike -465
-gatheranygems
+gathergems
 gathersacr
 gatherweed
 
@@ -53532,7 +53531,7 @@ spellweapon               28   2 # Dark Prayers
 spellweapon                1   1 # Infernal Magic at level 1.
 meleeweapon                7  10 # Life Drain: d7 Magic damage.
 assassinweapon             1 729 # Dream Seduction: Charm.
-gatheranygems
+gathergems
 gathersacr
 gatherweed
 power 8 2
@@ -53553,7 +53552,7 @@ assassinweapon             1 729 # Dream Seduction: Charm.
 nocombat
 invisible
 #lookslike -465
-gatheranygems
+gathergems
 gathersacr
 gatherweed
 power 8 2
@@ -55617,7 +55616,7 @@ allitemslots
 nametype        18  # Roman female
 power 32 1
 awe 1
-gatheranygems
+gathergems
 fast
 
 #Jade Version #2
@@ -55666,7 +55665,7 @@ fireres 50
 nametype        18  # Roman female
 power 32 1
 awe 1
-gatheranygems
+gathergems
 
 #Onyx Version #4
 newmonster "Priestess" #3
@@ -55721,7 +55720,7 @@ power       32   1  #Empress
 mastery 1
 awe 1
 gatherrelics
-gatheranygems
+gathergems
 gatherherbs
 
 newmonster "High Renata"
@@ -55796,7 +55795,7 @@ allitemslots
 # resFlag38         # Female
 nametype        18  # Roman female
 awe 1
-gatheranygems
+gathergems
 fast
 
 #Jade Version #2
@@ -55845,7 +55844,7 @@ fireres 50
 nametype        18  # Roman female
 power 32 1
 awe 1
-gatheranygems
+gathergems
 
 #Onyx Version #4
 newmonster "Renata" #4
@@ -55923,7 +55922,7 @@ mr 5
 nametype         7  # Greek male
 #more1spells 
 spellrange -1
-gatheranygems
+gathergems
 
 
 newmonster "Hedge Wizard" #4 #demonology
@@ -55966,7 +55965,7 @@ nametype         6  # Roman male
 #classcost 25
 #more1spells 
 spellrange -1
-gatheranygems
+gathergems
 
 newmonster "Hedge Wizard" #7 #Illusionism
 copystats " Hedge Wizard"
@@ -55979,7 +55978,7 @@ nametype         18  # Roman female
 #classcost 25
 #more1spells 
 spellrange -1
-gatheranygems
+gathergems
 
 
 newmonster "Assassin"
@@ -57556,7 +57555,7 @@ free
 # This ritual is free
 airare 5
 aiapprspam 50   
-cost 16  10 
+cost 16  5 
 setplayer 24
 sum0chance 1
 farsummon
@@ -57590,7 +57589,7 @@ airare 5
 aiapprspam 50              
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (summoning).
 terr 105       # Coal Mine
-cost 16  5 
+cost 16  10 
 promotion 1
 addstring "Slave"
 addstring "Slave"
@@ -70733,22 +70732,19 @@ level                  1
 apcost -1
 multiplane 2
 soundfx               23 # Sound effect when the ritual is cast: airduct.smp.
+castertarg
 closewin                 # Closes cast ritual window.
 scryloc 1000
 free
 
-newritual     "Create Iron and Gems"
-descr "Use your divine power to create Iron and Gems"
+newritual     "Godly Endurance"
+descr "Regain AP"
 level                  1
-#cost 0 -1000
-cost 1  -50
-#cost 2  -100
-#cost 3  -100
-#cost 4  -100
-#cost 5  -100
-#cost 6  -100
-cost 15  -100
-apcost -1
+apcost -6
+soundfx               23 # Sound effect when the ritual is cast: airduct.smp.
+castertarg
+apcost
+closewin                 # Closes cast ritual window.
 free
 
 newritual     "Travel"
@@ -75734,13 +75730,13 @@ free                     # This ritual is learned for free and everyone will kno
 summoning
 #addstring    "c*3:Hedge Wizard" # Elements
 #addstring    "c*4:Hedge Wizard"
-#addstring    "c*5:Hedge Wizard" #Necromancer
+addstring    "c*5:Hedge Wizard" #Necromancer
 #addstring    "c*6:Hedge Wizard"  #Illusionism
 #addstring    "c*7:Hedge Wizard"
 #addstring    "c*8:Hedge Wizard" 
-#addstring     "c*Person"                   #
-#addstring     "c*0:Renata"                   #
-addstring     "5*Abysian"                   #
+#addstring     "!Error"                   #
+#addstring     "c*Monk"                   #
+#addstring     "!Error"                   #
 #addstring     "c*Rare Dryad Offspring"                   #
 
 
@@ -76220,10 +76216,8 @@ clearrec
 clearstartunits
 clearstartterr
 nostdtroops
-
-
 setmaincom "Hero"
-hometerr 5
+hometerr 20
 addstartunits "Swordsman" 5
 addstartunits "Spearman"  10
 addstartunits "Archer" 10
@@ -76250,8 +76244,7 @@ addstartcom "Priestess"
 addstartcom "Hedge Wizard"
 #libbonusdescr    "none"
 #templebonusdescr "none"
-classcitterr -1013
-aiclass -1
+otherplanar
 addcomrec "Peddlar" 5 150 10 5
 addmercrec  "Spearman"               60  5   100   0    0
 addmercrec  "Archer"                 60  5   100   0    0
@@ -76803,7 +76796,10 @@ addcomrec   "Cultist"                 100      0 0   0
 reclimiter  "-Cultist"
 reclimiter  "-Demonologist"
 reclimiter  "-Goetic Master"
-addcomrec   "Cultist"                           4      55  20    0 # once per offer; extra; boosted chance if no caster (?).
+#addcomrec  "5:Hedge Wizard"  100  30  20  0 # Doesnt work
+addcomrec   "Slaver"                           20  75  20  0 
+addcomrec   "Cultist"                           4  100  20  0 
+templerec                                     # Each temple owned increases chance by an undocumented amount.
 templerec                                     # Each temple owned increases chance by an undocumented amount.
 libraryrec
 addmercrec  "Spearman"               30  5   75   0    0
@@ -81381,8 +81377,6 @@ selectterr 49
 trade 0
 selectterr 50
 trade 0
-selectterr 51
-trade 0
 selectterr 52
 trade 0
 selectterr 53
@@ -83242,12 +83236,7 @@ selectterr 50
 nosight
 #bonusrelics -2
 
-selectterr 51
 
-
-
-nosight
-#bonusrelics -2
 
 selectterr 52
 
@@ -84947,6 +84936,14 @@ weed 2
 
 selectterr 70
 gold 35
+
+selectterr 51
+clearspec
+apcost           99 # Action Point cost for moving through the terrain: 99
+invisible           # Terrain on top of the background is not drawn, but the grass will still be drawn.
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+ug                  # This is an underground terrain.
 
 #events
 
