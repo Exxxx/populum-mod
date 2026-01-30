@@ -2428,12 +2428,15 @@ hp 6
 
 selectmonster "Goblin"
 hp 4
+expendable 1
 
 selectmonster "Goblin Spearman"
 hp 4
+expendable 1
 
 selectmonster "Goblin Archer"
 hp 4
+expendable 1
 
 selectmonster "Goblin Shaman"
 hp 6
@@ -48727,10 +48730,18 @@ copystats "Director Tool"
 copyspr "Director Tool"
 
 newmonster "Priestess"
-copystats "Renata"
 descr "This Priestess is a trusted and important member to the community capable of inspiring and bringing them together."  
 spr1 "pop/monster/monster_0876.tga"
 spr2 "pop/monster/monster_0877.tga"
+armor                          0 # Armor.
+hp                             5 # Hit Points.
+str                            4 # Strength.
+mor                            5 # Morale.
+rank                          -1 # Back rank.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+allitemslots                     # Has the full set of item slots.
+female                           # Female.
+nametype                      18 # Roman female.
 clearweapons
 mr 6
 meleeweapon  0   0  # Fist
@@ -55612,9 +55623,9 @@ spellweapon 12   1  # Crystal Sorcery at level 1
 meleeweapon  0   0  # Fist
 human
 allitemslots
-# resFlag38         # Female
+female
 nametype        18  # Roman female
-power 32 1
+#power 32 1
 awe 1
 gathergems
 fast
@@ -55636,10 +55647,10 @@ spellweapon 14   1  # Jade Sorcery at level 1
 meleeweapon  0   0  # Fist
 human
 allitemslots
-# resFlag38         # Female
+female
 poisonres 90
 nametype        18  # Roman female
-power 32 1
+#power 32 1
 awe 1
 gatherfungus
 
@@ -55660,10 +55671,10 @@ spellweapon 13   1  # Garnet Sorcery at level 1
 meleeweapon  0   0  # Fist
 human
 allitemslots
-# resFlag38         # Female
+female
 fireres 50
 nametype        18  # Roman female
-power 32 1
+#power 32 1
 awe 1
 gathergems
 
@@ -55684,9 +55695,9 @@ spellweapon 15   1  # Onyx Sorcery at level 1
 meleeweapon  0   0  # Fist
 human
 allitemslots
-# resFlag38         # Female
+female
 nametype        18  # Roman female
-power 32 1
+#power 32 1
 awe 1
 sensedead 1
 gatherhands
@@ -55694,14 +55705,14 @@ gatherhands
 #new Renata
 
 selectmonster "Renata"
-name " Renata"
+name "oldRenata"
 
 selectmonster "Empress"
 name " Empress"
 
 newmonster "Renata" # 0
-copystats " Renata"
-copyspr   " Renata"
+copystats "oldRenata"
+copyspr   "oldRenata"
 clearweapons
 rank            -1  # Back
 hp              10
@@ -55724,7 +55735,7 @@ gathergems
 gatherherbs
 
 newmonster "High Renata"
-copystats " Renata"
+copystats "oldRenata"
 spr1 "pop/monster/hrenata01.tga"
 spr2 "pop/monster/hrenata02.tga"
 clearweapons
@@ -55777,7 +55788,7 @@ classcost -25
 
 #Crystal Version #1
 newmonster "Renata" #1
-copystats " Renata"
+copystats "oldRenata"
 spr1 "pop/monster/monster_5904.tga"
 spr2 "pop/monster/monster_5905.tga"
 clearweapons
@@ -55792,15 +55803,16 @@ spellweapon 12   1  # Crystal Sorcery at level 1
 meleeweapon  0   0  # Fist
 human
 allitemslots
-# resFlag38         # Female
+female
 nametype        18  # Roman female
 awe 1
 gathergems
 fast
+power 32 1
 
-#Jade Version #2
+#Jade Version #2 (This is actually 4 in rituals for some reason...)
 newmonster "Renata" #2
-copystats " Renata"
+copystats "oldRenata"
 spr1 "pop/monster/monster_1324.tga"
 spr2 "pop/monster/monster_1325.tga"
 clearweapons
@@ -55815,16 +55827,17 @@ spellweapon 14   1  # Jade Sorcery at level 1
 meleeweapon  0   0  # Fist
 human
 allitemslots
-# resFlag38         # Female
+female
 poisonres 90
 nametype        18  # Roman female
 awe 1
 gatherfungus
 coldblood
+power 32 1
 
-#Garnet Version #3
+#Garnet Version #3 (This is actually 5 in rituals for some reason...)
 newmonster "Renata" #3
-copystats " Renata"
+copystats "oldRenata"
 spr1 "pop/monster/monster_1324r.tga"
 spr2 "pop/monster/monster_1325r.tga"
 clearweapons
@@ -55839,16 +55852,16 @@ spellweapon 13   1  # Garnet Sorcery at level 1
 meleeweapon  0   0  # Fist
 human
 allitemslots
-# resFlag38         # Female
+female
 fireres 50
 nametype        18  # Roman female
 power 32 1
 awe 1
 gathergems
 
-#Onyx Version #4
+#Onyx Version #4 (This is actually 6 in rituals for some reason...)
 newmonster "Renata" #4
-copystats " Renata"
+copystats "oldRenata"
 spr1 "pop/monster/monster_0928.tga"
 spr2 "pop/monster/monster_0929.tga"
 clearweapons
@@ -55863,7 +55876,7 @@ spellweapon 15   1  # Onyx Sorcery at level 1
 meleeweapon  0   0  # Fist
 human
 allitemslots
-# resFlag38         # Female
+female
 nametype        18  # Roman female
 power 32 1
 awe 1
@@ -57572,10 +57585,10 @@ addstring     "(12)1*Cyclops" #Any
 addstring     "(12)1*Dwarf Warrior & 2d8*Dwarf" #Any
 addstring     "(-25)1d2*Yeti" #North
 addstring     "(-25)1d3+1*Winter Wolf" #North
-addstring     "(-25)1d2*Rock Troll" #North
-addstring     "(-26)1d3*Earth Gnome & 2d3*Goat" #Mid
-addstring     "(-26)1d2+1*Leogryph" #Mid
-addstring     "(-26)1d3+1*Troll" #Mid
+addstring     "(-25)1*Rock Troll" #North
+addstring     "(-26)1d2*Earth Gnome & 2d3*Goat" #Mid
+addstring     "(-26)1d2*Leogryph" #Mid
+addstring     "(-26)1d2*Troll" #Mid
 addstring     "(-27)Gryphon" #South
 addstring     "(-27)Wyvern" #South
 addstring     "(-27)1d3+1*Giant Spider & 2d3+2*Small Spider" #South
@@ -57983,14 +57996,6 @@ addstring "(131)Forest Troll"
 addstring "(131)Forest Troll King"
 addstring "(32)Troll"
 addstring "(32)Troll King"
-addstring "Troll"
-addstring "Troll King"
-addstring "Rock Troll"
-addstring "Rock Troll King"
-addstring "Forest Troll"
-addstring "Forest Troll King"
-addstring "Lake Troll"
-addstring "Lake Troll King"
 nomonhomereq             # Monsters in strings beginning with "(-)" must not have their home at target location.
 addstring "(-)Lake Troll King"
 addstring "(-)Forest Troll King"
@@ -58013,14 +58018,6 @@ gainrit 3   # "Troll King's Court"
 gainrit 4   # "Rock Troll King's Court"
 gainrit 5   # "Forest Troll King's Court"
 gainrit 778   # "Lake Troll King's Court"
-addstring "(516)Lake Troll"
-addstring "(516)Lake Troll King"
-addstring "(515)Rock Troll"
-addstring "(515)Rock Troll King"
-addstring "(131)Forest Troll"
-addstring "(131)Forest Troll King"
-addstring "(32)Troll"
-addstring "(32)Troll King"
 addstring "Troll King"
 addstring "Troll King"
 addstring "Rock Troll King"
@@ -59867,15 +59864,15 @@ setplayer 24
 sum0chance 1
 farsummon
 castertarg
-addstring     "1*Cyclops" #Any
-#addstring     "1*Roper"  #Any
-addstring     "1*Dwarf Warrior & 2d4*Dwarf" #Any
+addstring     "(12)1*Cyclops" #Any
+#addstring     "(12)1*Roper"  #Any
+addstring     "(12)1*Dwarf Warrior & 2d8*Dwarf" #Any
 addstring     "(-25)1d2*Yeti" #North
 addstring     "(-25)1d3+1*Winter Wolf" #North
-addstring     "(-25)1d2*Rock Troll" #North
-addstring     "(-26)1d3*Earth Gnome & 2d3*Goat" #Mid
-addstring     "(-26)1d2+1*Leogryph" #Mid
-addstring     "(-26)1d3+1*Troll" #Mid
+addstring     "(-25)1*Rock Troll" #North
+addstring     "(-26)1d2*Earth Gnome & 2d3*Goat" #Mid
+addstring     "(-26)1d2*Leogryph" #Mid
+addstring     "(-26)1d2*Troll" #Mid
 addstring     "(-27)Gryphon" #South
 addstring     "(-27)Wyvern" #South
 addstring     "(-27)1d3+1*Giant Spider & 2d3+2*Small Spider" #South
@@ -59898,10 +59895,7 @@ free
 # This ritual is free
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (summoning).
 terr 105       # Coal Mine
-promotion 1
-addstring "Dwarf Worker"
-addstring "Dwarf Worker"
-killtarg 9999
+cost 16  15
 ornext 65
 alterloc 105 #Coal Mine
 ornext 75
@@ -59921,6 +59915,7 @@ cost 0  1250
 # Gold
 cost 1   250 
 # Iron
+cost 16  30
 terr -12 #proper mine 
 # Town
 alterloc              126 
@@ -61249,8 +61244,27 @@ newspell1 42
 newspell1 12
 newspell2 12
 
-selectmonster 1:"Renata"
+#selectmonster 0:"Renata"
+#power 0 1
+
+selectmonster "Renata" [3]
 power 0 1
+
+#selectmonster 2:"Renata"
+#power 0 1
+#
+#selectmonster 3:"Renata"
+#power 0 1
+#
+#selectmonster 4:"Renata"
+#power 0 1
+#
+#selectmonster 5:"Renata"
+#power 0 1
+#
+#selectmonster 6:"Renata"
+#power 0 1
+
 ##
 selectmonster 0:"Priestess"
 power 0 1
@@ -61476,10 +61490,12 @@ newspell1 25
 newspell1 14
 newspell2 14
 
-selectmonster 2:"Renata"
+
+
+selectmonster "Renata" [4]
 power 0 1
 
-selectmonster 1:"Priestess"
+selectmonster "Priestess" [1]
 power 0 1
 
 #Jade
@@ -61584,7 +61600,7 @@ castertarg
 nomonreq
 addstring "(-)Jade Dragon Form"
 addstring "(-)Jade Dragon Human Form"
-transformtarg 1
+transformtarg 1c
 addstring "Jade Dragon Human Form"
 gainrit 1   # "Change Humanoid Form (Jade Dragon)"
 gainrit 2   # "Change Dragon Form (Jade Dragon)"
@@ -61842,7 +61858,7 @@ newspell2 13
 killtarg 4
 
 
-selectmonster 3:"Renata"
+selectmonster "Renata" [5]
 power 0 1
 
 selectmonster 2:"Priestess"   
@@ -62405,9 +62421,49 @@ newspell1 8
 newspell1 15
 newspell2 15
 
+#selectmonster "Renata" [0]
+#power 0 1
+#
+#selectmonster "Renata" [1]
+#power 0 1
+#
+#selectmonster "Renata" [2]
+#power 0 1
+#
+#selectmonster "Renata" [3]
+#power 0 1
 
-selectmonster 4:"Renata"
+#selectmonster "Renata" [4]
+#power 0 1
+#
+#selectmonster "Renata" [5]
+#power 0 1
+
+selectmonster "Renata" [6]
 power 0 1
+
+#selectmonster 0:"Renata"
+#power 0 1
+#
+#selectmonster 1:"Renata"
+#power 0 1
+#
+#selectmonster 2:"Renata"
+#power 0 1
+#
+#selectmonster 3:"Renata"
+#power 0 1
+#
+#selectmonster 4:"Renata"
+#power 0 1
+#
+#selectmonster 5:"Renata"
+#power 0 1
+#
+#selectmonster 6:"Renata"
+#power 0 1
+
+
 ##
 selectmonster 3:"Priestess"
 power 0 1
@@ -75730,14 +75786,14 @@ free                     # This ritual is learned for free and everyone will kno
 summoning
 #addstring    "c*3:Hedge Wizard" # Elements
 #addstring    "c*4:Hedge Wizard"
-addstring    "c*5:Hedge Wizard" #Necromancer
+#addstring    "c*5:Hedge Wizard" #Necromancer
 #addstring    "c*6:Hedge Wizard"  #Illusionism
 #addstring    "c*7:Hedge Wizard"
 #addstring    "c*8:Hedge Wizard" 
 #addstring     "!Error"                   #
-#addstring     "c*Monk"                   #
+addstring     "c*0:Renata & c*1:Renata & c*2:Renata & c*3:Renata & c*4:Renata"                   #
 #addstring     "!Error"                   #
-#addstring     "c*Rare Dryad Offspring"                   #
+#addstring     "c*0:Priestess & c*1:Priestess & c*2:Priestess & c*3:Priestess & c*4:Priestess"                   #
 
 
 
@@ -76038,6 +76094,7 @@ iron 30
 apcost 5
 level 3
 free
+airare                5 # chance that AI will cast this ritual.
 
 selectritual "Paint Tattoo" #0 # 507
 level 9
@@ -80207,6 +80264,7 @@ selectmonster "Dwarf Warrior"
 gold -1
 selectmonster "Dwarf Worker"	
 gold -0
+expendable 1
 selectmonster "Dwarf"	
 gold -1
 selectmonster "Dwarven Ballista"	
@@ -80741,6 +80799,7 @@ selectmonster "Sky Temple Attendant"
 gold -4
 selectmonster "Slave"	
 gold -1
+expendable 1
 selectmonster "Slinger"	
 gold -1
 selectmonster "Smoking Mirror"	
