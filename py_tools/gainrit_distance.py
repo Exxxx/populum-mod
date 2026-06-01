@@ -5,45 +5,28 @@ import re
 import tkinter as tk
 from tkinter import ttk
 
-# Specify the file path
-filename = "~/mod/populum.c5m"
+from gainrit_common import MOD_FILE, build_global_ritual_list
 
-# Read all lines from the file
-with open(filename, 'r', encoding='utf-8') as f:
-    lines = f.readlines()
+global_names, mod_rituals, _, vanilla_count = build_global_ritual_list(mod_path=MOD_FILE)
 
-# Collect all rituals and their line numbers
-rituals = []
-current_ritual_index = -1
-line_ritual_indices = [-1] * len(lines)
+# List of ritual names for the dropdown (global index order)
+ritual_names = global_names
 
-for i, line in enumerate(lines):
-    stripped_line = line.strip()
-    match_newritual = re.match(r'^newritual\s+"(.+)"', stripped_line)
-    if match_newritual:
-        ritual_name = match_newritual.group(1)
-        current_ritual_index += 1
-        rituals.append({'name': ritual_name, 'line_number': i, 'index': current_ritual_index})
-    line_ritual_indices[i] = current_ritual_index
 
-# List of ritual names for the dropdown
-ritual_names = [ritual['name'] for ritual in rituals]
-
-# Function to get a ritual index by exact name (case insensitive)
-def get_ritual_index(name):
+def get_global_index(name: str) -> int | None:
     name_lower = name.lower()
-    for ritual in rituals:
-        if ritual['name'].lower() == name_lower:
-            return ritual['index']
+    matches = [i for i, n in enumerate(global_names) if n.lower() == name_lower]
+    if len(matches) == 1:
+        return matches[0]
     return None
 
-# Function to calculate offset between two rituals
-def calculate_offset(ritual_name_a, ritual_name_b):
-    index_a = get_ritual_index(ritual_name_a)
-    index_b = get_ritual_index(ritual_name_b)
-    
+
+def calculate_offset(ritual_name_a: str, ritual_name_b: str) -> str:
+    index_a = get_global_index(ritual_name_a)
+    index_b = get_global_index(ritual_name_b)
+
     if index_a is None or index_b is None:
-        return "One or both rituals not found."
+        return "One or both rituals not found (or name is ambiguous)."
     offset = index_b - index_a
     return f"Offset from '{ritual_name_a}' to '{ritual_name_b}': {offset}"
 

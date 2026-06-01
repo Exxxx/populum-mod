@@ -1,0 +1,77 @@
+---
+description: Populum CoE5 mod development constraints and project layout
+alwaysApply: true
+---
+
+# Populum Modding
+
+This workspace is the live Populum mod for Conquest of Elysium 5.
+
+## Mod structure
+
+- Primary mod file: `populum.c5m` (~90k lines) at repo root
+- Assets: `pop/` (sprites, banners, map tiles)
+- Custom map: `GOTcoe5.coem`
+- Steam Workshop: `coe5ws.txt`, `steam_descr.txt`, `banner.png`
+- Helper scripts: `py_tools/pop_hp.py`, `py_tools/gainrit_describer.py`, `py_tools/gainrit_distance.py`, `py_tools/gainrit_validator.py`, `py_tools/validate_populum.py`, `py_tools/extract_modding_manual.py`
+- Extracted manual rules: `py_tools/references/coe5_modding_rules.json`, `py_tools/references/coe5_command_index.json`
+
+Modding reference: https://illwinter.com/coe5/coe5modding.html (use `extract_modding_manual.py lookup --command-index` before editing commands)
+
+## Command execution order
+
+Commands in `.c5m` files run top-to-bottom. Prerequisites must appear before dependents (e.g. define weapons before assigning them to monsters).
+
+## Save compatibility (critical)
+
+When updating existing content, **append only** new units, classes, rituals, weapons, and terrain at the **end** of their respective sections. Inserting new definitions in the middle shuffles IDs and breaks saved games.
+
+**Appending `newritual` at the end is safe for save games but still shifts the global ritual index** used by `gainrit` offsets on every line that points forward to a mod ritual. Always run gainrit validation after any `newritual` add, remove, or reorder (see below).
+
+## Gainrit validation (required after ritual changes)
+
+CoE5 resolves `gainrit <offset>` against the **global ritual list**: vanilla `newritual` entries first, then every Populum `newritual` in file order. Adding or removing a mod ritual changes all later indices; stale offsets grant the wrong ritual with no in-game error.
+
+After **any** edit that adds, removes, or moves a `newritual` block in `populum.c5m`:
+
+```bash
+python py_tools/validate_populum.py --fix --describe
+```
+
+- **`--fix`** — rewrite offsets to match trailing `# "Target Ritual"` comments (keep those comments accurate when editing)
+- **`--describe`** — refresh describer comments after offset fixes or new `gainrit` lines
+- Must exit **0** before considering the mod change complete
+
+Validate only (no file writes):
+
+```bash
+python py_tools/validate_populum.py
+```
+
+VS Code/Cursor: **Tasks → Run Test Task → Validate Populum (gainrit)** or **Validate Populum (fix + describe)**.
+
+Offset lookup between two rituals: `py_tools/gainrit_distance.py` (GUI).
+
+## Vanilla reference data (read-only)
+
+Look up names and stats in `py_tools/references/` before inventing duplicates:
+
+- `Monster Data v5.33.c5m`
+- `Class Data v5.33.c5m`
+- `Ritual Data v5.33.c5m`
+- `Weapon Data v5.33.c5m`
+- `Terrain Data v5.33.c5m`
+- `Magic Item Data v5.33.c5m`
+- `Recruitment Data v5.33.c5m`
+
+Never edit reference files as part of Populum changes.
+
+## Editing discipline
+
+- Minimize diffs in the monolithic `populum.c5m`; avoid unrelated reformatting
+- Preserve filename case for TGA/PNG assets (Linux and Steam Workshop are case-sensitive)
+- Graphics: 24- or 32-bit TGA or PNG in `pop/`
+
+## Testing
+
+Edits in this folder are picked up by CoE5 immediately after save. Enable the Populum mod in-game and restart if the mod list was open during editing.

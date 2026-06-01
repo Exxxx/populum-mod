@@ -1,0 +1,36 @@
+{
+  "name": "c5m",
+  "displayName": "CoE5 Mod (c5m)",
+  "description": "Syntax highlighting for Conquest of Elysium 5 mod files",
+  "version": "1.0.0",
+  "publisher": "populum-mod",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "c5m",
+        "aliases": [
+          "CoE5 Mod",
+          "c5m"
+        ],
+        "extensions": [
+          ".c5m",
+          ".coem"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "c5m",
+        "scopeName": "source.c5m",
+        "path": "./syntaxes/c5m.tmLanguage.json"
+      }
+    ]
+  }
+}

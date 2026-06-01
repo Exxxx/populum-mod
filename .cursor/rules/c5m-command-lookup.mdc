@@ -1,0 +1,51 @@
+---
+description: Look up CoE5 modding commands before editing populum.c5m
+globs: populum.c5m,**/*.c5m
+alwaysApply: false
+---
+
+# C5M Command Lookup (required before edits)
+
+Before adding or changing commands in `populum.c5m`, look up every unfamiliar `.c5m` command in the extracted modding manual. Do not guess syntax, argument order, or semantics.
+
+## Ensure rules exist
+
+If `py_tools/references/coe5_modding_rules.json` is missing, run:
+
+```bash
+python py_tools/extract_modding_manual.py extract --command-index
+```
+
+Re-run with `--refresh` only when the online manual may have changed.
+
+## Lookup workflow
+
+1. Identify each command you plan to use (e.g. `gainrit`, `newritual`, `selectmonster`).
+2. Look it up — prefer the deduplicated index when a name appears in multiple sections:
+
+```bash
+python py_tools/extract_modding_manual.py lookup --command-index gainrit
+python py_tools/extract_modding_manual.py command-index clear
+python py_tools/extract_modding_manual.py search "area of effect"
+python py_tools/extract_modding_manual.py table dmgtype
+```
+
+3. For commands flagged as **multi-section** (`command-index --multi-section`), read every variant before editing.
+4. Check Populum examples printed by `lookup` for established patterns in this mod.
+5. Cross-check entity names in `py_tools/references/` (Monster, Ritual, Weapon, etc.) — never invent duplicates.
+
+## When editing
+
+- Respect command execution order (definitions before references).
+- Append new definitions at section ends for save compatibility.
+- Match existing indentation and comment style in surrounding code.
+
+## After adding, removing, or reordering `newritual`
+
+Run gainrit validation before finishing the change:
+
+```bash
+python py_tools/validate_populum.py --fix --describe
+```
+
+Every `gainrit` offset is relative to the source ritual's index in the global list (vanilla rituals + mod `newritual` file order). A new ritual anywhere in the mod section shifts indices for all rituals defined after it; offsets that target later rituals must be updated. Trailing `# "Ritual Name"` comments on `gainrit` lines are the source of truth for `--fix`.

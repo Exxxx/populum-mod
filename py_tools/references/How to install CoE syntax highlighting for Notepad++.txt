@@ -1,0 +1,18 @@
+1. Install Notepad++.
+2. Start Notepad++ once, then close it.
+3. Start Notepad++ again.
+
+This c5m setup is designed for dark mode, so next we'll switch to that.
+
+4. On the top menu bar of Notepad++, click "Settings", then "Preferences".  In the window that pops up, click "Dark Mode" on the left, then click "Dark mode" in the radio button group to the right of that.  Click "Close".
+5. On the top menu bar of Notepad++, click "Settings", then "Style Configurator".  In the window that pops up, click the dropdown menu next to "Select theme" and choose "Deep Black".  Click "Save & Close".
+
+6. To open your Notepad++ userDefineLangs folder, on the top menu bar, click "Language", then hover over "User Defined Language" near the bottom of the pulldown, then click "Open User Defined Language folder" to the right. (Example: on my Windows 10 machine, it's "C:\Users\<username>\AppData\Roaming\Notepad++\userDefineLangs")
+7. In the zip archive containing the file you're reading now is a file called "c5m.xml".  Drag it into the userDefineLangs folder.
+8. Close Notepad++ again so it will notice the new file on its next startup.
+9. Start Notepad++ again.
+10. Open a CoE data file ending in ".c5m" using Notepad++.  Notepad++ may automatically detect and apply the syntax highlighting at this point; if it does, you're done.
+11. Otherwise, on the top menu bar of Notepad++, click "Language".
+12. Near the bottom of the pulldown, click "c5m".  The syntax highlighting should be applied.
+
+If you ever encounter any odd behavior (e.g. something that isn't a comment displaying as green), just repeat steps 11 and 12 and that should get it working properly again.

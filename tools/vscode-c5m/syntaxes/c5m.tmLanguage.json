@@ -1,0 +1,86 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "c5m",
+  "scopeName": "source.c5m",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#keywords1"
+    },
+    {
+      "include": "#keywords2"
+    },
+    {
+      "include": "#keywords3"
+    },
+    {
+      "include": "#keywords4"
+    },
+    {
+      "include": "#keywords5"
+    },
+    {
+      "include": "#keywords6"
+    },
+    {
+      "include": "#keywords7"
+    },
+    {
+      "include": "#keywords8"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "match": "#.*$",
+      "name": "comment.line.number-sign.c5m"
+    },
+    "strings": {
+      "match": "\"[^\"]*\"",
+      "name": "string.quoted.double.c5m"
+    },
+    "numbers": {
+      "match": "\\b-?\\d+\\b",
+      "name": "constant.numeric.c5m"
+    },
+    "keywords1": {
+      "match": "\\b(removehumanoidcorpses|\\-minhumanoidcorpses|\\+minhumanoidcorpses|removeanimalcorpses|\\-minanimalcorpses|\\+minanimalcorpses|\\+minhumancorpses|\\-squareactivated|\\-minhumancorpses|\\+squareactivated|\\-hasaffunithere|\\+hasaffunithere|\\+varvargreater|\\-varvargreater|\\+varvarlesser|\\-varvarlesser|makestationary|\\+varvarequal|\\+squareowner|\\+humanplayer|\\+minterrains|\\-hasunithere|\\+seasondelay|\\-humanplayer|\\-seasondelay|\\+hasitemhere|removecorpses|\\-ownsloctarg|\\-hasitemhere|\\-varvarequal|\\+hasunithere|\\-squareowner|\\-minterrains|targetunitloc|\\+ownsloctarg|\\+minturnnbr|promoteunits|\\-hascomhere|\\-squarename|\\-vargreater|addresources|alterterrain|\\-minturnnbr|makediseased|\\+mincorpses|\\+vargreater|\\-seasonleft|makeminoraff|\\+seasonleft|\\+hascomhere|\\+squarename|\\-mincorpses|\\-varlesser|squareevent|\\+varlesser|\\-armyowner|playerevent|makenhwound|changeowner|\\+armyowner|\\-varequal|namesquare|killsquare|\\+aiplayer|cureoneaff|\\+varequal|\\-minunits|\\-aiplayer|scatterloc|\\+minunits|\\-turnnbr|makeblind|\\-ownsloc|\\-hasitem|\\+turnnbr|\\-hasunit|\\+ownsloc|\\-terrain|\\+hasunit|\\+terrain|\\+hasitem|\\-player|\\+player|\\+chance|randitem|\\+hascom|endevent|\\-hascom|newunits|\\+season|\\-chance|\\-season|killunit|randmisc|comname|copyvar|\\+class|newitem|randloc|\\-class|makeaff|message|makeben|\\-plane|promote|\\+plane|setloc|gainxp|holdit|setvar|addvar)\\b",
+      "name": "keyword.control.event.c5m"
+    },
+    "keywords2": {
+      "match": "\\b(sampleisloopmusic|sampleismusic|translation|description|fontfile|mapfile|modprio|sample|icon)\\b",
+      "name": "keyword.control.mod.c5m"
+    },
+    "keywords3": {
+      "match": "\\b(guibordersquaretex|guiborderthintex|guiborder2tex|guiborder3tex|guibardarktex|guibordertex|guititletex|playercolor|guisbartex|guihbartex|tablecolor|guibartex)\\b",
+      "name": "keyword.control.gui.c5m"
+    },
+    "keywords4": {
+      "match": "\\b(clearsquarespec|nomonelysiumreq|nomonmasteryreq|nomonplayerreq|gaindarkbless|nonearby99req|transformtarg|ainotnearhome|updhomeifterr|noeventvarreq|chooseterrloc|nomonworldreq|cleareventvar|turncastcount|monplayerreq|centercaster|nonearby5req|unfollowtarg|newlocplanes|rebateterr20|hasportalreq|clearritspec|selectritual|raiseanimals|nonearby1req|nomonhomereq|choosefxtarg|nonearby3req|rebateterr50|nonearby7req|forgetcurrit|terrscale50|enchherereq|ainotclose1|addeventvar|destroyterr|ainotclose3|nearby99req|seteventvar|benrestrict|ainotclose2|teleportloc|ritequipall|resrestrict|aionlyplane|enchreqterr|eventvarreq|monworldreq|randterrloc|nofxherereq|ritmaxrange|trollifyloc|noportalreq|scatterscry|subeventvar|rebatefx50|sum0chance|bentargvar|bentargall|mirrortarg|randnewloc|sum4chance|levelupmon|fillmirror|reducetown|rebatefx25|gathergems|cureoneaff|forgetrits|multiplane|sum2chance|failplayer|nearby3req|castertarg|sum3chance|copyritual|nearby5req|nearby1req|squareench|sum1chance|promplayer|aiweakonly|putcorpses|nearby7req|makeportal|aiapprspam|homecitreq|portalroom|simulacrum|updatehome|notforpoor|squarespec|newspell3|centerloc|castcount|chooseloc|sacrscale|seasonreq|gainbless|newspell2|addstring|farsummon|minmonreq|fewmonreq|newspell1|setplayer|promotion|rarestart|randomloc|ainothere|nofortreq|aimaxcast|planeswap|newritpow|rebatelvl|raisedead|terrboost|afterprev|summoning|newritual|airestrig|ainosimul|planereq|closewin|planeloc|insanity|killtarg|levelreq|sum0snow|movehome|aialways|nofemale|nomonreq|selectfx|noundead|alterloc|setplane|afftarg|specpow|fortreq|ornext4|maxcast|homereq|defctrl|aiwhere|gainrit|nodemon|varcost|nexttoo|soundfx|levelup|nostart|ornext3|bentarg|scryloc|montarg|ornext2|ornext5|aitarg|newrit|apcost|setvar|ornext|airare|ritpow|resreq|level|fxreq|start|setfx|cost|terr|free)\\b",
+      "name": "keyword.control.ritual.c5m"
+    },
+    "keywords5": {
+      "match": "\\b(nextalwayswep|affectanimal|affectundead|selectweapon|affectfemale|affecthuman|nextalways|hardmorale|affectmale|onlyfriend|clearwspec|dispossess|stonekill|onlyenemy|shieldneg|strresist|replicate|inanimate|reloadsnd|newweapon|fullsweep|reanimate|rangepen|ghoulify|targterr|holykill|wallkill|ethereal|flysound|flymode|flying2|reload1|nextdmg|reload2|flylook|mundane|trgrank|dmgtype|nextwep|reload3|undkill|oneshot|scatter|flying|undead|sndvol|easymr|mutate|morale|yellow|hardmr|poison|purple|nostr|range|drain|sweep|drown|arrow|sound|large|stone|init|blue|soft|mind|look|huge|next|tree|dmg|lob|aoe|an|mr)\\b",
+      "name": "keyword.control.weapon.c5m"
+    },
+    "keywords6": {
+      "match": "\\b(rangedweaponbonus|spellweaponsingle|spellweaponbonus|meleeweaponbonus|gatherlifeforce|localleadership|meleeweaponspec|rangedweapon50s|meleeweaponlong|rangedweapon50x|assassinweapon|elementalshape|dmgonterrbonus|localgoldbonus|rangedweapon25|spellweapon50s|terrstealthinv|meleeweapon50s|localironbonus|celestialshape|rangedweapon50|combustionaura|scourgedefiler|minorstartaff|autoastrology|startinsanity|foreststealth|diseaseshield|deployoutside|spellweapon50|confusionaura|pickupanimals|gatheranygems|holyvengeance|wandermaxdist|selectmonster|desertstealth|terraformfrom|reformdestroy|ainofollower|rangedweapon|randomweapon|regeneration|clearweapons|spawnmonaway|gatherrelics|infernoshape|tramplexsize|poisonspikes|agarthashape|followstupid|diseasecloud|releasephant|mirrorimages|releasespell|gatherfungus|wanderattack|hadeswander2|elysiumshape|allitemslots|awakenfungus|revertmirror|sitepopboost|prebatweapon|more2spells|terraformto|weaponslots|battleslow2|more3spells|releaserate|terrstealth|hadeswander|siegeweapon|gatherhands|airbreather|aigoldrally|meleeambush|magicshield|deadforest1|armytrainer|terraformch|unimportant|nobootslots|spawn2d6mon|blesspierce|primalshape|secondshape|hideanimals|slimeshield|ironcarrier|acutesenses|snowstealth|more1spells|meleeweapon|goldcarrier|incorporate|aztlanshape|deadforest2|deepsleeper|nonmaginvul|noplanecamo|motherspawn|poisoncloud|gatherherbs|siegetunnel|largeshield|spawn1d6mon|awakentrees|revertowner|snowsleeper|spiritsight|lairgoldpen|farsightsea|forestheart|spellweapon|likestoburn|desolcloud|primalcult|voidsanity|colonyterr|infwander2|watershape|wanderrest|limittrade|randommisc|stationary|satyrspawn|gathersacr|madcultist|immortalap|libmastery|battlefast|semistupid|hpoverflow|setcreator|gatherweed|leadership|mirrorammo|maxsinners|chopforest|aggressive|spellrange|swallowres|burnforest|expendable|celwander2|tradebonus|battleslow|randomrare|harpyspawn|tunnelmove|gathergems|eatdeadcap|putridexpl|randomitem|hadesshape|newmonster|absorbdead|stonebeing|eatvillage|planeshift|ctrlchance|changetemp|firstshape|healonterr|makecolony|seduceaura|banishsurv|winteridle|diseaseres|poisonexpl|poisonaura|thrallhunt|ancforest1|mountain1|wateronly|miscslots|darkbless|voidshape|sensedead|neverturn|reformloc|twistfate|goldbonus|minospawn|clearspec|reanimate|indwander|transport|classcost|displaced|pierceres|landshape|lifeforce|limitgold|berserker|aimaxshop|aipowcom2|lovesterr|startitem|colonymsg|mountain2|dmgonterr|airshield|shardexpl|spawnoffs|petriaura|tangleres|desolator|likesterr|aipowcom1|celwander|invisible|inanimate|coldblood|shockaura|vengeance|centspawn|extraeyes|infwander|acidblood|indepitem|limitiron|hatesterr|clearmove|copystats|lookslike|homeplane|poisonres|ironbonus|aipowcom3|slavehunt|primifier|growoffs|passwall|scrycost|phantasm|hadesres|shockres|coldheal|growterr|bluntres|ethereal|treelook|spawnmon|teleport|growtime|slashres|voidship|shipmove|farsight|frontpos|noleader|shrinkhp|fastheal|varregen|immobile|primable|mindexpl|fireexpl|makeruin|sleepres|skyshape|drawsize|nametype|riverdmg|coldaura|savanna2|mountain|immortal|nonruin1|fireaura|nocombat|charmres|badsight|coastal|iceprot|coldres|unaging|trample|temple1|size2x2|mastery|sleeper|copyspr|forest2|fireres|size1x1|evasion|wander2|forest1|noslots|eatdead|defiler|jungle1|temple2|demonic|desert2|desert1|jungle2|seegems|rearpos|maptele|desert3|acidres|stealth|swamp1|south2|money2|south1|maxsum|reform|animal|stupid|flying|relics|gates1|north1|statue|kobold|growhp|noheal|mirror|unique|digest|mines1|fungus|noland|horror|rebate|money1|spread|aihold|shield|wander|montag|desert|dragon|noeyes|primal|female|swamp2|vassal|greedy|allrit|undead|affres|clumsy|tunnel|goblin|power|saner|lucky|armor|descr|troll|trade|herbs|loner|float|human|split|nozoc|swamp|alone|water|fungi|stray|void2|invul|hands|rank|weed|look|snow|tiny|scry|fast|spr2|iron|ship|name|melt|spr1|holy|slow|wall|fear|huge|gold|awe|mor|str|ape|mr|hp)\\b",
+      "name": "keyword.control.monster.c5m"
+    },
+    "keywords7": {
+      "match": "\\b(templebonusdescr|clearstartunits|classwoodencit|clearstartterr|townbonusdescr|classforestcit|libbonusdescr|mercpricemult|recherochance|addstartunits|addstartterr|classcitterr|classminecit|recasschance|recwizchance|classabdescr|setclassname|addstartcom|selectclass|nostdtroops|otherplanar|startplane|classdescr|tradebonus|likesnorth|likessouth|addunitrec|setmaincom|addmercrec|libraryrec|reclimiter|likescoast|goldbonus|templerec|addcomrec|classtune|ironbonus|stdtroops|mercboost|humancost|createcit|hometerr|clearrec|recxcost|newclass|atavirec|reqterr|recterr|aiclass|rarity)\\b",
+      "name": "keyword.control.class.c5m"
+    },
+    "keywords8": {
+      "match": "\\b(addallsettlements|widebattlements|selectterrgroup|earthbarricade|enchantedgate|addallforests|forestcitadel|woodencitadel|addalljungles|bramblegate|bonusrelics|combatspell|tradeboost|magicboost|woodengate|curseditem|protection|selectterr|selectitem|spreadcold|settlement|tempimmune|magicwalls|extracover|cavewalls|invseason|siegeable|ritrebate|sidegates|nevercold|eastcoast|destroyto|invisible|copystats|goldboost|extracost|lifeforce|falselife|deepspawn|clearfort|ironboost|combatsum|clearspec|earthgate|nosnowpen|watergate|barricade|highwalls|pathboost|cloudgate|burnable|realport|nostdrec|library2|desertok|irongate|farsight|mountain|cityname|widegate|library1|firegate|anchored|mistrare|citadel|addterr|visible|seepast|useable|relicm1|itemwep|newitem|airgate|copyspr|nostart|nosight|remterr|relicm2|nodrown|setname|hardfly|ownable|harvest|voidret|fungus|relic1|temple|snowok|hoburg|rarity|nodrop|farvis|relic2|batmap|invert|apcost|forest|unique|desert|morale|town1|melts|armor|hands|swamp|descr|misty|walls|water|town2|trade|smoke|herbs|void|port|sacr|name|dead|rank|type|cave|gold|mine|weed|rare|gems|iron|str|spr|pop|mr|ug|el|hp)\\b",
+      "name": "keyword.control.terrain.c5m"
+    }
+  }
+}

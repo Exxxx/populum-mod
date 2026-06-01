@@ -1,64 +1,92 @@
 """
-Goes through a mod file with "gainrit" commands and puts the associated ritual they will gainrit
+Goes through populum.c5m gainrit commands and adds/updates trailing # "Target" comments
+using the global ritual index (vanilla + mod newritual order).
 """
 
+from __future__ import annotations
+
 import re
- 
-# Specify the file path
-filename = "~/mod/populum.c5m"
+import sys
 
-# Read all lines from the file
-with open(filename, 'r', encoding='utf-8') as f:
-    lines = f.readlines()
+from gainrit_common import (
+    GAINRIT_LINE_RE,
+    MOD_FILE,
+    QUOTED_INTENT_RE,
+    build_global_ritual_list,
+    resolve_gainrit_target,
+)
 
-# First pass: Collect all rituals and their line numbers
-rituals = []  # List to store rituals with their names, line numbers, and indices
-current_ritual_index = -1
-line_ritual_indices = [-1] * len(lines)  # To store the ritual index for each line
 
-for i, line in enumerate(lines):
-    stripped_line = line.strip()
-    # Check for 'newritual' lines
-    match_newritual = re.match(r'^newritual\s+"(.+)"', stripped_line)
-    if match_newritual:
-        ritual_name = match_newritual.group(1)
-        current_ritual_index += 1
-        rituals.append({'name': ritual_name, 'line_number': i, 'index': current_ritual_index})
-    # Assign the current ritual index to each line
-    line_ritual_indices[i] = current_ritual_index
+def strip_trailing_quoted_comment(rest: str) -> str:
+    """Remove existing describer # \"Name\" suffix; preserve manual # comments."""
+    return QUOTED_INTENT_RE.sub("", rest).rstrip()
 
-# Second pass: Update 'gainrit' lines with the correct ritual names
-updated_lines = lines.copy()
 
-for i, line in enumerate(lines):
-    stripped_line = line.strip()
-    # Check for 'gainrit' lines
-    match_gainrit = re.match(r'^(gainrit\s+)(-?\d+)(.*)', stripped_line)
-    if match_gainrit:
-        gainrit_prefix = match_gainrit.group(1)
-        offset_str = match_gainrit.group(2)
-        rest_of_line = match_gainrit.group(3)
-        offset = int(offset_str)
+def annotate_gainrit_lines(mod_path=MOD_FILE, write: bool = True) -> int:
+    mod_lines = mod_path.read_text(encoding="utf-8").splitlines(keepends=True)
+    plain = [ln.rstrip("\n") for ln in mod_lines]
 
-        # Get the ritual index of the current line
-        ritual_index = line_ritual_indices[i]
-        if ritual_index == -1:
-            # The gainrit line is not within a ritual; skip updating
+    global_names, mod_rituals, mod_line_indices, vanilla_count = build_global_ritual_list(
+        mod_path=mod_path
+    )
+
+    updated = plain.copy()
+    changed = 0
+
+    for i, line in enumerate(plain):
+        m = GAINRIT_LINE_RE.match(line.strip())
+        if not m:
             continue
 
-        # Calculate the target ritual index
-        target_index = ritual_index + offset
+        prefix, offset_str, rest = m.group(1), m.group(2), m.group(3)
+        offset = int(offset_str)
+        src_local = mod_line_indices[i]
+        if src_local < 0:
+            continue
 
-        # Check if the target index is within bounds
-        if 0 <= target_index < len(rituals):
-            target_ritual_name = rituals[target_index]['name']
-        else:
-            target_ritual_name = 'Unknown'
+        target = resolve_gainrit_target(
+            src_local, offset, vanilla_count, global_names
+        )
+        target_name = target if target is not None else "Unknown"
 
-        # Update the gainrit line with the ritual name
-        updated_line = f"{gainrit_prefix}{offset_str}{rest_of_line}   # \"{target_ritual_name}\""
-        updated_lines[i] = updated_line + '\n'
+        rest_clean = strip_trailing_quoted_comment(rest)
+        new_line = f"{prefix}{offset_str}{rest_clean}   # \"{target_name}\""
+        if new_line != line:
+            changed += 1
+        updated[i] = new_line
 
-# Write the updated lines back to the file
-with open(filename, 'w', encoding='utf-8') as f:
-    f.writelines(updated_lines)
+    if write and changed:
+        mod_path.write_text(
+            "".join(f"{ln}\n" for ln in updated),
+            encoding="utf-8",
+        )
+
+    return changed
+
+
+def main() -> int:
+    import argparse
+    from pathlib import Path
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--mod",
+        type=Path,
+        default=MOD_FILE,
+        help="Path to populum.c5m",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Report how many lines would change without writing",
+    )
+    args = parser.parse_args()
+
+    n = annotate_gainrit_lines(args.mod, write=not args.dry_run)
+    action = "Would update" if args.dry_run else "Updated"
+    print(f"{action} {n} gainrit line(s) in {args.mod}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

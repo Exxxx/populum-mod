@@ -2,3 +2,14 @@
 banner.png
 pop/popbanner.tga
 pop/popbannercheat.tga
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~

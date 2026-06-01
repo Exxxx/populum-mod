@@ -1,0 +1,909 @@
+#                         COE5 CLASS DATA IN MOD FORMAT
+# 
+# This file contains the class data for CoE5, extracted from the executable. 
+# Although this file is not actually a mod, its contents adhere to CoE5's
+# modding format in order to make it an optimal resource for modders.
+# 
+# This file provides examples of how base game classes can be built using
+# modding commands (although some classes in the base game do use some commands
+# that are not available to modders) and templates that modders can use to
+# create their own classes.
+# 
+# Everything to the right of a "#" (such as what you're reading now) is a
+# comment, which means the game ignores it; it's there as a note for human
+# readers (i.e. you).  I've provided comments toward the right of many lines to
+# explain various things, but since I expect the class data to be mostly of
+# interest to modders, I assume the reader has also read the modding manual and
+# is familiar with at least the most common class modding commands described
+# therein.
+# 
+# If a line begins with "# fx" followed by a number, that means it's a command
+# that isn't accessible to modders.  I present these as comments because they
+# don't have mod command names that the game would recognize (so to adhere to
+# the modding format, I need to tell it to ignore them), but the part that's
+# actually intended for humans to read is the second comment, to the right.  If
+# there's a word in [], that's just my guess at what Illwinter might call this
+# command if they did make it accessible to modders.  If instead you see the
+# word "Unhandled", that's a trait the app doesn't know how to translate. 
+# Unless you want to guess at their meanings, you can ignore these, other than
+# to remember that there's some detail about the class that isn't explained
+# yet.
+# 
+# -----------------------------------------------------------------------------
+# 
+#                           INFORMATION FOR MODDERS
+# 
+#                             Class Modding Maxima
+# 
+# Each class has reserved space for 1 (and only 1) each of the following
+# commands: setclassname, classdescr, classabdescr, setmaincom, hometerr,
+# townbonusdescr, libbonusdescr, and templebonusdescr.
+# 
+# Each class has reserved space for 4 instances of the addstartterr command
+# (you can use less, but not more).
+# 
+# Each class has room for 16 total addstartunits and / or addstartcom commands
+# (you can use however many of each command you want, so long as there are no
+# more than 16 total between the two of them).
+# 
+# Each class has room for 16 fx commands.  Most class modding commands not
+# already mentioned here will use up one of the class's fx command slots. 
+# Exceptions (at the time I write this) include: selectclass, newclass,
+# clearstartterr, clearstartunits, and the commands for modding class
+# recruitment lists (clearrec, addunitrec, addmercrec, addcomrec, recxcost,
+# templerec, libraryrec, and reclimiter), which are technically separate data
+# structures from classes.
+# 
+# -----------------------------------------------------------------------------
+# 
+#                                    CREDITS
+# 
+# - Illwinter Game Design, for the creation of the wonderful Conquest of
+# Elysium and Dominions games in general, and specifically for the creation of
+# CoE5, from which all data in this file was extracted.  Also for the creation
+# of the modding manual, from which some descriptions in this file were copied
+# or adapted.
+# 
+# - Marlin, for publishing (for CoE4) documentation identifying some class fx
+# IDs.  While many remained unidentified and many more have been added in CoE5,
+# his work helped me when I was getting started, and I appreciate it!
+# 
+# - Me, Colonel Dracula joins the Navy, for deciphering everything in the class
+# data except the fx IDs identified by Marlin and for extracting and
+# translating the data.
+# 
+# -----------------------------------------------------------------------------
+
+newclass  #  1
+setclassname "Baron"
+classdescr "The frontiers of the human realm were defended by landowners known as Barons.  Some Barons were warlike and restless.  As humankind spread over Elysium and became dominant, these barons tried to usurp their masters' powers and waged war on their neighbors.  The large, well-trained forces at their disposal made them formidable foes.  They were soon in control of large parts of the human territories.  However, not all humans were content with this.  The sorcerers of Elysium gathered armies of their own and nonhuman warlords called out for vengeance.  The Barons must once again subjugate Elysium.
+
+The Baron has a wide variety of human troops and huge siege engines at his disposal.  Knights are formidable units who can inflict additional damage by charging enemies in the initial phase of a battle.  Heavy infantry units are strong, but move slowly.  Fast cavalry units under the leadership of mounted commanders work as highly mobile forces.
+
+The Baron knows how to keep his subjects in line and can cow peasants into obedience.  All farms and villages under the Baron's rule are required to send a levy of soldiers to the Baron each year.  This muster consists of simple spearmen from farms and at least one knight from each village.  Large towns and cities do not contribute soldiers.  The Baron can also form local militias to defend villages and cities.  The larger the settlement, the stronger the militia."
+classabdescr "Starts in a very well fortified castle.
+25% increase to gold income.
+25% increase to iron income.
+Conscription yields soldiers from settlements and ancient forests once every year.
+The Baron and High Lords can raise levies (stationary defenders) in villages and towns.
+Receives free units from Guard Towers."
+hometerr           30 # Baron's Castle
+addstartterr        5 # Farm
+addstartterr        6 # Farm
+addstartterr        7 # Hamlet
+setmaincom             "Baron"
+addstartunits          "Spearman"                  6
+addstartunits          "Longbowman"                5
+addstartcom            "High Lord"
+addstartunits          "Cavalryman"                5
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+# fx226             4 # [flagterr]: Ancient Forest. Can flag this terrain even if unable to collect any of its income.
+# fx226             8 # [flagterr]: Enchanted Forest. Can flag this terrain even if unable to collect any of its income.
+recwizchance        1 # Bonus to recruitment offers for human library wizards.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "monks"
+
+
+newclass  #  2
+setclassname "Necromancer"
+classdescr "Necromancers are sorcerers who are adept at the dark art of Necromancy, the summoning and creation of the living dead.  The Necromancer can raise the buried dead or those that have fallen in battle as undead troops to strengthen his army.  This practice is forbidden by the gods and Necromancers who are foolish enough to disturb the dead will lose their sanity in the process.  Only dead humanoids can be raised as undead and once they are destroyed, they cannot be raised a second time because by that time their bodies are too broken.
+
+The other aspect of Necromancy is the harvest of hands.  On stormy nights, darkly robed men collect the left hands of hanged murderers.  These are called the Hands of Glory.  The burnt flesh of such hands is pleasant to ghosts and evil spirits who can aid the Necromancer in his horrible art.  However, the hands can be used in even worse ways.  When enough Hands of Glory are burnt, spirits from the darkest realms can be called to instruct the Necromancer how to turn his body into that of a living dead.  Some necromancers use the Hands of Glory to rend the veil between worlds to quickly travel through the Underworld.
+
+The Necromancer has very weak troops at the start of the game.  It is essential for him to quickly find a battlefield or a graveyard.  The ritual of Dark Knowledge is important in this search.  The animated dead are weak and they never heal wounds sustained in battle, which makes them unreliable in the long run.
+
+Use the apprentice to animate undead.  Otherwise you will go mad and lose the ability to take rational action.  Summoned undead require Hands of Glory, which can be found in villages, towns, cities and gallows.  The ultimate goal of most necromancers is to transform into a powerful undead creature and live forever!  Transforming into a lich will make you immune to insanity and vampires can cure insanity by eating villages."
+classabdescr "Starts in a very well fortified dark citadel.
+Necromancers can sense the amount of dead where they are.
+Necromancers can raise the dead for the price of some sanity.
+Necromancers collect Hands of Glory from large villages and towns.
+Necromancers can use Hands of Glory to perform rituals to summon undead beings and enter the underworld."
+hometerr           24 # Dark Citadel
+addstartterr        5 # Farm
+addstartterr      153 # Gallows
+setmaincom             "Necromancer"
+addstartunits          "Spearman"                 10
+addstartunits          "Archer"                    5
+addstartcom            "Necromancer's Apprentice"
+stdtroops           1 # Adds standard troops to recruitment list: spearmen, swordsmen, archers, crossbowmen, heavy infantry, catapult, Captain (20%), and Scout (10%).
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards and apprentices"
+templebonusdescr       ""
+
+
+newclass  #  3
+setclassname "Demonologist"
+classdescr "The Demonologist is a mage-priest who summons the denizens of the Abyss and the Inferno.  The spirits of these realms are powerful and horrible to behold.  They crave human flesh and can only be bound to service if they are sated.  The greatest of these demons are insatiable and cannot be bound unless the Demonologist is very lucky indeed and the sacrifice is enormous.  If the Demonologist fails the binding ritual, the demon will attack and try to devour the weakling human who had the temerity to attempt to rob it of its freedom.  Some insane demonologists even try to open gates into the Infernal Realms.  Should this happen, the end of the world is near.
+
+The forces at the Demonologist's disposal are truly powerful.  Lesser demons are physically powerful and some of them have magical power the equal of any magic user.  Greater demons are even more powerful and the mighty demon lords are practically unequaled in the scope of their magical abilities as well as in physical combat.  Many demons use fire to damage their opponents and fire resistant troops in an enemy army may pose a problem for the unwary Demonologist."
+classabdescr "Starts in a very well fortified citadel.
+Demonologists collect sacrifices from hamlets, villages and towns.
+Demonologists can use sacrifices to summon and bind demons or open infernal gates."
+hometerr           23 # Citadel
+addstartterr        7 # Hamlet
+addstartterr        5 # Farm
+addstartterr        6 # Farm
+setmaincom             "Demonologist"
+addstartunits          "Swordsman"                 8
+addstartunits          "Crossbowman"               5
+addstartcom            "Cultist"
+stdtroops           1 # Adds standard troops to recruitment list: spearmen, swordsmen, archers, crossbowmen, heavy infantry, catapult, Captain (20%), and Scout (10%).
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "cultists"
+
+
+newclass  #  4
+setclassname "Witch"
+classdescr "In the ages long before the arrival of man, beings of tremendous power roamed Elysium.  These beings were the unchallenged lords of the as yet unnamed realm.  In time they tired of exploring the land and melded into the earth to sleep.  They slumbered for ages and other beings came to the realm.  The sounds and laughter of these new inhabitants disturbed the Sleeping Ones and sometimes one of them woke to punish the newcomers.  As a result, the Sleeping Ones came to be feared and worshiped by the people of Elysium. The adherents of this old faith are called Witches and are feared by troll and man alike.
+
+Witches collect fungi from the marshes and forests of Elysium and use them to brew a decoction pleasant to the Old Ones.  The smell of the cauldron makes them hungry and reminds their slow minds of the Time Before, when all was quiet and the land was theirs.  In rage and hunger the Old Ones and their servants follow the Witch to reclaim their lands from the noisy, shortlived interlopers.
+
+The beings at the Witch's disposal are physically strong and easy to obtain, but most lack ranged attacks.  Archers are a crucial supplement.  The Witch's ability to collect fungi from forests and swamps provides her with excellent scouting capabilities.  The more fungi she uses for summoning monsters, the greater the chance of controlling the summoned creature.  It is prudent to use plenty of fungi when summoning an Old One, for they are very dangerous if angered."
+classabdescr "Witches collect fungi from forests and marshes.
+Witches can use fungi to perform magic rituals.
+Poison Archers and Lizard Cavalry can be recruited by also spending fungi."
+hometerr           26 # Tower
+setmaincom             "Witch"
+addstartunits          "Androphag Cavalry"         1
+addstartunits          "Androphag Spearman"        5
+addstartunits          "Androphag Archer"          5
+addstartcom            "Witch's Apprentice"
+reqterr           107 # Re-rolls the map until there is at least one square of the following terrain: Swamp.
+recherochance       1 # Chance for recruitment offers from human heroes.
+# fx208          1000 # Unhandled trait 208 with argument 1000.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "apprentices"
+
+
+newclass  #  5
+setclassname "High Priestess"
+classdescr "Long ago in the land of Terra the god Ba'al was incarnated into a physical form and made humans taste fear and destruction.  The moon turned red as blood and severe heat, drought and famine struck.  Giants walked the earth and feasted on the flesh of humans.  To placate this horrifying god, men began to sacrifice their fellow men in rites of blood.  This pleased the Dark God, who consumed the souls of the sacrificial victims.  Ba'al withdrew back into the world from whence he came and feasted upon slaughtered souls.  But the giants remained.  Ever since, mortals have worshiped the abominable God and sacrificed their own kind to him.  From time to time Ba'al has even honored the prayers and sacrifices of his devotees by his very presence.
+
+When the Voice of El came to Terra and called out to the poor and the famished, Ba'al sent his subjects to war against him.  The Children of El were hunted down and exterminated and fled to the promised land of Elysium.  Ba'al's interest and hunger was aroused and a High Priestess was sent to hunt down and eradicate the heretics until the entire land of Elysium kneels before the glory of Ba'al Revealed and spills the blood of men in devotion.
+
+The High Priestess of Ba'al performs ritual sacrifices in order to please her God and be rewarded by his favor.  The giants and servants of Ba'al, whose service she can receive in return for a large sacrifice, can be nearly as powerful as demons and need not be controlled, for they are loyal to their Dark God even if it means serving a mere mortal.  This makes the High Priestess a very powerful and reliable contender for the throne of Elysium.  The greatest ritual the High Priestess can perform is to sacrifice her own body so that Ba'al can use it to enter Elysium in all his terrible splendor."
+classabdescr "Priestesses collect sacrifices from hamlets, villages and larger settlements.
+Priestesses can use sacrifices to perform rituals.
+Access to more and less expensive assassins."
+hometerr           31 # Temple of Ba'al
+addstartterr       18 # Village
+setmaincom             "High Priestess"
+addstartunits          "Ba'alite Spearman"        10
+addstartunits          "Ba'alite Archer"           5
+addstartcom            "Hierodule"
+recasschance        6 # Chance for recruitment offers from human assassins.
+recherochance       1 # Chance for recruitment offers from human heroes.
+likesnorth         -2 # -2: Willingness to start in the north, on a scale from -10 to 10.
+likessouth          2 # 2: Willingness to start in the south, on a scale from -10 to 10.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "hierodules"
+
+
+newclass  #  6
+setclassname "Bakemono"
+classdescr "The Bakemono were once slaves of the Oni, demons from the Netherworld of Bakemono legend.  The entrance to this Realm was on the top of a great mountain that the Oni made their fortress and where they enslaved the Bakemono.  When the gate to the Realm of the Oni was closed through trickery and the last of the Oni kings died, the Bakemono took over the mountain fortress of their masters and set out to carve a kingdom of their own and to make slaves of all lesser creatures.
+
+The Bakemono live in a tribal society ruled by the most powerful of their kind.  Usually this is a Bakemono Sorcerer, a powerful spellcaster who is rightfully feared by most others.  Powerful Bakemono Sorcerers have been known to make themselves immune to death by hiding their hearts away in secret places.
+
+Bakemono Sorcerers can perform blood sacrifices in order to summon Oni demons and spirits of the wilderness to their aid.  The greater the sacrifice, the greater the chance that the being will serve the Bakemono Sorcerer.  The summoning can also be performed without any sacrifices, but this will anger the spirit or demon being summoned and the more powerful demons should not be trifled with."
+classabdescr "Bakemono Sorcerors collect sacrifices from hamlets, villages and larger settlements.
+Bakemono Sorcerors can use sacrifices to perform rituals.
+Humans recruited at special locations cost twice the gold.
+Mines and Mountain Strongholds produce Bakemono warriors automatically."
+hometerr          112 # Mountain Stronghold
+addstartterr      105 # Coal Mine
+setmaincom             "Bakemono Sorceror"
+addstartunits          "Bakemono Spearman"        10
+addstartunits          "Bakemono Sho"             10
+addstartunits          "Bakemono Bowman"           5
+addstartcom            "Bakemono General"
+likesnorth          1 # 1: Willingness to start in the north, on a scale from -10 to 10.
+mercboost         -50 # -50% to frequency of mercenary offers.
+humancost         200 # 200% normal cost for human recruitment at special locations (castles, desert palaces).
+recherochance       0 # Chance for recruitment offers from human heroes.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "human mercenaries and magic items"
+libbonusdescr          "sorcerors and human wizards"
+templebonusdescr       "shamans"
+
+
+newclass  #  7
+setclassname "Barbarian"
+classdescr "Since ancient times, Barbarian hordes have plundered the lands of Elysium.  Of unknown origin, their sudden arrival at the fringes of civilization sends tremors throughout the realms.  Some speculate that they hail from small villages in secluded regions while others say they come from the Netherworld.  The Barbarian threat is always present and only with a united show of force can the tide be turned.
+
+Barbarians are physically more powerful than normal men, but they are also more vulnerable to magic.  The Barbarian Warlord cannot buy advanced weapons like siege engines, but may sometimes recruit werebears or the fierce warriors of the amazon tribes and their magic wielding leaders.  Werebears look just like ordinary Barbarians until they reveal themselves in combat, where their strength and rage make them far more powerful than a common Barbarian warrior.  Barbarians also have access to Spirit Guides who use magical herbs to contact ancestral spirits and summon them to join the armies of Barbarians again.  More powerful Spirit Guides are called Enaries."
+classabdescr "Barbarian troops are cheap and strong.
+Barbarian camps are defended by a Totem Pole inhabited by spirits.
+Spirit Guides and Amazon commanders collect magical herbs.
+Spirit Guides can perform rituals to summon ancestor spirits and create effigies."
+hometerr          113 # Barbarian Camp
+setmaincom             "Barbarian Leader"
+addstartunits          "Barbarian Warrior"        20
+addstartunits          "random totem"              1
+addstartunits          "Barbarian Bowman"          5
+addstartcom            "Mounted Chief"
+addstartunits          "Barbarian Cavalry"         5
+# fx209             1 # Unhandled trait 209 with argument 1.
+recherochance       2 # Chance for recruitment offers from human heroes.
+mercboost         -50 # -50% to frequency of mercenary offers.
+# fx239             1 # Unhandled trait 239 with argument 1.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "spirit guides and soothsayers"
+
+
+newclass  #  8
+setclassname "Senator"
+classdescr "During the rise of the Empire, new tactics and troops were developed to crush human dissidents and eliminate the Barbarian threat.  These tactics gave birth to the soldiers called legionnaires who were usually equipped with large shields and javelins.  Newly recruited legionnaires were placed next to veterans to learn the art of war.  This system was very effective against the humans the legions were supposed to fight, but its success against other forces present in Elysium has been more varied.
+
+The legionnaire is a formidable soldier by human standards.  Their large shield is more effective than most shields found in Elysium and the javelin can be used from a distance, which is very effective for large squads of legionnaires.  The well-disciplined legionnaires can use simple wooden watch towers as citadels in addition to the sturdy stone guard towers used by all other warlords.
+
+The Senator can sometimes buy gladiators or net-wielding retiarii to supplement his legions.  Besides the ordinary wizards who may take service with any warlord, the Senator may hire Augurs, priest-diviners of the Empire.  Sometimes followers of the various esoteric cults extant in the Empire can also make their services available to bolster the Senator's forces.
+
+All senators are of noble birth and battle for positions of political influence.  Being a senator leaves only one political position left to acquire: Emperor.  A Senator who is able to bribe or assassinate his way through the competition can replace the current Emperor and hold a great coronation ceremony held in the capital.  But being the Emperor is just the beginning of the Senator's divine aspirations."
+classabdescr "50% increase to gold and trade.
+Watch Towers can be used as citadels.
+Receives free units from Guard Towers and Watch Towers.
+Augurs can use scrying to gain information from distant places.
+Revelers can bring forth satyrs and maenads from ancient forests.
+Senator can proclaim himself Emperor if he conquers the capital.
+Access to more wizard mercenaries even without having a magic library."
+hometerr          154 # Outpost
+addstartterr       17 # Town
+setmaincom             "Senator"
+addstartunits          "Hastatus"                 10
+addstartunits          "Veles"                    10
+addstartunits          "Princeps"                  5
+addstartcom            "Centurion"
+classwoodencit      1 # Can use Watch Towers and Motte and Baileys as citadels.
+recwizchance        4 # Bonus to recruitment offers for human library wizards.
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+likesnorth         -1 # -1: Willingness to start in the north, on a scale from -10 to 10.
+likessouth         -1 # -1: Willingness to start in the south, on a scale from -10 to 10.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "serpent acolytes and serpent priests"
+
+
+newclass  #  9
+setclassname "Pale One"
+classdescr "A strange race of one-eyed creatures has evolved in the dark caverns under Elysium.  Untouched by the sun, they have become known to humans as the Pale Ones.  They dwell in cavernous, intricately carved halls in the depths of the earth.  The Pale Ones have gills and also inhabit underground lakes and rivers.  Their large single eye has very good night vision and can see well in dark caverns where the only glimmer of light comes from the luminous mushrooms growing there.  However, in daylight their vision is abysmal by human standards, the sensitive eyes accustomed to pitch darkness blinded by bright sunlight.  Pale Ones never stop growing and ancient ones can be of enormous proportions.
+
+The wisest of the ancient ones are the Oracles, priest-mages of great power.  The Oracles gather magical gems found beneath the earth and use them to divine the future and to summon allies in times of war.  The leader of the Pale Ones is called the King of the Deep.  He is a very old and therefore also a very large Pale One."
+classabdescr "Pale One starts with a citadel in 'Agartha' beneath a pit in Elysium.
+The King of the Deep is very tough.
+Most pale ones have poor eyesight, which hampers them in combat.
+Oracles can be recruited if temple sites are under the Pale Ones control.
+Oracles and Earth Readers gather gems.
+Gems (emeralds in particular) can be used for magic rituals."
+hometerr          104 # Portal terrain on Elysium will be: Pit. Actual home citadel will be set by createcit.
+addstartterr      187 # Deep Earth Iron Deposit
+setmaincom             "King of the Deep"
+addstartunits          "Pale One Soldier"          5
+addstartunits          "Pale One"                  8
+addstartunits          "Pale One Slinger"          2
+addstartcom            "Earth Reader"
+mercboost         -50 # -50% to frequency of mercenary offers.
+startplane          3 # Starting citadel will be on this plane: Agartha.
+createcit         121 # Other-planar home citadel: Pale One Lair.
+recherochance       0 # Chance for recruitment offers from human heroes.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "human mercenaries and magic items"
+libbonusdescr          "human wizards"
+templebonusdescr       "oracles and earth readers"
+
+
+newclass  # 10
+setclassname "Druid"
+classdescr "The Druids like to portray themselves as priests of nature and the saviors of Elysium.  Most do not agree with this description, but what is certain is that they have found a way to coerce the beasts of Elysium to do their bidding.  However, meddling with the forces of nature is dangerous and it is only a matter of time before the Druid is lured into helping the beasts in their war against humankind.  When such beasts attack human settlements, they are backed by the power of the Druid.  Helping the beasts is surely an act of evil, but no one can deny that leading the animals is a great feat of magic as the beasts of Elysium have strong souls and are not easily swayed.
+
+Influencing nature requires collecting magical herbs and using them in mystic rituals.  Ultimately the Druid may even win the support of powerful beings of legend that can only be contacted through communion with the most ancient forests where the Soul of the Wild runs deep.  Most beasts are stronger than humans, but they are usually lacking in ranged attacks and siege abilities."
+classabdescr "The Druid collects herbs from forests and jungles.
+The Druid can use herbs to perform rituals.
+The Druid and all animals under his command are stealthy in forests."
+hometerr           28 # Hut
+addstartterr        5 # Farm
+addstartterr        6 # Farm
+setmaincom             "Druid"
+addstartunits          "Barechested Warrior"      10
+addstartunits          "Barechested Slinger"       5
+addstartunits          "Barechested Scout"         1
+addstartunits          "Venus Trap"                5
+addstartcom            "Druid's Apprentice"
+reqterr             4 # Re-rolls the map until there is at least one square of the following terrain: Ancient Forest.
+recherochance       1 # Chance for recruitment offers from human heroes.
+# fx209          1000 # Unhandled trait 209 with argument 1000.
+# fx239             1 # Unhandled trait 239 with argument 1.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "apprentices"
+
+
+newclass  # 11
+setclassname "Burgmeister"
+classdescr "The Hoburghers are a race of honest and well organized halfmen.  They are famous for their skill in farming, their skill in manipulating iron and of course the best beer in Elysium.  The wealthiest of the Hoburghers is the Burgmeister who is at the top of the hierarchy and leads the entire Hoburgher society.  Hoburghers live in fortified settlements called Hoburgs in which they usually spend all their time as long as they are not farming or hunting.  Other noteworthy Hoburghers are the Horticulturist, who most importantly holds the secret of crafting perfect beer, and the Horologist, who is capable of building wondrous beings powered by clockwork mechanisms.
+
+Though generally a peaceful and gentle people, the Hoburghers have a well developed military.  They know that fighting is necessary to defend their villages and to secure new resources for their constructs or get more land for farming.  Crossbows play a very prominent role in the Hoburgher army, because they enable the Hoburghers to deliver serious damage even to much larger enemies despite their small size.
+
+As a Burgmeister it is important to conquer mines.  Mines yield iron, which is necessary to equip higher quality troops.  They also produce gems imbued with the powers of the Elements for the Horologist to use.  The Burgmeister and the Horticulturist are able to convert regular farms to Hoburg villages for added income and increased production of the enchanted weed."
+classabdescr "Hoburghers are small and weak, and move slowly.
+Can convert farms to Hoburg villages.
+Horticulturists collect enchanted weed, which is used for rituals.
+Horologists collect magical gems, which can be used to create constructs."
+hometerr            1 # Fortified Hoburg
+addstartterr       70 # Hoburg Village
+addstartterr        5 # Farm
+setmaincom             "Burgmeister"
+addstartunits          "Hoburg Defender"           5
+addstartunits          "Hoburg Soldier"           10
+addstartunits          "Hoburg Crossbow"          10
+addstartcom            "Hogmeister"
+reqterr             4 # Re-rolls the map until there is at least one square of the following terrain: Ancient Forest.
+recherochance       1 # Chance for recruitment offers from human heroes.
+likesnorth         -1 # -1: Willingness to start in the north, on a scale from -10 to 10.
+# fx207            20 # Unhandled trait 207 with argument 20.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "human mercenaries and magic items"
+libbonusdescr          "horologists and human wizards"
+templebonusdescr       "horticulturists"
+
+
+newclass  # 12
+setclassname "Warlock"
+classdescr "Warlocks were among the first humans to arrive in Elysium.  They discovered Elemental power trapped in the gems found deep in the mountains of the land.  By freeing this power, the Warlock can create or attract Elemental spirits to serve him.  Rubies contain the blazing power of Fire, diamonds the turbulent power of Air and winds, sapphires the mercurial power of Water and emeralds the enduring power of Earth.  When the energies of a large number of gems are released, more powerful feats can be performed.
+
+The Warlock can call upon a number of very strong and powerful beings to serve him.  The Kings and Queens of the Elements are almost as powerful as demon lords and can summon and command lesser Elemental beings.  Greater Elemental beings are strong, but often lacking in magical abilities."
+classabdescr "Starts in a well fortified tower of the elements.
+The warlock collects gems from mines.
+The warlock can use gems to perform elemental rituals.
+Warlocks have different innate powers depending on what element they are associated with."
+hometerr           29 # Tower of the Elements
+setmaincom             "Warlock of Fire"
+addstartunits          "Spearman"                 12
+addstartunits          "Archer"                    5
+addstartcom            "Warlock's Apprentice"
+stdtroops           1 # Adds standard troops to recruitment list: spearmen, swordsmen, archers, crossbowmen, heavy infantry, catapult, Captain (20%), and Scout (10%).
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "apprentices and wizards"
+templebonusdescr       ""
+
+
+newclass  # 13
+setclassname "Priest King"
+classdescr "The Priest Kings of Aztlan have only recently discovered Elysium and arrived there to acquire more slaves and sacrifices for the worship of their six bloodthirsty Gods, the Teotl.  Before the discovery of Elysium, the tribes of Aztlan had lived in isolation from other cultures and had not discovered the secrets of metal working, which has resulted in a technologically inferior culture when compared to the other nations found in Elysium. The soldiers of Aztlan use archaic weapons that will undoubtedly have trouble penetrating the armor of modern knights and other heavily armed troops.
+
+The Tribal Kings who serve the Priest King use slaves to form the sword fodder of their armies.  Slaves are taken from towns and larger villages and can be very useful against smaller armies despite their low morale and lack of proper equipment.  Sacred warriors who serve the temples of the Gods are better equipped and benefit from the blessing of the god, making them more powerful in combat if the Gods hold them in favor.
+
+The Priest King and his fellow Priests who serve the Six Teotl Gods can perform blood sacrifices to gain favors for their sacred warriors or summon creatures beloved of their bloodthirsty masters.  These beings are often sacred, which means that they enjoy their god's protection and gain more powers when more blood is sacrificed.
+
+The Priests of the six Teotl each have Invocations of power to aid them and their followers in battle.  The nature of these Invocations is tied to each Teotl's sphere of influence.  Priest Kings serve the Teotl of War and the Sun and can call on the fiery gaze of the sun to burn their enemies."
+classabdescr "The Priest King's troops have inferior armaments.
+The Priest King can recruit sacred warriors.
+The Priest King and Tribal Kings can acquire slave warriors from towns and villages.
+Priests can collect sacrifices from hamlets, villages and larger settlements.
+Priests can use blood sacrifices to perform magic rituals to summon powerful beings or empower the blessings of the gods."
+hometerr            3 # Temple City
+addstartterr        5 # Farm
+setmaincom             "Priest King"
+addstartunits          "Jungle Warrior"           10
+addstartunits          "Tribal Warrior"           10
+addstartcom            "Tribal King"
+likessouth          1 # 1: Willingness to start in the south, on a scale from -10 to 10.
+likesnorth         -2 # -2: Willingness to start in the north, on a scale from -10 to 10.
+recherochance       0 # Chance for recruitment offers from human heroes.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "temple attendants, priests and nahuallis"
+
+
+newclass  # 14
+setclassname "Troll King"
+classdescr "The Troll King is the most physically powerful warlord of all, capable of conquering entire towns on his own.  His hide is very tough, making him almost immune to attacks from weaker beings like Hoburgs or poorly armed humans.  Should the Troll King be wounded, his powers of regeneration allow him to heal at an extraordinary rate during battle just like his main companions, the trolls.  All trolls have very keen noses and can detect stealthy units like brigands without trouble.
+
+The Troll King's mother is a very old and magically proficient crone.  She and the goblin shamans under her tutelage can use fungi to perform magic rituals.  She can also turn ordinary forests into troll forests where the plants and trees themselves will attack anyone foolish enough to enter the woods.  Those who die in troll forests become animated by plants and tree roots and these carrion beasts will wander about and kill anything that gets in their way."
+classabdescr "The Troll King is very tough.
+The Troll King's mother, shamans and witch doctors collect fungi.
+Fungi can be used for magic rituals.
+Humans recruited at special locations cost twice the gold.
+Ancient Forests can be used as citadels."
+hometerr           32 # Troll Pit
+setmaincom             "Troll King"
+addstartunits          "Goblin"                   10
+addstartunits          "Shadow Tree"               1
+reqterr             4 # Re-rolls the map until there is at least one square of the following terrain: Ancient Forest.
+# fx219           200 # Unhandled trait 219 with argument 200.
+# fx208             1 # Unhandled trait 208 with argument 1.
+# fx212           -50 # Unhandled trait 212 with argument -50.
+classforestcit      1 # Can use all kinds of ancient forests and sacred groves as citadels.
+likesnorth          1 # 1: Willingness to start in the north, on a scale from -10 to 10.
+likessouth         -2 # -2: Willingness to start in the south, on a scale from -10 to 10.
+mercboost         -50 # -50% to frequency of mercenary offers.
+# fx239             1 # Unhandled trait 239 with argument 1.
+humancost         200 # 200% normal cost for human recruitment at special locations (castles, desert palaces).
+# fx246           -97 # Unhandled trait 246 with argument -97.
+recherochance       0 # Chance for recruitment offers from human heroes.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "human mercenaries and magic items"
+libbonusdescr          "human wizards"
+templebonusdescr       "shamans"
+
+
+newclass  # 15
+setclassname "Enchanter"
+classdescr "The Enchanter has learned the art of making constructs.  These constructs are mago-mechanical creations, partly magical, partly mechanical.  There are many types of constructs, such as living statues, animated armor and weapons and great golems.  The constructs are often huge and can withstand massive amounts of damage before being destroyed.  With the help of these enchanted, mechanical giants the Enchanter can crush even the mightiest of armies.  However, these titans are extremely expensive to build, requiring entire mines to construct.  Lesser constructs are not as costly and are more commonly used when building armies.
+
+The Enchanter will have troops with enormous hit points.  Since it costs vast amounts of money to build these constructs, the enchanter often lacks the funds to pay for regular troops.  However, even a few golems can crush powerful armies.  Constructs do not heal damage suffered in combat, but they have many and varied abilities, making them very powerful."
+classabdescr "Starts in a very well fortified crystal tower.
+Can use gold and iron to perform rituals.
+Most rituals are very time consuming, but relatively cheap in resources."
+hometerr          110 # Crystal Tower
+addstartterr      105 # Coal Mine
+addstartterr      105 # Coal Mine
+setmaincom             "Enchanter"
+addstartunits          "Swordsman"                10
+addstartunits          "Crossbowman"               3
+addstartcom            "Enchanter's Apprentice"
+# fx205           100 # Unhandled trait 205 with argument 100.
+# fx207            80 # Unhandled trait 207 with argument 80.
+# fx206           100 # Unhandled trait 206 with argument 100.
+stdtroops           1 # Adds standard troops to recruitment list: spearmen, swordsmen, archers, crossbowmen, heavy infantry, catapult, Captain (20%), and Scout (10%).
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "apprentices and wizards"
+templebonusdescr       ""
+
+
+newclass  # 16
+setclassname "Beholder"
+hometerr          106 # Beholder Cave
+setmaincom             "Ancient Beholder"
+addstartunits          "Dwarf"                     5
+addstartcom            "Dwarven Ballista"
+addstartunits          "Giant Spider"              3
+addstartunits          "Bear"                      2
+addstartunits          "Goblin"                    5
+aiclass             1 # This class is hidden and can only be played by AI players (and only by random choice).
+# fx204            90 # Unhandled trait 204 with argument 90.
+# fx210             5 # Unhandled trait 210 with argument 5.
+stdtroops           1 # Adds standard troops to recruitment list: spearmen, swordsmen, archers, crossbowmen, heavy infantry, catapult, Captain (20%), and Scout (10%).
+recasschance        2 # Chance for recruitment offers from human assassins.
+mercboost         -50 # -50% to frequency of mercenary offers.
+# fx239             1 # Unhandled trait 239 with argument 1.
+recherochance       0 # Chance for recruitment offers from human heroes.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "human wizards"
+templebonusdescr       ""
+
+
+newclass  # 17
+setclassname "Archmage"
+hometerr           88 # Academy of Higher Magic
+addstartterr        5 # Farm
+addstartterr        7 # Hamlet
+setmaincom             "Archmage"
+addstartunits          "Spearman"                  5
+addstartunits          "Swordsman"                 5
+addstartunits          "Archer"                   10
+addstartcom            "Captain"
+aiclass             1 # This class is hidden and can only be played by AI players (and only by random choice).
+# fx204            90 # Unhandled trait 204 with argument 90.
+# fx210             5 # Unhandled trait 210 with argument 5.
+stdtroops           1 # Adds standard troops to recruitment list: spearmen, swordsmen, archers, crossbowmen, heavy infantry, catapult, Captain (20%), and Scout (10%).
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       ""
+
+
+newclass  # 18
+setclassname "Goblin King"
+hometerr           32 # Troll Pit
+addstartterr      105 # Coal Mine
+setmaincom             "Goblin King"
+addstartunits          "Goblin"                   30
+addstartunits          "Goblin Archer"             5
+aiclass             1 # This class is hidden and can only be played by AI players (and only by random choice).
+# fx204            90 # Unhandled trait 204 with argument 90.
+# fx211             4 # Unhandled trait 211 with argument 4.
+likesnorth          1 # 1: Willingness to start in the north, on a scale from -10 to 10.
+likessouth         -2 # -2: Willingness to start in the south, on a scale from -10 to 10.
+mercboost         -50 # -50% to frequency of mercenary offers.
+# fx239             1 # Unhandled trait 239 with argument 1.
+# fx246           -97 # Unhandled trait 246 with argument -97.
+recherochance       0 # Chance for recruitment offers from human heroes.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "human wizards"
+templebonusdescr       "troll shamans, goblin shamans"
+
+
+newclass  # 19
+setclassname "High Cultist"
+classdescr "The High Cultist is the leader of an entire town of worshipers dedicated to the Great Old Ones.  However, regular human sacrifices to weed out the unworthy have left the town with only a small but highly dedicated population.  There is a special sea water well in the town where women are encouraged to submerge themselves in the hope of being impregnated by a Great Old One.  This never happens, but many women find themselves taken by a Deep One instead.  The offspring of such a union will be a hideous fish-like humanoid instead of the noble Starchild everyone hopes for.  These half-human hybrids are highly devoted to the cause and will help the cultists spread the influence of the Great Old Ones.  The cultists build similar sea water wells in all coastal settlements they conquer and subject the population to their rites, thus gaining the services of the resulting hybrids as soldiers for the High Cultist's armies or as a defensive force for the settlement.
+
+The High Cultist needs to conquer more settlements to gain sacrifices.  They are needed to summon Deep Ones from the depths of the sea and convince them to support the High Cultist's cause.  Summoning rituals are always risky and a successful cultist never summons anything that he cannot also kill if things go awry.
+
+Even though his service to the Great Old Ones has changed him, the High Cultist is ultimately human by nature and unable to grasp that which is required to perform the most difficult rituals.  To gain access to such magic, the High Cultist must summon an Old One to continue into the realms where he himself cannot go.  Starspawn can use astrology to divine the location of enemies and to open pathways for powerful Horrors to attack them.  The Queen of the Deep is an Old One who can summon entire armies from the deep."
+classabdescr "Gains hybrids from all coastal settlements.
+Cultists collect sacrifices from hamlets, villages and larger settlements.
+Cultists can use sacrifices to perform rituals.
+Cultists are easy to replace as new ones join frequently."
+hometerr          161 # Deserted Port
+addstartterr        6 # Farm
+setmaincom             "High Cultist"
+addstartunits          "Spearman"                  8
+addstartunits          "Crossbowman"               5
+addstartcom            "Cultist of the Deep"
+stdtroops           1 # Adds standard troops to recruitment list: spearmen, swordsmen, archers, crossbowmen, heavy infantry, catapult, Captain (20%), and Scout (10%).
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+likescoast         10 # 10: Willingness to start near a coast, on a scale from -10 to 10.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "cultists"
+
+
+newclass  # 20
+setclassname "Dwarf Queen"
+classdescr "The dwarves of Elysium live in mines, preferably deep inside the tunnels delved into the mountains.  Although they have good trade relations with humans, they rarely let any outsider enter the dwarven cities.  Most dwarves are suspicious of the outside world itself and prefer to stay under the mountain as much as possible.  However, sometimes dwarves must leave the safety of the mines in order to trade with humans and to locate new mountains suitable for mining.
+
+At the top of dwarven society is the Queen, or Dvala, as she is called among the dwarves.  She is the only female dwarf in a mine and her task is mainly to give birth to more dwarves.  The birthing of new dwarf workers occupies almost all of her time and thus the actual ruling of the mine is done by a council of elders, which consists of the oldest dwarves and the oldest Rune Smith.
+
+Rune Smiths and Councilors are highly esteemed dwarves.  The Rune Smiths create the magical equipment used by the dwarven elite guards and warriors.  The councilors have the honor of establishing new colonies by performing the secret rites that bring a new Dvala to an empty mine.
+
+Dwarves are excellent miners and can extract twice the normal amount of gold and iron from mines.  On the other hand, they are not very good at administering human settlements or castles and receive reduced income from anything that isn't a mine."
+classabdescr "The Dvala gives birth to new dwarf workers every month.
+Dwarf workers can be upgraded by spending iron.
+The Dvala can use diamonds to scry for new mines or create Rune Smiths.
+Rune Smiths can use gems to create elite guards and warriors.
+The Councilor can call forth a new Dvala by spending a heap of gold.
+Human mercenaries often offer their services, but at high prices.
+Humans recruited at special locations cost twice the gold.
+Minus 1 gold/iron/gem income from non mines."
+hometerr          126 # Dwarven City
+setmaincom             "Young Dvala"
+addstartunits          "Dwarf"                     5
+addstartunits          "Dwarf Worker"              8
+addstartunits          "Dwarf Arbalest"            2
+addstartcom            "Dwarf Commander"
+# fx217            -1 # [nonmineincomebonus]: -1 income of each resource from each non-mine location.
+classminecit        1 # Can use greater mines as citadels.
+# fx205            50 # Unhandled trait 205 with argument 50.
+likesnorth          1 # 1: Willingness to start in the north, on a scale from -10 to 10.
+likessouth         -2 # -2: Willingness to start in the south, on a scale from -10 to 10.
+mercpricemult       2 # 2 times normal cost for mercenary offers.
+mercboost         100 # +100% to frequency of mercenary offers.
+humancost         200 # 200% normal cost for human recruitment at special locations (castles, desert palaces).
+# fx246           -12 # Unhandled trait 246 with argument -12.
+recherochance       0 # Chance for recruitment offers from human heroes.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "human mercenaries and magic items"
+libbonusdescr          "human wizards"
+templebonusdescr       ""
+
+
+newclass  # 21
+setclassname "Voice of El"
+classdescr "The Voice of El is an Arch Bishop who is charged with the conversion of Elysium to the proper faith.  El should be worshiped at least in all human settlements and everyone shall pay a tithe to the Church.  The tithe is distributed yearly among the highest ranking priests.  A Cardinal will gain twice the share of an Arch Bishop, a normal Bishop has no right to any tithe and if a Pontiff has been appointed, he will collect the entire tithe to distribute as he sees fit.  Because the Church in the new world has large expenses, the tithe is taken thrice in Elysium, meaning that all converted settlements pay a third of their income to the Church.  Only the most high ranking priest for each Voice of El counts when the tithe is shared.
+
+The priests of El collect relics to enable them to serve El better.  The relics can be used either toward breaking the Seven Seals or to sacrifice them to El in order to gain more favor.  There are seven Seals that separate El from the world and they prevent him from punishing the heretics of Elysium in an effective manner.  After the breaking of at least one Seal, minions of El will come to assist His church.  The breaking of more Seals will bring forth more powerful minions and breaking all Seven Seals will unleash the Apocalypse."
+classabdescr "Priests collect relics.
+Convert settlements to have them give a third of their income to the church.
+Relics can be used to break the seals and receive help from El.
+Higher level priests enables recruitment of sacred soldiers.
+Sacred troops have bless effects that can be improved by spending relics.
+Cardinal can start the Crusade and call the Inquisition."
+hometerr           25 # Temple of El
+addstartterr        5 # Farm
+addstartterr        7 # Hamlet
+setmaincom             "Arch Bishop"
+addstartunits          "Halberdier"                7
+addstartunits          "Spearman"                  8
+addstartunits          "Archer"                    2
+addstartcom            "Bishop"
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "bishops"
+
+
+newclass  # 22
+setclassname "Illusionist"
+classdescr "Illusionists are masters of deception and misdirection.  Through their arcane study of light, sound and the senses, they have perfected a magic that is designed to confound sight, hearing, smell, taste and even touch.  The Crystal Palace of an Illusionist is a place where mirrored walls cast reflection upon reflection upon reflection in an infinite maze of illusion that leaves the unprepared visitor dazzled and disoriented.  In an Illusionist's domain, the border between the real and the unreal is crossed as casually as a peasant crosses his field.  One never knows whether the things he sees are real or simply figments of his own (or someone else's) imagination.  The conjurations of an Illusionist are fragile, instantly dispelled when confronted with hard reality.  Yet despite their ephemeral nature, they have a very real power to affect living things.  That which is seen and believed will have a physical effect upon those who do not realize they are dealing with the unreal and illusionary blades will inflict real, bleeding wounds on their bodies.
+
+Illusionists can use the power of magical gems to store both their spells and illusions in specially constructed mirrors, which will then release the stored contents in battle.  Many a warlord has laughed derisively at a small opposing force whose vain commander brings large, fragile mirrors to the field of battle.  Most of those warlords have then had to watch in frustration and disbelief as their own ordered ranks turn into a chaotic, snarled mess, their soldiers distracted and confused by bright lights, frightened by visions only they can see and cut down and trampled into the ground by soldiers and fantastical monsters that marched forth from the enchanted mirrors.  Those facing an Illusionist are advised to underestimate him at their own peril."
+classabdescr "Starts in a very well fortified crystal palace.
+Illusionists collect gems from mines and gem deposits.
+Gems can be used to perform magic rituals.
+Most rituals require an empty mirror, that is then filled with images."
+hometerr          156 # Crystal Palace
+setmaincom             "Illusionist"
+addstartunits          "Spearman"                 10
+addstartunits          "Archer"                    5
+addstartcom            "Illusionist's Apprentice"
+stdtroops           1 # Adds standard troops to recruitment list: spearmen, swordsmen, archers, crossbowmen, heavy infantry, catapult, Captain (20%), and Scout (10%).
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+likessouth          1 # 1: Willingness to start in the south, on a scale from -10 to 10.
+# fx206           100 # Unhandled trait 206 with argument 100.
+# fx219           200 # Unhandled trait 219 with argument 200.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards and apprentices"
+templebonusdescr       ""
+
+
+newclass  # 23
+setclassname "Markgraf"
+classdescr "The first Markgraf was once one of the richest persons in a Hoburg, but he was bested to the title of Burgmeister.  The Markgraf then decided to withdraw himself from the Hoburgher society altogether, setting up his domain as that of a Graf, modeled on the human Barons.  For a few generations, this remote area of the Hoburgher society was more or less self-sufficient, if a bit leaner than their neighbors.  The Markgraf managed to live well off of his subjects and no renegades survived to tell the tale.  Many Hoburghers of ill repute have found a refuge in the towns of the Markgrafdom as they had already broken with the customs of mainstream Hoburgher society.  As the Markgraf's domains are more barren and worn down than the rest the Hoburg lands, the Markgrafs have tried every means available to improve the lot of their subject and themselves.
+
+The subjects of the Markgraf are a quiet and suspicious people.  Strangers who come to visit will find that the doors are closed and no one will speak to them in the tavern.  One of the more noteworthy subjects of the Markgraf is the Nekromant, a Hoburgher with an affinity for the necromantic arts.  The Markgraf has seen the potential of using necromancy and put him to work on all kinds of projects.
+
+Nekromants collect the left hands of dead criminals that can be found in towns and large villages.  These hands are called Hands of Glory and contain power that can be used in necromantic rituals.  The Nekromants can raise the dead to create armies, but risk their sanity in the process.  However, the most important task for a Nekromant is to ensure eternal life for the Markgraf by transforming him into a vampire."
+classabdescr "Hoburghers are small and weak, and move slowly.
+Nekromants collect Hands of Glory from large villages and towns.
+Nekromants can use Hands of Glory to perform rituals.
+Nekromants can raise the dead at the cost of some sanity."
+hometerr            1 # Fortified Hoburg
+addstartterr       70 # Hoburg Village
+addstartterr        5 # Farm
+addstartterr      248 # Small Graveyard
+setmaincom             "Markgraf"
+addstartunits          "Hobmark Defender"          5
+addstartunits          "Hobmark Soldier"          10
+addstartunits          "Hobmark Crossbow"         10
+addstartcom            "Nekromant"
+reqterr            38 # Re-rolls the map until there is at least one square of the following terrain: Old Castle Ruin.
+recherochance       1 # Chance for recruitment offers from human heroes.
+likesnorth         -1 # -1: Willingness to start in the north, on a scale from -10 to 10.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "human mercenaries and magic items"
+libbonusdescr          "nekromants and human wizards"
+templebonusdescr       ""
+
+
+newclass  # 24
+setclassname "Dryad Queen"
+classdescr "In the wild forests of Elysium strange half-men roam.  Since time immemorial they have lived untamed and free.  But when man came to Elysium the old ways changed.  The wild half-men were exposed to the gifts of civilization and some of them embraced this new order.  Centaurs, once wild and quarrelsome, are now heralds of civilization and try to impose a culture not theirs on their brethren.  Scripture, metal working and less useful traits of human culture have diluted the ancient ways of the half-men.  Now the Queen of the Wild, a Dryad priestess of remarkable power is gathering her flock, regardless of the wishes of the Centaur Sages, to expel the humans and make Elysium what it once was, beautiful and untamed.
+
+In the sacred groves of Gaia wild half-men appear.  They are wild and undisciplined, but they can be armed and trained to fight in an orderly fashion.  Most of them are prone to go berserk and centaurs often abandon their bows to fight in melee if wounded.  If brought to a castle, citadel or city the wild ones can be educated and equipped with armaments of human manufacture.  Thus it is important for the half-men to ensure a steady income of iron and gold.  Still, most of the armies of the Dryad Queen is comprised of animals and wild half-men barely able to tell one end of a spear from the other."
+classabdescr "The Dryad Queen can not buy troops (including at most special locations).
+Satyrs and Harpies appear for free in sacred groves.
+Centaurs and Minotaurs appear for free in sacred groves if a centaur or minotaur commander is present.
+Free units can be upgraded in sacred groves, castles and cities for gold and iron.
+The Dryad Queen collect herbs from forests.
+The Dryad Queen use herbs to create sacred groves and summon animals."
+hometerr          236 # Sacred Grove
+addstartterr        5 # Farm
+setmaincom             "Dryad Queen"
+addstartunits          "Satyr Javelinist"          5
+addstartunits          "Satyr Warrior"             5
+addstartcom            "Satyr Commander"
+reqterr             4 # Re-rolls the map until there is at least one square of the following terrain: Ancient Forest.
+classforestcit      1 # Can use all kinds of ancient forests and sacred groves as citadels.
+mercboost         -50 # -50% to frequency of mercenary offers.
+humancost         999 # Cannot recruit humans at special locations (castles, desert palaces).
+# fx246            -1 # Unhandled trait 246 with argument -1.
+recherochance       0 # Chance for recruitment offers from human heroes.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "human mercenaries and magic items"
+libbonusdescr          "centaur sages and human wizards"
+templebonusdescr       "dryads and hierophants"
+
+
+newclass  # 25
+setclassname "Scourge Lord"
+classdescr "The Scourge Lord is the undisputed ruler of the land, as it is he who determines which people should be allowed to live and which should be drained of their life to fuel the Scourge Lord's power.  The Scourge Lords is able to grant great power to his foremost servants.  These servants are called Heralds and they enforce the Scourge Lord's laws and expand his influence by conquering neighboring areas.
+
+For lesser spells the Scourge Lord and his Herald can drain life force from vegetation or living beings in the immediate surroundings.  But for powerful rituals, much more life force is needed, and for this purpose great pillars or pyramids are built that can extract life force from the surrounding lands.  Anything in the vicinity of such a site of power will soon be turned into barren wastelands as the very life is drained from the land.  Some living beings from such areas will be turned into Ghouls and continue to serve the Scourge Lord, but most will simply die as their life force is stolen.
+
+These rituals of the Scourge Lord are very powerful and can be used to summon and control beasts, teleport entire armies or to further enhance the might of the Scourge Lord and his Heralds. The Scourge Lord will not share power and there can only be one master. Only if the Lord becomes a King will he allow his Heralds to advance in power and become Scourge Lords."
+classabdescr "Life force is collected by constructing sites of power.
+The sites of power destroy the surrounding lands.
+The Lord and the Heralds can use life force to perform rituals.
+The Lord and the Heralds require vegetation or living beings nearby to cast combat spells.
+The Scourge Lord can easily appoint new Heralds."
+hometerr           23 # Citadel
+addstartterr      255 # Pillar of Power
+addstartterr      206 # Market Village
+setmaincom             "Scourge Lord"
+addstartunits          "Desert Warrior"            8
+addstartunits          "Camel Rider"               5
+addstartcom            "Scourge Herald"
+stdtroops           1 # Adds standard troops to recruitment list: spearmen, swordsmen, archers, crossbowmen, heavy infantry, catapult, Captain (20%), and Scout (10%).
+recherochance       1 # Chance for recruitment offers from human heroes.
+recasschance        2 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards"
+templebonusdescr       "heralds"
+
+
+newclass  # 26
+setclassname "Cloud Lord"
+classdescr "The Cloud Lord is the ruler of the Airya, winged humanoids living on solid clouds far above the lands of Elysium. The Airya craft armors and weapons from magical gems and their forces are both swift and deadly. From his lofty abode the Cloud Lord has observed kingdoms rise and fall in Elysium. Now he has decided to rid the lands of incompetent and malicious rulers.
+
+The Cloud Lord can easily be mistaken for a Warlock of the Air, but where the warlock forms a pact with his chosen element, the Cloud Lord commands the beings of the sky through sheer magical power. Birds, elementals and mythical beasts of the skies are his to command as well as giants of thunder and frost; and even the elemental queens might come to his aid if properly called."
+classabdescr "The Cloud Lord starts with a citadel in the ‘Sky realm’ near a mountain top.
+The Airya armies can fly over difficult terrains and between clouds.
+Airya elites can be recruited for an additional cost in gems, but reduced gold cost.
+Eagle Kings, Cloud Lords and Cloud Casters collect gems.
+Air Gems can be used for magic rituals. Other gems can be converted to air gems with an alchemy ritual, or used to recruit elite units."
+hometerr          253 # Portal terrain on Elysium will be: Mountain Spire. Actual home citadel will be set by createcit.
+addstartterr      262 # Cloud Hamlet
+addstartterr      262 # Cloud Hamlet
+setmaincom             "Cloud Lord"
+addstartunits          "Airya Spearman"           10
+addstartunits          "Airya Archer"              5
+addstartcom            "Storm Captain"
+recherochance       1 # Chance for recruitment offers from human heroes.
+likesnorth          1 # 1: Willingness to start in the north, on a scale from -10 to 10.
+startplane          2 # Starting citadel will be on this plane: Sky.
+createcit         265 # Other-planar home citadel: Cloud Palace.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "human mercenaries and magic items"
+libbonusdescr          "wizards and apprentices"
+templebonusdescr       ""
+
+
+newclass  # 27
+setclassname "Kobold King"
+classdescr "Kobolds are small humanoid reptilians that claim draconic ancestry. They thrive in mines and caverns where they build hatcheries and reproduce at a prodigious rate. A Kobold Hatchery will soon flood the countryside with swarming kobolds. Sometimes a Kobold Shaman will establish a stronghold in a hatchery, improving both the defenses and the rate at which eggs are hatched. If a Kobold Prophet or Kobold King would emerge, the power to harness the magic of gems in incubating eggs is further increased and winged elite kobolds known as Dragon Spawn will be available.
+
+Kobolds come in five colors, four of which are affiliated with the powers of a specific gemstone. Red Kobolds are affiliated with the magic of rubies and will create their hatcheries where the fiery power of rubies will enhance and incubate their eggs. All red kobolds are resistant to fire and flames and their shamans bring fiery magic to the battlefield. Green Kobolds gain their powers from emeralds, are resistant to poison, and use poison in combat. Blue Kobolds are affiliated with the icy magic of sapphires. They are resistant to cold and can hide and move unhindered in cold climates. Their shamans use frost magic. White Kobolds are affiliated with the thunderous powers of diamonds. Many white kobolds are gifted with wings and are able to fly. Finally there are the Black Kobolds. Rare and enigmatic they do not found hatcheries as do the other kobolds. They can draw power from all kinds of gems, but at a higher cost. Black Kobolds are masters at stealth and they serve as scouts, murderers and dark mages."
+classabdescr "Kobolds come in several colors, each with their own strengths, but all are weak.
+Kings and Prophets enable the recruitment of Dragon Spawn.
+Great Mines and Kobold Strongholds produce free kobolds corresponding to the gems produced in the mine.
+The Kobold King, shamans and sorcerers collect gems.
+Gems can be used for magic rituals to create strongholds, traps, or summon guardian dragons.
+Cannot recruit humans in castles or other special locations."
+hometerr          282 # Kobold Lair
+setmaincom             "Red Kobold Shaman"
+addstartunits          "Red Kobold"               20
+addstartunits          "Red Kobold Slinger"       10
+addstartunits          "Fire Drake"                1
+addstartcom            "Red Kobold Chief"
+recherochance       1 # Chance for recruitment offers from human heroes.
+reqterr            -2 # Re-rolls the map until there is at least one square of the following terrain: temples.
+# fx240             1 # Unhandled trait 240 with argument 1.
+humancost         999 # Cannot recruit humans at special locations (castles, desert palaces).
+# fx246           -12 # Unhandled trait 246 with argument -12.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "human mercenaries and magic items"
+libbonusdescr          "wizards and apprentices"
+templebonusdescr       ""
+
+
+newclass  # 28
+setclassname "Monkey Maharaja"
+classdescr "In the jungles of southern Elysium lives strange breeds of monkey-men gifted with cunning and wisdom far beyond that of ordinary beasts. These monkeys have formed a society where size and strength determines your caste and position in society. Lowest of the low, the markatas are barely more than cunning monkeys. Above them comes the Vanara, monkeys of almost human stature. At the top of society are the Bandar, large and warlike brutes that have dominated their lesser kin for times immemorial. Living apart and in some ways above the other monkeys are the White Ones, white-furred vanaras gifted with profound wisdom and knowledge.
+
+The monkey-people are ruled by a Maharaja, a Bandar ape of outstanding stature."
+classabdescr "Small Markatas can be recruited in great numbers.
+Bandars are large apes that are much stronger than humans.
+Bandaraja enables recruitment of heavily armed Bandars.
+Atavi villages spawns markatas and atavi tribesmen over time.
+Yogis, Gurus and Rishis collect gems.
+Gems can be used to summon mythic beings."
+hometerr          114 # Maharaja's Palace
+addstartterr      348 # Atavi Tribe Village
+setmaincom             "Bandaraja"
+addstartunits          "Markata"                  10
+addstartunits          "Markata Archer"           10
+addstartunits          "Vanara Archer"             5
+addstartunits          "Vanara Soldier"            5
+addstartcom            "Vanara Captain"
+likessouth          1 # 1: Willingness to start in the south, on a scale from -10 to 10.
+likesnorth         -2 # -2: Willingness to start in the north, on a scale from -10 to 10.
+humancost         150 # 150% normal cost for human recruitment at special locations (castles, desert palaces).
+# fx247             1 # Unhandled trait 247 with argument 1.
+recherochance       0 # Chance for recruitment offers from human heroes.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "human wizards"
+templebonusdescr       ""
+
+
+newclass  # 29
+setclassname "Raksharaja"
+classdescr "In the jungles of southern Elysium lives strange breeds of monkey-men gifted with cunning and wisdom far beyond that of ordinary beasts. These monkeys have formed a society where size and strength determine your caste and position in the kingdom. Traditionally the top position has belonged to the Monkey Maharaja.
+
+But not all monkeys serve the Monkey Maharaja. Demons from realms beyond Elysium have infiltrated and subjugated the monkey-people and turned them into servants, slaves and fodder. The King of these demons, the Raksharaja, has now turned his eyes outwards intent on conquering the world.
+
+Apart from the monkey-people the Raksharaja commands half-bred demons and rakshasas summoned through bloody sacrifices. Rakshasas are demons able to manipulate Maya, the flawed perceptions of this world, and are known to hide their true selves, as well as reality itself. The armies of the Raksharaja are rarely what they seem, and even his lands might surprise the unwary.
+
+The Raksharaja will not share power and there can only be one master. Only if the Raksharaja becomes a Raksharishi will he allow his Generals to advance in power and become Raksharajas."
+classabdescr "Small Markatas can be recruited in great numbers.
+Bandars are large apes that are much stronger than humans.
+Raksharaja enables recruitment of heavily armed half-demon warriors.
+Atavi villages spawns markatas and atavi tribesmen over time.
+Raksharaja, Rakshasa generals, Raktapatas and Kala-Mukhas collect sacrifices.
+Sacrifices can be used to summon demonic rakshasas, reanimate the dead or create illusions.
+Raksharajas and some mages can hide troops and make them appear as regular monkey soldiers."
+hometerr          114 # Maharaja's Palace
+setmaincom             "Raksharaja"
+addstartunits          "Markata"                  10
+addstartunits          "Atavi Archer"              5
+addstartunits          "Atavi Warrior"             5
+addstartcom            "Atavi Chief"
+likessouth          1 # 1: Willingness to start in the south, on a scale from -10 to 10.
+likesnorth         -2 # -2: Willingness to start in the north, on a scale from -10 to 10.
+humancost         200 # 200% normal cost for human recruitment at special locations (castles, desert palaces).
+# fx247             1 # Unhandled trait 247 with argument 1.
+# fx248             1 # Unhandled trait 248 with argument 1.
+recherochance       0 # Chance for recruitment offers from human heroes.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "human wizards and monkey mages"
+templebonusdescr       ""
+
+
+newclass  # 30
+setclassname "Guildmaster"
+classdescr "When men came to Elysium there were individuals who realized that there was profit to be made in the growing markets and towns of the  newfound continent. Guilds formed where trade was abundant and the leaders of the guilds accumulated fortune, influence and eventually military power to rival that of human warlords. Relying on human troops and mercenaries, various Guildmasters established themselves across Elysium.
+
+Guildmasters can establish guilds in places of trade. These give different beneficiary effects to the faction. Some guilds give economic benefits while others give access to superior troops, navigators or other special commanders.
+
+Once a Guild is established it remains even if an enemy conquers the site. However, the guild will not grant any beneficial effects to the conqueror. If retaken the Guildmaster will once again be able to benefit from the guild. A Thieves Guild will be economically detrimental to would be conquerors and an Assassins Guild might even trigger assassination attempts against enemy commanders and armies."
+classabdescr "Regular human troops of good quality.
+Guilds can be built in places of trade.
+Different Guilds improve different economic aspects.
+Different Guilds can give access to elite or exotic troops as well as mages and other special commanders.
+Some guilds generate free units, some of which move around independently.
+Mercenary Guilds increases the number of mercenary offers."
+hometerr           79 # Port
+addstartterr      206 # Market Village
+addstartterr       18 # Village
+setmaincom             "Guildmaster"
+addstartunits          "Halberdier"                6
+addstartunits          "Pikeneer"                  6
+addstartunits          "Crossbowman"               8
+addstartunits          "Ship"                      1
+addstartcom            "Captain"
+recherochance       1 # Chance for recruitment offers from human heroes.
+likescoast         10 # 10: Willingness to start near a coast, on a scale from -10 to 10.
+reqterr           -93 # Re-rolls the map until there is at least one square of the following terrain: ports.
+recasschance        0 # Chance for recruitment offers from human assassins.
+townbonusdescr         "mercenaries and magic items"
+libbonusdescr          "wizards as well as cartographers/navigators/mage pilots if the proper guild is created"
+templebonusdescr       ""
+
+
+# © 2021-2025 by Colonel Dracula joins the Navy.  All Rights Reserved.

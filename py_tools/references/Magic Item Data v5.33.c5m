@@ -1,0 +1,2823 @@
+#                       COE5 MAGIC ITEM DATA IN MOD FORMAT
+# 
+# This file contains the magic item data for CoE5, extracted from the
+# executable.  Although this file is not actually a mod, its contents adhere to
+# CoE5's modding format in order to make it an optimal resource for modders. 
+# That said, much of the information here can be useful to players, as well.
+# 
+# For modders, this file provides examples of how base game magic items can be
+# built using modding commands (although some magic items in the base game do
+# use some commands that are not available to modders) and templates that
+# modders can use to create their own magic items.
+# 
+# For players, this file provides detailed information on each magic item's
+# stats and traits.  Among other uses, this provides a solution to one of the
+# game's lingering issues--that you can't see any information (other than the
+# name) about an item that's offered for purchase until after you've already
+# bought it.  Hopefully, this information will someday be made available in
+# game before purchasing the item, but unless and until that happens, you can
+# at least look the item up here to see whether it's worth purchasing before
+# you commit.
+# 
+# -----------------------------------------------------------------------------
+# 
+#                           INFORMATION FOR PLAYERS
+# 
+# Everything to the right of a "#" (such as what you're reading now) is a
+# comment, which means the game ignores it; it's there as a note for human
+# readers (i.e. you).  I've provided comments on the right-hand side of most
+# lines to explain what all the modding commands on the left actually do, so if
+# you're not a modder, you can pretty much ignore most things on the left and
+# just read the comments.
+# 
+# The major exceptions are:
+# 
+# -Lines beginning with newitem.  The part between the "" is the name of the
+# magic item; the comment with the number on the far right is the magic item's
+# index number, which you can ignore.
+# 
+# -Lines beginning with descr.  The part between "" is the description shown in
+# game when you right-click on the magic item.
+# 
+# -Lines beginning with itemwep.  The part between the "" is the name of the
+# weapon associated with the magic item.  You can use that name and the index
+# number (nbr) in the comment to look it up in the Weapon Data.
+# 
+# -Lines beginning with combatsum.  The part between the "" is the string that
+# determines what will be summoned.  Usually, it's just the name of a monster,
+# such as "Bear", which means 1 Bear will be summoned.  A more complex example
+# such as "2d3+2*Myrmeke" means the game will roll two 3-sided dice and add 2
+# to determine the number of Myrmeke units to summon.  If the string has
+# multiple types of monsters separated by "&", then it will summon all of them
+# at once.
+# 
+# -Lines beginning with combatspell.  The part between the "" is the name of
+# the spell that will be cast.
+# 
+# -Commands whose names and meanings are especially obvious generally either
+# don't get comments, or don't repeat the command name at the start of the
+# comments, for the sake of brevity.
+# 
+# If a line begins with "# fx", "# res", "# aff", "# ben", "# move", or "#
+# grp", followed by a number, that means it's a command that isn't accessible
+# to modders.  I present these as comments because they don't have mod command
+# names that the game would recognize (so to adhere to the modding format, I
+# need to tell it to ignore them), but the part that's actually intended for
+# humans to read is the second comment, to the right.  If there's a word in [],
+# that's just my guess at what Illwinter might call this command if they did
+# make it accessible to modders.  If instead you see the word "Unhandled",
+# that's a trait the app doesn't know how to translate.  Unless you want to
+# guess at their meanings, you can ignore these, other than to remember that
+# there's some detail about the magic item that isn't explained yet.
+# 
+# If a line begins with "# [serveondeath]", that's another command that isn't
+# accessible to modders.  It's only used for the soul contract items.  The part
+# between "" is the name of the monster type which the bearer will be bound to
+# serve after death.
+# 
+# -----------------------------------------------------------------------------
+# 
+#                           INFORMATION FOR MODDERS
+# 
+#                          Magic Item Modding Maxima
+# 
+# CoE5 has reserved space for a total of 1000 magic items, including those from
+# the base game and all simultaneously activated mods.  This gives us a rough
+# ballpark of how many magic items can be added by mods (1000 minus the number
+# reserved for the base game), but not an exact number.  Illwinter reserve more
+# slots for base game magic items than are currently in use, so that they can
+# add new magic items in future updates without breaking every saved game that
+# uses mods with new magic items, but to my knowledge, they haven't stated
+# exactly how many magic item slots they've reserved for the base game. 
+# Probably there's room for mods to add at least 500 magic items; I very much
+# doubt there's room for more than 700.
+# 
+# Each magic item has reserved space for 1 (and only 1) each of the following
+# commands:
+# newitem (or name, if you're modifying an existing item), descr, spr, rarity,
+# type, itemwep, combatsum, and combatspell.  The same is true of
+# [serveondeath], but there's currently no way for modders to access that.
+# 
+# Each magic item's name can be up to 48 bytes long.  How many characters that
+# is depends on how many bytes it takes to express each character in UTF-8
+# encoding.  Usually, it's one or two bytes per character, so that means 24 to
+# 48 characters.
+# 
+# Each magic item's combatsum string can be up to 64 bytes long.  Again, how
+# many characters that is depends on how many bytes it takes to express each
+# character in UTF-8 encoding.  Note that this is much less than the 256 bytes
+# of a ritual addstring, so just because a given summoning string fits in a
+# ritual doesn't necessarily mean it will fit in a magic item.
+# 
+# Each magic item has room for 20 fx commands.  Unfortunately, the modding
+# manual isn't organized in such a way as to make it easy to tell which
+# commands will use up an fx slot and which won't.  Commands already mentioned
+# here as having reserved space will not use up an fx slot.  Otherwise, if the
+# command can take an argument other than 0 or 1, it will use up an fx slot. 
+# However, even if the command takes no argument, or the argument can only be 0
+# or 1, it might use up an fx slot or it might not, depending on how it was
+# implemented.
+# 
+# -----------------------------------------------------------------------------
+# 
+#                                    CREDITS
+# 
+# - Illwinter Game Design, for the creation of the wonderful Conquest of
+# Elysium and Dominions games in general, and specifically for the creation of
+# CoE5, from which all data in this file was extracted.  Also for the creation
+# of the modding manual, from which many descriptions in this file were copied
+# or adapted.
+# 
+# - Marlin, for publishing (for CoE4) documentation of many fx IDs, flag
+# meanings, and other information relevant to the magic item data.  While some
+# of these have changed in CoE5 and many more have been added, his work helped
+# me when I was getting started, and I am forever grateful to him!
+# 
+# - Me, Colonel Dracula joins the Navy, for deciphering everything in the magic
+# item data not covered by Marlin's documentation from CoE4 and for extracting
+# and translating the data.
+# 
+# -----------------------------------------------------------------------------
+
+newitem    "Frost Brand"                                                  #   0
+# sprite number                           1026
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Frost Brand" # nbr 172.
+coldres                                    100 # +100 Cold Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Fire Brand"                                                   #   1
+# sprite number                           1027
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                           "Fire Brand" # nbr 173.
+fireres                                    100 # +100 Fire Resistance.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Lightning Spear"                                              #   2
+# sprite number                           1053
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                      "Lightning Spear" # nbr 792.
+shockres                                   100 # +100 Shock Resistance.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Demon Whip"                                                   #   3
+# sprite number                           1034
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                           "Demon Whip" # nbr 166.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Serpent Kryss"                                                #   4
+# sprite number                           1033
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                        "Serpent Kryss" # nbr 181.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Staff of the Night"                                           #   5
+# sprite number                           1076
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Magic Staff" # nbr 385.
+acutesenses                                    # Can see units with Stealth or Forest Stealth.
+combatsum                       -1 "Dire Wolf" # Summon on Battle Round 0.
+combatspell                     1 "Dark Cloud" # Can cast in place of normal attacks.
+
+
+newitem    "Club of the Ogre King"                                        #   6
+descr "This club was once wielded by Forgnosh the Ogre King. It made Forgnosh much more resistant to damage and immune to cold. Anyone surviving a hit from the club will be stunned unless he is exceptionally strong."
+# sprite number                           1039
+rarity                                       2 # Rare & Unique.
+type                                         1 # Weapon.
+itemwep                "Club of the Ogre King" # nbr 253.
+hp                                          25 # +25 Hit Points.
+coldres                                    100 # +100 Cold Resistance.
+
+
+newitem    "Sword of the Damned"                                          #   7
+# sprite number                           1001
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                  "Sword of the Damned" # nbr 254.
+
+
+newitem    "Sword of Enfeeblement"                                        #   8
+# sprite number                           1001
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                "Sword of Enfeeblement" # nbr 803.
+
+
+newitem    "Infernal Torch"                                               #   9
+# sprite number                           1009
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                       "Infernal Torch" # nbr 295.
+burnforest                                   2 # Can choose to burn a forest for 1 AP. The difference between arguments 1, 2, and 3 is undocumented.
+fireres                                    100 # +100 Fire Resistance.
+
+
+newitem    "Staff of Lightning"                                           #  10
+# sprite number                           1018
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Magic Staff" # nbr 385.
+combatspell                1 "Chain Lightning" # Can cast in place of normal attacks.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Rod of Death"                                                 #  11
+# sprite number                           1019
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                     1 "Drain Life" # Can cast in place of normal attacks.
+
+
+newitem    "Venom Sword"                                                  #  12
+# sprite number                           1003
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Venom Sword" # nbr 408.
+
+
+newitem    "Morningstar of Flames"                                        #  13
+# sprite number                           1010
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                "Morningstar of Flames" # nbr 410.
+
+
+newitem    "Faithful"                                                     #  14
+# sprite number                           1005
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Magic Sword" # nbr 474.
+lucky                                          # Luck: 50% chance to evade each attack..
+
+
+newitem    "Staff of Fire"                                                #  15
+# sprite number                           1017
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Magic Staff" # nbr 385.
+burnforest                                   1 # Can choose to burn a forest for 1 AP. The difference between arguments 1, 2, and 3 is undocumented.
+fireres                                    100 # +100 Fire Resistance.
+combatspell                       1 "Fireball" # Can cast in place of normal attacks.
+
+
+newitem    "Shaman's Staff"                                               #  16
+# sprite number                           1015
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Magic Staff" # nbr 385.
+spiritsight                                    # Can see units with Stealth, Forest Stealth, or Invisible.
+lucky                                          # Luck: 50% chance to evade each attack..
+pathboost                                   17 # Path Boost: Spiritism + 1.
+combatspell                          1 "Curse" # Can cast in place of normal attacks.
+
+
+newitem    "Sword of Heroes"                                              #  17
+# sprite number                           1000
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Magic Sword" # nbr 475.
+mr                                           2 # +2 Magic Resistance.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Axe of Sharpness"                                             #  18
+# sprite number                           1036
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                     "Axe of Sharpness" # nbr 710.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Club of Dreams"                                               #  19
+# sprite number                           1038
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                       "Club of Dreams" # nbr 711.
+sleepres                                       # Sleep immunity.
+
+
+newitem    "Staff of the Magi"                                            #  20
+# sprite number                           1052
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                       "Staff of Power" # nbr 201.
+spellrange                                   1 # +1 range for all combat spells.
+
+
+newitem    "Mace of Pain"                                                 #  21
+# sprite number                           1011
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                         "Mace of Pain" # nbr 763.
+sleepres                                       # Sleep immunity.
+
+
+newitem    "Sword of No Weight"                                           #  22
+# sprite number                           1064
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                   "Sword of No Weight" # nbr 841.
+# ben30                                        # Quickness: Can move 2 squares per turn in combat and avoid about a quarter of all attacks.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Snake Staff"                                                  #  23
+# sprite number                           1065
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Snake Staff" # nbr 842.
+combatsum                           -1 "Snake" # Summon on Battle Round 0.
+
+
+newitem    "Ice Spear"                                                    #  24
+# sprite number                           1066
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Ice Spear" # nbr 843.
+iceprot                                      1 # +1 armor in cold climate.
+coldres                                    100 # +100 Cold Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Vine Whip"                                                    #  25
+# sprite number                           1035
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Vine Whip" # nbr 832.
+
+
+newitem    "Oakbane Axe"                                                  #  26
+# sprite number                           1036
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Oakbane Axe" # nbr 786.
+chopforest                                   1 # Can choose to chop a Forest for 2 AP (3 AP for Jungle or Ancient Forest; 4 AP for Enchanted Forest).
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Shovel of the Mole King"                                      #  27
+# sprite number                           8045
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                     "Enchanted Shovel" # nbr 865.
+tunnel                                         # Can remove walls on world map and dig through earth to create pits between planes.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Burning Sword"                                                #  28
+# sprite number                           1072
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                        "Burning Sword" # nbr 884.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Banestar"                                                     #  29
+# sprite number                           1073
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                             "Banestar" # nbr 886.
+
+
+newitem    "Morningstar of Strength"                                      #  30
+# sprite number                           1074
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep              "Morningstar of Strength" # nbr 888.
+hp                                           5 # +5 Hit Points.
+str                                          1 # +1 Strength.
+
+
+newitem    "Mace of Unlife"                                               #  31
+# sprite number                           1075
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                       "Mace of Unlife" # nbr 889.
+pathboost                                    8 # Path Boost: Unlife + 1.
+hadesres                                     1 # Hades Immunity: Immunity to the damaging effect of being on the plane of Hades.
+
+
+newitem    "Golden Sickle"                                                #  32
+# sprite number                           1037
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                        "Golden Sickle" # nbr 714.
+# fx163                                    505 # 20% reduction to cost of Druidism rituals.
+
+
+newitem    "Athame of High Sacrifice"                                     #  33
+# sprite number                           1041
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                               "Athame" # nbr 731.
+# fx163                                    508 # 20% reduction to cost of Baalite Rituals.
+
+
+newitem    "Staff of Power"                                               #  34
+# sprite number                           1013
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                       "Staff of Power" # nbr 201.
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+
+
+newitem    "Solar Mace"                                                   #  35
+# sprite number                           1063
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                           "Solar Mace" # nbr 839.
+flying                                         # Can enter almost any terrain for 1 AP. In battle, can move up to 3 squares at once and fly over walls.
+awe                                          1 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -1 penalty, or waste the attack.
+
+
+newitem    "Mace of Order"                                                #  36
+descr "This mace is traditionally used by fighting commanders in well equipped armies. It will increase the discipline of all nearby soldiers. When the mace is used to strike an enemy, it will strike adjacent enemies as well."
+# sprite number                           1012
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                        "Mace of Order" # nbr 298.
+localleadership                              1 # +1 Morale for allied units within two squares of this unit.
+
+
+newitem    "Great Tetsubo of the Oni King"                                #  37
+# sprite number                           1062
+rarity                                       2 # Rare & Unique.
+type                                         1 # Weapon.
+itemwep        "Great Tetsubo of the Oni King" # nbr 817.
+pathboost                                   24 # Path Boost: Kuro Do + 1.
+
+
+newitem    "Tempest"                                                      #  38
+# sprite number                           1031
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                              "Tempest" # nbr 383.
+shockres                                   100 # +100 Shock Resistance.
+combatspell                 1 "Thunder Strike" # Can cast in place of normal attacks.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Flail of Pain"                                                #  39
+# sprite number                           1008
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                        "Flail of Pain" # nbr 287.
+
+
+newitem    "Staff of the Spirit World"                                    #  40
+# sprite number                           1016
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                          "Magic Staff" # nbr 385.
+spiritsight                                    # Can see units with Stealth, Forest Stealth, or Invisible.
+ethereal                                       # 75% chance to be unaffected by mundane weapons; can pass through walls.
+pathboost                                   17 # Path Boost: Spiritism + 1.
+mr                                          -1 # -1 Magic Resistance.
+combatsum         -1 "2d4*Dispossessed Spirit" # Summon on Battle Round 0.
+
+
+newitem    "Golden Scepter"                                               #  41
+# sprite number                           1061
+rarity                                       2 # Rare & Unique.
+type                                         1 # Weapon.
+itemwep                        "Magic Scepter" # nbr 676.
+rank                                        -1 # Deploys 1 rank further back than normal.
+pathboost                                   22 # Path Boost: Dawn Magic + 1.
+
+
+newitem    "Staff of the Arch Magi"                                       #  42
+# sprite number                           1014
+rarity                                       2 # Rare & Unique.
+type                                         1 # Weapon.
+itemwep                       "Staff of Power" # nbr 201.
+spiritsight                                    # Can see units with Stealth, Forest Stealth, or Invisible.
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+spellrange                                   1 # +1 range for all combat spells.
+
+
+newitem    "Scepter of the Goblin King"                                   #  43
+descr "This scepter was first found by a grave robber. Later it was taken by a band of goblin brigands and one of these brigands used the scepter to make himself the Goblin King. The scepter will curse anyone struck by it and can engulf opponents in flames from a distance."
+# sprite number                           1021
+rarity                                       2 # Rare & Unique.
+type                                         1 # Weapon.
+itemwep           "Scepter of the Goblin King" # nbr 342.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                    1 "Flame Burst" # Can cast in place of normal attacks.
+
+
+newitem    "Alicorn"                                                      #  44
+# sprite number                           1050
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                              "Alicorn" # nbr 891.
+poisonres                                  100 # Poison immunity.
+combatspell                           1 "Heal" # Can cast in place of normal attacks.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Death"                                                        #  45
+# sprite number                           1024
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         1 # Weapon.
+itemwep                        "Death Scepter" # nbr 417.
+pathboost                                   38 # Path Boost: Necromancy + 1.
+
+
+newitem    "Sword of War"                                                 #  46
+# sprite number                           1001
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         1 # Weapon.
+itemwep                         "Sword of War" # nbr 732.
+curseditem                                     # Item is cursed and cannot be removed.
+rank                                         2 # Deploys 2 ranks further forward than normal.
+
+
+newitem    "Soul Scythe"                                                  #  47
+# sprite number                           1051
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         1 # Weapon.
+itemwep                          "Soul Scythe" # nbr 511.
+curseditem                                     # Item is cursed and cannot be removed.
+
+
+newitem    "Axe of Lords"                                                 #  48
+# sprite number                           1054
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         1 # Weapon.
+itemwep                         "Axe of Lords" # nbr 804.
+charmres                                       # Charm immunity.
+
+
+newitem    "Hell's Reign"                                                 #  49
+descr "This scepter was forged by the Duke of Hell himself and it is a formidable weapon."
+# sprite number                           1025
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         1 # Weapon.
+itemwep                         "Hell's Reign" # nbr 418.
+spellrange                                   1 # +1 range for all combat spells.
+pathboost                                    1 # Path Boost: Infernal Magic + 1.
+fireres                                    100 # +100 Fire Resistance.
+
+
+newitem    "Wand of Fire"                                                 #  50
+# sprite number                           1042
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                    1 "Flame Burst" # Can cast in place of normal attacks.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Wand of Frost"                                                #  51
+# sprite number                           1043
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                   1 "Frozen Heart" # Can cast in place of normal attacks.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Witch Wand"                                                   #  52
+# sprite number                           1044
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell       1 "Curse of the Frog Prince" # Can cast in place of normal attacks.
+
+
+newitem    "Wand of Sleep"                                                #  53
+# sprite number                           1045
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                    1 "Sleep Cloud" # Can cast in place of normal attacks.
+
+
+newitem    "Wand of Fear"                                                 #  54
+# sprite number                           1019
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                           1 "Fear" # Can cast in place of normal attacks.
+
+
+newitem    "Wand of Disintegration"                                       #  55
+# sprite number                           1067
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                   1 "Disintegrate" # Can cast in place of normal attacks.
+
+
+newitem    "Wand of Combustion"                                           #  56
+# sprite number                           1068
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+burnforest                                   1 # Can choose to burn a forest for 1 AP. The difference between arguments 1, 2, and 3 is undocumented.
+combatspell                     1 "Combustion" # Can cast in place of normal attacks.
+
+
+newitem    "Poison Cloud Wand"                                            #  57
+# sprite number                           1069
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                   1 "Poison Cloud" # Can cast in place of normal attacks.
+
+
+newitem    "Spider Wand"                                                  #  58
+# sprite number                           1070
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                     1 "Poison Web" # Can cast in place of normal attacks.
+
+
+newitem    "Wand of Acid"                                                 #  59
+# sprite number                           1071
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                     1 "Acid Darts" # Can cast in place of normal attacks.
+
+
+newitem    "Nomad's Helmet"                                               #  60
+# sprite number                           3023
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+hp                                           5 # +5 Hit Points.
+coldres                                     50 # +50 Cold Resistance.
+combatsum                            -1 "Wolf" # Summon on Battle Round 0.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Sun Helm"                                                     #  61
+# sprite number                           3000
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+hp                                           5 # +5 Hit Points.
+fireres                                    100 # +100 Fire Resistance.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Crown of Command"                                             #  62
+# sprite number                           3001
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+extracost                                   25 # Increases the base price of this item by 25 Gold.
+leadership                                   1 # +1 Morale for units commanded by this unit.
+
+
+newitem    "Mitre of Splendour"                                           #  63
+# sprite number                           3022
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+pathboost                                   25 # Path Boost: Prayers + 1.
+awe                                          1 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -1 penalty, or waste the attack.
+fireres                                    100 # +100 Fire Resistance.
+
+
+newitem    "Crown of Intimidation"                                        #  64
+# sprite number                           3002
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+extracost                                   25 # Increases the base price of this item by 25 Gold.
+awe                                          1 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -1 penalty, or waste the attack.
+
+
+newitem    "Wraith Crown"                                                 #  65
+# sprite number                           3003
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+ethereal                                       # 75% chance to be unaffected by mundane weapons; can pass through walls.
+float                                          # -1 AP to enter terrain (min 1), can float in sky or over water without fatiguing, and immune to ground attacks.
+extracost                                   50 # Increases the base price of this item by 50 Gold.
+hadesres                                     1 # Hades Immunity: Immunity to the damaging effect of being on the plane of Hades.
+combatsum                    -1 "5d4*Longdead" # Summon on Battle Round 0.
+
+
+newitem    "Horror Helmet"                                                #  66
+# sprite number                           3007
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+fear                                         1 # Causes Fear (1d7 vs morale) in adjacent squares.
+hp                                           2 # +2 Hit Points.
+
+
+newitem    "Helmet of the Dark Knight"                                    #  67
+# sprite number                           3010
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+hp                                           5 # +5 Hit Points.
+str                                          1 # +1 Strength.
+hadesres                                     1 # Hades Immunity: Immunity to the damaging effect of being on the plane of Hades.
+coldres                                    100 # +100 Cold Resistance.
+
+
+newitem    "Crown of Bones"                                               #  68
+# sprite number                           3015
+rarity                                       1 # Rare.
+type                                         3 # Headwear.
+combatsum                         2 "Longdead" # Summon with undocumented timing and frequency.
+
+
+newitem    "Crown of Golden Mastery"                                      #  69
+# sprite number                           3017
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+extracost                                   25 # Increases the base price of this item by 25 Gold.
+pathboost                                   56 # Path Boost: Gold Arcana + 1.
+mr                                           1 # +1 Magic Resistance.
+
+
+newitem    "Crown of Silver Mastery"                                      #  70
+# sprite number                           3018
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+extracost                                   25 # Increases the base price of this item by 25 Gold.
+pathboost                                   53 # Path Boost: Silver Arcana + 1.
+mr                                           1 # +1 Magic Resistance.
+
+
+newitem    "Crown of Iron Mastery"                                        #  71
+# sprite number                           3019
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+extracost                                   25 # Increases the base price of this item by 25 Gold.
+pathboost                                   23 # Path Boost: Iron Arcana + 1.
+mr                                           1 # +1 Magic Resistance.
+
+
+newitem    "Wizard's Hat"                                                 #  72
+# sprite number                           3021
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+pathboost                                   16 # Path Boost: White Magic + 1.
+pathboost                                   29 # Path Boost: Wizardry + 1.
+mr                                           1 # +1 Magic Resistance.
+
+
+newitem    "Tribal Mask"                                                  #  73
+# sprite number                           3024
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+hp                                           5 # +5 Hit Points.
+poisonres                                   50 # +50 Poison Resistance.
+combatsum                           -1 "Snake" # Summon on Battle Round 0.
+combatspell                        1 "Disease" # Can cast in place of normal attacks.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Totem Mask"                                                   #  74
+# sprite number                           3025
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+hp                                           5 # +5 Hit Points.
+poisonres                                   50 # +50 Poison Resistance.
+combatsum                    -1 "Large Spider" # Summon on Battle Round 0.
+combatspell                          1 "Curse" # Can cast in place of normal attacks.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Helmet of Might"                                              #  75
+# sprite number                           3004
+rarity                                       1 # Rare.
+type                                         3 # Headwear.
+hp                                           5 # +5 Hit Points.
+str                                          2 # +2 Strength.
+mr                                           1 # +1 Magic Resistance.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Helmet of the Triton King"                                    #  76
+# sprite number                           3005
+rarity                                       1 # Rare.
+type                                         3 # Headwear.
+water                                          # Amphibian: The monster can enter water squares and is immune to drowning damage.
+hp                                           8 # +8 Hit Points.
+shockres                                   100 # +100 Shock Resistance.
+
+
+newitem    "Helmet of the Efreet"                                         #  77
+# sprite number                           3006
+rarity                                       1 # Rare.
+type                                         3 # Headwear.
+hp                                           5 # +5 Hit Points.
+burnforest                                 100 # Set forests on fire automatically.
+fireaura                                     5 # Fire Shield (5): Any enemy attacking this unit in melee will take some fire damage and may be set on fire.
+fireres                                    100 # +100 Fire Resistance.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Crown of Overmight"                                           #  78
+# sprite number                           3008
+rarity                                       2 # Rare & Unique.
+type                                         3 # Headwear.
+poisonres                                  100 # Poison immunity.
+sleepres                                       # Sleep immunity.
+charmres                                       # Charm immunity.
+leadership                                   1 # +1 Morale for units commanded by this unit.
+hp                                          10 # +10 Hit Points.
+mr                                           1 # +1 Magic Resistance.
+str                                         -1 # -1 Strength.
+awe                                          3 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -3 penalty, or waste the attack.
+
+
+newitem    "Wreath of the Arch Druid"                                     #  79
+# sprite number                           3009
+rarity                                       2 # Rare & Unique.
+type                                         3 # Headwear.
+poisonres                                  100 # Poison immunity.
+hp                                           5 # +5 Hit Points.
+coldres                                    100 # +100 Cold Resistance.
+combatsum                        -1 "1d2*Bear" # Summon on Battle Round 0.
+combatspell                2 "Befriend Animal" # Cast automatically every round starting on Battle Round 0?
+
+
+newitem    "Gauntlets of Power"                                           #  80
+# sprite number                           4000
+rarity                                       0 # Common.
+type                                         5 # Gloves.
+str                                          2 # +2 Strength.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Gauntlets of Knighthood"                                      #  81
+# sprite number                           4002
+rarity                                       0 # Common.
+type                                         5 # Gloves.
+protection                                   1 # +1 Armor.
+str                                          1 # +1 Strength.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Thunder Gauntlets"                                            #  82
+# sprite number                           4011
+rarity                                       0 # Common.
+type                                         5 # Gloves.
+protection                                   1 # +1 Armor.
+shockaura                                    3 # Shock Shield (3): Any enemy attacking this unit in melee will take some armor-negating shock damage.
+shockres                                   100 # +100 Shock Resistance.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Gauntlets of Protection"                                      #  83
+# sprite number                           4001
+rarity                                       0 # Common.
+type                                         5 # Gloves.
+protection                                   1 # +1 Armor.
+hp                                           5 # +5 Hit Points.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Gloves of the Forest"                                         #  84
+# sprite number                           4009
+rarity                                       0 # Common.
+type                                         5 # Gloves.
+poisonres                                  100 # Poison immunity.
+str                                          1 # +1 Strength.
+hp                                           5 # +5 Hit Points.
+
+
+newitem    "Blood Stone Gauntlets"                                        #  85
+# sprite number                           4008
+rarity                                       1 # Rare.
+type                                         5 # Gloves.
+str                                          2 # +2 Strength.
+hp                                           5 # +5 Hit Points.
+varregen                                     5 # +5(%) Regeneration.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Gloves of Kokytos"                                            #  86
+# sprite number                           4006
+rarity                                       1 # Rare.
+type                                         5 # Gloves.
+str                                          2 # +2 Strength.
+coldaura                                     2 # Frost Shield (2): Any enemy attacking this unit in melee will take some armor-negating cold damage.
+coldres                                    100 # +100 Cold Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Silver Gauntlets"                                             #  87
+# sprite number                           4007
+rarity                                       1 # Rare.
+type                                         5 # Gloves.
+gold                                         2 # Gold Bonus: +2 Gold income per turn.
+hp                                           5 # +5 Hit Points.
+mr                                           2 # +2 Magic Resistance.
+
+
+newitem    "Gauntlets of Giant Strength"                                  #  88
+# sprite number                           4005
+rarity                                       1 # Rare.
+type                                         5 # Gloves.
+str                                          4 # +4 Strength.
+hp                                           5 # +5 Hit Points.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Infernal Gauntlets"                                           #  89
+# sprite number                           4004
+rarity                                       1 # Rare.
+type                                         5 # Gloves.
+fireaura                                     3 # Fire Shield (3): Any enemy attacking this unit in melee will take some fire damage and may be set on fire..
+hp                                           5 # +5 Hit Points.
+fireres                                    100 # +100 Fire Resistance.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Crow Master's Gloves"                                         #  90
+# sprite number                           4010
+rarity                                       1 # Rare.
+type                                         5 # Gloves.
+combatsum                  1 "Murder Of Crows" # Summon every round starting on Battle Round 0.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Boots of the Swamp"                                           #  91
+# sprite number                           5004
+rarity                                       0 # Common.
+type                                         6 # Boots.
+poisonres                                  100 # Poison immunity.
+swamp                                          # Swamp Move: only requires 1 AP to move to a swamp square.
+
+
+newitem    "Boots of Regeneration"                                        #  92
+# sprite number                           5003
+rarity                                       0 # Common.
+type                                         6 # Boots.
+varregen                                     5 # +5(%) Regeneration.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Boots of the North"                                           #  93
+# sprite number                           5002
+rarity                                       0 # Common.
+type                                         6 # Boots.
+snow                                           # -1 AP to enter snow-covered squares.
+str                                          1 # +1 Strength.
+coldres                                    100 # +100 Cold Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Shoes of Speed"                                               #  94
+# sprite number                           5005
+rarity                                       0 # Common.
+type                                         6 # Boots.
+fast                                           # The monster has 4 AP and also moves twice on the battlefield per turn in combat.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Boots of the Mountains"                                       #  95
+# sprite number                           5001
+rarity                                       0 # Common.
+type                                         6 # Boots.
+mountain                                       # Mountain Move: AP cost to enter a mountain square is reduced by 1.
+str                                          1 # +1 Strength.
+hp                                           5 # +5 Hit Points.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Shoes of Protection"                                          #  96
+# sprite number                           5010
+rarity                                       1 # Rare.
+type                                         6 # Boots.
+protection                                   1 # +1 Armor.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Shoes of Flying"                                              #  97
+# sprite number                           5008
+rarity                                       0 # Common.
+type                                         6 # Boots.
+flying                                         # Can enter almost any terrain for 1 AP. In battle, can move up to 3 squares at once and fly over walls.
+float                                          # -1 AP to enter terrain (min 1), can float in sky or over water without fatiguing, and immune to ground attacks.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Boots of Scouting"                                            #  98
+# sprite number                           5009
+rarity                                       0 # Common.
+type                                         6 # Boots.
+stealth                                        # Can only be seen by units with Acute Senses or Spirit Sight.
+fast                                           # The monster has 4 AP and also moves twice on the battlefield per turn in combat.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Boots of Strength"                                            #  99
+# sprite number                           5011
+rarity                                       0 # Common.
+type                                         6 # Boots.
+mountain                                       # Mountain Move: AP cost to enter a mountain square is reduced by 1.
+str                                          2 # +2 Strength.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Dwarven Shoes"                                                # 100
+# sprite number                           5013
+rarity                                       0 # Common.
+type                                         6 # Boots.
+fireres                                    100 # +100 Fire Resistance.
+coldres                                    100 # +100 Cold Resistance.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Earth Boots"                                                  # 101
+# sprite number                           5014
+rarity                                       0 # Common.
+type                                         6 # Boots.
+hp                                           2 # +2 Hit Points.
+pathboost                                    6 # Path Boost: Geomancy + 1.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Brigand Boots"                                                # 102
+# sprite number                           5018
+rarity                                       0 # Common.
+type                                         6 # Boots.
+foreststealth                                  # When in a forest or jungle, can only be seen by units with Acute Senses or Spirit Sight.
+hp                                           2 # +2 Hit Points.
+
+
+newitem    "Shadow Boots"                                                 # 103
+# sprite number                           5007
+rarity                                       1 # Rare.
+type                                         6 # Boots.
+stealth                                        # Can only be seen by units with Acute Senses or Spirit Sight.
+ethereal                                       # 75% chance to be unaffected by mundane weapons; can pass through walls.
+
+
+newitem    "Brimstone Boots"                                              # 104
+# sprite number                           5012
+rarity                                       1 # Rare.
+type                                         6 # Boots.
+fireaura                                     3 # Fire Shield (3): Any enemy attacking this unit in melee will take some fire damage and may be set on fire.
+fireres                                    100 # +100 Fire Resistance.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Boots of the Winter Queen"                                    # 105
+# sprite number                           5019
+rarity                                       1 # Rare.
+type                                         6 # Boots.
+snowstealth                                    # When in snow, can only be seen by units with Acute Senses or Spirit Sight.
+fast                                           # The monster has 4 AP and also moves twice on the battlefield per turn in combat.
+snow                                           # -1 AP to enter snow-covered squares.
+hp                                           2 # +2 Hit Points.
+iceprot                                      2 # +2 armor in cold climate.
+coldres                                    100 # +100 Cold Resistance.
+
+
+newitem    "Shaia's Enchanted Boots"                                      # 106
+descr "Shaia was once a mighty druidess. She made these magic boots to make her life easier in the forest. The boots protect their wearer from cold, heat and being hit by anything, be it animals or tree branches. They also confer the ability to run without getting tired."
+# sprite number                           5006
+rarity                                       2 # Rare & Unique.
+type                                         6 # Boots.
+lucky                                          # Luck: 50% chance to evade each attack..
+fast                                           # The monster has 4 AP and also moves twice on the battlefield per turn in combat.
+protection                                   1 # +1 Armor.
+fireres                                    100 # +100 Fire Resistance.
+coldres                                    100 # +100 Cold Resistance.
+
+
+newitem    "Hydra Skin Armor"                                             # 107
+# sprite number                           2002
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+hp                                           5 # +5 Hit Points.
+armor                                        3 # Bearer's Armor value becomes 3 if it was less.
+varregen                                     5 # +5(%) Regeneration.
+extracost                                   50 # Increases the base price of this item by 50 Gold.
+
+
+newitem    "Mirror Armor"                                                 # 108
+# sprite number                           2003
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+mr                                           2 # +2 Magic Resistance.
+armor                                        2 # Bearer's Armor value becomes 2 if it was less.
+hp                                           5 # +5 Hit Points.
+
+
+newitem    "Elven Cloak"                                                  # 109
+# sprite number                           2012
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+stealth                                        # Can only be seen by units with Acute Senses or Spirit Sight.
+
+
+newitem    "Robe of Shadows"                                              # 110
+# sprite number                           2010
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+ethereal                                       # 75% chance to be unaffected by mundane weapons; can pass through walls.
+float                                          # -1 AP to enter terrain (min 1), can float in sky or over water without fatiguing, and immune to ground attacks.
+
+
+newitem    "Cloak of Displacement"                                        # 111
+# sprite number                           2008
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+displaced                                      # Displaced: 25% chance of being missed per rank away from attacker..
+
+
+newitem    "Breastplate of Protection"                                    # 112
+# sprite number                           2021
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+hp                                           5 # +5 Hit Points.
+armor                                        3 # Bearer's Armor value becomes 3 if it was less.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Cloak of Mirrors"                                             # 113
+# sprite number                           2023
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+mirrorimages                                 4 # Constant Mirror Images (4): start each battle with 4 mirror images.
+
+
+newitem    "Golden Platemail"                                             # 114
+# sprite number                           2026
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+extracost                                  100 # Increases the base price of this item by 100 Gold.
+hp                                           5 # +5 Hit Points.
+armor                                        4 # Bearer's Armor value becomes 4 if it was less.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Enchanted Chainmail"                                          # 115
+# sprite number                           2018
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+hp                                           5 # +5 Hit Points.
+armor                                        3 # Bearer's Armor value becomes 3 if it was less.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Alchemist's Armor"                                            # 116
+# sprite number                           2040
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+hp                                           5 # +5 Hit Points.
+armor                                        1 # Bearer's Armor value becomes 1 if it was less.
+acidres                                     50 # +50 Acid Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Athlete's Haubergeon"                                         # 117
+# sprite number                           2039
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+hp                                           5 # +5 Hit Points.
+armor                                        2 # Bearer's Armor value becomes 2 if it was less.
+evasion                                      1 # 25% chance to evade attacks.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Boarhide Armor"                                               # 118
+# sprite number                           2020
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+berserker                                      # Can go berserk if hit in combat.  Berserk: +1 Strength, +10 Morale, fight to -20% HP.
+hp                                           5 # +5 Hit Points.
+armor                                        2 # Bearer's Armor value becomes 2 if it was less.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Rime Armor"                                                   # 119
+# sprite number                           2029
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+hp                                           5 # +5 Hit Points.
+armor                                        3 # Bearer's Armor value becomes 3 if it was less.
+coldaura                                     2 # Frost Shield (2): Any enemy attacking this unit in melee will take some armor-negating cold damage.
+coldres                                    100 # +100 Cold Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Silver Armor"                                                 # 120
+# sprite number                           2028
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+hp                                           5 # +5 Hit Points.
+armor                                        3 # Bearer's Armor value becomes 3 if it was less.
+mirrorimages                                 2 # Constant Mirror Images (2): start each battle with 2 mirror images.
+shockres                                   100 # +100 Shock Resistance.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Rainbow Armor"                                                # 121
+# sprite number                           2036
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+lucky                                          # 50% chance to evade each attack.
+mr                                           2 # +2 Magic Resistance.
+armor                                        2 # Bearer's Armor value becomes 2 if it was less.
+hp                                           5 # +5 Hit Points.
+# grp1                                         # Part of Item Group 1: water themed items.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Kithaironic Lion Pelt"                                        # 122
+# sprite number                           2031
+rarity                                       0 # Common.
+type                                         4 # Body Armor.
+slashres                                       # Slash resistance (half damage).
+pierceres                                      # Pierce resistance (half damage).
+hp                                           5 # +5 Hit Points.
+armor                                        2 # Bearer's Armor value becomes 2 if it was less.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Bloodstone Armor"                                             # 123
+# sprite number                           2001
+rarity                                       1 # Rare.
+type                                         4 # Body Armor.
+armor                                        3 # Bearer's Armor value becomes 3 if it was less.
+str                                          2 # +2 Strength.
+hp                                          10 # +10 Hit Points.
+varregen                                     5 # +5(%) Regeneration.
+
+
+newitem    "Robe of Power"                                                # 124
+# sprite number                           2011
+rarity                                       1 # Rare.
+type                                         4 # Body Armor.
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+
+
+newitem    "Robe of Invulnerability"                                      # 125
+# sprite number                           2009
+rarity                                       1 # Rare.
+type                                         4 # Body Armor.
+nonmaginvul                                    # Invulnerable to non-magical weapons.
+
+
+newitem    "Elven Armor"                                                  # 126
+# sprite number                           2015
+rarity                                       1 # Rare.
+type                                         4 # Body Armor.
+stealth                                        # Can only be seen by units with Acute Senses or Spirit Sight.
+hp                                           5 # +5 Hit Points.
+armor                                        1 # Bearer's Armor value becomes 1 if it was less.
+
+
+newitem    "Demon Armor"                                                  # 127
+# sprite number                           2016
+rarity                                       1 # Rare.
+type                                         4 # Body Armor.
+bluntres                                       # Blunt resistance (half damage).
+slashres                                       # Slash resistance (half damage).
+pierceres                                      # Pierce resistance (half damage).
+hp                                          10 # +10 Hit Points.
+armor                                        1 # Bearer's Armor value becomes 1 if it was less.
+planeshift                                   2 # Plane Shift: Inferno. Can shift from Elysium to Inferno or vice-versa for 1 AP.
+
+
+newitem    "Dragon Scale Mail"                                            # 128
+# sprite number                           2022
+rarity                                       1 # Rare.
+type                                         4 # Body Armor.
+poisonres                                  100 # Poison immunity.
+hp                                          10 # +10 Hit Points.
+armor                                        3 # Bearer's Armor value becomes 3 if it was less.
+
+
+newitem    "Celestial Platemail"                                          # 129
+# sprite number                           2025
+rarity                                       1 # Rare.
+type                                         4 # Body Armor.
+hp                                          10 # +10 Hit Points.
+armor                                        4 # Bearer's Armor value becomes 4 if it was less.
+awe                                          1 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -1 penalty, or waste the attack.
+
+
+newitem    "Blood Armor"                                                  # 130
+# sprite number                           2030
+rarity                                       1 # Rare.
+type                                         4 # Body Armor.
+hp                                          15 # +15 Hit Points.
+armor                                        3 # Bearer's Armor value becomes 3 if it was less.
+pathboost                                   11 # Path Boost: Blood Magic + 1.
+
+
+newitem    "Aseftik's Armor"                                              # 131
+# sprite number                           2004
+rarity                                       2 # Rare & Unique.
+type                                         4 # Body Armor.
+mr                                           2 # +2 Magic Resistance.
+armor                                        4 # Bearer's Armor value becomes 4 if it was less.
+str                                          2 # +2 Strength.
+hp                                          10 # +10 Hit Points.
+
+
+newitem    "Monolith Armor"                                               # 132
+# sprite number                           2006
+rarity                                       2 # Rare & Unique.
+type                                         4 # Body Armor.
+slashres                                       # Slash resistance (half damage).
+slow                                           # The monster only has 2 AP.
+armor                                        5 # Bearer's Armor value becomes 5 if it was less.
+hp                                          15 # +15 Hit Points.
+varregen                                    10 # +10(%) Regeneration.
+
+
+newitem    "Robe of the Arch Magi"                                        # 133
+# sprite number                           2007
+rarity                                       2 # Rare & Unique.
+type                                         4 # Body Armor.
+airshield                                   75 # Air Shield (75): 75% chance of negating certain incoming missile attacks..
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+protection                                   1 # +1 Armor.
+fireres                                    100 # +100 Fire Resistance.
+
+
+newitem    "Durgon's Robe of Authority"                                   # 134
+# sprite number                           2013
+rarity                                       2 # Rare & Unique.
+type                                         4 # Body Armor.
+charmres                                       # Charm immunity.
+acutesenses                                    # Can see units with Stealth or Forest Stealth.
+ethereal                                       # 75% chance to be unaffected by mundane weapons; can pass through walls.
+curseditem                                     # Item is cursed and cannot be removed.
+hp                                          10 # +10 Hit Points.
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+leadership                                   1 # +1 Morale for units commanded by this unit.
+mr                                           1 # +1 Magic Resistance.
+
+
+newitem    "Robe of the Arch King"                                        # 135
+# sprite number                           2037
+rarity                                       2 # Rare & Unique.
+type                                         4 # Body Armor.
+invul                                          # Invulnerability: cannot be harmed by Slash, Pierce, or Blunt damage, even if magical.
+float                                          # -1 AP to enter terrain (min 1), can float in sky or over water without fatiguing, and immune to ground attacks.
+hp                                           5 # +5 Hit Points.
+
+
+newitem    "Divine Mantle"                                                # 136
+# sprite number                           2038
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         7 # Misc Item.
+fastheal                                       # Heals all wounds in two months at most. Also heals permanent afflictions over time, but not as quickly as with regeneration.
+bluntres                                       # Blunt resistance (half damage).
+slashres                                       # Slash resistance (half damage).
+pierceres                                      # Pierce resistance (half damage).
+curseditem                                     # Item is cursed and cannot be removed.
+mr                                           2 # +2 Magic Resistance.
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+hp                                          20 # +20 Hit Points.
+protection                                   1 # +1 Armor.
+awe                                          3 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -3 penalty, or waste the attack.
+planeshift                                   3 # Plane Shift: Hades. Can shift from Elysium to Hades or vice-versa for 1 AP.
+fireres                                    100 # +100 Fire Resistance.
+
+
+newitem    "Pendant of Luck"                                              # 137
+# sprite number                           6000
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+lucky                                          # Luck: 50% chance to evade each attack..
+
+
+newitem    "Ring of the Dead"                                             # 138
+descr "In battle this ring can be used to constantly summon the dead to aid its wearer in combat."
+# sprite number                           6021
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+combatsum                         1 "Longdead" # Summon every round starting on Battle Round 0.
+
+
+newitem    "Spirit Ring"                                                  # 139
+descr "The wearer of this ring will become spirit-like and able to float through the air and through solid objects."
+# sprite number                           6024
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+ethereal                                       # 75% chance to be unaffected by mundane weapons; can pass through walls.
+float                                          # -1 AP to enter terrain (min 1), can float in sky or over water without fatiguing, and immune to ground attacks.
+
+
+newitem    "Dream Crystal"                                                # 140
+descr "This strange crystal dreams for its wielder so that no sleep will be necessary. This makes it possible to travel further and resist sleep based attacks."
+# sprite number                           6001
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+sleepres                                       # Sleep immunity.
+fast                                           # The monster has 4 AP and also moves twice on the battlefield per turn in combat.
+
+
+newitem    "Gem of Fire Resistance"                                       # 141
+# sprite number                           6003
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+fireres                                    100 # +100 Fire Resistance.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Amulet of Cold Resistance"                                    # 142
+# sprite number                           6013
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+coldres                                    100 # +100 Cold Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Necklace of the Winter Queen"                                 # 143
+# sprite number                           6050
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+snow                                           # -1 AP to enter snow-covered squares.
+pathboost                                   27 # Path Boost: Frost Magic + 1.
+coldaura                                     2 # Frost Shield (2): Any enemy attacking this unit in melee will take some armor-negating cold damage.
+coldres                                    100 # +100 Cold Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Amulet of Hate"                                               # 144
+# sprite number                           6009
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+charmres                                       # Charm immunity.
+berserker                                      # Can go berserk if hit in combat.  Berserk: +1 Strength, +10 Morale, fight to -20% HP.
+rank                                         2 # Deploys 2 ranks further forward than normal.
+
+
+newitem    "Ring of Invisibility"                                         # 145
+# sprite number                           6022
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+invisible                                      # Can only be seen by units with Spirit Sight.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Ring of Protection"                                           # 146
+# sprite number                           6023
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+protection                                   1 # +1 Armor.
+mr                                           2 # +2 Magic Resistance.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Ring of Evasion"                                              # 147
+# sprite number                           6049
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+evasion                                      1 # 25% chance to evade attacks.
+
+
+newitem    "Ring of Protection"                                           # 148
+# sprite number                           6023
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+protection                                   1 # +1 Armor.
+mr                                           2 # +2 Magic Resistance.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Ring of Shadows"                                              # 149
+# sprite number                           6057
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+pathboost                                    9 # Path Boost: Dark Magic + 1.
+mr                                           1 # +1 Magic Resistance.
+combatsum                     -1 "1d3+1*Shade" # Summon on Battle Round 0.
+
+
+newitem    "Obol"                                                         # 150
+# sprite number                           6061
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+hadesres                                     1 # Hades Immunity: Immunity to the damaging effect of being on the plane of Hades.
+
+
+newitem    "Gem of Flying"                                                # 151
+# sprite number                           6012
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+flying                                         # Can enter almost any terrain for 1 AP. In battle, can move up to 3 squares at once and fly over walls.
+float                                          # -1 AP to enter terrain (min 1), can float in sky or over water without fatiguing, and immune to ground attacks.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Gem of True Seeing"                                           # 152
+# sprite number                           6030
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+spiritsight                                    # Can see units with Stealth, Forest Stealth, or Invisible.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Amulet of Anti Magic"                                         # 153
+# sprite number                           6015
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+mr                                           3 # +3 Magic Resistance.
+
+
+newitem    "Bloodstone Amulet"                                            # 154
+# sprite number                           6016
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+varregen                                     5 # +5(%) Regeneration.
+extracost                                   50 # Increases the base price of this item by 50 Gold.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Woundfend Amulet"                                             # 155
+# sprite number                           6017
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+slashres                                       # Slash resistance (half damage).
+
+
+newitem    "Stonebone Amulet"                                             # 156
+# sprite number                           6018
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+bluntres                                       # Blunt resistance (half damage).
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Coral Ring"                                                   # 157
+# sprite number                           6006
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+pierceres                                      # Pierce resistance (half damage).
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Ring of Infinite Gold"                                        # 158
+# sprite number                           6028
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+gold                                         5 # Gold Bonus: +5 Gold income per turn.
+extracost                                  150 # Increases the base price of this item by 150 Gold.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Trader's Medallion"                                           # 159
+# sprite number                           6029
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+gold                                         1 # Gold Bonus: +1 Gold income per turn.
+trade                                        2 # Trade Bonus: +2 Trade per turn.
+extracost                                   50 # Increases the base price of this item by 50 Gold.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Star Ruby"                                                    # 160
+# sprite number                           6011
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+pathboost                                    3 # Path Boost: Pyromancy + 1.
+fireaura                                     3 # Fire Shield (3): Any enemy attacking this unit in melee will take some fire damage and may be set on fire.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Star Sapphire"                                                # 161
+# sprite number                           6002
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+lucky                                          # 50% chance to evade each attack.
+pathboost                                   42 # Path Boost: Void Magic + 1.
+mr                                          -1 # -1 Magic Resistance.
+
+
+newitem    "Gem of Concentration"                                         # 162
+# sprite number                           6007
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# res19                                        # Combat Caster: double chance to cast spells in melee.
+
+
+newitem    "Ring of Water Breathing"                                      # 163
+# sprite number                           6035
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+water                                          # Amphibian: The monster can enter water squares and is immune to drowning damage.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Serpent Amulet"                                               # 164
+# sprite number                           6020
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+poisonres                                  100 # Poison immunity.
+hp                                           3 # +3 Hit Points.
+pathboost                                   21 # Path Boost: Serpent Magic + 1.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Bottle of Demon Blood"                                        # 165
+# sprite number                           8004
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+pathboost                                    1 # Path Boost: Infernal Magic + 1.
+fireres                                    100 # +100 Fire Resistance.
+
+
+newitem    "Magic Acorns"                                                 # 166
+# sprite number                           8012
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+combatsum                         -1 "Woodman" # Summon on Battle Round 0.
+
+
+newitem    "Magic Flowers"                                                # 167
+# sprite number                           8015
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+combatsum                  -1 "1d2*Venus Trap" # Summon on Battle Round 0.
+
+
+newitem    "Magic Spores"                                                 # 168
+# sprite number                           8013
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+combatsum                -1 "1d2*Blood Fungus" # Summon on Battle Round 0.
+
+
+newitem    "Pile of Bones"                                                # 169
+# sprite number                           8016
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+combatsum                    -1 "2d4*Longdead" # Summon on Battle Round 0.
+
+
+newitem    "Horn of Valor"                                                # 170
+# sprite number                           8007
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+localleadership                              1 # +1 Morale for allied units within two squares of this unit.
+
+
+newitem    "Magic Lamp"                                                   # 171
+# sprite number                           8008
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+extracost                                   50 # Increases the base price of this item by 50 Gold.
+combatsum                   -1 "Air Elemental" # Summon on Battle Round 0.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Warrior's Charm"                                              # 172
+# sprite number                           8011
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+hp                                           5 # +5 Hit Points.
+morale                                       2 # +2 Morale.
+str                                          1 # +1 Strength.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Hydra Bowl"                                                   # 173
+# sprite number                           8006
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+poisonres                                  100 # Poison immunity.
+poisoncloud                                  2 # Poison Aura (2): This unit is surrounded by a radius 1 cloud which will poison anyone standing in it.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Bottle of Living Water"                                       # 174
+descr "The owner of this bottle can summon a water elemental at the start of every battle."
+# sprite number                           8005
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+combatsum                 -1 "Water Elemental" # Summon on Battle Round 0.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Seeing Stone"                                                 # 175
+# sprite number                           8002
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+spiritsight                                    # Can see units with Stealth, Forest Stealth, or Invisible.
+farsight                                     1 # Farsight: can see 1 square further than usual on the world map.
+
+
+newitem    "Whispering Skull"                                             # 176
+# sprite number                           8000
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+charmres                                       # Charm immunity.
+pathboost                                   38 # Path Boost: Necromancy + 1.
+
+
+newitem    "Mirage Crystal"                                               # 177
+# sprite number                           6036
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+stealth                                        # Can only be seen by units with Acute Senses or Spirit Sight.
+pathboost                                   43 # Path Boost: Illusionism + 1.
+mirrorimages                                 2 # Constant Mirror Images (2): start each battle with 2 mirror images.
+
+
+newitem    "Moon Stone"                                                   # 178
+# sprite number                           6059
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+stealth                                        # Can only be seen by units with Acute Senses or Spirit Sight.
+pathboost                                   52 # Path Boost: Moon Magic + 1.
+pathboost                                   32 # Path Boost: Night + 1.
+
+
+newitem    "Astrolabium"                                                  # 179
+# sprite number                           6060
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+pathboost                                   61 # Path Boost: Astrology + 1.
+twistfate                                    1 # Starts each battle with a Twist Fate effect, which will prevent the first successful attack against the unit.
+
+
+newitem    "Amulet of Bear Control"                                       # 180
+# sprite number                           6037
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+combatsum                            -1 "Bear" # Summon on Battle Round 0.
+
+
+newitem    "Bloodstone Ring"                                              # 181
+# sprite number                           6038
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+hp                                          10 # +10 Hit Points.
+
+
+newitem    "Spirit Eye"                                                   # 182
+# sprite number                           8026
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+spiritsight                                    # Can see units with Stealth, Forest Stealth, or Invisible.
+curseditem                                     # Item is cursed and cannot be removed.
+# aff20                                        # Affliction: Lost an Eye.
+# fx446                                      1 # Unhandled trait 446 with argument 1.
+sensedead                                    1 # Can sense the number of corpses of all types in current square.
+
+
+newitem    "Eye of the Night"                                             # 183
+# sprite number                           8027
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# aff20                                        # Affliction: Lost an Eye.
+# fx446                                      1 # Unhandled trait 446 with argument 1.
+pathboost                                    9 # Path Boost: Dark Magic + 1.
+pathboost                                   32 # Path Boost: Night + 1.
+combatspell                           2 "Fear" # Cast automatically every round starting on Battle Round 0?
+
+
+newitem    "Eye of the Old One"                                           # 184
+# sprite number                           8028
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# aff20                                        # Affliction: Lost an Eye.
+# fx446                                      1 # Unhandled trait 446 with argument 1.
+pathboost                                   40 # Path Boost: Witchery + 1.
+pathboost                                   41 # Path Boost: Troll Magic + 1.
+varregen                                     5 # +5(%) Regeneration.
+
+
+newitem    "Crystal Heart"                                                # 185
+# sprite number                           8025
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+poisonres                                  100 # Poison immunity.
+curseditem                                     # Item is cursed and cannot be removed.
+# aff22                                        # Affliction: Chest Wound.
+# fx447                                      1 # Unhandled trait 447 with argument 1.
+varregen                                    10 # +10(%) Regeneration.
+
+
+newitem    "Bottle of Children's Tears"                                   # 186
+# sprite number                           8039
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+diseaseres                                     # Disease immunity.
+pathboost                                   40 # Path Boost: Witchery + 1.
+pathboost                                   41 # Path Boost: Troll Magic + 1.
+
+
+newitem    "Bottled Spirit"                                               # 187
+# sprite number                           8040
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+hadesres                                     1 # Hades Immunity: Immunity to the damaging effect of being on the plane of Hades.
+combatsum             -1 "Dispossessed Spirit" # Summon on Battle Round 0.
+
+
+newitem    "Magic Bean"                                                   # 188
+# sprite number                           8042
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx486                                   -103 # [terr]: Can only be used in this terrain: plain-like terrains.
+# fx485                                      1 # Using this item transforms the square into a Beanstalk and creates a portal to the plane above.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Portable Pit"                                                 # 189
+# sprite number                           8043
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx486                                   -103 # [terr]: Can only be used in this terrain: plain-like terrains.
+# fx487                                      1 # Using this item transforms the square into a Pit and creates a portal to the plane below.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Elixir of Health"                                             # 190
+# sprite number                           8048
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx499                                    100 # [cureoneaff]: 100% chance that using this item removes one affliction from the user.
+
+
+newitem    "Orb of Projection"                                            # 191
+# sprite number                           8023
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+spellrange                                   1 # +1 range for all combat spells.
+
+
+newitem    "Twisted Figurine"                                             # 192
+# sprite number                           8050
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+charmres                                       # Charm immunity.
+combatsum                      -1 "Shadow Imp" # Summon on Battle Round 0.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Heart of Life"                                                # 193
+# sprite number                           8025
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# aff22                                        # Affliction: Chest Wound.
+# fx447                                      2 # Unhandled trait 447 with argument 2.
+falselife                                    1 # False Life: gives life to an inanimate creature and removes any never heals disability.
+mr                                           2 # +2 Magic Resistance.
+hadesres                                   100 # Hades Immunity: Immunity to the damaging effect of being on the plane of Hades. How argument 100 differs from 1 is undocumented.
+
+
+newitem    "Alchemist's Mortar"                                           # 194
+# sprite number                           8051
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+pathboost                                   55 # Path Boost: Alchemy + 1.
+acidres                                     50 # +50 Acid Resistance.
+
+
+newitem    "Ring of Wizardry"                                             # 195
+# sprite number                           6048
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+mr                                           1 # +1 Magic Resistance.
+
+
+newitem    "Orb of Power"                                                 # 196
+# sprite number                           8046
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+spellrange                                   2 # +2 range for all combat spells.
+
+
+newitem    "Sphere of Power"                                              # 197
+# sprite number                           8003
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+
+
+newitem    "Frozen Star"                                                  # 198
+# sprite number                           6014
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+coldaura                                     3 # Frost Shield (3): Any enemy attacking this unit in melee will take some armor-negating cold damage.
+coldres                                    100 # +100 Cold Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Soul Stone"                                                   # 199
+# sprite number                           6031
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+hp                                           5 # +5 Hit Points.
+# fx407                                      1 # Extra Life: When the bearer dies, it will be revived with full HP and this item will be destroyed.
+
+
+newitem    "Sacred Ark"                                                   # 200
+# sprite number                           8021
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+pathboost                                   28 # Path Boost: Dark Prayers + 1.
+pathboost                                   25 # Path Boost: Prayers + 1.
+growhp                                     168 # When HP >= 168, change form to the previous monster type.
+growhp                                       0 # When HP >= 0, change form to the previous monster type.
+
+
+newitem    "Pendant of the Forest King"                                   # 201
+# sprite number                           6043
+rarity                                       2 # Rare & Unique.
+type                                         7 # Misc Item.
+poisonres                                  100 # Poison immunity.
+combatsum -1 "1d2*Moose & 2d4*Deer & 1d6*Boar" # Summon on Battle Round 0.
+
+
+newitem    "Amulet of the Spider King"                                    # 202
+# sprite number                           8024
+rarity                                       2 # Rare & Unique.
+type                                         7 # Misc Item.
+poisonres                                  100 # Poison immunity.
+curseditem                                     # Item is cursed and cannot be removed.
+protection                                   1 # +1 Armor.
+pathboost                                   28 # Path Boost: Dark Prayers + 1.
+combatsum                -1 "2d3*Giant Spider" # Summon on Battle Round 0.
+
+
+newitem    "King's Pendant"                                               # 203
+# sprite number                           6046
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+protection                                   2 # +2 Armor.
+hp                                           5 # +5 Hit Points.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Pendant of the Ice Lord"                                      # 204
+# sprite number                           6042
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+coldres                                    100 # +100 Cold Resistance.
+combatsum                 -1 "2d3*Winter Wolf" # Summon on Battle Round 0.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Tomb King's Amulet"                                           # 205
+# sprite number                           8035
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+sensedead                                    1 # Can sense the number of corpses of all types in current square.
+coldres                                    100 # +100 Cold Resistance.
+combatsum                -1 "6*Giant Scorpion" # Summon on Battle Round 0.
+
+
+newitem    "Pendant of the Desert Emperor"                                # 206
+# sprite number                           6044
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+fireres                                    100 # +100 Fire Resistance.
+combatsum              -1 "2d4*Giant Scorpion" # Summon on Battle Round 0.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Tablet of the Myrmeke"                                        # 207
+# sprite number                           8036
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+gold                                         2 # Gold Bonus: +2 Gold income per turn.
+combatsum                   -1 "2d3+2*Myrmeke" # Summon on Battle Round 0.
+
+
+newitem    "Tablet of the Underworld"                                     # 208
+# sprite number                           8037
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+mr                                          -1 # -1 Magic Resistance.
+combatsum                   -1 "3*Shade Beast" # Summon on Battle Round 0.
+
+
+newitem    "Tablet of Secrets"                                            # 209
+# sprite number                           8038
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+str                                          2 # +2 Strength.
+hp                                           5 # +5 Hit Points.
+mr                                           2 # +2 Magic Resistance.
+awe                                          1 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -1 penalty, or waste the attack.
+
+
+newitem    "Pendant of the Gods"                                          # 210
+# sprite number                           6019
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+flying                                         # Can enter almost any terrain for 1 AP. In battle, can move up to 3 squares at once and fly over walls.
+float                                          # -1 AP to enter terrain (min 1), can float in sky or over water without fatiguing, and immune to ground attacks.
+hp                                           5 # +5 Hit Points.
+protection                                   1 # +1 Armor.
+awe                                          1 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -1 penalty, or waste the attack.
+pathboost                                   19 # Path Boost: Solar Magic + 1.
+shockres                                   100 # +100 Shock Resistance.
+
+
+newitem    "Barrel of Toads"                                              # 211
+# sprite number                           8049
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+poisonres                                  100 # Poison immunity.
+combatsum                      -7 "Giant Toad" # Summon with undocumented timing and frequency.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Pocket Lich"                                                  # 212
+# sprite number                           8001
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+pathboost                                   38 # Path Boost: Necromancy + 1.
+combatsum                     1 "1d4*Longdead" # Summon every round starting on Battle Round 0.
+combatspell                           2 "Fear" # Cast automatically every round starting on Battle Round 0?
+
+
+newitem    "Devil Spores"                                                 # 213
+# sprite number                           8014
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+combatsum                -1 "1d2*Devil Fungus" # Summon on Battle Round 0.
+
+
+newitem    "A Chest Full of Fire"                                         # 214
+# sprite number                           8010
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+pathboost                                    3 # Path Boost: Pyromancy + 1.
+burnforest                                   3 # Can choose to burn a forest for 1 AP. The difference between arguments 1, 2, and 3 is undocumented.
+str                                          1 # +1 Strength.
+fireaura                                     3 # Fire Shield (3): Any enemy attacking this unit in melee will take some fire damage and may be set on fire.
+fireres                                    100 # +100 Fire Resistance.
+coldres                                    100 # +100 Cold Resistance.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Shadow Stone"                                                 # 215
+# sprite number                           6032
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+ethereal                                       # 75% chance to be unaffected by mundane weapons; can pass through walls.
+planeshift                                   1 # Plane Shift: Hades. Can shift from Elysium to Hades or vice-versa for 1 AP.
+
+
+newitem    "Conch of the Triton Kings"                                    # 216
+# sprite number                           8041
+rarity                                       2 # Rare & Unique.
+type                                         7 # Misc Item.
+water                                          # Amphibian: The monster can enter water squares and is immune to drowning damage.
+combatspell                    1 "Rising Tide" # Can cast in place of normal attacks.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Orb of the Gods"                                              # 217
+# sprite number                           8047
+rarity                                       2 # Rare & Unique.
+type                                         7 # Misc Item.
+spiritsight                                    # Can see units with Stealth, Forest Stealth, or Invisible.
+spellrange                                   2 # +2 range for all combat spells.
+farsight                                     1 # Farsight: can see 1 square further than usual on the world map.
+
+
+newitem    "Torleifur's Ring"                                             # 218
+# sprite number                           6025
+rarity                                       2 # Rare & Unique.
+type                                         7 # Misc Item.
+stealth                                        # Can only be seen by units with Acute Senses or Spirit Sight.
+curseditem                                     # Item is cursed and cannot be removed.
+hp                                          10 # +10 Hit Points.
+morale                                       2 # +2 Morale.
+str                                          1 # +1 Strength.
+fireres                                    100 # +100 Fire Resistance.
+
+
+newitem    "Precious"                                                     # 219
+# sprite number                           6026
+rarity                                       2 # Rare & Unique.
+type                                         7 # Misc Item.
+invisible                                      # Can only be seen by units with Spirit Sight.
+ethereal                                       # 75% chance to be unaffected by mundane weapons; can pass through walls.
+curseditem                                     # Item is cursed and cannot be removed.
+# aff14                                        # Affliction: Horrormark.
+hp                                          15 # +15 Hit Points.
+str                                          1 # +1 Strength.
+mr                                          -1 # -1 Magic Resistance.
+
+
+newitem    "Balances of Famine"                                           # 220
+# sprite number                           8022
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# aff0                                         # Affliction: Disease.
+vengeance                                    1 # Blood Vengeance (+0): anyone harming this unit must make a Magic Resistance check or take the damage themself instead.
+
+
+newitem    "Oblivion"                                                     # 221
+descr "This amulet contains enough souls to both protect its wearer from harm and to resurrect him should he fall in battle. It was created by the Duke of Hell himself."
+# sprite number                           6033
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         7 # Misc Item.
+protection                                   1 # +1 Armor.
+mr                                           2 # +2 Magic Resistance.
+# fx407                                      1 # Extra Life: When the bearer dies, it will be revived with full HP and this item will be destroyed.
+
+
+newitem    "Orb of Fire"                                                  # 222
+# sprite number                           8017
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         7 # Misc Item.
+pathboost                                    3 # Path Boost: Pyromancy + 1.
+fireres                                    100 # +100 Fire Resistance.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Orb of Water"                                                 # 223
+# sprite number                           8018
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         7 # Misc Item.
+water                                          # Amphibian: The monster can enter water squares and is immune to drowning damage.
+pathboost                                    4 # Path Boost: Hydromancy + 1.
+coldres                                    100 # +100 Cold Resistance.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Orb of Air"                                                   # 224
+# sprite number                           8019
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         7 # Misc Item.
+flying                                         # Can enter almost any terrain for 1 AP. In battle, can move up to 3 squares at once and fly over walls.
+float                                          # -1 AP to enter terrain (min 1), can float in sky or over water without fatiguing, and immune to ground attacks.
+pathboost                                    5 # Path Boost: Storm Magic + 1.
+shockres                                   100 # +100 Shock Resistance.
+# grp2                                         # Part of Item Group 2: air themed items.
+
+
+newitem    "Orb of Earth"                                                 # 225
+# sprite number                           8020
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         7 # Misc Item.
+pathboost                                    6 # Path Boost: Geomancy + 1.
+protection                                   1 # +1 Armor.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Tome of the Elemental Planes"                                 # 226
+# sprite number                           7003
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+# fx22                                       1 # Usable, non-consumable item. A commander with this item will have the option to use it for 1 AP.
+# fx483                                   -114 # Using this item teleports the user's army to a random location in: elemental plane. If already there, return to a random location in Elysium, instead.
+
+
+newitem    "Tome of High Magic"                                           # 227
+# sprite number                           7000
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+
+
+newitem    "Tome of Arcane Mastery"                                       # 228
+# sprite number                           7004
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+pathboost                                   51 # Path Boost: High Arcana + 1.
+pathboost                                   56 # Path Boost: Gold Arcana + 1.
+pathboost                                   53 # Path Boost: Silver Arcana + 1.
+pathboost                                   23 # Path Boost: Iron Arcana + 1.
+
+
+newitem    "Infernal Tome"                                                # 229
+# sprite number                           7001
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+madcultist                                   1 # If this unit is owned by Independents, they might decide to open a gate to Inferno.
+combatsum                              1 "Imp" # Summon every round starting on Battle Round 0.
+# grp0                                         # Part of Item Group 0: fire themed items.
+
+
+newitem    "Tome of the Lower Planes"                                     # 230
+# sprite number                           7011
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+# fx22                                       1 # Usable, non-consumable item. A commander with this item will have the option to use it for 1 AP.
+# fx483                                    -74 # Using this item teleports the user's army to a random location in: inferno. If already there, return to a random location in Elysium, instead.
+
+
+newitem    "Tome of Afterlife"                                            # 231
+# sprite number                           7002
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+# fx22                                       1 # Usable, non-consumable item. A commander with this item will have the option to use it for 1 AP.
+# fx483                                    -78 # Using this item teleports the user's army to a random location in: hades plane. If already there, return to a random location in Elysium, instead.
+
+
+newitem    "Book of Plagues"                                              # 232
+# sprite number                           7001
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         7 # Misc Item.
+diseaseres                                     # Disease immunity.
+diseaseshield                                1 # Any enemy attacking this unit in melee will be diseased unless it succeeds with a magic resistance check.
+combatsum              -1 "2d4*Demonic Locust" # Summon on Battle Round 0.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Spell Scroll Level 1"                                         # 233
+# sprite number                           7005
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx406                                      5 # 5% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx23                                       1 # Using this item will grant the user 1 new level 1 spell.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Spell Scroll Level 2"                                         # 234
+# sprite number                           7006
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx406                                      5 # 5% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx24                                       1 # Using this item will grant the user 1 new level 2 spell.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Spell Scroll Level 3"                                         # 235
+# sprite number                           7007
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx406                                      5 # 5% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx25                                       1 # Using this item will grant the user 1 new level 3 spell.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Adept's Spell Scroll"                                         # 236
+# sprite number                           7008
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx406                                      5 # 5% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx23                                       1 # Using this item will grant the user 1 new level 1 spell.
+# fx24                                       1 # Using this item will grant the user 1 new level 2 spell.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Archmage's Spell Scroll"                                      # 237
+# sprite number                           7009
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx406                                     10 # 10% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx23                                       1 # Using this item will grant the user 1 new level 1 spell.
+# fx24                                       1 # Using this item will grant the user 1 new level 2 spell.
+# fx25                                       1 # Using this item will grant the user 1 new level 3 spell.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Map of Kokytos"                                               # 238
+# sprite number                           7010
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx406                                     15 # 15% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx26                                     -72 # Using this item will reveal part of this location: kokytos.
+extracost                                  -25 # Decreases the base price of this item by 25 Gold.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Map of Pandemonium"                                           # 239
+# sprite number                           7010
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx406                                     15 # 15% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx26                                     -73 # Using this item will reveal part of this location: pandemonium.
+extracost                                  -25 # Decreases the base price of this item by 25 Gold.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Map of Inferno"                                               # 240
+# sprite number                           7010
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx406                                     15 # 15% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx26                                     -74 # Using this item will reveal part of this location: inferno.
+extracost                                  -25 # Decreases the base price of this item by 25 Gold.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Map of the Abyss"                                             # 241
+# sprite number                           7010
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx406                                     15 # 15% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx26                                     -75 # Using this item will reveal part of this location: abyss.
+extracost                                  -25 # Decreases the base price of this item by 25 Gold.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Scroll of Astral Travel"                                      # 242
+# sprite number                           7012
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx415                                    -76 # Using this item will teleport the user and its troops to terrain: void plane.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Scroll of Heavenly Ascension"                                 # 243
+# sprite number                           7012
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx415                                    -77 # Using this item will teleport the user and its troops to terrain: celestial plane.
+# fx406                                      5 # 5% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Scroll of Hades Journey"                                      # 244
+# sprite number                           7013
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx415                                    -78 # Using this item will teleport the user and its troops to terrain: hades plane.
+# fx406                                      5 # 5% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Scroll of Kokytos Paths"                                      # 245
+# sprite number                           7014
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx415                                    -72 # Using this item will teleport the user and its troops to terrain: kokytos.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Scroll of Pandemonic Paths"                                   # 246
+# sprite number                           7014
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx415                                    -73 # Using this item will teleport the user and its troops to terrain: pandemonium.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Scroll of Infernal Paths"                                     # 247
+# sprite number                           7014
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx415                                    -74 # Using this item will teleport the user and its troops to terrain: inferno.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Scroll of Abyssal Paths"                                      # 248
+# sprite number                           7014
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx415                                    -75 # Using this item will teleport the user and its troops to terrain: abyss.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Metaphysical Map"                                             # 249
+# sprite number                           7015
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx415                                    223 # Using this item will teleport the user and its troops to terrain: Nexus.
+# fx406                                      5 # 5% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Scroll of Returning"                                          # 250
+# sprite number                           7012
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx415                                    -98 # Using this item will teleport the user and its troops to terrain: Elysium plane.
+# fx406                                      5 # 5% chance that using this item will misfire, teleporting the user and their troops to another plane.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Heavenly Seal"                                                # 251
+# sprite number                           8052
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+# fx175                                      1 # Usable, consumable item. A commander with this item will have the option to use it, which will destroy the item.
+# fx1232                                     1 # [breakseal]: Using this item breaks the next of the seven seals of El.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+
+
+newitem    "Thorn Staff"                                                  # 252
+# sprite number                           1077
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Thorn Staff" # nbr 897.
+poisonres                                  100 # Poison immunity.
+
+
+newitem    "Spear of Justice"                                             # 253
+# sprite number                           1078
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                     "Spear of Justice" # nbr 898.
+acutesenses                                    # Can see units with Stealth or Forest Stealth.
+awe                                          1 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -1 penalty, or waste the attack.
+
+
+newitem    "Solar Lance"                                                  # 254
+# sprite number                           1079
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Solar Lance" # nbr 899.
+
+
+newitem    "Fisherman's Trident"                                          # 255
+# sprite number                           1080
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                  "Fisherman's Trident" # nbr 900.
+
+
+newitem    "Trident of the Sea"                                           # 256
+# sprite number                           1081
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                   "Trident of the Sea" # nbr 901.
+water                                          # Amphibian: The monster can enter water squares and is immune to drowning damage.
+combatsum                     -1 "1d3*Sea Dog" # Summon on Battle Round 0.
+
+
+newitem    "Dimensional Rod"                                              # 257
+# sprite number                           1082
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                            "Magic Rod" # nbr 386.
+rank                                        -1 # Deploys 1 rank further back than normal.
+combatspell                   1 "Star Showers" # Can cast in place of normal attacks.
+
+
+newitem    "Emperor's Hope"                                               # 258
+# sprite number                           1083
+rarity                                       2 # Rare & Unique.
+type                                         1 # Weapon.
+itemwep                       "Emperor's Hope" # nbr 902.
+spiritsight                                    # Can see units with Stealth, Forest Stealth, or Invisible.
+mr                                           4 # +4 Magic Resistance.
+
+
+newitem    "Flame Spear"                                                  # 259
+# sprite number                           1084
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Flame Spear" # nbr 903.
+combatspell                         1 "Flames" # Can cast in place of normal attacks.
+
+
+newitem    "Crown of the Bull"                                            # 260
+# sprite number                           3026
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+berserker                                      # Can go berserk if hit in combat.  Berserk: +1 Strength, +10 Morale, fight to -20% HP.
+hp                                           5 # +5 Hit Points.
+str                                          1 # +1 Strength.
+morale                                       2 # +2 Morale.
+# grp3                                         # Part of Item Group 3: earth themed items.
+
+
+newitem    "Crown of Hades"                                               # 261
+# sprite number                           3027
+rarity                                       1 # Rare.
+type                                         3 # Headwear.
+charmres                                       # Charm immunity.
+ethereal                                       # 75% chance to be unaffected by mundane weapons; can pass through walls.
+hadesres                                     1 # Hades Immunity: Immunity to the damaging effect of being on the plane of Hades.
+saner                                        1 # Regains 1 sanity per month.
+mr                                           2 # +2 Magic Resistance.
+combatsum                      4 "Shade Beast" # Summon with undocumented timing and frequency.
+
+
+newitem    "Crown of the Ancients"                                        # 262
+# sprite number                           3028
+rarity                                       2 # Rare & Unique.
+type                                         3 # Headwear.
+# res19                                        # Combat Caster: double chance to cast spells in melee.
+magicboost                                   1 # Magic Boost: + 1 (all Paths).
+protection                                   1 # +1 Armor.
+hp                                          10 # +10 Hit Points.
+rank                                         2 # Deploys 2 ranks further forward than normal.
+
+
+newitem    "Boots of the Spider King"                                     # 263
+# sprite number                           5020
+rarity                                       2 # Rare & Unique.
+type                                         6 # Boots.
+poisonres                                  100 # Poison immunity.
+stealth                                        # Can only be seen by units with Acute Senses or Spirit Sight.
+fast                                           # The monster has 4 AP and also moves twice on the battlefield per turn in combat.
+mountain                                       # Mountain Move: AP cost to enter a mountain square is reduced by 1.
+hp                                           5 # +5 Hit Points.
+combatsum                -1 "4d6*Small Spider" # Summon on Battle Round 0.
+
+
+newitem    "Kobold Skin Boots"                                            # 264
+# sprite number                           5021
+rarity                                       0 # Common.
+type                                         6 # Boots.
+poisonres                                  100 # Poison immunity.
+snow                                           # -1 AP to enter snow-covered squares.
+coldres                                    100 # +100 Cold Resistance.
+
+
+newitem    "Boots of the Forest King"                                     # 265
+# sprite number                           5022
+rarity                                       2 # Rare & Unique.
+type                                         6 # Boots.
+foreststealth                                  # When in a forest or jungle, can only be seen by units with Acute Senses or Spirit Sight.
+tangleres                                    1 # Immunity to tangle vines.
+hp                                           5 # +5 Hit Points.
+mr                                           1 # +1 Magic Resistance.
+pathboost                                   54 # Path Boost: Forest Magic + 1.
+pathboost                                   60 # Path Boost: Tree Magic + 1.
+varregen                                     5 # +5(%) Regeneration.
+
+
+newitem    "Mantle of Destruction"                                        # 266
+# sprite number                           2038
+rarity                                       3 # Not a random item (only available via commands like startitem, ritequipall, or newitem (event)).
+type                                         7 # Misc Item.
+fastheal                                       # Heals all wounds in two months at most. Also heals permanent afflictions over time, but not as quickly as with regeneration.
+bluntres                                       # Blunt resistance (half damage).
+slashres                                       # Slash resistance (half damage).
+pierceres                                      # Pierce resistance (half damage).
+curseditem                                     # Item is cursed and cannot be removed.
+lucky                                          # Luck: 50% chance to evade each attack..
+mr                                           2 # +2 Magic Resistance.
+pathboost                                    3 # Path Boost: Pyromancy + 1.
+pathboost                                   67 # Path Boost: Destruction + 1.
+hp                                          20 # +20 Hit Points.
+protection                                   1 # +1 Armor.
+awe                                          3 # Each time a non-mindless unit tries to attack this unit in melee, the attacker must pass a morale check with a -3 penalty, or waste the attack.
+fireres                                    100 # +100 Fire Resistance.
+shockres                                   100 # +100 Shock Resistance.
+poisonres                                  100 # +100 Poison Resistance.
+coldres                                     50 # +50 Cold Resistance.
+twistfate                                    1 # Starts each battle with a Twist Fate effect, which will prevent the first successful attack against the unit.
+
+
+newitem    "Medallion of Venom"                                           # 267
+# sprite number                           6062
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+poisonres                                  100 # +100 Poison Resistance.
+poisonspikes                                 4 # Poison (4): Any enemy attacking this unit in melee will take some armor-negating poison damage.
+pathboost                                   63 # Path Boost: Bile Magic + 1.
+# grp1                                         # Part of Item Group 1: water themed items.
+
+
+newitem    "Ancient Tablet"                                               # 268
+# sprite number                           7017
+rarity                                       1 # Rare.
+type                                         7 # Misc Item.
+lucky                                          # Luck: 50% chance to evade each attack..
+pathboost                                   66 # Path Boost: Akashic Magic + 1.
+pathboost                                   44 # Path Boost: Sage Magic + 1.
+
+
+newitem    "Crown of the False World"                                     # 269
+# sprite number                           3029
+rarity                                       0 # Common.
+type                                         3 # Headwear.
+extracost                                   25 # Increases the base price of this item by 25 Gold.
+pathboost                                   68 # Path Boost: Maya Manipulation + 1.
+mirrorimages                                 3 # Constant Mirror Images (3): start each battle with 3 mirror images.
+
+
+newitem    "Mardutz's Hat"                                                # 270
+# sprite number                           3030
+rarity                                       2 # Rare & Unique.
+type                                         3 # Headwear.
+pathboost                                    7 # Path Boost: Hedge Magic + 1.
+hp                                           5 # +5 Hit Points.
+coldres                                    100 # +100 Cold Resistance.
+
+
+newitem    "Gloves of the Night"                                          # 271
+# sprite number                           4003
+rarity                                       0 # Common.
+type                                         5 # Gloves.
+stealth                                        # Can only be seen by units with Acute Senses or Spirit Sight.
+combatsum               -1 "Fiend of Darkness" # Summon on Battle Round 0.
+
+
+newitem    "Dragon Gloves"                                                # 272
+# sprite number                           4012
+rarity                                       1 # Rare.
+type                                         5 # Gloves.
+fireres                                    100 # +100 Fire Resistance.
+fireaura                                     3 # Fire Shield (3): Any enemy attacking this unit in melee will take some fire damage and may be set on fire.
+protection                                   1 # +1 Armor.
+hp                                           5 # +5 Hit Points.
+
+
+newitem    "Pythian Headdress"                                            # 273
+# sprite number                           3031
+rarity                                       1 # Rare.
+type                                         3 # Headwear.
+poisonres                                  100 # Poison immunity.
+extracost                                  100 # Increases the base price of this item by 100 Gold.
+varregen                                     5 # +5(%) Regeneration.
+pathboost                                   21 # Path Boost: Serpent Magic + 1.
+mr                                           1 # +1 Magic Resistance.
+
+
+newitem    "Blood Sickle"                                                 # 274
+# sprite number                           1085
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                         "Blood Sickle" # nbr 926.
+curseditem                                     # Item is cursed and cannot be removed.
+rank                                         1 # Deploys 1 rank further forward than normal.
+
+
+newitem    "Main Gauche of Protection"                                    # 275
+# sprite number                           1086
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                          "Main Gauche" # nbr 927.
+protection                                   1 # +1 Armor.
+
+
+newitem    "Emerald Staff"                                                # 276
+# sprite number                           1087
+rarity                                       1 # Rare.
+type                                         1 # Weapon.
+itemwep                          "Magic Staff" # nbr 385.
+hadesres                                     1 # Hades Immunity: Immunity to the damaging effect of being on the plane of Hades.
+mr                                           1 # +1 Magic Resistance.
+combatsum                           -1 "Ghost" # Summon on Battle Round 0.
+
+
+newitem    "Wooden Sword"                                                 # 277
+# sprite number                           1088
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                         "Wooden Sword" # nbr 928.
+coldres                                    100 # +100 Cold Resistance.
+mr                                           2 # +2 Magic Resistance.
+
+
+newitem    "Spear of the Forest"                                          # 278
+# sprite number                           1089
+rarity                                       0 # Common.
+type                                         1 # Weapon.
+itemwep                  "Spear of the Forest" # nbr 929.
+poisonres                                  100 # Poison immunity.
+combatspell                    1 "Poison Vine" # Can cast in place of normal attacks.
+
+
+newitem    "Boots of the Ichtyid King"                                    # 279
+# sprite number                           5023
+rarity                                       2 # Rare & Unique.
+type                                         6 # Boots.
+coldres                                    100 # +100 Cold Resistance.
+water                                          # Amphibian: The monster can enter water squares and is immune to drowning damage.
+hp                                           5 # +5 Hit Points.
+str                                          1 # +1 Strength.
+combatsum             -1 "2d3*Ichtyid Warrior" # Summon on Battle Round 0.
+
+
+newitem    "Soul Contract with Abbadon"                                   # 280
+# sprite number                           7016
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# fx1285                                     1 # [issoulcontract]: Prevents the bearer from learning Enter Soul Contract, in conjunction with [fxnolearn] on the ritual.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+nodrop                                       1 # The item is destroyed when its bearer is killed, instead of passing to a new bearer.
+combatsum                  -1 "Demonic Locust" # Summon on Battle Round 0.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+# [serveondeath]                  "Arch Devil" # When the bearer dies, they will become a Demonic Locust, then be sent to serve Abbadon, the Arch Devil.
+
+
+newitem    "Soul Contract with Asmodeus"                                  # 281
+# sprite number                           7016
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# fx1285                                     1 # [issoulcontract]: Prevents the bearer from learning Enter Soul Contract, in conjunction with [fxnolearn] on the ritual.
+# fx1288                                    75 # [lesscommon]: Item is 75% less likely to be randomly found, created, or offered for purchase.
+nodrop                                       1 # The item is destroyed when its bearer is killed, instead of passing to a new bearer.
+combatsum                     -1 "Storm Demon" # Summon on Battle Round 0.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+# [serveondeath]                "Duke of Hell" # When the bearer dies, they will become a Storm Demon, then be sent to serve Asmodeus, the Duke of Hell.
+
+
+newitem    "Soul Contract with Belial"                                    # 282
+# sprite number                           7016
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# fx1285                                     1 # [issoulcontract]: Prevents the bearer from learning Enter Soul Contract, in conjunction with [fxnolearn] on the ritual.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+nodrop                                       1 # The item is destroyed when its bearer is killed, instead of passing to a new bearer.
+combatsum                    -1 "Lesser Demon" # Summon on Battle Round 0.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+# [serveondeath]          "Lord of Corruption" # When the bearer dies, they will become a Lesser Demon, then be sent to serve Belial, the Lord of Corruption.
+
+
+newitem    "Soul Contract with Geryon"                                    # 283
+# sprite number                           7016
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# fx1285                                     1 # [issoulcontract]: Prevents the bearer from learning Enter Soul Contract, in conjunction with [fxnolearn] on the ritual.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+nodrop                                       1 # The item is destroyed when its bearer is killed, instead of passing to a new bearer.
+combatsum                   -1 "Serpent Fiend" # Summon on Battle Round 0.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+# [serveondeath]            "Monster of Fraud" # When the bearer dies, they will become a Serpent Fiend, then be sent to serve Geryon, the Monster of Fraud.
+
+
+newitem    "Soul Contract with Buer"                                      # 284
+# sprite number                           7016
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# fx1285                                     1 # [issoulcontract]: Prevents the bearer from learning Enter Soul Contract, in conjunction with [fxnolearn] on the ritual.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+nodrop                                       1 # The item is destroyed when its bearer is killed, instead of passing to a new bearer.
+combatsum                           -1 "Devil" # Summon on Battle Round 0.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+# [serveondeath]                    "Goat Sun" # When the bearer dies, they will become a Devil, then be sent to serve Buer, the Goat Sun.
+
+
+newitem    "Soul Contract with Belphegor"                                 # 285
+# sprite number                           7016
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+curseditem                                     # Item is cursed and cannot be removed.
+# fx1285                                     1 # [issoulcontract]: Prevents the bearer from learning Enter Soul Contract, in conjunction with [fxnolearn] on the ritual.
+# fx1288                                    50 # [lesscommon]: Item is 50% less likely to be randomly found, created, or offered for purchase.
+nodrop                                       1 # The item is destroyed when its bearer is killed, instead of passing to a new bearer.
+combatsum                    -1 "Demon Knight" # Summon on Battle Round 0.
+# grp4                                         # Part of Item Group 4: books & scrolls.
+# [serveondeath]                  "Demon Lord" # When the bearer dies, they will become a Demon Knight, then be sent to serve Belphegor, the Demon Lord.
+
+
+newitem    "Thousand Medicine Bowl"                                       # 286
+# sprite number                           8054
+rarity                                       0 # Common.
+type                                         7 # Misc Item.
+fastheal                                       # Heals all wounds in two months at most. Also heals permanent afflictions over time, but not as quickly as with regeneration.
+pathboost                                   69 # Path Boost: Apothecary + 1.
+
+
+# © 2021-2025 by Colonel Dracula joins the Navy.  All Rights Reserved.

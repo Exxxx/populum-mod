@@ -2,6 +2,8 @@ icon "pop/popbanner.tga"
 description "Populum (latin for People) mod's goal is to link all the classes together in a thematic story-like fashion based loosely on systems of government connecting to social, political, and economic attributes. Populum increases the depth of the economy management and expands the early and late game of the classes by introducing new options.^^Some classes are meant for the AI only and are tagged with an '(NPC)' at the end of the class name. I would not recommend using these NPC classes because they are designed to be played by the AI with significant bonuses. These classes include: Goblin Emperor, Slave King, Independent Town, Bandit King, and the boss class called 'Blood Tide' which you may only have one due to the unique boss that comes with it. These classes were designed with the intent to be difficult early game enemies and mere nuisance to late-game players. The NPC classes are useful to quickly add flavor to a generated map. The NPC classes have their recommended difficulty built into the class name and are designed for the largest map size (enormous or custom larger). You may want to decrease an NPCs difficulty by one for 1-2 map size class reductions. For example the Goblin Emperor on enormous+ is played on Emperor difficulty; reduce to King for a Huge map, Duke for Large, Marquis for Medium, and anything smaller set to Count.^^Content Warning: This mod contains content (textual and game mechanics, not imagery) that may make some people uncomfortable including: Violence, Kidnapping and abduction, Enslavement, Death or dying, Pregnancy/Childbirth, Mental illness, Sexual Assault, Abuse, Animal cruelty or animal death, Self-harm and suicide, Eating disorders, Racism, Sexism and misogyny, and Classism."
 modprio 5
 
+#Refresh test
+
 mapfile "GOTcoe5.coem" # Thanks to Wankovich
 
 #Rebalancing existing
@@ -21395,6 +21397,14 @@ addterr 133 # "Frozen Lake"
 addterr 139 # "Fimbul Fortress"
 addterr 346 # "Frozen Sea"
 addterr 347 # "Frozen Sea"
+
+selectterrgroup -1035
+setname "House Ruins"
+addterr 184
+addterr 190
+addterr 191
+addterr 192
+addterr 193
 
 #selectterrgroup ????
 #setname "Earth locations"
@@ -46093,7 +46103,7 @@ selectmonster "Engineer"
 name "Engineer "
 
 newmonster "Engineer"
-descr "Engineers may build roads on various terrains."
+descr "Engineers may build roads on various terrains and restore house ruins into farms."
 spr1 "pop/monster/engineer01.tga"
 spr2 "pop/monster/engineer02.tga" 
 rank            -1  
@@ -46114,7 +46124,7 @@ aipowcom2 -1
 #leadership -2
 
 newmonster "Master Engineer"
-descr "Master Engineers may build roads and bridges on various terrains. They have access to rudimentary magical abilities also."
+descr "Master Engineers may build roads and bridges on various terrains and fortify city ruins into castles. They have access to rudimentary magical abilities also."
 spr1 "pop/monster/engineer01.tga"
 spr2 "pop/monster/engineer02.tga" 
 rank            -1  
@@ -49962,7 +49972,7 @@ prebatweapon 10 "Summon Marine Swordsman"
 #shrinkhp 5
 fast
 coldres                      -1 # Cold immunity.
-float
+#float
 healonterr -93
 fastheal
 gold -4
@@ -56876,6 +56886,59 @@ copyspr "Black Kobold Scout"
 copystats "Black Kobold Scout"
 descr "Some Kobolds explore the world, looking for a place to settle before embracing their magic capabilities. This kobold is looking for that opportunity."
 
+
+#newmonster "Magun Slinger"
+#copystats "Crossbowman"
+#descr "Magun slingers are skirmishers armed with powerful, short-ranged magic pistols.^These weapons fire condensed bolts of energy, effective at punching through armor at close quarters."
+#spr1 "pop/monster/magun_slinger.tga"
+#spr2 "pop/monster/magun_slinger_attack.tga"
+#clearweapons
+#rangedweapon50 6 "Magun Pistol" # New weapon
+#meleeweapon 3 "Dagger"
+#human
+#rank 1
+#
+#newmonster "Magun Soldier"
+#copystats "Crossbowman"
+#descr "The standard infantry of modern armies, the Magun Soldier is equipped with a reliable and versatile Magun Carbine.^They form the disciplined firing lines that have come to dominate the battlefields."
+#spr1 "pop/monster/magun_soldier.tga"
+#spr2 "pop/monster/magun_soldier_attack.tga"
+#clearweapons
+#rangedweapon 8 "Magun Carbine" # New weapon
+#meleeweapon 4 "Short Sword"
+#human
+#rank 0
+#
+#newmonster "Magun Marksman"
+#copystats "Arbalester"
+#descr "Elite soldiers, Magun Marksmen are trained to eliminate key enemy targets from extreme distances.^Their long-barreled magun rifles require time to aim and recharge, but their shots are incredibly potent and accurate."
+#spr1 "pop/monster/magun_marksman.tga"
+#spr2 "pop/monster/magun_marksman_attack.tga"
+#clearweapons
+#rangedweapon 10 "Magun Rifle" # New weapon
+#meleeweapon 3 "Dagger"
+#human
+#rank -1
+#
+#newmonster "Mag-cannon Team"
+#descr "A heavy crew-served weapon, the Mag-cannon fires a massive shell of unstable energy that explodes on impact.^While devastating against fortifications and massed troops, the crew is vulnerable and the weapon takes a long time to recharge."
+#spr1 "pop/monster/mag_cannon.tga"
+#hp 20
+#str 4
+#mr 5
+#armor 2
+#mor 7
+#rank -1
+#siegeweapon 25 "Mag-cannon" # New weapon
+#rangedweaponbonus 5 "Pistol"
+#human
+#size2x2
+#immobile
+#noleader
+
+
+
+
 #End monsters
 
 
@@ -58014,10 +58077,10 @@ level                  1
 apcost 3
 airare -1
 promotion -1
-gainrit 3   # "Troll King's Court"
-gainrit 4   # "Rock Troll King's Court"
-gainrit 5   # "Forest Troll King's Court"
-gainrit 778   # "Lake Troll King's Court"
+gainrit 8   # "Troll King's Court"
+gainrit 9   # "Rock Troll King's Court"
+gainrit 10   # "Forest Troll King's Court"
+gainrit 790   # "Lake Troll King's Court"
 addstring "Troll King"
 addstring "Troll King"
 addstring "Rock Troll King"
@@ -58635,9 +58698,9 @@ apcost -1
 forgetcurrit
 newrit 2
 newrit 1
-gainrit -35 # "Pillage"
-gainrit -34 # "Enslave"
-gainrit 747 # "Pale One Concubines"
+gainrit -40   # "Pillage"
+gainrit -39   # "Enslave"
+gainrit 749   # "Pale One Concubines"
 nostart
 
 newritual "Inaugurate Deep King"
@@ -59367,7 +59430,7 @@ addstring     "Unexpected Hero" #nothing
 addstring     "Unexpected Hero" #nothing
 free 
 gainrit 1   # "Build Barbarian Camp"
-gainrit -44 # "Blood Consecration"
+gainrit -44   # "Blood Consecration"
 
 selectmonster "Unexpected Hero"
 power 0 1
@@ -60775,7 +60838,7 @@ transformtarg 1
 addstring "Immortal Archmage"
 newrit 4
 gainrit 1   # "Move Soul"
-gainrit 3   # "Local Omniscience"
+gainrit 3   # "Local Omniscience" Note: Duplicate Ritual Name   # "Local Omniscience"
 forgetcurrit
 
 newritual "Move Soul"
@@ -60822,7 +60885,7 @@ castertarg
 forgetcurrit
 soundfx               71 # Sound effect when the ritual is cast: eerie.wav.
 free
-gainrit 1 # "Omniscience"
+gainrit 1 # "Omniscience" Note: Duplicate Ritual Name   # "Omniscience"
 
 
 newritual     "Omniscience"
@@ -61239,7 +61302,7 @@ addstring     "(-56)Crystal Priestess"
 addstring     "(-57)Crystal Priestess" 
 addstring     "(165)Crystal Priestess" 
 free
-gainrit 1   # "Crystal Secrets"
+gainrit 1   # "Crystal Secrets" Note: Duplicate Ritual Name   # "Crystal Secrets"
 newspell1 42
 newspell1 12
 newspell2 12
@@ -61418,7 +61481,7 @@ addstring     "Heroine" #fail:3/4,1/2,1/4
 addstring     "Heroine"
 addstring     "Heroine"
 free
-gainrit 1   # "Crystal Secrets"
+gainrit 1   # "Crystal Secrets" Note: Duplicate Ritual Name   # "Crystal Secrets"
 newspell1 43
 newspell1 12
 newspell2 12
@@ -61439,9 +61502,9 @@ levelreq 2
 nostart
 newspell1 12
 newspell2 43
-gainrit 1   # "Train Crystal Amazonian Squad"
+gainrit 1   # "Train Crystal Amazonian Squad" Note: Duplicate Ritual Name   # "Train Crystal Amazonian Squad"
 gainrit 2   # "Expert Reward Power - Jade Mysticism"
-gainrit 3   # "Jade Secrets"
+gainrit 3   # "Jade Secrets" Note: Duplicate Ritual Name   # "Jade Secrets"
 newrit 2
 newrit 1
 descr "Secrets of magic are whispered into the mind of the Sorceress."
@@ -61485,7 +61548,7 @@ addstring     "Jade Priestess" #Swamps jade
 addstring     "Jade Priestess" #Swamps jade
 addstring     "Snake" 
 free
-gainrit 1   # "Jade Secrets"
+gainrit 1   # "Jade Secrets" Note: Duplicate Ritual Name   # "Jade Secrets"
 newspell1 25
 newspell1 14
 newspell2 14
@@ -61669,7 +61732,7 @@ addstring     "Jade Sorceress"
 addstring     "Jade Sorceress"
 addstring     "Heroine" #nothing
 free
-gainrit 1   # "Jade Secrets"
+gainrit 1   # "Jade Secrets" Note: Duplicate Ritual Name   # "Jade Secrets"
 newspell1 40
 newspell1 14
 newspell2 14
@@ -61851,7 +61914,7 @@ addstring     "Garnet Priestess" #Volcano
 addstring     "Garnet Priestess" #Volcano
 addstring     "!Error" #nothing
 free
-gainrit 1   # "Garnet Secrets"
+gainrit 1   # "Garnet Secrets" Note: Duplicate Ritual Name   # "Garnet Secrets"
 newspell1 25
 newspell1 13
 newspell2 13
@@ -61971,7 +62034,7 @@ transformtarg 1
 addstring     "Garnet Sorceress"
 killtarg 5
 free
-gainrit 1   # "Garnet Secrets"
+gainrit 1   # "Garnet Secrets" Note: Duplicate Ritual Name   # "Garnet Secrets"
 newspell1  3
 newspell1 13
 newspell2 3
@@ -62212,7 +62275,7 @@ transformtarg 1
 addstring     "Heroine"
 addstring     "Onyx Sorceress" #
 free
-gainrit 1   # "Onyx Secrets"
+gainrit 1   # "Onyx Secrets" Note: Duplicate Ritual Name   # "Onyx Secrets"
 newspell1 38
 newspell1 15
 newspell2 15
@@ -62416,7 +62479,7 @@ addstring     "!Error"
 addstring     "Onyx Priestess" #
 addstring     "Onyx Priestess" #
 free
-gainrit 1   # "Onyx Secrets"
+gainrit 1   # "Onyx Secrets" Note: Duplicate Ritual Name   # "Onyx Secrets"
 newspell1 8
 newspell1 15
 newspell2 15
@@ -63516,7 +63579,7 @@ gainrit 1   # "Baron's Bath of Blood"
 castertarg
 newspell1 38
 newspell1 36
-gainrit 2   # "Baron's Bath of Blood "
+gainrit 1   # "Baron's Bath of Blood"
 castertarg
 newspell1 38
 newspell1 36
@@ -63536,7 +63599,7 @@ forgetcurrit
 transformtarg 1
 addstring "Vampire Baron"
 gainrit 3   # "Study Necromancy Poorly"
-gainrit 7   # "Relocate Soul"
+gainrit 7   # "Relocate Soul" Note: Duplicate Ritual Name   # "Relocate Soul"
 gainrit 8   # "Turn Vampire"
 centerloc
 closewin
@@ -63555,7 +63618,7 @@ forgetrits
 transformtarg 1
 addstring "Mad Vampire Baron"
 gainrit 2   # "Study Necromancy Poorly"
-gainrit 6   # "Relocate Soul"
+gainrit 6   # "Relocate Soul" Note: Duplicate Ritual Name   # "Relocate Soul"
 gainrit 7   # "Turn Vampire"
 centerloc
 closewin
@@ -63655,7 +63718,7 @@ rarestart
 # Seldom start with this ritual.
 addstring     "High Vampire"
 gainrit -3   # "Claim Baronial Title"
-gainrit 2   # "Relocate Soul"
+gainrit 2   # "Relocate Soul" Note: Duplicate Ritual Name   # "Relocate Soul"
 gainrit 3   # "Turn Vampire"
 newspell1 59 #Death
 newspell1 11 #Blood
@@ -63682,7 +63745,7 @@ transformtarg 1
 updatehome
 addstring     "Ba'alite Vampire"
 gainrit 2   # "Turn Vampire"
-gainrit 1   # "Relocate Soul"
+gainrit 1   # "Relocate Soul" Note: Duplicate Ritual Name   # "Relocate Soul"
 rarestart
 newspell1 11
 newspell1 28
@@ -63787,7 +63850,7 @@ addstring  "Merchant"
 centerloc
 castertarg
 transformtarg 1
-gainrit 5   # "Incorporate Inn"
+gainrit 6   # "Incorporate Inn"
 
 selectmonster "Merchant"
 power 0 1
@@ -63810,7 +63873,7 @@ airare 1
 forgetrits
 castertarg
 transformtarg 1
-gainrit -286   # "Enslave"
+gainrit -291   # "Enslave"
 addstring "Slaver"
 
 selectmonster "Captain"
@@ -63938,7 +64001,7 @@ soundfx               26
 # Sound effect
 apcost 8 
 # Actual AP cost: cost+1
-gainrit 1   # "Develop Iron Mine"
+gainrit 1   # "Develop Iron Mine" Note: Duplicate Ritual Name   # "Develop Iron Mine"
 airare 2
 setplayer 24
 sum0chance 1
@@ -64000,7 +64063,7 @@ alterloc              15
 # Silver Mine
 soundfx               26 
 # Sound effect
-gainrit 1   # "Develop Gold Stream"
+gainrit 1   # "Develop Gold Stream" Note: Duplicate Ritual Name   # "Develop Gold Stream"
 apcost 4 
 # Actual AP cost: cost+1
 #free                     
@@ -64019,7 +64082,7 @@ alterloc              33
 # Gold Stream
 soundfx               26 
 # Sound effect
-gainrit 1   # "Build Gold Mine"
+gainrit 1   # "Build Gold Mine" Note: Duplicate Ritual Name   # "Build Gold Mine"
 apcost 4 
 # Actual AP cost: cost+1
 #free                     
@@ -64039,7 +64102,7 @@ alterloc              34
 # Gold Mine
 soundfx               26 
 # Sound effect
-gainrit 1   # "Commission Library"
+gainrit 1   # "Commission Library" Note: Duplicate Ritual Name   # "Commission Library"
 apcost 4 
 # Actual AP cost: cost+1
 #free                     
@@ -64516,7 +64579,7 @@ power 0 1
 
 newritpow
 newritual "Train Engineer"
-descr "Trains a Captain into an Engineer capable of building roads and bridges."
+descr "Trains a Captain into an Engineer capable of building roads, bridges, and restoring house ruins."
 level 1
 rarestart
 cost 0 100
@@ -64536,7 +64599,7 @@ power 0 1
 #Terrain Build
 newritpow
 newritual "Basic Road Building"
-descr "Unlock basic road building techniques."
+descr "Unlock basic road building techniques and house ruin restoration."
 level 1
 levelreq 2
 apcost 0
@@ -64547,7 +64610,7 @@ soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (su
 nostart
 
 newritual "Master Engineering"
-descr "Learn how to build bridges."
+descr "Learn how to build bridges and fortify city ruins."
 level 2
 levelreq 2
 levelup 3
@@ -65903,7 +65966,7 @@ alterloc 30 # Change target location
 nomonhomereq             # Monsters in strings beginning with "(-)" must not have their home at target location.
 aialways             100 # AI will always try to cast this ritual if it currently can, but it will not make long term plans to do so.
 promotion             -1 # Promote 1 unit to a commander and make it the target unit. Valid promotions are in paired strings not beginning with "(+)", "(-)", or "(&)".
-gainrit -92   # "Steward of Leadership"
+gainrit -93   # "Steward of Leadership"
 addstring "Baronet"
 addstring "Baron"
 updatehome               # Updates home (immortal resurrection location) for target unit to where he stands.
@@ -66778,7 +66841,7 @@ apcost 1
 #newrit 2
 #levelupmon        2 # Level up to the monster in string if below level 2.
 newrit 1
-gainrit 1   # "Iron Grafting"
+gainrit 1   # "Iron Grafting" Note: Duplicate Ritual Name   # "Iron Grafting"
 gainrit 2   # "Specialize Inorganic Matter"
 #gainrit 3
 #gainrit 4
@@ -67338,7 +67401,7 @@ cost 1  25
 terr -30 # Required terrain: crystals
 castertarg
 forgetcurrit
-gainrit 1   # "Create Onyx Golem"
+gainrit 1   # "Create Onyx Golem" Note: Duplicate Ritual Name   # "Create Onyx Golem"
 gainrit 2   # "Create Crystal Golem"
 gainrit 3   # "Raise Crystal Tower"
 nostart
@@ -67811,9 +67874,9 @@ cost 3    10 # Fungus
 cost 17    2 
 forgetcurrit
 # Corpses
-gainrit 1   # "Build Flesh Golem"
+gainrit 1   # "Build Flesh Golem" Note: Duplicate Ritual Name   # "Build Flesh Golem"
 gainrit 2   # "Create Necrotod"
-gainrit 3   # "Horde of Flesh"
+gainrit 3   # "Horde of Flesh" Note: Duplicate Ritual Name   # "Horde of Flesh"
 gainrit 4   # "Study Advanced Enthalpy"
 
 newritual     "Build Flesh Golem"
@@ -68585,7 +68648,7 @@ addstring     "Ebonsteel Heavy Infantry"
 addstring     "Crossbowman"
 addstring     "Ebonsteel Crossbowman"
 free
-gainrit -1   # "Rapid Ebonsteel Construction"
+gainrit -1   # "Rapid Ebonsteel Construction" Note: Duplicate Ritual Name   # "Rapid Ebonsteel Construction"
 nexttoo
 
 newritual     "Slow Ebonsteel Construction"
@@ -68606,7 +68669,7 @@ addstring     "Footman"
 addstring     "Ebonsteel Heavy Infantry"
 addstring     "Crossbowman"
 addstring     "Ebonsteel Crossbowman"
-gainrit -1   # "Ebonsteel Construction"
+gainrit -1   # "Ebonsteel Construction" Note: Duplicate Ritual Name   # "Ebonsteel Construction"
 
 newritual     "Repair Iron Dragon"
 descr "Spend a few months repairing a damaged Iron Dragon, Diamond is prioritized over Ruby then Sapphire and last Emerald.^^The Enchanter prepares and activates auto-repair enchantments allowing the Iron Dragon to automatically repair itself over-time until reaching a worn state in about three months."
@@ -69873,9 +69936,9 @@ addstring "(-3)Cultist" #If temple also has lib
 soundfx 57
 #apcost -1 # Actual AP cost: cost+1
 free
-gainrit 2   # "Voices"
-gainrit 3   # "Voices"
-gainrit 104   # "Overt Senator"
+gainrit 2   # "Voices" Note: Duplicate Ritual Name   # "Voices"
+gainrit 3   # "Voices" Note: Duplicate Ritual Name   # "Voices"
+gainrit 105   # "Overt Senator"
 
 newritual "Visions in the Temple"
 descr "Experience visions in the temple of strange and alien beings, the effects are much worse if temple is located near the water or a void gateway. Some teach a strict regime of fundamentalist doctrine that can radicalize settlements to gain zealots. These powers have the side-effects of occasionally creating uncontrollable splinter sects that are violent toward particular magic-users they view as heretical."
@@ -69896,8 +69959,8 @@ addstring "(-53)Cultist of the Deep" #Void Gateway
 addstring "(-53)Cultist of the Deep" #Void Gateway
 soundfx 57
 #apcost -1 # Actual AP cost: cost+1
-gainrit 3   # "Visions"
-gainrit 4   # "Visions"
+gainrit 3   # "Visions" Note: Duplicate Ritual Name   # "Visions"
+gainrit 4   # "Visions" Note: Duplicate Ritual Name   # "Visions"
 newspell1 25
 newspell1 42
 free
@@ -70760,9 +70823,9 @@ updatehome
 #This solves the problem of gaining spells
 addstring     "Vampire Witch"
 castertarg
-gainrit 1   # "Relocate Soul"
-gainrit -602        # "Crossbreeding"   # "Crossbreeding"
-gainrit -601        # "Improved Crossbreeding"   # "Improved Crossbreeding"
+gainrit 1   # "Relocate Soul" Note: Duplicate Ritual Name   # "Relocate Soul"
+gainrit -608        # "Crossbreeding"   # "Crossbreeding"
+gainrit -607        # "Improved Crossbreeding"   # "Improved Crossbreeding"
 newspell1 11 #Blood
 newspell1 38
 newspell2 38
@@ -70935,10 +70998,10 @@ transformtarg          1
 newrit 3
 newrit 2
 newrit 1
-gainrit -306   # "Shade Summoning"
-gainrit -308   # "Dust Summoning"
-gainrit -310   # "Unfrozen Summoning"
-gainrit 178   # "Dark Emperor's Path"
+gainrit -307   # "Shade Summoning"
+gainrit -309   # "Dust Summoning"
+gainrit -311   # "Unfrozen Summoning"
+gainrit 183   # "Dark Emperor's Path"
 forgetcurrit
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (summoning).
 castertarg
@@ -72082,7 +72145,7 @@ free
 nomonreq
 forgetrits
 transformtarg 1
-gainrit -1
+gainrit -1   # "Train and Bless Temple Guards"
 addstring "Bishop"
 addstring "(-)Senator"
 addstring "(-)Emperor"
@@ -72692,7 +72755,7 @@ castertarg
 killtarg 9999
 promotion -1
 updatehome
-gainrit 100   # "Excavate Mountainous Pit"
+gainrit 105   # "Excavate Mountainous Pit"
 soundfx               56
 addstring     "Princess"
 addstring     "Hierodule"
@@ -73242,7 +73305,7 @@ newritual "Ba'alite Succubus"
 descr "Gain the powers of the Ba'alite Succubus."
 level 2
 apcost 0
-gainrit 1   # "Sentimentality"
+gainrit 1   # "Sentimentality" Note: Duplicate Ritual Name   # "Sentimentality"
 forgetcurrit
 nostart
 
@@ -73257,7 +73320,7 @@ nostart
 castertarg
 transformtarg 1
 addstring "Covert Ba'alite Succubus"
-gainrit 1   # "Dominance"
+gainrit 1   # "Dominance" Note: Duplicate Ritual Name   # "Dominance"
 gainrit 2   # "Lovergirl"
 free
 unfollowtarg
@@ -73557,9 +73620,9 @@ airare 1
 castertarg
 transformtarg 1
 addstring "God "
-gainrit 1   # "Many Faces of Baal"
+gainrit 1   # "Many Faces of Baal" Note: Duplicate Ritual Name   # "Many Faces of Baal"
 gainrit 2   # "Divine Inspiration"
-gainrit 3   # "Omniscience"
+gainrit 3   # "Omniscience" Note: Duplicate Ritual Name   # "Omniscience"
 gainrit 4   # "Teleport Self (Godly)"
 
 selectmonster "God"
@@ -73578,7 +73641,7 @@ castertarg
 transformtarg 1
 addstring "God"
 nostart
-gainrit -1   # "Many Faces of Baal"
+gainrit -1   # "Many Faces of Baal" Note: Duplicate Ritual Name   # "Many Faces of Baal"
 
 selectmonster "God "
 power 0 4
@@ -74008,7 +74071,7 @@ castertarg
 transformtarg 1
 addstring "Watcher "
 unfollowtarg
-gainrit 1   # "Dominance"
+gainrit 1   # "Dominance" Note: Duplicate Ritual Name   # "Dominance"
 gainrit 2   # "Watcher's Love"
 free
 
@@ -74029,7 +74092,7 @@ castertarg
 transformtarg 1
 addstring "Watcher"
 gainrit -2   # "Watcher's Lust"
-gainrit -1   # "Sentimentality"
+gainrit -1   # "Sentimentality" Note: Duplicate Ritual Name   # "Sentimentality"
 
 newritual     "Watcher's Love"
 descr "The Watcher seeks out a mate spending around five years forging a friendship and producing a Nephil offspring. A Nephil offspring is a powerful hybrid who will grow bigger than any human with penchant for destruction and innate magical abilities. If given flesh in early childhood they will grow powerful quickly but will gain a never-ending hunger for flesh of humans that stunts their mental capacity^^This ritual takes a year to complete."
@@ -75082,10 +75145,10 @@ soundfx 57
 forgetrits
 transformtarg 1
 newrit 2
-gainrit -746 #Burgmeister's Court   # "Burgmeister's Court"
-gainrit -702 #Raise Hoburg Militia   # "Beast Buddy"
-gainrit -485 #Coal mine   # "Build Coal Mine"
-gainrit -473 #Clear forest   # "Clear Forest"
+gainrit -748 #Burgmeister's Court   # "Burgmeister's Court"
+gainrit -703 #Raise Hoburg Militia   # "Raise Hoburg Militia"
+gainrit -486 #Coal mine   # "Build Coal Mine"
+gainrit -474 #Clear forest   # "Clear Forest"
 updatehome
 addstring "Burgmeister"
 addstring "(-)Burgmeister"
@@ -75101,11 +75164,11 @@ apcost -1
 free
 forgetcurrit #& nextoos
 gainrit -7   #"Urbanize Hoburg Settlement"   # "Urbanize Hoburg Settlement"
-gainrit -701 #Bulk arms   # "Bulk Purchase Hoburg Armaments"
-gainrit -700 #Quality Arms   # "Purchase Quality Hoburg Armaments"
-gainrit -699 #Hog Knight   # "Hog Knight"
-gainrit 18  #"Create Hoburg Manufactury"# 272   # "Create Hoburg Manufactury"
-gainrit 19  #"Create Fortified Hoburg"# 272   # "Create Fortified Hoburg"
+gainrit -703 #Bulk arms   # "Bulk Purchase Hoburg Armaments"
+gainrit -702 #Quality Arms   # "Purchase Quality Hoburg Armaments"
+gainrit -701 #Hog Knight   # "Hog Knight"
+gainrit 23  #"Create Hoburg Manufactury"# 272   # "Create Hoburg Manufactury"
+gainrit 24  #"Create Fortified Hoburg"# 272   # "Create Fortified Hoburg"
 
 selectmonster "Burgmann"
 power 0 1
@@ -75129,7 +75192,7 @@ castertarg
 forgetrits
 transformtarg 1
 addstring "Farmer"
-gainrit -437 #Build farm   # "Build Farm"
+gainrit -438   # "Build Farm"
 free
 
 newritual     "Entertainer and Performers"
@@ -75701,7 +75764,7 @@ newrit                 2 # Caster will learn a new ritual of level 2.
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
 apcost -1
 forgetcurrit
-gainrit -520 #"Study Necromancy Poorly"   # "Study Necromancy Poorly"
+gainrit -527 #"Study Necromancy Poorly"   # "Study Necromancy Poorly"
 nostart
 
 newritual     "Oracle of the Temple"# 254
@@ -75749,7 +75812,7 @@ free                     # Always start with this ritual in addition to the othe
 addstring     "God Emperor"     # Unique.
 nomonworldreq          1 # Monsters in strings beginning with "(-)" in the world must be fewer than 1.
 addstring     "(-)God Emperor"     # This string will only be used by nomon[...] commands.
-gainrit -63   # "Local Omniscience"
+gainrit -63   # "Local Omniscience" Note: Duplicate Ritual Name   # "The Iron Rule"
 descr "While being ruler over Elysium is great, the Gods are even more powerful than that.  This ritual fixes that by raising the Emperor or Empress of Elysium to the status of full godhood."
 
 newritual     "Apotheosis"# 308
@@ -75763,7 +75826,7 @@ free                     # Always start with this ritual in addition to the othe
 addstring     "God Empress"     # Unique.
 nomonworldreq          1 # Monsters in strings beginning with "(-)" in the world must be fewer than 1.
 addstring     "(-)God Empress"     # This string will only be used by nomon[...] commands.
-gainrit -64   # "Local Omniscience"
+gainrit -64   # "Local Omniscience" Note: Duplicate Ritual Name   # "The Iron Rule"
 descr "While being ruler over Elysium is great, the Gods are even more powerful than that.  This ritual fixes that by raising the Emperor or Empress of Elysium to the status of full godhood."
 
 newritpow
@@ -75791,12 +75854,10 @@ summoning
 #addstring    "c*7:Hedge Wizard"
 #addstring    "c*8:Hedge Wizard" 
 #addstring     "!Error"                   #
-addstring     "c*0:Renata & c*1:Renata & c*2:Renata & c*3:Renata & c*4:Renata"                   #
+#addstring     "c*0:Renata & c*1:Renata & c*2:Renata & c*3:Renata & c*4:Renata"                   #
 #addstring     "!Error"                   #
-#addstring     "c*0:Priestess & c*1:Priestess & c*2:Priestess & c*3:Priestess & c*4:Priestess"                   #
-
-
-
+#addstring     "c*0:Priestess & c*1:Priestess & c*2:Priestess & c*3:Priestess & c*4:Priestess"   
+addstring     "c*0:Person"
 
 descr "Tests a particular ritual function used in modding and testing. Likely whatever the last thing tested."
 
@@ -76243,6 +76304,47 @@ addstring "Abbot"
 #add "Dark Abbot" # Make a seperate version for Dark Emperor only
 descr "A rank of Baron or higher may bestow land and sacred title unto a holy person outside the Church of El making them an Abbot. The location must have a temple or be fortified, though with an existing temple at the location the appointment is easier to convince a holy person to potentially go against the powerful Church of El."
 
+
+newritual     "Restore House Ruins"
+descr "Clear rubble and rebuild a small farm from house ruins. Requires an Engineer on the tile."
+ritpow                82
+level                  1
+cost 0   100
+# Gold
+cost 1    10
+# Iron
+terr -1035
+# Required terrain: House Ruins.
+alterloc               5
+# Change target location's terrain to: Farm.
+soundfx               57
+# Sound effect when the ritual is cast: orchhit.smp (summoning).
+apcost 2
+# Actual AP cost: 3.
+castertarg
+free
+
+
+newritual     "Fortify City Ruins"
+descr "Salvage city rubble to erect a fortified Castle with a garrison. Only a Master Engineer can manage a project of this scale."
+ritpow                82
+level                  3
+cost 0  1000
+# Gold
+cost 1    75
+# Iron
+terr 185
+# Required terrain: City Ruins.
+alterloc              22
+# Change target location's terrain to: Castle.
+soundfx               57
+# Sound effect when the ritual is cast: orchhit.smp (summoning).
+apcost 7
+# Actual AP cost: 8.
+castertarg
+free
+summoning
+addstring  "10*Trained Guard"
 
 
 ##remove or reworks without settlement prosperity
@@ -79249,6 +79351,768 @@ mine
 temple
 #bonusrelics -2
 smoke
+
+selectterr       519 # Airport
+name                 "Aero Port"
+spr                  "pop/map/airport.tga"
+gold              2 # Gold income for a transport hub.
+trade             1 # Trade value for a transport hub.
+lifeforce        30 # Moderate lifeforce for an ancient site.
+dead              1 # Some history or minor casualties.
+pop               5 # Minor population for a hub.
+apcost            1 # Easy movement through a Grav-Port.
+gems           4096 # Random gem A for arcane runes.
+ownable             # A valuable transport hub can be owned.
+farsight            # Landing platform implies observation.
+library1            # Arcane runes imply knowledge.
+realport            # Functions as a transport hub, like a realport for ships.
+tempimmune          # Advanced tech implies temperature immunity.
+
+selectterr       520 # Arch
+name                 "Arch"
+spr                  "pop/map/arch.tga"
+lifeforce        50 # Colossal, pulsing energy.
+apcost            1 # Portal implies easy transit.
+gems           4096 # Random gem A for violet energy/crystalline conduits.
+voidret             # Planar transit implies connection to the Void.
+useable             # Portals often imply activation.
+rare                # Colossal ancient structure.
+nostart             # Unique structures often cannot be starting locations.
+tempimmune          # Bio-metallic alloys imply temperature immunity.
+
+selectterr       521 # Area
+name                 "Area"
+spr                  "pop/map/area.tga"
+lifeforce        40 # Subtle, shimmering, pulsating field.
+apcost            1 # Easy movement around an obelisk.
+gems            512 # Emerald for glowing green runic circuitry.
+ownable             # A valuable projector can be owned.
+farsight            # Emanating field implies observation/control.
+library1            # Runic circuitry implies knowledge.
+tempimmune          # Ancient metal obelisk implies temperature immunity.
+useable             # Territory projector implies an active function.
+
+selectterr       522 # Arroyo
+name                 "Arroyo"
+spr                  "pop/map/arroyo.tga"
+lifeforce        30 # Mystical geo-conduit, pulsating energy.
+apcost            2 # Difficult movement through a jagged scar.
+gems              1 # Ruby for pulsating crimson energy.
+cave                # Deep chasm and crystalline formations.
+mountain            # Jagged scar implies mountainous terrain.
+smoke               # Crimson energy could be hot, creating smoke-like effects.
+nostart             # Unique geographic features often cannot be starting locations.
+
+selectterr       523 # Bar
+name                 "Bar"
+spr                  "pop/map/bar.tga"
+lifeforce        20 # Subtly glowing ethereal filaments.
+apcost            2 # Movement slower underwater.
+gems              8 # Sapphire for deep blue energy filaments.
+water               # Submerged structure.
+seepast             # Submerged features can offer remote horizon.
+tempimmune          # Ancient, alien structure implies temperature immunity.
+nosight             # Submerged and glowing implies difficult vision.
+rare                # Ethereal Filament Bar sounds rare.
+
+selectterr       524 # Basin
+name                 "Basin"
+spr                  "pop/map/basin.tga"
+lifeforce        50 # Swirling pool of vibrant, pulsating golden energy.
+apcost            2 # Deep depression implies slightly more difficult movement.
+gems           4096 # Random gem A for golden energy.
+ownable             # A valuable psionic resonance basin can be owned.
+useable             # Psionic resonance implies a power that can be activated.
+rare                # Ancient, alien rock formation.
+tempimmune          # Alien rock implies temperature immunity.
+
+selectterr       525 # Bay
+name                 "Bay"
+spr                  "pop/map/bay.tga"
+lifeforce        30 # Subtly glowing with deep indigo luminescence.
+apcost            1 # Secluded inlet, easy access.
+gems              8 # Sapphire for deep indigo luminescence.
+water               # Inlet with water.
+port                # Docking spire implies port functionality.
+seepast             # Provides remote horizon over water.
+ownable             # A valuable port can be owned.
+citadel             # Docking spire could imply fortification.
+batmap           28 # Battle map: port.
+
+selectterr       526 # Beach
+name                 "Beach"
+spr                  "pop/map/beach.tga"
+lifeforce        20 # Shimmer with faint azure luminescence.
+apcost            1 # Easy movement across a beach.
+gems           4096 # Random gem A for psionic shards/glowing purple crystals.
+ownable             # Valuable psionic shards make it ownable.
+rare                # Psionic Shard Beach implies rarity.
+desertok            # Beaches can appear in southern/desert regions.
+tempimmune          # Alien formations imply temperature immunity.
+
+selectterr       527 # Bench
+name                 "Bench"
+spr                  "pop/map/bench.tga"
+lifeforce        10 # Platform, not much life but some arcane.
+apcost            1 # Easy movement across a platform.
+gems              1 # Ruby for glowing crimson arcane runes.
+ownable             # An observation post can be owned.
+useable             # Observation implies a function that can be activated.
+library1            # Rune-etched implies knowledge.
+tempimmune          # Bio-metallic stone implies temperature immunity.
+farsight            # Observation bench implies increased vision range.
+
+selectterr       528 # Bend
+name                 "Bend"
+spr                  "pop/map/bend.tga"
+lifeforce        20 # Swirling vortex of deep violet ethereal energy.
+apcost            1 # Unseen pathway implies normal movement.
+gems           4096 # Random gem A for deep violet ethereal energy.
+ownable             # Control over a gravitational anomaly could be valuable.
+useable             # Anomaly implies a power that can be manipulated.
+rare                # Gravitational flux anomaly implies rarity.
+smoke               # Ethereal energy causing distortions could look like smoke.
+tempimmune          # Anomaly implies temperature immunity.
+
+selectterr 529 # Bridge
+name                 "Aether-Spanning Bridge"
+spr                  "pop/map/aetherspanning_bridge.tga"
+gold              2 # Gold:  2 (Slightly more than regular bridge for advanced nature)
+gems              8 # Sapphires: 1 (For teal/crystalline energy)
+lifeforce        10 # 100 Lifeforce can be drained from the square. (Active energy structure)
+apcost            1 # Action Point cost for moving through the terrain:  1 (Facilitates movement)
+batmap           25 # Battle map: bridge.
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+enchantedgate       # The gate of the fort is enchanted to be more durable. (Glowing crystalline conduits)
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+port                # Partly Water (ships can enter this terrain).
+seepast             # Remote Horizon (can see 1 square past this one when adjacent to it).
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke. (For pulsing energy)
+water               # The terrain is water and cannot be passed, unless it is frozen or the monsters moving through it are amphibian or aquatic. (For channel liquid, assuming traversable)
+
+selectterr 530 # Enclave
+name                 "Arcane Enclave"
+spr                  "pop/map/arcane_building.tga"
+gold              3 # Gold:  3 (Value of an arcane center)
+gems           4096 # Random gem A: 1 (For crystalline protrusions and energy field)
+lifeforce        50 # 500 Lifeforce can be drained from the square. (Ancient, powerful structure)
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap           34 # Battle map: academy. (Fitting for an enclave)
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+enchantedgate       # The gate of the fort is enchanted to be more durable. (Pulsating energy field)
+citadel             # The terrain functions as a citadel when owned.
+farsight            # The terrain gives increased vision range when there are units present there. (Arcane/sensor capabilities)
+library2            # Library level +2. (High academic/arcane knowledge)
+
+selectterr 531
+name                 "Thermo-Conduit Canal"
+spr                  "pop/map/thermo_conduit_canal.tga"
+gold              1 # Gold:  1 (For trade/utility)
+lifeforce        20 # 200 Lifeforce can be drained from the square. (Active with energy)
+apcost            1 # Action Point cost for moving through the terrain:  1 (Easy passage)
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke. (For luminous orange liquid)
+water               # The terrain is water and cannot be passed, unless it is frozen or the monsters moving through it are amphibian or aquatic. (Liquid channel, assuming traversable)
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+port                # Partly Water (ships can enter this terrain).
+seepast             # Remote Horizon (can see 1 square past this one when adjacent to it).
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot. (Thermo-conduit)
+
+selectterr 532
+name                 "Progenitor Sensor Cape"
+spr                  "pop/map/progenitor_sensor_cape.tga"
+gold              1 # Gold:  1 (Strategic value)
+gems            512 # Emeralds: 1 (For glowing emerald crystal)
+apcost            2 # Action Point cost for moving through the terrain:  2 (Craggy rock terrain)
+farsight            # The terrain gives increased vision range when there are units present there. (Sensor spire)
+seepast             # Remote Horizon (can see 1 square past this one when adjacent to it). (Jutting into void)
+mountain            # The terrain counts as a mountain for the purposes of abilities like Mountain Move. (Craggy rock landform)
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+
+selectterr 533
+name                 "Spirit Weave Cemetery"
+spr                  "pop/map/spirit_weave_cemetery.tga"
+hands             2 # Hands:  2 (Spirit weave, more than standard)
+sacr              1 # Sacrifices:  1 (Small amount for spectral interaction)
+dead             15 # The location starts with 15 * d6 corpses in it. (High number for cemetery)
+apcost            1 # Action Point cost for moving through the terrain:  1
+ownable             # The terrain can be claimed for ownership even if it provides no income the player can use.
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke. (For ethereal wisps)
+
+selectterr 534
+name                 "Biometric Census Nexus"
+spr                  "pop/map/census.tga"
+gold              2 # Gold:  2 (Economic/strategic value)
+trade             1 # Trade:  1 (Data exchange)
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap           12 # Battle map: stonetower. (Fitting for an obelisk)
+citadel             # The terrain functions as a citadel when owned.
+farsight            # The terrain gives increased vision range when there are units present there. (Data displays/nexus)
+library1            # Library level +1. (Information hub)
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot. (Advanced tech)
+
+selectterr 535
+name                 "Natural Aetherium Channel"
+spr                  "pop/map/natural_aetherium_channel.tga"
+gems              8 # Sapphires: 1 (For electric-blue luminescence)
+lifeforce        30 # 300 Lifeforce can be drained from the square. (Latent energy)
+apcost            2 # Action Point cost for moving through the terrain:  2 (Winding waterway)
+water               # The terrain is water and cannot be passed, unless it is frozen or the monsters moving through it are amphibian or aquatic.
+port                # Partly Water (ships can enter this terrain).
+seepast             # Remote Horizon (can see 1 square past this one when adjacent to it).
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke. (For luminescence)
+
+selectterr 536
+name                 "Cosmic Alignment Temple"
+spr                  "pop/map/church.tga"
+gold              2 # Gold:  2
+sacr              3 # Sacrifices:  3 (Higher for an alignment temple)
+hands             2 # Hands:  2
+gems              9 # Rubies: 1, Sapphires: 1 (Violet crystalline windows)
+lifeforce        60 # 600 Lifeforce can be drained from the square. (Powerful energy)
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap           31 # Battle map: monasteryn. (Fits gothic temple structure)
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+enchantedgate       # The gate of the fort is enchanted to be more durable. (Bio-mechanical/crystalline)
+citadel             # The terrain functions as a citadel when owned.
+temple              # The terrain counts as a temple.  Also guarantees a minimum Relic income of 2 (before applying bonusrelics, if applicable).
+farsight            # The terrain gives increased vision range when there are units present there. (Central spire)
+bonusrelics       1 # Get 1 extra relics from this location. (Total 3 relics with temple and hands 2)
+ownable             # The terrain can be claimed for ownership even if it provides no income the player can use.
+
+selectterr 537
+name                 "Centralized Bio-Shield Hub"
+spr                  "pop/map/civil.tga"
+gold              2 # Gold:  2
+lifeforce        50 # 500 Lifeforce can be drained from the square. (Protective energy)
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap           11 # Battle map: outpost. (Compact, hexagonal structure)
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+enchantedgate       # The gate of the fort is enchanted to be more durable. (Protective energy field)
+magicwalls          # Ethereal units cannot pass through walls at this fort. (Force field of protective energy)
+citadel             # The terrain functions as a citadel when owned.
+farsight            # The terrain gives increased vision range when there are units present there.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot. (Advanced tech)
+
+selectterr 538
+name                 "Tectonic Energy Cliff"
+spr                  "pop/map/cliff.tga"
+iron              1 # Iron:  1 (Ancient rock, mining potential)
+gems              1 # Rubies: 1 (For pulsating red crystalline energy)
+lifeforce        20 # 200 Lifeforce can be drained from the square. (Energy seams)
+apcost            3 # Action Point cost for moving through the terrain:  3 (Jagged precipice, mountain-like)
+mountain            # The terrain counts as a mountain for the purposes of abilities like Mountain Move.
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke. (For pulsating energy)
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot. (Tectonic energy)
+
+selectterr       539 # Crater
+name                 "Crater"
+spr                  "pop/map/crater.tga"
+gems         344064 # Gems: see comments below.
+# Random gem A   d4
+# Random gem B   d2
+apcost            2 # Action Point cost for moving through the terrain:  2
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke.
+
+selectterr      540 # Crossing
+name                 "Planar Energy Crossing"
+spr                  "pop/map/crossing.tga" # New Terrain
+gems               512 # Emeralds: 1
+lifeforce         10 # 100 Lifeforce can be drained from the square.
+apcost            2 # Action Point cost for moving through the terrain:  2
+ownable             # The terrain can be claimed for ownership.
+useable             # There is a special power inherent to the terrain.
+rare                # The terrain is rare.
+farsight            # The terrain gives increased vision range.
+voidret             # If placed when the map is generated, this terrain will have a one-way portal from the Void.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+
+selectterr      541 # Dam
+name                 "Hydro-Energy Dam"
+spr                  "pop/map/dam.tga" # New Terrain
+gold              2 # Gold:  2
+trade             1 # Trade:  1
+lifeforce        30 # 300 Lifeforce can be drained from the square.
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap            5 # Battle map: greatwall.
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+irongate            # The gate of the fort is iron.
+magicwalls          # Ethereal units cannot pass through walls at this fort.
+citadel             # The terrain functions as a citadel when owned.
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+farsight            # The terrain gives increased vision range.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+ownable             # The terrain can be claimed for ownership.
+
+selectterr      542 # Falls
+name                 "Cascading Aetherium Falls"
+spr                  "pop/map/falls.tga" # New Terrain
+gems                8 # Sapphires: 1
+lifeforce        40 # 400 Lifeforce can be drained from the square.
+apcost            4 # Action Point cost for moving through the terrain:  4
+water               # The terrain is water.
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke.
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+seepast             # Remote Horizon (can see 1 square past this one when adjacent to it).
+ownable             # The terrain can be claimed for ownership.
+
+selectterr      543 # Flat
+name                 "Planar Stabilization Flat"
+spr                  "pop/map/flat.tga" # New Terrain
+gold              1 # Gold:  1
+gems           4096 # Random gem A: 1
+lifeforce        20 # 200 Lifeforce can be drained from the square.
+apcost            1 # Action Point cost for moving through the terrain:  1
+ownable             # The terrain can be claimed for ownership.
+useable             # There is a special power inherent to the terrain.
+rare                # The terrain is rare.
+voidret             # If placed when the map is generated, this terrain will have a one-way portal from the Void.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+
+selectterr      544 # Forest
+name                 "Luminous Crystal Forest"
+spr                  "pop/map/forest.tga" # New Terrain
+fungus            1 # Fungus:  1
+gems               72 # Sapphires: 1, Diamonds: 1
+lifeforce        40 # 400 Lifeforce can be drained from the square.
+apcost            2 # Action Point cost for moving through the terrain:  2
+forest              # The terrain counts as forest.
+nosight             # The terrain does not provide vision into adjacent squares when owned.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+rare                # The terrain is rare.
+
+selectterr      545 # Gap
+name                 "Planar Rift Gap"
+spr                  "pop/map/gap.tga" # New Terrain
+gems                1 # Rubies: 1
+lifeforce        30 # 300 Lifeforce can be drained from the square.
+apcost            3 # Action Point cost for moving through the terrain:  3
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke.
+ownable             # The terrain can be claimed for ownership.
+useable             # There is a special power inherent to the terrain.
+voidret             # If placed when the map is generated, this terrain will have a one-way portal from the Void.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+rare                # The terrain is rare.
+mountain            # The terrain counts as a mountain.
+
+selectterr      546 # Glacier
+name                 "Cryo-Energy Glacier"
+spr                  "pop/map/glacier.tga" # New Terrain
+gems                8 # Sapphires: 1
+lifeforce        40 # 400 Lifeforce can be drained from the square.
+apcost            3 # Action Point cost for moving through the terrain:  3
+mountain            # The terrain counts as a mountain.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+spreadcold          # The terrain square spreads cold around it.
+snowok              # Income in this terrain is not affected by snow.
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+rare                # The terrain is rare.
+
+selectterr      547 # Gut
+name                 "Bio-Mechanical Gut Channel"
+spr                  "pop/map/gut.tga" # New Terrain
+iron              1 # Iron:  1
+gems              513 # Rubies: 1, Emeralds: 1
+lifeforce        30 # 300 Lifeforce can be drained from the square.
+apcost            3 # Action Point cost for moving through the terrain:  3
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke.
+cave                # The terrain counts as a cave.
+ug                  # This is an underground terrain.
+ownable             # The terrain can be claimed for ownership.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+rare                # The terrain is rare.
+
+selectterr      548 # Harbor
+name                 "Aether-Docking Harbor"
+spr                  "pop/map/harbor.tga" # New Terrain
+gold              3 # Gold:  3
+trade             2 # Trade:  2
+gems              512 # Emeralds: 1
+lifeforce        40 # 400 Lifeforce can be drained from the square.
+pop              20 # Population level: 20
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap           28 # Battle map: port.
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+irongate            # The gate of the fort is iron.
+citadel             # The terrain functions as a citadel when owned.
+settlement          # Defines the terrain as a human settlement.
+port                # Partly Water (ships can enter this terrain).
+realport            # Ships can be recruited here.
+seepast             # Remote Horizon (can see 1 square past this one when adjacent to it).
+farsight            # The terrain gives increased vision range.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+
+selectterr      549
+name                 "Hospital"
+spr                  "pop/map/sci_fi_hospital.tga"
+gold              1 # Gold:  1
+herbs             1 # Herbs:  1 (from bio-regeneration)
+lifeforce        20 # 200 Lifeforce can be drained/generated.
+pop               5 # Population level:  5 (compact building)
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap           12 # Battle map: stonetower (for a circular building)
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+enchantedgate       # Bio-metallic/runic circuitry suggests advanced gate.
+citadel             # The terrain functions as a citadel when owned.
+smoke               # Pulsating luminescence effect.
+library1            # Runic circuitry, ancient Xylosian knowledge.
+farsight            # Advanced tech for monitoring/vision.
+tempimmune          # Advanced building, resistant to environmental changes.
+
+selectterr      550
+name                 "Island"
+spr                  "pop/map/sci_fi_island.tga"
+gold              1 # Gold:  1
+gems              8 # Sapphires: 1 (ethereal green energy)
+lifeforce        30 # 300 Lifeforce can be drained from the square.
+apcost            1 # Action Point cost for moving through the terrain:  1
+citadel             # Towering spire implies a fort.
+farsight            # Towering spire provides increased vision.
+smoke               # Pulsating ethereal energy.
+rare                # Solitary, ancient implies rare.
+seepast             # Island often implies remote horizon.
+tempimmune          # Bio-metallic plates.
+
+selectterr      551
+name                 "Lake"
+spr                  "pop/map/sci_fi_lake.tga"
+gems             64 # Diamonds: 1 (swirling, luminescent arcane plasma)
+lifeforce        40 # 400 Lifeforce can be drained from the square (energy reservoir).
+apcost            2 # Action Point cost for moving through the terrain:  2
+water               # The terrain is water.
+smoke               # Swirling, luminescent plasma.
+invisible           # Natural terrains are often invisible.
+nevercold           # Arcane plasma suggests it won't freeze.
+library1            # Pulsing data-runes.
+
+selectterr      552
+name                 "Lava"
+spr                  "pop/map/sci_fi_lava.tga"
+gems              1 # Rubies: 1 (crimson xenomatter)
+apcost            4 # Action Point cost for moving through the terrain:  4 (very difficult)
+smoke               # Furious, pulsating heat-glow.
+invisible           # Natural terrains often invisible.
+nostart             # Not a suitable starting location.
+tempimmune          # Molten, resistant to heat changes.
+desertok            # Fits desert environments.
+
+selectterr      553
+name                 "Levee"
+spr                  "pop/map/sci_fi_levee.tga"
+gold              1 # Gold:  1 (resource from structure)
+gems             64 # Diamonds: 1 (glowing crystal power conduits)
+lifeforce        10 # 100 Lifeforce (from contained energy flow)
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap            5 # Battle map: greatwall (massive, fortified earthwork)
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+irongate            # Dark metallic plates, bio-mechanical.
+citadel             # The terrain functions as a citadel when owned.
+smoke               # Swirling, volatile energy flow.
+farsight            # Raised structure provides increased vision.
+port                # Designed to contain a flow, likely near water/fluid, allowing ship movement.
+
+selectterr      554
+name                 "Locale"
+apcost            1 # Action Point cost for moving through the terrain:  1
+spr                  "pop/map/locale.tga"
+hands             1 # Hands:  1
+gems          36864 # Random gem A 1, Random gem B 1
+useable             # There is a special power inherent to the terrain that can be activated by commander actions.
+rare                # The terrain is rare and is sometimes deployed at a random place on the map by the random map generator.
+voidret             # If placed when the map is generated, this terrain will have a one-way portal from the Void.
+library1            # Library level +1.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+ritrebate        15 # All rituals cast on this location will be 15% cheaper.
+
+selectterr      555
+name                 "Military Bunker"
+gold              2 # Gold:  2
+iron              2 # Iron:  2
+dead              2 # The location starts with 2 * d6 corpses in it.
+apcost            1 # Action Point cost for moving through the terrain:  1
+spr                  "pop/map/military.tga"
+batmap           37 # Battle map: bronzecastle.
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+irongate            # The gate of the fort is iron
+citadel             # The terrain functions as a citadel when owned.
+farsight            # The terrain gives increased vision range when there are units present there.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+
+selectterr      556
+name                 "Crystal Mine"
+gold              1 # Gold:  1
+gems              8 # Gems: Sapphires 1
+apcost            2 # Action Point cost for moving through the terrain:  2
+spr                  "pop/map/mine.tga"
+mine                # The terrain counts as a mine.
+cave                # The terrain counts as a cave.
+ug                  # This is an underground terrain.
+snowok              # Income in this terrain is not affected by snow.
+
+selectterr      557
+name                 "Aetherium Oilfield"
+gold              3 # Gold:  3
+iron              1 # Iron:  1
+trade             1 # Trade:  1
+apcost            2 # Action Point cost for moving through the terrain:  2
+spr                  "pop/map/oilfield.tga"
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+
+selectterr      558
+name                 "Xenobotanical Park"
+herbs             2 # Herbs:  2
+fungus            1 # Fungus:  1
+lifeforce        30 # 300 Lifeforce can be drained from the square.
+apcost            1 # Action Point cost for moving through the terrain:  1
+spr                  "pop/map/park.tga"
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke.
+rare                # The terrain is rare and is sometimes deployed at a random place on the map by the random map generator.
+useable             # There is a special power inherent to the terrain that can be activated by commander actions.
+voidret             # If placed when the map is generated, this terrain will have a one-way portal from the Void.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+
+selectterr 559
+name                 "Pillar"
+spr                  "pop/map/pillar.tga"
+gold              1 # Minor gold from "golden luminescence"
+lifeforce        20 # 200 Lifeforce from magical structure
+apcost            1 # Action Point cost for moving through the terrain:  1
+citadel             # Functions as a citadel
+farsight            # Increased vision from tall structure
+magicwalls          # Crystalline structure, arcane runes, internal luminescence suggests magic defenses
+tempimmune          # Alien, crystalline structure suggests resilience
+unique              # Singular, massive structure
+voidret             # Alien origin, arcane runes suggest void connection
+useable             # "Support pillar" implies a special function
+
+selectterr 560
+name                 "Energy Plain"
+spr                  "pop/map/plain.tga"
+gold              1 # Income from energy conduit
+trade             1 # Trade from energy hub
+lifeforce        15 # 150 Lifeforce from energy nexus
+apcost            1 # Action Point cost for moving through the terrain:  1
+smoke               # For pulsating/glowing effects
+tempimmune          # Technological nature resists environmental change
+gems           4096 # Random gem A, income 1 from "glowing power lines"
+
+selectterr 561
+name                 "Bioluminescent Settlement"
+spr                  "pop/map/populated_place.tga"
+gold              2 # Income from bustling settlement
+trade             1 # Trade from settlement hub
+lifeforce        30 # 300 Lifeforce from bioluminescence
+dead              1 # The location starts with 1 * d6 corpses in it.
+pop              20 # Population level: 20
+apcost            1 # Action Point cost for moving through the terrain:  1
+citadel             # Hub should be somewhat defensible
+smoke               # For bioluminescence
+magicwalls          # Alien technology suggests magic defenses
+settlement          # Defines the terrain as a human settlement.
+gems           4096 # Random gem A, income 1 from "multi-colored luminescence"
+
+selectterr 562
+name                 "Data Relay Station"
+spr                  "pop/map/post_office.tga"
+gold              1 # Minor income from station
+trade             2 # Trade points from relaying data
+apcost            1 # Action Point cost for moving through the terrain:  1
+farsight            # Antenna arrays and receiver imply long-range vision
+library1            # Data relay and runes imply knowledge
+gems              8 # Sapphires 1, from "pulsing blue data runes"
+tempimmune          # Technological/ancient structure suggests resilience
+smoke               # For electric glow effects
+ownable             # The terrain can be claimed for ownership
+
+selectterr 563
+name                 "Xenocrystal Mountain"
+spr                  "pop/map/range.tga"
+iron              1 # From "dark metallic sensor array"
+apcost            3 # Action Point cost for moving through the terrain:  3
+mountain            # The terrain counts as a mountain
+farsight            # Sensor array at summit implies increased vision
+gems          36864 # Random gem A 1, Random gem B 1, from "deep purple xenocrystal"
+snowok              # "Snow-capped" implies cold resistance
+tempimmune          # Alien rock formation suggests resilience
+nostart             # Mountains are often nostart locations
+unique              # "Singular, jagged" structure
+
+name                 "Rapids"
+spr                  "pop/map/rapids.tga"
+lifeforce        15 # 150 Lifeforce can be drained from the square.
+apcost            2 # Action Point cost for moving through the terrain:  2
+water               # The terrain is water and cannot be passed, unless it is frozen or the monsters moving through it are amphibian or aquatic.
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+seepast             # Remote Horizon (can see 1 square past this one when adjacent to it).
+
+selectterr      564
+name                 "Reserve"
+spr                  "pop/map/reserve.tga"
+gold              1 # Gold:  1
+herbs             1 # Herbs:  1
+lifeforce        40 # 400 Lifeforce can be drained from the square.
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap            4 # Battle map: highwalln.
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+enchantedgate       # The gate of the fort is enchanted to be more durable.
+magicwalls          # Ethereal units cannot pass through walls at this fort.
+citadel             # The terrain functions as a citadel when owned.
+ownable             # The terrain can be claimed for ownership even if it provides no income the player can use.
+useable             # There is a special power inherent to the terrain that can be activated by commander actions.
+rare                # The terrain is rare and is sometimes deployed at a random place on the map by the random map generator.
+farsight            # The terrain gives increased vision range when there are units present there.
+
+selectterr      565
+name                 "Reservoir"
+spr                  "pop/map/reservoir.tga"
+gold              1 # Gold:  1
+gems           4096 # Gems: Random gem A 1
+lifeforce        25 # 250 Lifeforce can be drained from the square.
+apcost            2 # Action Point cost for moving through the terrain:  2
+water               # The terrain is water and cannot be passed, unless it is frozen or the monsters moving through it are amphibian or aquatic.
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+
+selectterr      566
+name                 "Ridge"
+spr                  "pop/map/ridge.tga"
+gems              1 # Rubies 1
+lifeforce        15 # 150 Lifeforce can be drained from the square.
+apcost            2 # Action Point cost for moving through the terrain:  2
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke.
+mountain            # The terrain counts as a mountain for the purposes of abilities like Mountain Move.
+
+selectterr      567
+name                 "School"
+spr                  "pop/map/school.tga"
+gold              2 # Gold:  2
+pop               5 # Population level:  5
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap           34 # Battle map: academy.
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+enchantedgate       # The gate of the fort is enchanted to be more durable.
+citadel             # The terrain functions as a citadel when owned.
+settlement          # Defines the terrain as a human settlement.
+library2            # Library level +2.
+farsight            # The terrain gives increased vision range when there are units present there.
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+
+selectterr      568
+name                 "Slope"
+spr                  "pop/map/slope.tga"
+apcost            3 # Action Point cost for moving through the terrain:  3
+lifeforce        -1 # Drains Lifeforce from all squares within radius: 1.
+useable             # There is a special power inherent to the terrain that can be activated by commander actions.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+
+selectterr      569
+name                 "Spring"
+spr                  "pop/map/spring.tga"
+apcost            1 # Action Point cost for moving through the terrain:  1
+lifeforce        50 # 500 Lifeforce can be drained from the square.
+herbs             2 # Herbs:  2
+water               # The terrain is water and cannot be passed, unless it is frozen or the monsters moving through it are amphibian or aquatic.
+useable             # There is a special power inherent to the terrain that can be activated by commander actions.
+rare                # The terrain is rare and is sometimes deployed at a random place on the map by the random map generator.
+nevercold           # This square will never get cold.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+
+selectterr      570
+name                 "Stream"
+spr                  "pop/map/stream.tga"
+apcost            1 # Action Point cost for moving through the terrain:  1
+lifeforce        20 # 200 Lifeforce can be drained from the square.
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+seepast             # Remote Horizon (can see 1 square past this one when adjacent to it).
+nostart             # This type of terrain cannot be overwritten by a start citadel from a player.
+
+selectterr      571
+name                 "Summit"
+spr                  "pop/map/summit.tga"
+apcost            3 # Action Point cost for moving through the terrain:  3
+mountain            # The terrain counts as a mountain for the purposes of abilities like Mountain Move.
+farsight            # The terrain gives increased vision range when there are units present there.
+farvis              # Can be seen from far away (3 squares?).
+rare                # The terrain is rare and is sometimes deployed at a random place on the map by the random map generator.
+tempimmune          # The terrain will not be transformed into a wasteland when it gets too hot.
+gems           4096 # Gems: see comments below.
+# Random gem A    1
+
+selectterr      572
+name                 "Living Swamp"
+spr                  "pop/map/magic_swamp.tga"
+apcost            4 # Action Point cost for moving through the terrain:  4
+lifeforce        -1 # Drains Lifeforce from all squares within radius: 1.
+fungus            2 # Fungus:  2
+herbs             1 # Herbs:  1
+swamp               # The terrain counts as swamp for the purposes of abilities like Swamp Move.
+smoke               # Pixels with a certain pink color (245,0,255) will produce smoke. Pixels with color (235,0,255) will produce flames and smoke.
+nosight             # The terrain does not provide vision into adjacent squares when owned.
+
+selectterr 573
+spr "pop/map/tower.tga"
+name "Sentinel Spire"
+gold              3 # Gold from strategic importance
+gems           4096 # Random gem A    1
+lifeforce        30 # 300 Lifeforce can be drained from the square.
+dead              1 # The location starts with 1 * d6 corpses in it.
+pop               1 # Population level:  1
+apcost            1 # Action Point cost for moving through the terrain:  1
+batmap            4 # Battle map: highwalln.
+#siegeable           # Siege weapons can be used in battles fought in this terrain square.
+irongate            # The gate of the fort is iron
+magicwalls          # Ethereal units cannot pass through walls at this fort.
+citadel             # The terrain functions as a citadel when owned.
+farsight            # The terrain gives increased vision range when there are units present there.
+
+selectterr 574
+spr "pop/map/trail.tga"
+name "Void Trail"
+apcost            1 # Action Point cost for moving through the terrain:  1
+voidret             # Connected to the Void due to warp gates.
+useable             # Can be activated by commander actions.
+rare                # The terrain is rare.
+tempimmune          # Immune to climate transformation.
+nodrown             # No drowning if over water.
+
+selectterr 575
+spr "pop/map/tunnel.tga"
+name "Void Tunnel Entrance"
+apcost            1 # Action Point cost for moving through the terrain:  1
+smoke               # Vortex of energy produces smoke.
+nostart             # Cannot be a start citadel.
+tempimmune          # Immune to climate transformation.
+ug                  # This is an underground terrain.
+voidret             # Connected to the Void due to warp gate.
+
+selectterr 576
+spr "pop/map/valley.tga"
+name "Valley of Forgotten Knowledge"
+hands             1 # Hands from forgotten knowledge.
+gems              1 # Rubies          1
+lifeforce        30 # 300 Lifeforce can be drained from the square.
+apcost            2 # Action Point cost for moving through the terrain:  2
+smoke               # Flickering luminescence.
+library1            # Library level +1 from knowledge.
+rare                # The terrain is rare.
+
+selectterr 577
+spr "pop/map/well.tga"
+name "Power Conduit Well"
+gems           4096 # Random gem A    1
+lifeforce        50 # 500 Lifeforce can be drained from the square.
+apcost            1 # Action Point cost for moving through the terrain:  1
+smoke               # Shimmering light effect.
+farsight            # Column of light grants vision.
+rare                # The terrain is rare.
+useable             # Can be activated by commander actions.
+tempimmune          # Immune to climate transformation.
 
 #Remove bonuses
 selectclass 1
@@ -82354,6 +83218,7 @@ apcost 1
 
 selectterr 154
 apcost 1
+settlement
 
 selectterr 155
 apcost 1
@@ -88335,11 +89200,11 @@ descr "A Magic Treasury is a convenient way to quickly transport magical items b
 selectritual     "Teleport Treasury"
 descr "Instantly move the Magic Treasury between Libraries, be careful as sending it to the wrong destination could have your treasures wind up accidentally in the hands of your enemies."
 selectritual "Train Engineer"
-descr "Trains a Captain into an Engineer capable of building roads and bridges."
+descr "Trains a Captain into an Engineer capable of building roads, bridges, and restoring house ruins."
 selectritual "Basic Road Building"
-descr "Unlock basic road building techniques."
+descr "Unlock basic road building techniques and house ruin restoration."
 selectritual "Master Engineering"
-descr "Learn how to build bridges."
+descr "Learn how to build bridges and fortify city ruins."
 selectritual     "Build Road (Plain)"
 descr "Builds a road on a plain, creatures associated with the terrain and climate will attack in response."
 selectritual     "Build Road (Forest)"
@@ -88360,6 +89225,10 @@ selectritual     "Build Tower Bridge (NS)"
 descr "Builds a bridge north to south on a river, creatures associated with the terrain and climate will attack in response.^^Engineers can survive in water for a limited amount of time."
 selectritual     "Build Tower Bridge (EW)"
 descr "Builds a bridge east to west on a river, creatures associated with the terrain and climate will attack in response.^^Engineers can survive in water for a limited amount of time."
+selectritual     "Restore House Ruins"
+descr "Clear rubble and rebuild a small farm from house ruins. Requires an Engineer on the tile."
+selectritual     "Fortify City Ruins"
+descr "Salvage city rubble to erect a fortified Castle with a garrison. Only a Master Engineer can manage a project of this scale."
 selectritual     "Build Catapult"
 descr "Build a Catapult."
 selectritual     "Build Ballista"
@@ -89286,4 +90155,8 @@ descr "Excavate a pit in a nearby cove and enchant it, turning the area into a T
 selectmonster "Flagellant"
 meleeweapon -1 "Self-flagellation with Flail" 
 hp 15
+
+
+
+# Populum campaign
 

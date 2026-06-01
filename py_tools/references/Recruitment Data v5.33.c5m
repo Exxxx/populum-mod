@@ -1,0 +1,1074 @@
+#                      COE5 RECRUITMENT DATA IN MOD FORMAT
+# 
+# This file contains the recruitment data (for both classes and terrains) for
+# CoE5, extracted from the executable.  Although this file is not actually a
+# mod, its contents adhere to CoE5's modding format in order to make it an
+# optimal resource for modders.
+# 
+# This file provides examples of how base game class recruitment lists can be
+# built using modding commands (although some class recruitment lists in the
+# base game do use some commands that are not available to modders) and
+# templates that modders can use to create their own class recruitment lists. 
+# Unfortunately, despite the addition of the recterr command in CoE v5.12,
+# terrain-based recruitment the way the base game does it (which generates
+# offers regardless of class) is still not accessible to modders, but you can
+# at least see here how it works in the base game.
+# 
+# Everything to the right of a "#" (such as what you're reading now) is a
+# comment, which means the game ignores it; it's there as a note for human
+# readers (i.e. you).  I've provided comments toward the right of many lines to
+# explain various things, but there's too much information to fit it all there,
+# so some of it will go here, instead.
+# 
+# There are three different commands that can start a recruitment offer:
+# addunitrec, addmercrec, and addcomrec.  Following each selectclass command
+# (which starts a class recruitment list), there's a comment line establishing
+# the headers for columns, like this:
+# 
+# #                                               % No gold die iron
+# 
+# The columns hold the numerical values (arguments) that accompany the
+# addunitrec, addmercrec, and addcomrec commands.  The "%" column is the base
+# chance each turn for that offer to appear.  The "No" column is the number of
+# units that will be recruited with that offer.  The "gold" column is the base
+# gold cost, while the "die" column is the size of an open ended die (see the
+# game manual if you need an explanation of what open ended means) rolled to
+# determine additional gold cost each time the offer appears.  The "iron"
+# column is the cost in iron.
+# 
+# Here's an example of an addunitrec command:
+# 
+# addunitrec  "Tower Guard"                     100  5   50   0   15
+# 
+# This means that every turn, there will be a 100% chance of an offer to
+# recruit 5 Tower Guard units for a cost of 50 Gold and 15 Iron.
+# 
+# addmercrec works very similarly, except that the offer's text in the Recruit
+# menu will be green, and both the "once per offer" and "extra" flags will be
+# set, meaning that the offer can only be purchased once, in one citadel, each
+# turn it appears, but it will not use up that citadel's recruitment for the
+# turn.
+# 
+# addcomrec is much like addmercrec (including the "once per offer" and "extra"
+# flags), but the unit will have commander status and the "No" column will be
+# empty (it isn't needed because an offer for a commander can only ever recruit
+# one unit).  The text will again be green, unless the unit allows the owner to
+# gather a special resource, in which case the text will be blue, instead.
+# 
+# If a line begins with "# " followed by a word in [], that means it's a
+# command that isn't accessible to modders.  The word in [] is just my guess at
+# what Illwinter might call that command if they did make it accessible to
+# modders.  I present these as comments because they don't have mod command
+# names that the game would recognize (so to adhere to the modding format, I
+# need to tell it to ignore them), but the part that's actually intended for
+# humans to read is the second comment, to the right.
+# 
+# -----------------------------------------------------------------------------
+# 
+#                           INFORMATION FOR MODDERS
+# 
+#                     Class Recruitment List Modding Maxima
+# 
+# Each class's recruitment list has reserved space for 128 offers.  Each offer
+# consists of one addunitrec, addmercrec, or addcomrec command, with room to
+# follow that command with templerec, libraryrec, atavirec, 2 recxcost
+# commands, 8 reclimiter commands, and 1 recterr command.
+# 
+# -----------------------------------------------------------------------------
+# 
+#                                    CREDITS
+# 
+# - Illwinter Game Design, for the creation of the wonderful Conquest of
+# Elysium and Dominions games in general, and specifically for the creation of
+# CoE5, from which all data in this file was extracted.  Also for the creation
+# of the modding manual, which provided information about many of the commands.
+# 
+# - Marlin, for publishing (for CoE4) a list of recruitment flag meanings. 
+# While one has changed in CoE5 and many more have been added, his work helped
+# me when I was getting started, and I appreciate it!
+# 
+# - Me, Colonel Dracula joins the Navy, for deciphering everything in the
+# recruitment data except the flags published by Marlin and for extracting and
+# translating the data.
+# 
+# -----------------------------------------------------------------------------
+
+selectclass  1 # Baron
+#                                               % No gold die iron
+addunitrec  "Spearman"                        100  5   50   0    0
+addunitrec  "Swordsman"                       100  5   50   0   10
+addunitrec  "Crossbowman"                     100  5   50   0    5
+addunitrec  "Heavy Infantry"                  100  5   50   0   25
+addunitrec  "Longbowman"                      100  4   50   0    0
+addunitrec  "Pikeneer"                        100  5   50   0    5
+addunitrec  "Halberdier"                      100  5   50   0    5
+addunitrec  "Zweihander"                      100  5   50   0   10
+addunitrec  "Tower Guard"                     100  5   50   0   15
+addunitrec  "Cavalryman"                      100  3   50   0   20
+addunitrec  "War Dog"                         100  5   25   0    0
+addunitrec  "Ballista"                        100  2   25   0   50
+addunitrec  "Catapult"                        100  1   25   0   50
+addunitrec  "Trebuchet"                       100  1   50   0   50
+addunitrec  "Archer"                            5 10   70   0    0 # once per offer.
+addunitrec  "Crossbowman"                       5 10   70   0    7 # once per offer.
+addunitrec  "Spearman"                          5 10   70   0    0 # once per offer.
+addunitrec  "Swordsman"                         5 10   70   0    7 # once per offer.
+addunitrec  "Trebuchet"                        10  2   75   0   75 # once per offer.
+addmercrec  "Scout"                            10  1   15  10    0 # once per offer; extra.
+addcomrec   "Baron"                            10      60  10   10 # once per offer; extra.
+reclimiter  "-Baron"                          # Owning a Baron prevents the preceding offer.
+addcomrec   "High Lord"                        20      50  10   10 # once per offer; extra.
+addcomrec   "Captain"                          20      40  10    0 # once per offer; extra.
+addcomrec   "Monk"                              5      50  10    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Court Mage"                        3      40  15    0 # once per offer; extra.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+addcomrec   "Alchemist"                         3      40  15    0 # once per offer; extra.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+
+
+selectclass  2 # Necromancer
+#                                               % No gold die iron
+addcomrec   "Goblin Chieftain"                  5      35  10    0 # once per offer; extra.
+addmercrec  "Goblin"                           25  5   20   0    0 # once per offer; extra.
+reclimiter  "+Goblin Chieftain"               # Owning a Goblin Chieftain enables the preceding offer.
+addmercrec  "Goblin Spearman"                  20  5   20   0    0 # once per offer; extra.
+reclimiter  "+Goblin Chieftain"               # Owning a Goblin Chieftain enables the preceding offer.
+addmercrec  "Goblin Archer"                    15  5   20   0    0 # once per offer; extra.
+reclimiter  "+Goblin Chieftain"               # Owning a Goblin Chieftain enables the preceding offer.
+addunitrec  "Soulless Soldier"                100  5    0   0    5
+reclimiter  "=Soulless"                       # The preceding offer can only be used to upgrade Soulless unit(s).
+addunitrec  "Armored Soulless"                100  5    0   0   20
+reclimiter  "=Soulless"                       # The preceding offer can only be used to upgrade Soulless unit(s).
+addunitrec  "Armored Longdead"                100  5    0   0   20
+reclimiter  "=Longdead"                       # The preceding offer can only be used to upgrade Longdead unit(s).
+addunitrec  "Bane Fire Archer"                100  5    0   0    0
+recxcost     5  10                            # 10 Hands additional cost.
+reclimiter  "=Longdead"                       # The preceding offer can only be used to upgrade Longdead unit(s).
+addunitrec  "Bane-Bones"                      100  5    0   0   10
+recxcost     5   5                            #  5 Hands additional cost.
+reclimiter  "=Longdead"                       # The preceding offer can only be used to upgrade Longdead unit(s).
+addcomrec   "Necromancer's Apprentice"          3      55  20    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+
+
+selectclass  3 # Demonologist
+#                                               % No gold die iron
+addcomrec   "Cultist"                           4      55  20    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+
+
+selectclass  4 # Witch
+#                                               % No gold die iron
+addunitrec  "Androphag Spearman"              100  5   50   0    0
+addunitrec  "Androphag Archer"                100  5   50   0    0
+recxcost     3  25                            # 25 Fungus additional cost.
+addunitrec  "Androphag Cavalry"               100  4   50   0    5
+recxcost     3  25                            # 25 Fungus additional cost.
+addcomrec   "Androphag Lord"                   25      50  10    0 # once per offer; extra.
+addcomrec   "Manflayer"                         2      70  20    0 # once per offer; extra.
+addcomrec   "Witch's Apprentice"                3      55  10    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addmercrec  "Scout"                            10  1   15  10    0 # once per offer; extra.
+
+
+selectclass  5 # High Priestess
+#                                               % No gold die iron
+addunitrec  "Ba'alite Spearman"               100  5   50   0    0
+addunitrec  "Ba'alite Archer"                 100  5   50   0    0
+addunitrec  "Ba'alite Zealot"                 100  5   50   0    5
+addunitrec  "Ba'alite Heavy Infantry"         100  5   50   0   25
+addunitrec  "Catapult"                        100  1   25   0   50
+addcomrec   "Hierodule"                         6      50  10    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addmercrec  "Scout"                            10  1   15  10    0 # once per offer; extra.
+
+
+selectclass  6 # Bakemono
+#                                               % No gold die iron
+addunitrec  "Bakemono Soldier"                100  5   25   0    1
+addunitrec  "Bakemono Archer"                 100  5   25   0    1
+addunitrec  "Bakemono Swordsman"              100  5   25   0    3
+addunitrec  "Dai Bakemono"                     25  3   50   0   15 # once per offer.
+addunitrec  "Dai Bakemono Archer"              25  3   50   0   15 # once per offer.
+addunitrec  "O Bakemono"                       25  1   25   0    0 # once per offer.
+addcomrec   "Bakemono General"                 25      50  10    5 # once per offer; extra.
+addcomrec   "Bakemono Sorceror"                 1     100  20    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+addcomrec   "Bakemono Shaman"                   5      55  10    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Uba"                               2      75  10    0 # once per offer; extra.
+addunitrec  "Tengu Warrior"                    15  3   50   0   15 # once per offer.
+reclimiter  "+Dai Tengu"                      # Owning a Dai Tengu enables the preceding offer.
+
+
+selectclass  7 # Barbarian
+#                                               % No gold die iron
+addunitrec  "Barbarian Warrior"               100  7   50   0    0
+addunitrec  "Barbarian Bowman"                100  7   50   0    0
+addunitrec  "Barbarian Swordsman"             100  7   50   0   10
+addunitrec  "Barbarian Cavalry"               100  4   50   0    0
+addunitrec  "Barbarian Lancer"                100  4   50   0   10
+addunitrec  "Barbarian Werebear"               10  1   25   0    0 # once per offer.
+addcomrec   "Spirit Guide"                      8      75  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Soothsayer"                        8      40  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Barbarian Leader"                100      25  10    0 # once per offer; extra.
+reclimiter  "-Barbarian Leader"               # Owning a Barbarian Leader prevents the preceding offer.
+addcomrec   "Mounted Chief"                    10      25  10    0 # once per offer; extra.
+addmercrec  "Mounted Scout"                    15  1   15  10    0 # once per offer; extra.
+addcomrec   "Crystal Priestess"                 3      40  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Crystal Sorceress"                 3      80  20    0 # once per offer; extra.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+reclimiter  "+Crystal Priestess"              # Owning a Crystal Priestess enables the preceding offer.
+reclimiter  "+Painted Crystal Priestess"      # Owning a Painted Crystal Priestess enables the preceding offer.
+addunitrec  "Crystal Amazon"                   25  7   50   0    0 # once per offer.
+reclimiter  "+Crystal Priestess"              # Owning a Crystal Priestess enables the preceding offer.
+reclimiter  "+Painted Crystal Priestess"      # Owning a Painted Crystal Priestess enables the preceding offer.
+addcomrec   "Garnet Priestess"                  3      40  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Garnet Sorceress"                  3      80  20    0 # once per offer; extra.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+reclimiter  "+Garnet Priestess"               # Owning a Garnet Priestess enables the preceding offer.
+reclimiter  "+Painted Garnet Priestess"       # Owning a Painted Garnet Priestess enables the preceding offer.
+addunitrec  "Garnet Amazon"                    25  7   50   0    0 # once per offer.
+reclimiter  "+Garnet Priestess"               # Owning a Garnet Priestess enables the preceding offer.
+reclimiter  "+Painted Garnet Priestess"       # Owning a Painted Garnet Priestess enables the preceding offer.
+addcomrec   "Jade Priestess"                    3      40  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Jade Sorceress"                    3      80  20    0 # once per offer; extra.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+reclimiter  "+Jade Priestess"                 # Owning a Jade Priestess enables the preceding offer.
+reclimiter  "+Painted Jade Priestess"         # Owning a Painted Jade Priestess enables the preceding offer.
+addunitrec  "Jade Amazon"                      25  7   50   0    0 # once per offer.
+reclimiter  "+Jade Priestess"                 # Owning a Jade Priestess enables the preceding offer.
+reclimiter  "+Painted Jade Priestess"         # Owning a Painted Jade Priestess enables the preceding offer.
+addcomrec   "Onyx Priestess"                    3      40  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Onyx Sorceress"                    3      80  20    0 # once per offer; extra.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+reclimiter  "+Onyx Priestess"                 # Owning a Onyx Priestess enables the preceding offer.
+reclimiter  "+Painted Onyx Priestess"         # Owning a Painted Onyx Priestess enables the preceding offer.
+addunitrec  "Onyx Amazon"                      25  7   50   0    0 # once per offer.
+reclimiter  "+Onyx Priestess"                 # Owning a Onyx Priestess enables the preceding offer.
+reclimiter  "+Painted Onyx Priestess"         # Owning a Painted Onyx Priestess enables the preceding offer.
+
+
+selectclass  8 # Senator
+#                                               % No gold die iron
+addunitrec  "Veles"                           100  5   40   0    0
+addunitrec  "Hastatus"                        100  5   45   0    5
+addunitrec  "Princeps"                        100  5   50   0   10
+addunitrec  "Princeps Solaris"                100  5   55   0   10
+reclimiter  "+Leo"                            # Owning a Leo enables the preceding offer.
+addunitrec  "Triarius"                        100  5   55   0   20
+addunitrec  "Praetorian Guard"                100  5   60   0   20
+reclimiter  "+Emperor"                        # Owning a Emperor enables the preceding offer.
+reclimiter  "+God Emperor"                    # Owning a God Emperor enables the preceding offer.
+reclimiter  "+Dark Emperor"                   # Owning a Dark Emperor enables the preceding offer.
+reclimiter  "+God Emperor of the Underworld"  # Owning a God Emperor of the Underworld enables the preceding offer.
+addunitrec  "Ballista"                        100  2   25   0   50
+addunitrec  "Hastatus"                          5 10   65   0    5 # once per offer.
+addmercrec  "Standard"                        100  1   20   0    0 # once per offer; extra.
+addmercrec  "Archer"                           20  5   50   0    0 # once per offer; extra.
+addmercrec  "Gladiator"                        20  2   25   0    0 # once per offer; extra.
+addmercrec  "Retiarius"                        -1  2   25   0    0 # once per offer; extra; ignores chance and is offered when previous offer is.
+addcomrec   "Senator"                          10      50  10    0 # once per offer; extra.
+reclimiter  "-Senator"                        # Owning a Senator prevents the preceding offer.
+reclimiter  "-Emperor"                        # Owning a Emperor prevents the preceding offer.
+reclimiter  "-God Emperor"                    # Owning a God Emperor prevents the preceding offer.
+reclimiter  "-Dark Emperor"                   # Owning a Dark Emperor prevents the preceding offer.
+reclimiter  "-God Emperor of the Underworld"  # Owning a God Emperor of the Underworld prevents the preceding offer.
+addcomrec   "Centurion"                        25      35  10    0 # once per offer; extra.
+addcomrec   "Leo"                               5      50  20    0 # once per offer; extra.
+addcomrec   "Heliodromus"                       1      90  20    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+addcomrec   "Renata"                            5      50  20    0 # once per offer; extra.
+addcomrec   "Renatus"                           1     110  20    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+addcomrec   "Serpent Acolyte"                   5      50  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Serpent Priest"                    2      90  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Reveler"                           5      50  20    0 # once per offer; extra.
+addcomrec   "Augur"                             3      60  20    0 # once per offer; extra.
+addmercrec  "Scout"                            10  1   15  10    0 # once per offer; extra.
+
+
+selectclass  9 # Pale One
+#                                               % No gold die iron
+addunitrec  "Pale One"                        100  5   50   0    0
+addunitrec  "Pale One Slinger"                100  5   50   0    0
+addunitrec  "Pale One Soldier"                100  5   50   0    5
+addunitrec  "Cavern Guard"                    100  5   50   0   20
+addunitrec  "Ancient Pale One"                 15  1   30   0   15 # once per offer.
+addunitrec  "Ancient Hurler"                   15  1   30   0    0 # once per offer.
+addunitrec  "Seal Guard"                       10  1   50   0   25 # once per offer.
+addcomrec   "Pale One Commander"               25      40  10    5 # once per offer; extra.
+addmercrec  "Pale One Scout"                    8  1   15  10    0 # once per offer; extra.
+addcomrec   "Ancient Commander"                 5      60  20   15 # once per offer; extra.
+addcomrec   "Earth Reader"                      5      55  20    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Oracle of Subterranean Fires"      0     150  30    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Oracle of Subterranean Waters"     0     150  30    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Oracle of the Dead"                0     150  30    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+
+
+selectclass 10 # Druid
+#                                               % No gold die iron
+addunitrec  "Barechested Warrior"             100  5   50   0    0
+addunitrec  "Barechested Slinger"             100  5   50   0    0
+addunitrec  "Barechested Swordsman"           100  5   50   0    0
+addunitrec  "Beast Cavalry"                   100  3   50   0    5
+addunitrec  "Boar Warrior"                     20  4   50   0   10 # once per offer.
+addmercrec  "Hornblower"                      100  1   25  10    0 # once per offer; extra.
+addmercrec  "Barechested Scout"                15  1   15  10    0 # once per offer; extra.
+addcomrec   "Chieftain"                        20      40  10    0 # once per offer; extra.
+addcomrec   "Beast Knight"                      5      50  10    5 # once per offer; extra.
+addcomrec   "Vergobret"                        20      30  10    0 # once per offer; extra.
+addcomrec   "Druid's Apprentice"                3      55  10    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+
+
+selectclass 11 # Burgmeister
+#                                               % No gold die iron
+addunitrec  "Hoburg Militia"                  100 15   50   0    0
+addunitrec  "Hoburg Slinger"                  100 15   50   0    0
+addunitrec  "Hoburg Crossbow"                 100 15   50   0    5
+addunitrec  "Hoburg Soldier"                  100 15   50   0    5
+addunitrec  "Hoburg Defender"                 100 15   50   0   10
+addunitrec  "Hoburg Pikeneer"                 100 10   30   0    5
+addunitrec  "Burgmeister Guard"               100 10   40   0   10
+addunitrec  "Hog Knight"                      100  5   50   0   10
+addunitrec  "Catapult"                        100  1   25   0   50
+addcomrec   "Hogmeister"                       15      25   5    0 # once per offer; extra.
+addcomrec   "Burgmann"                         20      20   5    0 # once per offer; extra.
+addcomrec   "Horologist"                        2      75  10    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+addcomrec   "Horticulturist"                    2      75  10    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addmercrec  "Hoburg Scout"                      6  1   15  10    0 # once per offer; extra.
+
+
+selectclass 12 # Warlock
+#                                               % No gold die iron
+addcomrec   "Warlock's Apprentice"              3      55  20    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+
+
+selectclass 13 # Priest King
+#                                               % No gold die iron
+addunitrec  "Tribal Warrior"                  100  7   50   0    0
+addunitrec  "Jungle Warrior"                  100  6   50   0    0
+addunitrec  "Feathered Warrior"               100  5   50   0    5
+addunitrec  "Jaguar Warrior"                  100  5   50   0    0
+reclimiter  "+Sun Temple Attendant"           # Owning a Sun Temple Attendant enables the preceding offer.
+reclimiter  "+Priest King"                    # Owning a Priest King enables the preceding offer.
+reclimiter  "+High Priest of the Sun"         # Owning a High Priest of the Sun enables the preceding offer.
+addunitrec  "Eagle Warrior"                    20  5   50   0    0 # once per offer.
+reclimiter  "+Sky Temple Attendant"           # Owning a Sky Temple Attendant enables the preceding offer.
+reclimiter  "+Sky Priest"                     # Owning a Sky Priest enables the preceding offer.
+reclimiter  "+High Priest of the Sky"         # Owning a High Priest of the Sky enables the preceding offer.
+addunitrec  "Moon Warrior"                     20  4   50   0    5 # once per offer.
+reclimiter  "+Moon Temple Attendant"          # Owning a Moon Temple Attendant enables the preceding offer.
+reclimiter  "+Moon Priest"                    # Owning a Moon Priest enables the preceding offer.
+reclimiter  "+High Priest of the Night"       # Owning a High Priest of the Night enables the preceding offer.
+addunitrec  "Sun Warrior"                      20  4   50   0   10 # once per offer.
+reclimiter  "+Sun Temple Attendant"           # Owning a Sun Temple Attendant enables the preceding offer.
+reclimiter  "+Priest King"                    # Owning a Priest King enables the preceding offer.
+reclimiter  "+High Priest of the Sun"         # Owning a High Priest of the Sun enables the preceding offer.
+addcomrec   "Tribal King"                      20      40  20    0 # once per offer; extra.
+addcomrec   "Nahualli"                          3      55  20    0 # once per offer; extra.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+addcomrec   "Sun Temple Attendant"              1      45  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Blood Temple Attendant"            1      45  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Sky Temple Attendant"              1      45  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Rain Temple Attendant"             1      45  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Moon Temple Attendant"             1      45  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Death Temple Attendant"            1      45  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addmercrec  "Scout"                            10  1   15  10    0 # once per offer; extra.
+
+
+selectclass 14 # Troll King
+#                                               % No gold die iron
+addunitrec  "Goblin"                          100 15   50   0    0
+addunitrec  "Ogre"                            100  1   25   0    0
+addunitrec  "Goblin Spearman"                  40 15   50   0    0 # once per offer.
+addunitrec  "Goblin Archer"                    20 10   50   0    0 # once per offer.
+addunitrec  "Wolf Kin"                         20 10   50   0    0 # once per offer.
+addunitrec  "Wolf Kin Reaver"                  20  7   50   0   10 # once per offer.
+addunitrec  "Rock Troll"                       20  1   50   0   60 # once per offer.
+addunitrec  "Troll"                            30  1   50   0   20 # once per offer.
+addunitrec  "Forest Troll"                     30  1   40   0   10 # once per offer.
+addunitrec  "Lake Troll"                       30  1   50   0   10 # once per offer.
+recterr     -102                              # The preceding offer can only be recruited in terrain: near fresh water.
+addunitrec  "Lake Troll Warrior"               20  1   50   0   30 # once per offer.
+reclimiter  "+Lake Troll King"                # Owning a Lake Troll King enables the preceding offer.
+recterr     -102                              # The preceding offer can only be recruited in terrain: near fresh water.
+addunitrec  "Hill Giant"                        5  1  100   0    0 # once per offer.
+addunitrec  "Ettin"                             8  1   50   0    0 # once per offer.
+addcomrec   "Goblin Chieftain"                  7      25  20    0 # once per offer; extra.
+addcomrec   "Ogre Chief"                        3      35  20    0 # once per offer; extra.
+addcomrec   "Forest Giant"                      5      70  20    0 # once per offer; extra.
+addcomrec   "Goblin Shaman"                     4      35  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Troll Shaman"                      2      75  50    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Lake Troll King"                   1      75  50    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+recterr     -102                              # The preceding offer can only be recruited in terrain: near fresh water.
+addmercrec  "Goblin Murderer"                   3  1   10  40    0 # once per offer; extra.
+addcomrec   "Goblin Hero"                       3      10  50    0 # once per offer; extra.
+
+
+selectclass 15 # Enchanter
+#                                               % No gold die iron
+addcomrec   "Enchanter's Apprentice"            4      55  20    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+
+
+selectclass 16 # Beholder
+#                                               % No gold die iron
+addcomrec   "Witch's Apprentice"                2      55  10    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Druid's Apprentice"                2      55  10    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Bakemono Shaman"                   2      55  10    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Horticulturist"                    1      75  10    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Horologist"                        1      75  10    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+addcomrec   "Cultist of the Deep"               2      45  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Goblin Shaman"                     2      35  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+
+
+selectclass 17 # Archmage
+#                                               % No gold die iron
+addcomrec   "Necromancer's Apprentice"          2      55  20    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+addcomrec   "Druid's Apprentice"                2      55  10    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Cultist"                           3      55  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addcomrec   "Warlock's Apprentice"              2      55  20    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+addcomrec   "Enchanter's Apprentice"            2      55  20    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+
+
+selectclass 18 # Goblin King
+#                                               % No gold die iron
+addunitrec  "Goblin"                          100 15   50   0    0
+addunitrec  "Ogre"                            100  1   25   0    0
+addunitrec  "Goblin Spearman"                 100 15   50   0    0
+addunitrec  "Goblin Archer"                   100 10   50   0    0
+addunitrec  "Wolf Kin"                         50 10   50   0    0 # once per offer.
+addunitrec  "Wolf Kin Reaver"                  50  7   50   0   10 # once per offer.
+addunitrec  "Rock Troll"                        4  1   50   0   60 # once per offer.
+addunitrec  "Troll"                             4  1   50   0   20 # once per offer.
+addunitrec  "Forest Troll"                      4  1   50   0   10 # once per offer.
+addunitrec  "Ettin"                            10  1   75   0    0 # once per offer.
+addcomrec   "Goblin Chieftain"                 20      25  20    0 # once per offer; extra.
+addcomrec   "Ogre Chief"                        5      35  20    0 # once per offer; extra.
+addcomrec   "Goblin Shaman"                     6      35  20    0 # once per offer; extra.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+addmercrec  "Goblin Murderer"                   5  1   10  40    0 # once per offer; extra.
+addcomrec   "Goblin Hero"                       5      10  50    0 # once per offer; extra.
+
+
+selectclass 19 # High Cultist
+#                                               % No gold die iron
+addcomrec   "Cultist of the Deep"               6      45  20    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+
+
+selectclass 20 # Dwarf Queen
+#                                               % No gold die iron
+addunitrec  "Dwarf"                           100  5    0   0   20
+reclimiter  "=Dwarf Worker"                   # The preceding offer can only be used to upgrade Dwarf Worker unit(s).
+addunitrec  "Dwarf Warrior"                   100  5    0   0   30
+reclimiter  "=Dwarf Worker"                   # The preceding offer can only be used to upgrade Dwarf Worker unit(s).
+addunitrec  "Dwarf Guard"                     100  5    0   0   40
+reclimiter  "=Dwarf Worker"                   # The preceding offer can only be used to upgrade Dwarf Worker unit(s).
+addunitrec  "Dwarf Arbalest"                  100  5    0   0   30
+reclimiter  "=Dwarf Worker"                   # The preceding offer can only be used to upgrade Dwarf Worker unit(s).
+addunitrec  "Outdoor Dwarf"                   100  2   10   0   10
+reclimiter  "=Dwarf Worker"                   # The preceding offer can only be used to upgrade Dwarf Worker unit(s).
+addunitrec  "Dwarf Sapper"                    100  5    0   0   40
+reclimiter  "=Dwarf Worker"                   # The preceding offer can only be used to upgrade Dwarf Worker unit(s).
+addunitrec  "Dwarven Ballista"                100  2    0   0   80
+reclimiter  "=Dwarf Worker"                   # The preceding offer can only be used to upgrade Dwarf Worker unit(s).
+addcomrec   "Dwarf Commander"                 100      20   0   10 # once per offer; extra.
+reclimiter  "=Dwarf Worker"                   # The preceding offer can only be used to upgrade Dwarf Worker unit(s).
+
+
+selectclass 21 # Voice of El
+#                                               % No gold die iron
+addunitrec  "Spearman"                        100  5   50   0    0
+addunitrec  "Swordsman"                       100  5   50   0   10
+addunitrec  "Archer"                          100  5   50   0    0
+addunitrec  "Pikeneer"                        100  5   50   0    5
+addunitrec  "Halberdier"                      100  5   50   0    5
+addunitrec  "Temple Guard"                    100  5   50   0    5 # Arch Bishop+.
+recxcost    12   1                            #  1 Relics additional cost.
+addunitrec  "Templar"                         100  5   50   0   35 # Cardinal+.
+recxcost    12   5                            #  5 Relics additional cost.
+addunitrec  "Catapult"                        100  1   25   0   50
+addmercrec  "Scout"                            10  1   15  10    0 # once per offer; extra.
+addcomrec   "Bishop"                           10      40  10    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+templerec                                     # +4% to chance per temple owned, to a max of +20% for 5+ temples.
+
+
+selectclass 22 # Illusionist
+#                                               % No gold die iron
+addcomrec   "Illusionist's Apprentice"          3      55  20    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+addunitrec  "Mirror"                          100  1   10   0    0 # extra; flag9 (undocumented).
+addunitrec  "Large Mirror"                    100  1   20   0    0 # extra.
+addunitrec  "Silver Mirror"                   100  1   30   0    0 # extra.
+addunitrec  "Golden Mirror"                   100  1  100   0    0 # extra.
+
+
+selectclass 23 # Markgraf
+#                                               % No gold die iron
+addunitrec  "Hoburg Militia"                  100 15   50   0    0
+addunitrec  "Hoburg Slinger"                  100 15   50   0    0
+addunitrec  "Hobmark Crossbow"                100 15   50   0    5
+addunitrec  "Hobmark Soldier"                 100 15   50   0    5
+addunitrec  "Hobmark Defender"                100 15   50   0   10
+addunitrec  "Hobmark Hammerer"                100 10   30   0    5
+addunitrec  "Hobmark Pikeneer"                100 10   30   0    5
+addunitrec  "Markgraf Guard"                  100 10   40   0   10
+addunitrec  "Hog Hussar"                      100  5   50   0    5
+addunitrec  "Ghoul Guardian"                  100 10    0   0    5
+recxcost     5   5                            #  5 Hands additional cost.
+reclimiter  "+Ghoul Baron"                    # Owning a Ghoul Baron enables the preceding offer.
+reclimiter  "+Ghoulgraf"                      # Owning a Ghoulgraf enables the preceding offer.
+addunitrec  "Little Soulless Soldier"         100 15    0   0    5
+reclimiter  "=Little Soulless"                # The preceding offer can only be used to upgrade Little Soulless unit(s).
+addunitrec  "Little Soulless Defender"        100 15    0   0   10
+reclimiter  "=Little Soulless"                # The preceding offer can only be used to upgrade Little Soulless unit(s).
+addunitrec  "Little Bane Fire Crossbow"       100  5    0   0    0
+recxcost     5  10                            # 10 Hands additional cost.
+reclimiter  "=Little Longdead"                # The preceding offer can only be used to upgrade Little Longdead unit(s).
+addunitrec  "Catapult"                        100  1   25   0   50
+addcomrec   "Markgraf"                         10      45   5    0 # once per offer; extra.
+reclimiter  "-Markgraf"                       # Owning a Markgraf prevents the preceding offer.
+reclimiter  "-Malefic Markgraf"               # Owning a Malefic Markgraf prevents the preceding offer.
+reclimiter  "-Malefic Master"                 # Owning a Malefic Master prevents the preceding offer.
+addcomrec   "Markmeister"                      15      25   5    0 # once per offer; extra.
+addcomrec   "Markmann"                         20      20   5    0 # once per offer; extra.
+addcomrec   "Nekromant"                         4      55  10    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+
+
+selectclass 24 # Dryad Queen
+#                                               % No gold die iron
+addunitrec  "Centaur Warrior"                 100  5   50   0    0
+reclimiter  "=Centaur"                        # The preceding offer can only be used to upgrade Centaur unit(s).
+addunitrec  "Centaur Cataphract"              100  5   50   0   25 # not in forest citadels.
+reclimiter  "=Centaur"                        # The preceding offer can only be used to upgrade Centaur unit(s).
+addunitrec  "Steel Cataphract"                100  5   50   0   50 # only in forge citadels.
+reclimiter  "=Centaur"                        # The preceding offer can only be used to upgrade Centaur unit(s).
+addunitrec  "Centauride Warrior"              100  5   50   0    0
+reclimiter  "=Centauride"                     # The preceding offer can only be used to upgrade Centauride unit(s).
+addunitrec  "Centauride Cataphract"           100  5   50   0   25 # not in forest citadels.
+reclimiter  "=Centauride"                     # The preceding offer can only be used to upgrade Centauride unit(s).
+addunitrec  "Centauride Crossbow"             100  5   50   0   50 # only in forge citadels.
+reclimiter  "=Centauride"                     # The preceding offer can only be used to upgrade Centauride unit(s).
+addunitrec  "Satyr Javelinist"                100  5   25   0    0
+reclimiter  "=Satyr"                          # The preceding offer can only be used to upgrade Satyr unit(s).
+addunitrec  "Satyr Warrior"                   100  5   25   0    0
+reclimiter  "=Satyr"                          # The preceding offer can only be used to upgrade Satyr unit(s).
+addunitrec  "Satyr Hoplite"                   100  5   25   0   10 # not in forest citadels.
+reclimiter  "=Satyr"                          # The preceding offer can only be used to upgrade Satyr unit(s).
+addunitrec  "Steel Hoplite"                   100  5   25   0   25 # only in forge citadels.
+reclimiter  "=Satyr"                          # The preceding offer can only be used to upgrade Satyr unit(s).
+addunitrec  "Satyr Sniper"                    100  5   25   0   25 # only in forge citadels.
+reclimiter  "=Satyr"                          # The preceding offer can only be used to upgrade Satyr unit(s).
+addunitrec  "Minotaur Warrior"                100  5   50   0    0
+reclimiter  "=Minotaur"                       # The preceding offer can only be used to upgrade Minotaur unit(s).
+addunitrec  "Bronze Bull"                     100  5   50   0   25 # not in forest citadels.
+reclimiter  "=Minotaur"                       # The preceding offer can only be used to upgrade Minotaur unit(s).
+addunitrec  "Steel Bull"                      100  5   50   0   50 # only in forge citadels.
+reclimiter  "=Minotaur"                       # The preceding offer can only be used to upgrade Minotaur unit(s).
+addmercrec  "Harpy Scout"                      10  1   15  10    0 # once per offer; extra.
+addunitrec  "Stymphalian Bird"                100  5   15   0   25 # not in forest citadels.
+reclimiter  "=Harpy"                          # The preceding offer can only be used to upgrade Harpy unit(s).
+addcomrec   "Satyr Commander"                  10      40  10    0 # once per offer; extra.
+addcomrec   "Hoplite Commander"                 5      40  10    5 # once per offer; extra.
+addcomrec   "Centaur Commander"                 5      50  15    5 # once per offer; extra.
+addcomrec   "Cataphract Commander"              3      50  15   10 # once per offer; extra.
+addcomrec   "Keeper of Traditions"              3      55  20    5 # once per offer; extra.
+addcomrec   "Minotaur Lord"                     2      55  20   10 # once per offer; extra.
+addcomrec   "Hierophant"                        1      65  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Centaur Sage"                      2      65  20    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+addcomrec   "Hierophantide"                     1      65  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+addcomrec   "Dryad"                             1      65  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+
+
+selectclass 25 # Scourge Lord
+#                                               % No gold die iron
+addunitrec  "Desert Warrior"                  100  5   50   0    0
+addunitrec  "Camel Rider"                     100  3   50   0    0
+addunitrec  "Sellsoul"                        100  2   50   0    0
+reclimiter  "+Scourge King"                   # Owning a Scourge King enables the preceding offer.
+addcomrec   "Sheikh"                           20      45  15    0 # once per offer; extra.
+addunitrec  "Catapult"                        100  1   25   0   50
+addcomrec   "Scourge Herald"                   20      65   5    0 # once per offer; extra.
+reclimiter  "-Scourge Herald"                 # Owning a Scourge Herald prevents the preceding offer.
+reclimiter  "-Scourge Lord"                   # Owning a Scourge Lord prevents the preceding offer.
+reclimiter  "-Scourge King"                   # Owning a Scourge King prevents the preceding offer.
+
+
+selectclass 26 # Cloud Lord
+#                                               % No gold die iron
+addunitrec  "Airya Spearman"                  100  5   50   0    0
+recxcost     8   1                            #  1 Sapphires additional cost.
+addunitrec  "Airya Archer"                    100  5   50   0    0
+addunitrec  "Airya Swordsman"                 100  5   50   0    0
+recxcost     8   2                            #  2 Sapphires additional cost.
+addunitrec  "Iceclad"                         100  5   50   0    0
+recxcost     8   5                            #  5 Sapphires additional cost.
+addunitrec  "Dawn Guard"                      100  5   25   0    5
+recxcost     7  10                            # 10 Rubies additional cost.
+addunitrec  "Dusk Guard"                      100  5   25   0    5
+recxcost    10  10                            # 10 Emeralds additional cost.
+addcomrec   "Storm Captain"                    20      40   5    0 # once per offer; extra.
+addmercrec  "Airya Scout"                      10  1   15  10    0 # once per offer; extra.
+recxcost     8   1                            #  1 Sapphires additional cost.
+addcomrec   "Cloud Caster"                      4      55  10    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+addunitrec  "Catapult"                        100  1   25   0   50 # not in Sky.
+
+
+selectclass 27 # Kobold King
+#                                               % No gold die iron
+addunitrec  "Red Kobold"                      100 15   50   0    0 # only if player has Ruby income somewhere.
+addunitrec  "Red Kobold Slinger"              100 15   50   0    0 # only where Ruby income.
+addunitrec  "Green Kobold"                    100 15   50   0    0 # only if player has Emerald income somewhere.
+addunitrec  "Green Kobold Archer"             100 10   50   0    0 # only where Emerald income.
+addunitrec  "Blue Kobold"                     100 15   50   0    0 # only if player has Sapphire income somewhere.
+addunitrec  "Blue Kobold Slinger"             100 15   50   0    0 # only where Sapphire income.
+addunitrec  "White Kobold"                    100 15   50   0    0 # only if player has Diamond income somewhere.
+addunitrec  "White Kobold Archer"             100 10   50   0    0 # only where Diamond income.
+addcomrec   "Red Kobold Chief"                 20      20  20    0 # once per offer; extra; only if player has Ruby income somewhere.
+addcomrec   "Green Kobold Chief"               20      20  20    0 # once per offer; extra; only if player has Emerald income somewhere.
+addcomrec   "Blue Kobold Chief"                20      20  20    0 # once per offer; extra; only if player has Sapphire income somewhere.
+addcomrec   "White Kobold Chief"               20      20  20    0 # once per offer; extra; only if player has Diamond income somewhere.
+addcomrec   "Black Kobold Chief"               10      20  20    0 # once per offer; extra.
+addcomrec   "Red Kobold Shaman"                 7      40  20    0 # once per offer; extra; only where Ruby income.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+reclimiter  "$Fire Dragon"                    # +2% chance per Fire Dragon owned.
+reclimiter  "$Arcane Fire Dragon"             # +2% chance per Arcane Fire Dragon owned.
+reclimiter  "$Elder Dragon"                   # +2% chance per Elder Dragon owned.
+addcomrec   "Green Kobold Shaman"               7      40  20    0 # once per offer; extra; only where Emerald income.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+reclimiter  "$Bile Dragon"                    # +2% chance per Bile Dragon owned.
+reclimiter  "$Arcane Bile Dragon"             # +2% chance per Arcane Bile Dragon owned.
+reclimiter  "$Elder Dragon"                   # +2% chance per Elder Dragon owned.
+addcomrec   "Blue Kobold Shaman"                7      40  20    0 # once per offer; extra; only where Sapphire income.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+reclimiter  "$Frost Dragon"                   # +2% chance per Frost Dragon owned.
+reclimiter  "$Arcane Frost Dragon"            # +2% chance per Arcane Frost Dragon owned.
+reclimiter  "$Elder Dragon"                   # +2% chance per Elder Dragon owned.
+addcomrec   "White Kobold Shaman"               7      40  20    0 # once per offer; extra; only where Diamond income.
+templerec                                     # +3% to chance per temple owned, to a max of +15% for 5+ temples.
+reclimiter  "$Storm Dragon"                   # +2% chance per Storm Dragon owned.
+reclimiter  "$Arcane Storm Dragon"            # +2% chance per Arcane Storm Dragon owned.
+reclimiter  "$Elder Dragon"                   # +2% chance per Elder Dragon owned.
+addcomrec   "Red Kobold Sorcerer"               3      95  20    0 # once per offer; extra; only where Ruby income.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+reclimiter  "$Fire Dragon"                    # +2% chance per Fire Dragon owned.
+reclimiter  "$Arcane Fire Dragon"             # +2% chance per Arcane Fire Dragon owned.
+reclimiter  "$Elder Dragon"                   # +2% chance per Elder Dragon owned.
+addcomrec   "Green Kobold Sorcerer"             3      95  20    0 # once per offer; extra; only where Emerald income.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+reclimiter  "$Bile Dragon"                    # +2% chance per Bile Dragon owned.
+reclimiter  "$Arcane Bile Dragon"             # +2% chance per Arcane Bile Dragon owned.
+reclimiter  "$Elder Dragon"                   # +2% chance per Elder Dragon owned.
+addcomrec   "Blue Kobold Sorcerer"              3      95  20    0 # once per offer; extra; only where Sapphire income.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+reclimiter  "$Frost Dragon"                   # +2% chance per Frost Dragon owned.
+reclimiter  "$Arcane Frost Dragon"            # +2% chance per Arcane Frost Dragon owned.
+reclimiter  "$Elder Dragon"                   # +2% chance per Elder Dragon owned.
+addcomrec   "White Kobold Sorcerer"             3      95  20    0 # once per offer; extra; only where Diamond income.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+reclimiter  "$Storm Dragon"                   # +2% chance per Storm Dragon owned.
+reclimiter  "$Arcane Storm Dragon"            # +2% chance per Arcane Storm Dragon owned.
+reclimiter  "$Elder Dragon"                   # +2% chance per Elder Dragon owned.
+addmercrec  "Black Kobold Murderer"             5  1   10  40    0 # once per offer; extra.
+reclimiter  "$Dusk Dragon"                    # +2% chance per Dusk Dragon owned.
+reclimiter  "$Elder Dragon"                   # +2% chance per Elder Dragon owned.
+addmercrec  "Black Kobold Scout"               10  1   15  10    0 # once per offer; extra.
+addcomrec   "Black Kobold Slayer Shaman"        1      40  20    0 # once per offer; extra.
+templerec                                     # +2% to chance per temple owned, to a max of +10% for 5+ temples.
+reclimiter  "$Dusk Dragon"                    # +1% chance per Dusk Dragon owned.
+reclimiter  "$Elder Dragon"                   # +1% chance per Elder Dragon owned.
+addunitrec  "Red Kobold Warrior"              100  5   25   0    5 # once per offer; only where Ruby income.
+reclimiter  "+Red Kobold Shaman"              # Owning a Red Kobold Shaman enables the preceding offer.
+reclimiter  "+Red Kobold Prophet"             # Owning a Red Kobold Prophet enables the preceding offer.
+reclimiter  "+Red Kobold Sorcerer"            # Owning a Red Kobold Sorcerer enables the preceding offer.
+reclimiter  "+Red Kobold King"                # Owning a Red Kobold King enables the preceding offer.
+addunitrec  "Green Kobold Warrior"            100  5   25   0    5 # once per offer; only where Emerald income.
+reclimiter  "+Green Kobold Shaman"            # Owning a Green Kobold Shaman enables the preceding offer.
+reclimiter  "+Green Kobold Prophet"           # Owning a Green Kobold Prophet enables the preceding offer.
+reclimiter  "+Green Kobold Sorcerer"          # Owning a Green Kobold Sorcerer enables the preceding offer.
+reclimiter  "+Green Kobold King"              # Owning a Green Kobold King enables the preceding offer.
+addunitrec  "Blue Kobold Warrior"             100  5   25   0    5 # once per offer; only where Sapphire income.
+reclimiter  "+Blue Kobold Shaman"             # Owning a Blue Kobold Shaman enables the preceding offer.
+reclimiter  "+Blue Kobold Prophet"            # Owning a Blue Kobold Prophet enables the preceding offer.
+reclimiter  "+Blue Kobold Sorcerer"           # Owning a Blue Kobold Sorcerer enables the preceding offer.
+reclimiter  "+Blue Kobold King"               # Owning a Blue Kobold King enables the preceding offer.
+addunitrec  "White Kobold Warrior"            100  5   25   0    5 # once per offer; only where Diamond income.
+reclimiter  "+White Kobold Shaman"            # Owning a White Kobold Shaman enables the preceding offer.
+reclimiter  "+White Kobold Prophet"           # Owning a White Kobold Prophet enables the preceding offer.
+reclimiter  "+White Kobold Sorcerer"          # Owning a White Kobold Sorcerer enables the preceding offer.
+reclimiter  "+White Kobold King"              # Owning a White Kobold King enables the preceding offer.
+addunitrec  "Winged White Kobold Archer"      100  5   25   0    0 # once per offer; only where Diamond income.
+reclimiter  "+White Kobold Shaman"            # Owning a White Kobold Shaman enables the preceding offer.
+reclimiter  "+White Kobold Prophet"           # Owning a White Kobold Prophet enables the preceding offer.
+reclimiter  "+White Kobold Sorcerer"          # Owning a White Kobold Sorcerer enables the preceding offer.
+reclimiter  "+White Kobold King"              # Owning a White Kobold King enables the preceding offer.
+addunitrec  "Black Kobold"                     25 15   50   0    0 # once per offer.
+reclimiter  "+Black Kobold Chief"             # Owning a Black Kobold Chief enables the preceding offer.
+reclimiter  "+Black Kobold Slayer Shaman"     # Owning a Black Kobold Slayer Shaman enables the preceding offer.
+reclimiter  "+Black Kobold Slayer Prophet"    # Owning a Black Kobold Slayer Prophet enables the preceding offer.
+addunitrec  "Black Kobold Warrior"             25  5   25   0    5 # once per offer.
+reclimiter  "+Black Kobold Slayer Shaman"     # Owning a Black Kobold Slayer Shaman enables the preceding offer.
+reclimiter  "+Black Kobold Slayer Prophet"    # Owning a Black Kobold Slayer Prophet enables the preceding offer.
+addunitrec  "Red Dragon Spawn"                100 10   25   0   10 # only where Ruby income.
+recxcost     7  10                            # 10 Rubies additional cost.
+reclimiter  "+Red Kobold Prophet"             # Owning a Red Kobold Prophet enables the preceding offer.
+reclimiter  "+Red Kobold King"                # Owning a Red Kobold King enables the preceding offer.
+addunitrec  "Green Dragon Spawn"              100 10   25   0   10 # only where Emerald income.
+recxcost    10  10                            # 10 Emeralds additional cost.
+reclimiter  "+Green Kobold Prophet"           # Owning a Green Kobold Prophet enables the preceding offer.
+reclimiter  "+Green Kobold King"              # Owning a Green Kobold King enables the preceding offer.
+addunitrec  "Green Dragon Spawn Archer"       100 10   25   0    0 # only where Emerald income.
+recxcost    10  10                            # 10 Emeralds additional cost.
+reclimiter  "+Green Kobold Prophet"           # Owning a Green Kobold Prophet enables the preceding offer.
+reclimiter  "+Green Kobold King"              # Owning a Green Kobold King enables the preceding offer.
+addunitrec  "Blue Dragon Spawn"               100 10   25   0   10 # only where Sapphire income.
+recxcost     8  10                            # 10 Sapphires additional cost.
+reclimiter  "+Blue Kobold Prophet"            # Owning a Blue Kobold Prophet enables the preceding offer.
+reclimiter  "+Blue Kobold King"               # Owning a Blue Kobold King enables the preceding offer.
+addunitrec  "White Dragon Spawn"              100 10   25   0    0 # only where Diamond income.
+recxcost     9  10                            # 10 Diamonds additional cost.
+reclimiter  "+White Kobold Prophet"           # Owning a White Kobold Prophet enables the preceding offer.
+reclimiter  "+White Kobold King"              # Owning a White Kobold King enables the preceding offer.
+addunitrec  "Black Dragon Spawn"               25  5   25   0   10 # once per offer.
+recxcost    15  10                            # 10 Gems additional cost.
+reclimiter  "+Black Kobold Slayer Prophet"    # Owning a Black Kobold Slayer Prophet enables the preceding offer.
+addcomrec   "Red Dragon Spawn Chief"           10      15  20    5 # once per offer; extra; only where Ruby income.
+recxcost     7   2                            #  2 Rubies additional cost.
+reclimiter  "+Red Kobold Prophet"             # Owning a Red Kobold Prophet enables the preceding offer.
+reclimiter  "+Red Kobold King"                # Owning a Red Kobold King enables the preceding offer.
+addcomrec   "Green Dragon Spawn Chief"         10      15  20    5 # once per offer; extra; only where Emerald income.
+recxcost    10   2                            #  2 Emeralds additional cost.
+reclimiter  "+Green Kobold Prophet"           # Owning a Green Kobold Prophet enables the preceding offer.
+reclimiter  "+Green Kobold King"              # Owning a Green Kobold King enables the preceding offer.
+addcomrec   "Blue Dragon Spawn Chief"          10      15  20    5 # once per offer; extra; only where Sapphire income.
+recxcost     8   2                            #  2 Sapphires additional cost.
+reclimiter  "+Blue Kobold Prophet"            # Owning a Blue Kobold Prophet enables the preceding offer.
+reclimiter  "+Blue Kobold King"               # Owning a Blue Kobold King enables the preceding offer.
+addcomrec   "White Dragon Spawn Chief"         10      15  20    5 # once per offer; extra; only where Diamond income.
+recxcost     9   2                            #  2 Diamonds additional cost.
+reclimiter  "+White Kobold Prophet"           # Owning a White Kobold Prophet enables the preceding offer.
+reclimiter  "+White Kobold King"              # Owning a White Kobold King enables the preceding offer.
+addmercrec  "Fire Drake"                       10  1   20   0    0 # once per offer; extra; only where Ruby income.
+recxcost    16  10                            # 10 Kobolds additional cost.
+reclimiter  "+Red Kobold Shaman"              # Owning a Red Kobold Shaman enables the preceding offer.
+reclimiter  "+Red Kobold Prophet"             # Owning a Red Kobold Prophet enables the preceding offer.
+reclimiter  "+Red Kobold Sorcerer"            # Owning a Red Kobold Sorcerer enables the preceding offer.
+reclimiter  "+Red Kobold King"                # Owning a Red Kobold King enables the preceding offer.
+reclimiter  "$Fire Dragon"                    # +3% chance per Fire Dragon owned.
+reclimiter  "$Arcane Fire Dragon"             # +3% chance per Arcane Fire Dragon owned.
+addmercrec  "Wyvern Knight"                    10  1   20   0   10 # once per offer; extra; only where Emerald income.
+recxcost    16   5                            #  5 Kobolds additional cost.
+reclimiter  "+Green Kobold Shaman"            # Owning a Green Kobold Shaman enables the preceding offer.
+reclimiter  "+Green Kobold Prophet"           # Owning a Green Kobold Prophet enables the preceding offer.
+reclimiter  "+Green Kobold Sorcerer"          # Owning a Green Kobold Sorcerer enables the preceding offer.
+reclimiter  "+Green Kobold King"              # Owning a Green Kobold King enables the preceding offer.
+reclimiter  "$Bile Dragon"                    # +3% chance per Bile Dragon owned.
+reclimiter  "$Arcane Bile Dragon"             # +3% chance per Arcane Bile Dragon owned.
+addmercrec  "Frost Drake"                      10  1   20   0    0 # once per offer; extra; only where Sapphire income.
+recxcost    16  10                            # 10 Kobolds additional cost.
+reclimiter  "+Blue Kobold Shaman"             # Owning a Blue Kobold Shaman enables the preceding offer.
+reclimiter  "+Blue Kobold Prophet"            # Owning a Blue Kobold Prophet enables the preceding offer.
+reclimiter  "+Blue Kobold Sorcerer"           # Owning a Blue Kobold Sorcerer enables the preceding offer.
+reclimiter  "+Blue Kobold King"               # Owning a Blue Kobold King enables the preceding offer.
+reclimiter  "$Frost Dragon"                   # +3% chance per Frost Dragon owned.
+reclimiter  "$Arcane Frost Dragon"            # +3% chance per Arcane Frost Dragon owned.
+addmercrec  "Storm Drake"                      10  1   20   0    0 # once per offer; extra; only where Diamond income.
+recxcost    16  10                            # 10 Kobolds additional cost.
+reclimiter  "+White Kobold Shaman"            # Owning a White Kobold Shaman enables the preceding offer.
+reclimiter  "+White Kobold Prophet"           # Owning a White Kobold Prophet enables the preceding offer.
+reclimiter  "+White Kobold Sorcerer"          # Owning a White Kobold Sorcerer enables the preceding offer.
+reclimiter  "+White Kobold King"              # Owning a White Kobold King enables the preceding offer.
+reclimiter  "$Storm Dragon"                   # +3% chance per Storm Dragon owned.
+reclimiter  "$Arcane Storm Dragon"            # +3% chance per Arcane Storm Dragon owned.
+addmercrec  "Stone Drake"                       5  1   20   0   25 # once per offer; extra.
+recxcost    16  10                            # 10 Kobolds additional cost.
+
+
+selectclass 28 # Monkey Maharaja
+#                                               % No gold die iron
+addunitrec  "Markata"                         100 15   50   0    0
+addunitrec  "Markata Archer"                  100 15   50   0    0
+addunitrec  "Atavi Archer"                    100  5   40   0    0
+addunitrec  "Atavi Warrior"                   100  5   40   0    0
+addunitrec  "Vanara Archer"                   100  5   40   0   10
+addunitrec  "Vanara Soldier"                  100  5   40   0   10
+addunitrec  "Vanara Swordsman"                100  5   50   0   10
+addunitrec  "Bandar Archer"                   100  3   50   0    0
+addunitrec  "Bandar Warrior"                  100  3   50   0   10
+addunitrec  "Heavy Bandar Archer"             100  3   50   0   20
+reclimiter  "+Bandaraja"                      # Owning a Bandaraja enables the preceding offer.
+addunitrec  "Heavy Bandar Warrior"            100  3   50   0   20
+reclimiter  "+Bandaraja"                      # Owning a Bandaraja enables the preceding offer.
+addunitrec  "Bandar Swordsman"                100  3   50   0   20
+reclimiter  "+Bandaraja"                      # Owning a Bandaraja enables the preceding offer.
+addcomrec   "Bandaraja"                        10      60  10   10 # once per offer; extra.
+reclimiter  "-Bandaraja"                      # Owning a Bandaraja prevents the preceding offer.
+addcomrec   "Atavi Chief"                      10      35  10    0 # once per offer; extra.
+addcomrec   "Vanara Captain"                   25      35  10    0 # once per offer; extra.
+addmercrec  "Vanara Scout"                     10  1   15  10    0 # once per offer; extra.
+addcomrec   "Yogi"                              4      55  10    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+addunitrec  "War Elephant"                     20  1   50   0   25 # once per offer.
+addunitrec  "Catapult"                        100  1   25   0   50 # not in Sky.
+
+
+selectclass 29 # Raksharaja
+#                                               % No gold die iron
+addunitrec  "Markata"                         100 15   50   0    0
+addunitrec  "Markata Archer"                  100 15   50   0    0
+addunitrec  "Atavi Archer"                    100  5   40   0    0
+addunitrec  "Atavi Warrior"                   100  5   40   0    0
+addunitrec  "Vanara Archer"                   100  5   40   0   10
+addunitrec  "Vanara Soldier"                  100  5   40   0   10
+addunitrec  "Vanara Swordsman"                100  5   50   0   10
+addunitrec  "Bandar Archer"                   100  3   50   0    0
+addunitrec  "Bandar Warrior"                  100  3   50   0   10
+addunitrec  "Kala-Mukha Warrior"              100  3   75   0   10
+reclimiter  "+Raksharaja"                     # Owning a Raksharaja enables the preceding offer.
+reclimiter  "+Raksharishi"                    # Owning a Raksharishi enables the preceding offer.
+addcomrec   "Rakshasa General"                 10     100  20   10 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+reclimiter  "-Raksharaja"                     # Owning a Raksharaja prevents the preceding offer.
+addcomrec   "Yogini"                            4      55  10    0 # once per offer; extra.
+atavirec                                      # +2% to chance per Atavi Tribe Village owned.
+addcomrec   "Raktapata"                         3      60  10    0 # once per offer; extra.
+libraryrec                                    # +2% to chance per library point owned, to a max of +20% for 10+ library points.
+addcomrec   "Kala-Mukha"                        1     100  10    0 # once per offer; extra.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+reclimiter  "+Raksharaja"                     # Owning a Raksharaja enables the preceding offer.
+reclimiter  "+Raksharishi"                    # Owning a Raksharishi enables the preceding offer.
+addcomrec   "Atavi Chief"                      10      35  10    0 # once per offer; extra.
+addcomrec   "Vanara Captain"                   25      35  10    0 # once per offer; extra.
+addmercrec  "Vanara Scout"                     10  1   15  10    0 # once per offer; extra.
+addunitrec  "Catapult"                        100  1   25   0   50 # not in Sky.
+addunitrec  "Possessed Soulless Vanara Soldier"100  5    0   0   10
+reclimiter  "=Possessed Soulless Vanara"      # The preceding offer can only be used to upgrade Possessed Soulless Vanara unit(s).
+addunitrec  "Possessed Longdead Vanara Soldier"100  5    0   0   10
+reclimiter  "=Possessed Longdead Vanara"      # The preceding offer can only be used to upgrade Possessed Longdead Vanara unit(s).
+addunitrec  "Possessed Armored Soulless Bandar"100  3    0   0   10
+reclimiter  "=Possessed Soulless Bandar"      # The preceding offer can only be used to upgrade Possessed Soulless Bandar unit(s).
+addunitrec  "Possessed Longdead Bandar Warrior"100  3    0   0   10
+reclimiter  "=Possessed Longdead Bandar"      # The preceding offer can only be used to upgrade Possessed Longdead Bandar unit(s).
+
+
+selectclass 30 # Guildmaster
+#                                               % No gold die iron
+addcomrec   "Guild Merchant"                    5      40  30    0 # once per offer; extra.
+# [nogathererrec]                             # +6% to chance if player doesn't own any unit (with some exceptions) that gathers a special resource.
+addunitrec  "Spearman"                        100  5   50   0    0
+addunitrec  "Swordsman"                       100  5   50   0   10
+addunitrec  "Crossbowman"                     100  5   50   0    5
+addunitrec  "Heavy Infantry"                  100  5   50   0   25
+addunitrec  "Pikeneer"                        100  5   50   0    5
+addunitrec  "Halberdier"                      100  5   50   0    5
+addunitrec  "Zweihander"                      100  5   50   0   10
+addunitrec  "Ballista"                        100  2   25   0   50
+addunitrec  "Catapult"                        100  1   25   0   50
+addmercrec  "Scout"                            10  1   15  10    0 # once per offer; extra.
+addcomrec   "Captain"                          20      40  10    0 # once per offer; extra.
+# Note: the Guildmaster class has many more potential recruitment offers, but they're hard-coded rather than being part of the Recruitment Data.
+
+
+
+# All-class terrain-based recruitment:
+selectclass  -1 # -1 is not a real class. This is a fake command and I put it here only as an indication that the previous class's recruitment list has ended and everything below here cannot actually be modded.
+
+# Terrain: -36: infernal citadels.
+#                                               % No gold die iron
+addunitrec  "Sinner"                          100 10   50   0    0
+recterr      -36                              # The preceding offer can only be recruited in terrain: infernal citadels.
+addunitrec  "Imp"                             100  5   50   0    0
+recterr      -36                              # The preceding offer can only be recruited in terrain: infernal citadels.
+addunitrec  "Bloodsworn"                      100  5  150  25    0
+recterr      -36                              # The preceding offer can only be recruited in terrain: infernal citadels.
+
+# Terrain: -37: hades citadels.
+#                                               % No gold die iron
+addunitrec  "Ghost Warrior"                   100  5  150   0    0
+recterr      -37                              # The preceding offer can only be recruited in terrain: hades citadels.
+addunitrec  "Spectral Archer"                 100  5  150   0    0
+recterr      -37                              # The preceding offer can only be recruited in terrain: hades citadels.
+addunitrec  "Spectral Horseman"               100  3  150   0    0
+recterr      -37                              # The preceding offer can only be recruited in terrain: hades citadels.
+addcomrec   "Ghost Captain"                     5     100   0    0 # once per offer.
+recterr      -37                              # The preceding offer can only be recruited in terrain: hades citadels.
+addcomrec   "Ghost Scout"                      10      35  10    0 # once per offer.
+recterr      -37                              # The preceding offer can only be recruited in terrain: hades citadels.
+
+# Terrain: 30: Baron's Castle.
+#                                               % No gold die iron
+addunitrec  "Pikeneer"                        100  5   50   0    5
+recterr       30                              # The preceding offer can only be recruited in terrain: Baron's Castle.
+addunitrec  "Halberdier"                      100  5   50   0    5
+recterr       30                              # The preceding offer can only be recruited in terrain: Baron's Castle.
+addunitrec  "Zweihander"                      100  5   50   0   10
+recterr       30                              # The preceding offer can only be recruited in terrain: Baron's Castle.
+addunitrec  "Catapult"                        100  1   25   0   50
+recterr       30                              # The preceding offer can only be recruited in terrain: Baron's Castle.
+
+# Terrain: 1: Fortified Hoburg.
+#                                               % No gold die iron
+addunitrec  "Hoburg Militia"                  100 15   50   0    0
+recterr        1                              # The preceding offer can only be recruited in terrain: Fortified Hoburg.
+addunitrec  "Hoburg Slinger"                  100 15   50   0    0
+recterr        1                              # The preceding offer can only be recruited in terrain: Fortified Hoburg.
+
+# Terrain: 32: Troll Pit.
+#                                               % No gold die iron
+addunitrec  "Goblin"                          100 15   50   0    0
+recterr       32                              # The preceding offer can only be recruited in terrain: Troll Pit.
+
+# Terrain: 112: Mountain Stronghold.
+#                                               % No gold die iron
+addunitrec  "Bakemono Sho"                    100  5   25   0    0
+recterr      112                              # The preceding offer can only be recruited in terrain: Mountain Stronghold.
+addunitrec  "Bakemono Bowman"                 100  5   25   0    0
+recterr      112                              # The preceding offer can only be recruited in terrain: Mountain Stronghold.
+
+# Terrain: -44: fire plane.
+#                                               % No gold die iron
+addunitrec  "Ember Warrior"                   100  5  100   0    0
+recterr      -44                              # The preceding offer can only be recruited in terrain: fire plane.
+addunitrec  "Flame Spirit"                     25  1  100   0    0 # once per offer.
+recterr      -44                              # The preceding offer can only be recruited in terrain: fire plane.
+addunitrec  "Magma Child"                      50  1   75   0    0 # once per offer.
+recterr      -44                              # The preceding offer can only be recruited in terrain: fire plane.
+addcomrec   "Champion of Flames"                3     150   0    0 # once per offer.
+recterr      -44                              # The preceding offer can only be recruited in terrain: fire plane.
+
+# Terrain: -52: ice citadels.
+#                                               % No gold die iron
+addunitrec  "Mist Warrior"                    100  5  150   0    0
+recterr      -52                              # The preceding offer can only be recruited in terrain: ice citadels.
+addunitrec  "Yeti"                            100  1   50   0    0
+recterr      -52                              # The preceding offer can only be recruited in terrain: ice citadels.
+
+# Terrain: -45: water plane.
+#                                               % No gold die iron
+addunitrec  "Wave Warrior"                    100  5  100   0    0
+recterr      -45                              # The preceding offer can only be recruited in terrain: water plane.
+addunitrec  "Undine"                           25  2  200   0    0 # once per offer.
+recterr      -45                              # The preceding offer can only be recruited in terrain: water plane.
+addcomrec   "Champion of Waves"                 3     150   0    0 # once per offer.
+recterr      -45                              # The preceding offer can only be recruited in terrain: water plane.
+
+# Terrain: -46: air plane.
+#                                               % No gold die iron
+addunitrec  "Cloud Warrior"                   100  5  100   0    0
+recterr      -46                              # The preceding offer can only be recruited in terrain: air plane.
+addunitrec  "Sylph"                            25  2  200   0    0 # once per offer.
+recterr      -46                              # The preceding offer can only be recruited in terrain: air plane.
+addcomrec   "Champion of Storms"                3     150   0    0 # once per offer.
+recterr      -46                              # The preceding offer can only be recruited in terrain: air plane.
+
+# Terrain: -47: earth plane.
+#                                               % No gold die iron
+addunitrec  "Stone Warrior"                   100  5  100   0    0
+recterr      -47                              # The preceding offer can only be recruited in terrain: earth plane.
+addunitrec  "Earth Gnome"                      25  1  100   0    0 # once per offer.
+recterr      -47                              # The preceding offer can only be recruited in terrain: earth plane.
+addcomrec   "Champion of Mountains"             3     150   0    0 # once per offer.
+recterr      -47                              # The preceding offer can only be recruited in terrain: earth plane.
+
+# Terrain: 22: Castle.
+#                                               % No gold die iron
+addunitrec  "Heavy Infantry"                  100  5   50   0   25 # not for Kobold class.
+recterr       22                              # The preceding offer can only be recruited in terrain: Castle.
+addunitrec  "Catapult"                        100  1   25   0   50 # not for Kobold class.
+recterr       22                              # The preceding offer can only be recruited in terrain: Castle.
+
+# Terrain: 38: Old Castle Ruin.
+#                                               % No gold die iron
+addunitrec  "Brigand"                         100  2   25   0    0 # not for Kobold class.
+recterr       38                              # The preceding offer can only be recruited in terrain: Old Castle Ruin.
+addunitrec  "Werewolf"                          1  1   25   0    0 # once per offer; not for Kobold class.
+recterr       38                              # The preceding offer can only be recruited in terrain: Old Castle Ruin.
+
+# Terrain: 160: Desert Palace.
+#                                               % No gold die iron
+addunitrec  "Desert Warrior"                  100  4   50   0    5 # not for Kobold class.
+recterr      160                              # The preceding offer can only be recruited in terrain: Desert Palace.
+addunitrec  "Camel Rider"                     100  2   50   0    5 # not for Kobold class.
+recterr      160                              # The preceding offer can only be recruited in terrain: Desert Palace.
+
+# Terrain: 223: Nexus.
+#                                               % No gold die iron
+addunitrec  "Ether Warrior"                    25  5  500   0    0 # once per offer.
+recterr      223                              # The preceding offer can only be recruited in terrain: Nexus.
+addcomrec   "Ether Lord"                        3     250  50    0 # once per offer.
+recterr      223                              # The preceding offer can only be recruited in terrain: Nexus.
+
+# Terrain: -106: sky plane.
+#                                               % No gold die iron
+addunitrec  "Cloudfolk Archer"                100  5   75   0    0 # not for Kobold class.
+recterr     -106                              # The preceding offer can only be recruited in terrain: sky plane.
+addunitrec  "Cloudfolk Soldier"               100  5   75   0    0 # not for Kobold class.
+recterr     -106                              # The preceding offer can only be recruited in terrain: sky plane.
+addunitrec  "Cloudfolk Lady"                    4  2   75   0    0 # once per offer; not for Kobold class.
+recterr     -106                              # The preceding offer can only be recruited in terrain: sky plane.
+addcomrec   "Cloudfolk Elder"                   1      75  25    0 # once per offer; not for Kobold class.
+libraryrec                                    # +1% to chance per library point owned, to a max of +10% for 10+ library points.
+recterr     -106                              # The preceding offer can only be recruited in terrain: sky plane.
+
+# © 2021-2025 by Colonel Dracula joins the Navy.  All Rights Reserved.

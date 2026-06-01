@@ -1,0 +1,24 @@
+---
+description: Git commit and GitHub standards for Populum mod repo
+alwaysApply: true
+---
+
+# Git Standards
+
+## Identity
+
+This repo uses local git identity: `tomst <xelos.wot@gmail.com>`. Remote pushes use SSH via `github.com-populum` (personal gaming GitHub account, not business credentials).
+
+## No Cursor attribution
+
+Never include "Made with Cursor", "Built with Cursor", or `Co-authored-by: Cursor` in commits, PR titles, or PR bodies.
+
+## Commit and push policy
+
+- Only commit when explicitly asked
+- Never push unless explicitly asked
+- Never update global git config from this project
+
+## Commit messages
+
+Short, imperative, focused on why. Match existing style (e.g. "Renata fixes", "Update populum.c5m").

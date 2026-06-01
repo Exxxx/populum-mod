@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "*.c5m": "c5m",
+    "*.coem": "c5m"
+  },
+  "files.watcherExclude": {
+    "**/py_tools/references/**": true
+  },
+  "search.exclude": {
+    "**/py_tools/references/**": true
+  },
+  "editor.largeFileOptimizations": true
+}
