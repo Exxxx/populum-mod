@@ -7,7 +7,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 VANILLA_RITUALS = REPO_ROOT / "py_tools" / "references" / "Ritual Data v5.33.c5m"
-MOD_FILE = REPO_ROOT / "populum.c5m"
+MOD_FILE = REPO_ROOT / "populum" / "populum.c5m"
 
 NEW_RITUAL_RE = re.compile(r'^newritual\s+"(.+)"')
 GAINRIT_RE = re.compile(r'^gainrit\s+(-?\d+)(.*)$')

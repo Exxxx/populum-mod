@@ -1,12 +1,12 @@
 ---
 description: Look up CoE5 modding commands before editing populum.c5m
-globs: populum.c5m,**/*.c5m
+globs: populum/populum.c5m,**/*.c5m
 alwaysApply: false
 ---
 
 # C5M Command Lookup (required before edits)
 
-Before adding or changing commands in `populum.c5m`, look up every unfamiliar `.c5m` command in the extracted modding manual. Do not guess syntax, argument order, or semantics.
+Before adding or changing commands in `populum/populum.c5m`, look up every unfamiliar `.c5m` command in the extracted modding manual. Do not guess syntax, argument order, or semantics.
 
 ## Ensure rules exist
 

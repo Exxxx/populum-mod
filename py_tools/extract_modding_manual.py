@@ -34,7 +34,7 @@ DEFAULT_JSON = REPO_ROOT / "py_tools" / "references" / "coe5_modding_rules.json"
 DEFAULT_INDEX = REPO_ROOT / "py_tools" / "references" / "coe5_command_index.json"
 DEFAULT_MARKDOWN = REPO_ROOT / "py_tools" / "references" / "coe5_modding_rules.md"
 MANUAL_URL = "https://illwinter.com/coe5/coe5modding.html"
-MOD_FILE = REPO_ROOT / "populum.c5m"
+MOD_FILE = REPO_ROOT / "populum" / "populum.c5m"
 
 HEADING_TAGS = {"h2": 1, "h3": 2, "h4": 3, "h5": 4}
 

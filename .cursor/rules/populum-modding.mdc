@@ -9,10 +9,13 @@ This workspace is the live Populum mod for Conquest of Elysium 5.
 
 ## Mod structure
 
-- Primary mod file: `populum.c5m` (~90k lines) at repo root
-- Assets: `pop/` (sprites, banners, map tiles)
-- Custom map: `GOTcoe5.coem`
-- Steam Workshop: `coe5ws.txt`, `steam_descr.txt`, `banner.png`
+- **Steam publish folder:** `populum/` (only this folder is uploaded to Workshop)
+- Primary mod file: `populum/populum.c5m` (~90k lines)
+- Assets: `populum/pop/` (sprites, banners, map tiles)
+- Custom map: `populum/GOTcoe5.coem`
+- Steam Workshop: `populum/coe5ws.txt`, `populum/steam_descr.txt`, `populum/banner.png`
+- Dev tooling (repo root, not published): `py_tools/`, `art_tools/`, `tools/`, `.vscode/`, `.cursor/`
+- Sprite batch pipeline: `art_tools/` (ComfyUI scan/generate; outputs land in `populum/pop/`)
 - Helper scripts: `py_tools/pop_hp.py`, `py_tools/gainrit_describer.py`, `py_tools/gainrit_distance.py`, `py_tools/gainrit_validator.py`, `py_tools/validate_populum.py`, `py_tools/extract_modding_manual.py`
 - Extracted manual rules: `py_tools/references/coe5_modding_rules.json`, `py_tools/references/coe5_command_index.json`
 
@@ -32,7 +35,7 @@ When updating existing content, **append only** new units, classes, rituals, wea
 
 CoE5 resolves `gainrit <offset>` against the **global ritual list**: vanilla `newritual` entries first, then every Populum `newritual` in file order. Adding or removing a mod ritual changes all later indices; stale offsets grant the wrong ritual with no in-game error.
 
-After **any** edit that adds, removes, or moves a `newritual` block in `populum.c5m`:
+After **any** edit that adds, removes, or moves a `newritual` block in `populum/populum.c5m`:
 
 ```bash
 python py_tools/validate_populum.py --fix --describe
@@ -68,9 +71,28 @@ Never edit reference files as part of Populum changes.
 
 ## Editing discipline
 
-- Minimize diffs in the monolithic `populum.c5m`; avoid unrelated reformatting
+- Minimize diffs in the monolithic `populum/populum.c5m`; avoid unrelated reformatting
 - Preserve filename case for TGA/PNG assets (Linux and Steam Workshop are case-sensitive)
-- Graphics: 24- or 32-bit TGA or PNG in `pop/`
+- Graphics: 24- or 32-bit TGA or PNG in `populum/pop/`
+
+## Sprite references and batch generation
+
+When adding **new original** mod content that needs graphics, **include the sprite path in `.c5m` even if the image file does not exist yet**. Missing files are expected during authoring; they are filled in later by the `art_tools/` batch pipeline.
+
+- **`newmonster`:** set `spr1` (and `spr2` after `spr1` when attack art differs). Use paths under `pop/` (e.g. `spr1 "pop/monster/myunit01.tga"`, `spr2 "pop/monster/myunit02.tga"`).
+- **`newitem`:** set `spr "pop/item/myitem.tga"`.
+- **`selectterr` / `newterr`:** set `spr "pop/map/mytile.tga"`.
+- Do **not** omit sprite lines or defer them because the TGA/PNG is missing.
+- Do **not** block `.c5m` edits waiting for art; pick stable final filenames up front (case-sensitive for Workshop/Linux).
+
+After sprite paths exist in the mod file, generate missing assets with:
+
+```bash
+python art_tools/comfyui_run_sprites.py --scan populum/populum.c5m
+python art_tools/comfyui_run_sprites.py --jobs art_tools/generated/missing_sprites_jobs.json --resume
+```
+
+Style tuning (once): `python art_tools/comfyui_probe_sprite_styles.py --resume`, then set `art_tools/coe5_probe_winners.json`.
 
 ## Testing
 

@@ -1,7 +1,12 @@
-#ignore picture edits to differentiate
-banner.png
-pop/popbanner.tga
-pop/popbannercheat.tga
+# Populum mod assets (local banner variants)
+populum/banner.png
+populum/pop/popbanner.tga
+populum/pop/popbannercheat.tga
+
+# Local art assets, vanilla sprite dumps, ComfyUI outputs (not published)
+art/
+art_tools/generated/
+art_tools/.venv/
 
 # Python
 __pycache__/

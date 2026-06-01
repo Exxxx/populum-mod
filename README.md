@@ -114,11 +114,14 @@ pip install -r py_tools/requirements.txt
 
 ### Repository layout
 
+Open the `mods/` folder as the workspace (parent of `populum/`). Only `populum/` is published to Steam Workshop.
+
 | Path | Purpose |
 |------|---------|
-| `populum.c5m` | Main mod file (~90k lines) |
-| `pop/` | Sprites, banners, map tiles |
-| `GOTcoe5.coem` | Custom Game of Thrones map |
+| `populum/populum.c5m` | Main mod file (~90k lines) |
+| `populum/pop/` | Sprites, banners, map tiles |
+| `populum/GOTcoe5.coem` | Custom Game of Thrones map |
+| `populum/readme.txt`, `populum/steam_descr.txt` | Steam Workshop text |
 | `py_tools/` | Validation, lookup, and utility scripts |
 | `tools/` | VS Code/Cursor syntax extension and grammar generator |
 | `.vscode/` | Workspace settings and validation tasks |
@@ -165,6 +168,32 @@ In VS Code or Cursor: **Tasks → Run Test Task → Validate Populum (gainrit)**
 | `py_tools/pop_hp.py` | Bulk HP rebalance using Populum's scaling formula |
 | `tools/generate_c5m_grammar.py` | Rebuild TextMate grammar after `c5m.xml` changes |
 
+### Sprite art pipeline (`art_tools/`)
+
+ComfyUI batch tools for generating missing `spr1` / `spr2` / item / terrain sprites. Requires ComfyUI at `http://127.0.0.1:8000` and the Qwen workflows in `art_tools/workflows/`.
+
+```bash
+# One-time: create venv and install deps
+python -m venv art_tools/.venv
+art_tools/.venv/Scripts/pip install -r art_tools/requirements.txt
+
+# Windows (PowerShell) — use venv Python for all art_tools commands:
+$env:ART_PY = "art_tools/.venv/Scripts/python.exe"
+
+# 1. Probe art styles (pick winner in art_tools/coe5_probe_winners.json)
+& $env:ART_PY art_tools/comfyui_probe_sprite_styles.py --resume
+
+# 2. Scan mod for missing sprite files
+& $env:ART_PY art_tools/comfyui_run_sprites.py --scan populum/populum.c5m
+
+# 3. Generate missing sprites (Pass 1: all spr1/2512, then Pass 2: all spr2/Edit)
+& $env:ART_PY art_tools/comfyui_run_sprites.py --jobs art_tools/generated/missing_sprites_jobs.json --resume
+```
+
+On Linux/macOS, use `art_tools/.venv/bin/python` instead of `Scripts/python.exe`.
+
+VS Code/Cursor tasks: **Scan Populum missing sprites**, **Probe COE5 sprite styles (dry-run)**, **Run COE5 sprite batch (dry-run)**.
+
 **Command lookup** (run from repo root):
 
 ```bash
@@ -190,7 +219,7 @@ Pick one editor — all paths below use files included in this repo.
 
 1. Install the Python extension (`ms-python.python`) if prompted.
 2. Install the bundled c5m syntax extension: **Extensions → … → Install from VSIX…** → select `tools/vscode-c5m/c5m-1.0.0.vsix`. (This extension is not published to the marketplace.)
-3. Open this folder as the workspace. `.vscode/settings.json` associates `*.c5m` and `*.coem` with the c5m language.
+3. Open the `mods/` folder as the workspace. `.vscode/settings.json` associates `*.c5m` and `*.coem` with the c5m language.
 
 **Notepad++**
 
@@ -212,7 +241,7 @@ python py_tools/extract_modding_manual.py extract --command-index --refresh
 
 ### Testing changes
 
-Edits in your local mod folder are picked up by CoE5 immediately after save. Enable the Populum mod in-game and restart if the mod list was open during editing.
+Edits in `populum/` are picked up by CoE5 immediately after save. Enable the Populum mod in-game and restart if the mod list was open during editing.
 
 ---
 
