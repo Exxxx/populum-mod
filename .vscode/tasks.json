@@ -46,6 +46,16 @@
       "problemMatcher": []
     },
     {
+      "label": "Probe monster style tuning (dry-run)",
+      "type": "shell",
+      "command": "${workspaceFolder}/art_tools/.venv/Scripts/python.exe art_tools/comfyui_probe_monster_tuning.py --families fidelity original --dry-run",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Run COE5 sprite batch (dry-run)",
       "type": "shell",
       "command": "${workspaceFolder}/art_tools/.venv/Scripts/python.exe art_tools/comfyui_run_sprites.py --scan populum/populum.c5m --dry-run",

@@ -1,0 +1,17 @@
+{
+  "description": "Default vanilla sprite numbers for monster style tuning probes",
+  "sprite_numbers": [
+    0,
+    1002,
+    1018,
+    2006,
+    4042
+  ],
+  "notes": {
+    "0": "Baron — human elite spr1",
+    "1002": "Spearman — standard infantry",
+    "1018": "Storm Titan — huge storm giant (override; data lists Knight at 1018)",
+    "2006": "Unicorn Knight — exotic mount",
+    "4042": "God Emperor — huge (128px canvas)"
+  }
+}

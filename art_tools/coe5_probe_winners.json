@@ -1,0 +1,6 @@
+{
+  "style_id": "coe5_painted_pixel",
+  "fidelity_style_id": "coe5_fidelity_painted",
+  "original_style_id": "original_watercolor",
+  "notes": "Update after running comfyui_probe_sprite_styles.py or comfyui_probe_monster_tuning.py"
+}

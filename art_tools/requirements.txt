@@ -1,0 +1,2 @@
+# COE5 sprite art pipeline (art_tools/)
+Pillow>=10.0

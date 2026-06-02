@@ -1,0 +1,512 @@
+#Cheats file
+
+icon "bannercheat.tga"
+description "A stand-alone cheat mod for Vanilla and other mods, this cheat mod only works for the first player slot. You will receive a large amount of all resources and a special director tool."
+modprio 9
+
+
+newweapon "Annihilation"
+range      0
+init       4
+dmgtype    7  # Magic
+dmg     9999
+aoe     9999  # All squares
+
+
+newweapon "Charm Cheat"                                                    
+trgrank    9  
+range      8
+init       4
+dmgtype   14  
+aoe      999  
+an            
+flymode    8  
+flylook  149
+flysound  29  
+sound     -1  
+
+newweapon "Corrupt Cheat"                                                    
+trgrank    9  
+range      8
+init       4
+dmgtype   22  
+aoe      999  
+an            
+flymode    8  
+flylook  149
+flysound  29  
+sound     -1  
+
+
+
+newweapon "Meteors"
+trgrank    9  # Any enemy
+range 99
+aoe        2
+init       4
+dmgtype    2  # Blunt
+scatter       # May deviate one square from intended target
+flymode    9  # Particles from heaven (meteor)
+flylook   84  # Meteor
+flysound  16  # fire.smp
+look      69  # Flame Smoke
+sound     90  # bomb.sw
+next   #-191    Extra effect once target is hit: 191, Meteor Flame Burst
+nextdmg    8  # D8 fire damage
+
+newweapon "Meteor Flame Burst"  # 191
+range 1
+init       1
+dmgtype    4  # Fire
+aoe        5  # 5 squares near and including target
+look      68  # Flame
+sound     16  # fire.smp
+
+newweapon "Strong Meteor Showers"      #  60
+trgrank    0  # Self
+range 0
+init       4
+dmgtype    2  # Blunt
+aoe     9997  # 25% of all squares
+flymode    9  # Particles from heaven (meteor)
+flylook   86  # Meteor Shower
+flysound  16  # fire.smp
+look      69  # Flame Smoke
+sound     90  # bomb.sw
+next 
+nextdmg    8  # D8 fire damage
+
+newweapon "Meteor Flame Burst"  # 191
+range 1
+init       1
+dmgtype    4  # Fire
+aoe        5  # 5 squares near and including target
+look      68  # Flame
+sound     16  # fire.smp
+
+newweapon "Kill Self"
+trgrank    0  
+range 1
+init       0
+dmgtype    7
+an
+sound     -1  # No sound on impact
+
+newmonster "Annihilation"
+spr1 "blank64.tga"
+spr2 "blank64.tga"
+rank            1  
+frontpos
+hp              1
+armor           0
+mr              1  
+mor             1  
+str             1  
+prebatweapon 9999 "Annihilation"
+meleeambush 1
+invisible
+dmgonterr -1
+dmgonterrbonus 5
+
+newmonster "Change Team"
+descr "Charm unit tool."
+copyspr "Will o'the Wisp"
+rank             1  
+frontpos
+hp               0
+armor           99
+mr              99  
+mor             99  
+str             99  
+prebatweapon 20 "Charm Cheat"
+prebatweapon 20 "Corrupt Cheat"
+assassinweapon 20 "Charm Cheat"
+#assassinweapon 1 "Kill Self"
+fireres 100
+coldres 100
+shockres 100
+poisoncloud 1
+flying
+fast
+water
+charmres            
+allrit          -1  
+passwall
+voidsanity 100
+invisible
+saner 100
+spiritsight
+nametype 0
+melt 1
+dmgonterr -1
+dmgonterrbonus 5
+
+
+newmonster "Director Tool"
+descr "A cheat tool for directing a game."
+spr1 "blank64.tga"
+spr2 "blank64.tga"
+rank             1  
+frontpos
+hp             999
+armor           99
+mr              99  
+mor             99  
+str             99
+fireres 100
+coldres 100
+shockres 100
+poisonres 100
+flying
+teleport
+fast
+water
+charmres            
+diseaseres          
+banishsurv      
+unique 1
+allrit          -1  
+passwall
+voidsanity 100
+invisible
+saner 100
+fastheal
+spiritsight
+immortal
+immortalap       1
+eatvillage       1
+nonmaginvul
+lucky
+reformloc     1000  
+nametype 62
+immobile
+nocombat
+
+
+newmonster "Make Ruin"
+descr "Turns the tile into a ruin after the turn."
+spr1 "blank64.tga"
+spr2 "blank64.tga"
+invisible
+hp 3
+melt 1
+assassinweapon 1 "Kill Self"
+nocombat
+makeruin 100
+stationary
+dmgonterr -1
+dmgonterrbonus 9999
+
+
+newmonster "Meteors"
+descr "What's that in the sky?"
+spr1 "blank64.tga"
+spr2 "blank64.tga"
+rank             1  
+frontpos
+hp               1
+armor           0
+mr              1  
+mor             1  
+str             1  
+prebatweapon 40 "Meteors"
+prebatweapon 40 "Meteors"
+prebatweapon 40 "Meteors"
+prebatweapon 40 "Meteors"
+assassinweapon 1 "Kill Self"
+meleeambush 1
+invisible
+stationary
+dmgonterr -1
+dmgonterrbonus 9999
+
+newmonster "Strong Meteor Showers"
+descr "What's that in the sky?"
+spr1 "blank64.tga"
+spr2 "blank64.tga"
+rank             1  
+frontpos
+hp               1
+armor           0
+mr              1  
+mor             1  
+str             1  
+prebatweapon 35 "Strong Meteor Showers"
+prebatweapon 35 "Strong Meteor Showers"
+assassinweapon 1 "Kill Self"
+meleeambush 1
+invisible
+stationary
+dmgonterr -1
+dmgonterrbonus 9999
+
+
+newritpow
+newritual     "Omniscience"
+descr "See all things happening on your current plane."
+level                  1
+apcost -1
+multiplane 2
+soundfx               23 # Sound effect when the ritual is cast: airduct.smp.
+castertarg
+scryloc 1000
+closewin                 # Closes cast ritual window.
+free
+
+newritual     "Godly Endurance"
+descr "Regain AP"
+level                  1
+apcost -6
+soundfx               23 # Sound effect when the ritual is cast: airduct.smp.
+castertarg
+apcost
+closewin                 # Closes cast ritual window.
+free
+
+newritual     "Travel"
+descr "Teleport anywhere"
+level                  2
+apcost -1
+chooseterrloc         -1 # Player chooses the target location
+multiplane 2
+teleportloc            2 # Teleport caster and army to target location.
+soundfx               23 # Sound effect when the ritual is cast: airduct.smp.
+closewin                 # Closes cast ritual window.
+free
+
+newritual     "Change Team 0"
+descr "Places a unit that changes the team of all enemy units if they are charm-able."
+level                  2
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 0
+farsummon
+addstring     "Change Team"
+apcost -1
+free
+
+newritual     "Change Team 24 (Independents)"
+descr "Places a unit that changes the team of all enemy units if they are charm-able. The Independents will stay while special monsters disappear."
+level                  2
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 24
+farsummon
+addstring     "Change Team"
+apcost -1
+free
+
+newritual     "Change Team 25 (Special monsters)"
+descr "Places a unit that changes the team of all enemy units if they are charm-able. The Independents will stay while special monsters disappear."
+level                  2
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 25
+farsummon
+addstring     "Change Team"
+apcost -1
+free
+
+newritual     "Change Team 26 (Horrors)"
+descr "Places a unit that changes the team of all enemy units if they are charm-able."
+level                  2
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 26
+farsummon
+addstring     "Change Team"
+apcost -1
+free
+
+newritual     "Change Team 27 (Hades)"
+descr "Places a unit that changes the team of all enemy units if they are charm-able."
+level                  2
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 27
+farsummon
+addstring     "Change Team"
+apcost -1
+free
+
+newritual     "Change Team 28 (Inferno)"
+descr "Places a unit that changes the team of all enemy units if they are charm-able."
+level                  2
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 28
+farsummon
+addstring     "Change Team"
+apcost -1
+free
+
+newritual     "Change Team 29 (Celestial)"
+descr "Places a unit that changes the team of all enemy units if they are charm-able."
+level                  2
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 29
+farsummon
+addstring     "Change Team"
+apcost -1
+free
+
+newritual     "Change Team 30 (Kingdom/Empire)"
+descr "Places a unit that changes the team of all enemy units if they are charm-able."
+level                  2
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 30
+farsummon
+addstring     "Change Team"
+apcost -1
+free
+
+newritual     "Kill Tile"
+descr "Kills all units on tile including your own."
+level                  3
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 25
+farsummon
+addstring     "Annihilation"
+apcost -1
+free
+
+newritual     "Call Meteor"
+descr "Cause a Meteor to strike a tile."
+level                  1
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 25
+farsummon
+addstring     "1*Meteors"
+addstring     "1*Strong Meteor Showers"
+apcost -1
+free
+
+newritual     "Call Make Ruin"
+descr "Causes the tile to become a ruin the next turn."
+level                  1
+chooseloc              1 # Player chooses the target location, which may deviate to a location with a horror marked unit.
+multiplane 2
+setplayer 25
+farsummon
+addstring     "1*Make Ruin"
+apcost -1
+free
+
+
+#newritual "Debugger"
+#level                  4
+#apcost -1
+#free                     # This ritual is learned for free and everyone will know it from the start if able to.
+#summoning
+##addstring     "20*Slave" #test
+#addstring     "Ordinary Princess" #test
+##addstring     "Young Phoenix" #test
+##addstring     "4:Priestess" #test confirmed pre-onyx priestess
+##promotion 1
+##addstring "Death Knight"
+##addstring "Death Knight"
+##killtarg 10
+#descr "Tests a particular ritual function used in modding and testing. Likely whatever the last thing tested."
+
+
+selectmonster "Director Tool"
+power 0 3
+
+#addresources 0 0 500        # resources
+#addresources 0 1 100        # resources
+#addresources 0 2 100        # resources
+#addresources 0 3 100        # resources
+#addresources 0 4 100        # resources
+#addresources 0 5 100        # resources
+#addresources 0 7 100        # resources
+#addresources 0 8 100        # resources
+#addresources 0 9 100        # resources
+#addresources 0 10 100       # resources
+#addresources 0 12 100       # resources
+#addresources 0 14 100       # resources
+#endevent
+
+
+##Cheats
+#playerevent
+##+player 15 #sets the player, player 0=player 1 (green default)
+#+player 0 #sets the player, player 0=player 1 (green default)
+#+turnnbr -1
+#newunits -2 "c*Director Tool" #Spawns the director tool
+##newunits -2 "c*Engineer" #test
+#addresources -2 0 50000        # resources
+#addresources -2 1 10000        # resources
+#addresources -2 2 10000        # resources
+#addresources -2 3 10000        # resources
+#addresources -2 4 10000        # resources
+#addresources -2 5 10000        # resources
+#addresources -2 7 10000        # resources
+#addresources -2 8 10000        # resources
+#addresources -2 9 10000        # resources
+#addresources -2 10 10000       # resources
+#addresources -2 12 10000       # resources
+#addresources -2 14 10000       # resources
+#endevent
+##cleanup change team to replace melting
+#playerevent
+#+hasunit -2 "Change Team"
+#killunit 9999
+#endevent
+
+playerevent
+#+player 15 #sets the player, player 0=player 1 (green default)
++player 0 #sets the player, player 0=player 1 (green default)
+#+player 7 #sets the player, player 0=player 1 (green default) 7=senator 8= mage on GOT203
++turnnbr -1
+newunits -2 "c*Director Tool" #Spawns the director tool
+#newunits -2 "c*Gigax the Awesome" #test
+#newunits -2 "c*Hero" #test
+#newunits -2 "c*Heroine" #test
+#newunits -2 "c*Unexpected Hero" #test
+#newunits -2 "c*Farmer" #testp
+#newunits -2 "Frost Warrior" #testp
+#newunits -2 "growbase" #testp
+#newunits -2 "Warrior Totem" #testp
+#newunits -2 "c*Succubus" #testp
+#newunits -2 "c*Ice Witch" #testp
+#newunits -2 "c*New 309" #test
+#newunits -2 "c*Warlock's Apprentice" #test
+#newunits -2 "c*Princess" #test
+#newunits -2 "c*Baroness" #test
+
+#newunits -2 "c*Old Weapon Master" #test
+#newunits -2 "30*Nephil Offspring" #test
+#newunits -2 "c*Alchemist" #test
+#newunits -2 "c*Master Alchemist" #test
+#newunits -2 "c*Princess" #test
+#newunits -2 "Princess" #test
+#newunits -2 "c*Emperor" #test
+
+#newunits -2 "c*Hedge Wizard" #test
+#newunits -2 "c*Test gem gather" #test
+#newunits -2 "c*Bard" #test
+#newunits -2 "c*Slaver" #test
+#newunits -2 "c*Pristine Onyx Golem" #test
+#newunits -2 "c*Pristine Oak Golem" #test
+#newunits -2 "c*Pristine Clay Golem" #test
+
+addresources -2 0 500000     # resources
+addresources -2 1 100000     # resources
+addresources -2 2 100000     # resources
+addresources -2 3 100000     # resources
+addresources -2 4 100000     # resources
+addresources -2 5 100000     # resources
+addresources -2 6 100000     # resources
+addresources -2 7 100000     # resources
+addresources -2 8 100000     # resources
+addresources -2 9 100000     # resources
+addresources -2 10 100000     # resources
+addresources -2 11 100000     # resources
+addresources -2 12 100000     # resources
+addresources -2 13 100000     # resources
+addresources -2 14 100000     # resources
+endevent

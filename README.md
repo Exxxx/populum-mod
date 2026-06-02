@@ -188,11 +188,18 @@ $env:ART_PY = "art_tools/.venv/Scripts/python.exe"
 
 # 3. Generate missing sprites (Pass 1: all spr1/2512, then Pass 2: all spr2/Edit)
 & $env:ART_PY art_tools/comfyui_run_sprites.py --jobs art_tools/generated/missing_sprites_jobs.json --resume
+
+# Monster style tuning (vanilla controls in art/coe5_sprites/monster/)
+& $env:ART_PY art_tools/monster_sprite_registry.py --refresh
+& $env:ART_PY art_tools/monster_sprite_registry.py --lookup Spearman
+& $env:ART_PY art_tools/monster_sprite_registry.py --lookup knight --pick 1
+& $env:ART_PY art_tools/comfyui_probe_monster_tuning.py --families fidelity original --dry-run
+& $env:ART_PY art_tools/comfyui_probe_monster_tuning.py --families fidelity original --resume
 ```
 
 On Linux/macOS, use `art_tools/.venv/bin/python` instead of `Scripts/python.exe`.
 
-VS Code/Cursor tasks: **Scan Populum missing sprites**, **Probe COE5 sprite styles (dry-run)**, **Run COE5 sprite batch (dry-run)**.
+VS Code/Cursor tasks: **Scan Populum missing sprites**, **Probe COE5 sprite styles (dry-run)**, **Probe monster style tuning (dry-run)**, **Run COE5 sprite batch (dry-run)**.
 
 **Command lookup** (run from repo root):
 

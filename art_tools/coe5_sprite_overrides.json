@@ -1,0 +1,10 @@
+{
+  "_comment": "Maps control/TRS file index to monster identity when Monster Data # sprite number disagrees with extracted art, or when multiple monsters share one sprite number.",
+  "overrides": {
+    "1018": {
+      "monster_index": 478,
+      "visual_subject": "elderly bearded storm giant in purple toga, holding lightning bolts",
+      "note": "Control art is Storm Titan (storm giant king with lightning). Monster Data assigns sprite 1018 to Knight, Crusader, and Phantasmal Knight; Storm Titan is listed as sprite 11072."
+    }
+  }
+}
