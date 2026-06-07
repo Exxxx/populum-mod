@@ -31,6 +31,13 @@ When updating existing content, **append only** new units, classes, rituals, wea
 
 **Appending `newritual` at the end is safe for save games but still shifts the global ritual index** used by `gainrit` offsets on every line that points forward to a mod ritual. Always run gainrit validation after any `newritual` add, remove, or reorder (see below).
 
+## Ritual power placement (ritpow vs newritpow)
+
+- **`newritpow`** — creates a mod-original ritual school. All rituals belonging to that school go immediately after its `newritpow` line (until the next `newritpow`). Do **not** use explicit `ritpow <n>` for mod-created schools.
+- **`ritpow <n>`** — only when adding rituals to an **existing vanilla** school. Verify the number in `py_tools/references/Ritual Data v5.33.c5m` or the modding manual ritual-school table (e.g. `ritpow 48 # Scourge Lord`).
+- **Never** append mod-school rituals at the file end with `ritpow <mod_index>` as a shortcut — insert them in the correct `newritpow` block instead.
+- After any ritual add/move/remove, run `validate_populum.py --fix --describe`.
+
 ## Gainrit validation (required after ritual changes)
 
 CoE5 resolves `gainrit <offset>` against the **global ritual list**: vanilla `newritual` entries first, then every Populum `newritual` in file order. Adding or removing a mod ritual changes all later indices; stale offsets grant the wrong ritual with no in-game error.
@@ -74,6 +81,22 @@ Never edit reference files as part of Populum changes.
 - Minimize diffs in the monolithic `populum/populum.c5m`; avoid unrelated reformatting
 - Preserve filename case for TGA/PNG assets (Linux and Steam Workshop are case-sensitive)
 - Graphics: 24- or 32-bit TGA or PNG in `populum/pop/`
+
+## Monster weapon commands (damage bonus required)
+
+CoE5 weapon lines always lead with a **damage bonus**, then the weapon (name or numeric id). Omitting the bonus defaults to **-1 damage**.
+
+```text
+rangedweapon 0 "Crossbow"      # +0 bonus (standard crossbow damage)
+rangedweapon 0   9             # +0 bonus, weapon id 9 (Crossbow)
+meleeweapon  2   3             # +2 bonus, weapon id 3 (Axe)
+meleeweaponbonus 2 "Grapple"   # +2 bonus named weapon
+rangedweapon50 0 "Throwing Dagger"
+```
+
+**Wrong:** `rangedweapon "Crossbow"` — applies -1 damage penalty.
+
+When editing or adding weapons, check vanilla stats in `py_tools/references/Monster Data v5.33.c5m` for the intended bonus, or use `0` for standard weapon damage. Lookup: `python py_tools/extract_modding_manual.py lookup --command-index rangedweapon`.
 
 ## Sprite references and batch generation
 

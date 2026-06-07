@@ -34,10 +34,14 @@ python py_tools/extract_modding_manual.py table dmgtype
 4. Check Populum examples printed by `lookup` for established patterns in this mod.
 5. Cross-check entity names in `py_tools/references/` (Monster, Ritual, Weapon, etc.) — never invent duplicates.
 
+## Monster weapon lines
+
+`meleeweapon`, `rangedweapon`, and `*bonus`/`*spec`/`*50` variants require a **leading damage bonus** before the weapon name or id. A named weapon alone (e.g. `rangedweapon "Crossbow"`) applies **-1 damage**. Use `0` for standard damage: `rangedweapon 0 "Crossbow"`. Numeric form: `meleeweapon <bonus> <weapon_id>` (bonus is the first number, not the id).
+
 ## When editing
 
 - Respect command execution order (definitions before references).
-- Append new definitions at section ends for save compatibility.
+- Append new definitions at section ends for save compatibility (monsters, classes, weapons, terrain). Mod-school rituals belong in their `newritpow` block — see **Ritual power placement** in populum-modding rules — even when that means inserting mid-file.
 - Match existing indentation and comment style in surrounding code.
 
 ## After adding, removing, or reordering `newritual`

@@ -17168,6 +17168,15 @@ addterr 162
 addterr 163
 addterr 164
 
+selectterrgroup -1037
+setname "Farms, hamlets, tent villages and villages"
+addterr 5 # Farm
+addterr 6 # Farm
+addterr 7 # Hamlet
+addterr 18 # Village
+addterr 78 # Coastal Hamlet
+addterr 109 # Tent Village
+
 #selectterrgroup ????
 #setname "Earth locations"
 #addterr 12
@@ -18743,7 +18752,7 @@ armor          0
 mr              10  # Magic Resistance
 mor             99  # Morale
 str              1  # Strength
-meleeweapon  586  # Illusory Bite
+meleeweapon  1 586  # Illusory Bite
 float
 battlefast
 poisonres      100  # Poison immunity
@@ -18767,7 +18776,7 @@ armor          0
 mr              10  # Magic Resistance
 mor             99  # Morale
 str              1  # Strength
-meleeweapon  586  # Illusory Bite
+meleeweapon  1 586  # Illusory Bite
 float
 poisonres      100  # Poison immunity
 acutesenses
@@ -23340,7 +23349,7 @@ clearweapons
 rangedweapon50     1 512  
 meleeweapon     14  "Large Fist"   
 meleeweapon     14  "Large Fist"   
-meleeweaponbonus  "Large Hoof" 95  
+meleeweaponbonus 10 "Large Hoof"  
 spellrange 1
 selectmonster 1:"Apocalyptic Rider"                                         
 clearweapons
@@ -25440,25 +25449,25 @@ clearweapons
 spellweapon 58   3  
 spellweapon 39   2  
 spellrange 1
-meleeweapon  "Large Magic Staff"   5  
+meleeweapon 0 "Large Magic Staff"  
 selectmonster "Chaac of the South"                                         
 clearweapons
 spellweapon 58   3  
 spellweapon  3   2  
 spellrange 1
-meleeweapon  "Large Magic Staff"   5  
+meleeweapon 0 "Large Magic Staff"  
 selectmonster "Chaac of the West"                                          
 clearweapons
 spellweapon 58   3  
 spellweapon 38   2  
 spellrange 1
-meleeweapon  "Large Magic Staff"   5  
+meleeweapon 0 "Large Magic Staff"  
 selectmonster "Chaac of the North"                                         
 clearweapons
 spellweapon 58   3  
 spellweapon 27   2  
 spellrange 1
-meleeweapon  "Large Magic Staff"   5  
+meleeweapon 0 "Large Magic Staff"  
 selectmonster "Teotl of the Sky"                                           
 clearweapons
 spellweaponbonus  58   3  
@@ -25828,7 +25837,7 @@ armor            0
 mr               5  # Magic Resistance
 mor              3  # Morale
 str              5  # Strength
-rangedweapon "Bow"
+rangedweapon 0 "Bow"
 meleeweapon  -1  "Hoof"
 nobootslots
 growtime 24 #2 years and Centaur grows up, much faster than humans
@@ -26772,16 +26781,16 @@ clearweapons
 nametype 31
 aggressive
 meleeweapon  0  5  # Staff
-rangedweapon "Short-bow"
-meleeweaponbonus "Grapple"
+rangedweapon 0 "Short-bow"
+meleeweaponbonus 0 "Grapple"
 aggressive
 selectmonster "Brigand"
 clearweapons
 nametype 31
 aggressive
 meleeweapon  0  5  # Staff
-rangedweapon "Short-bow"
-meleeweaponbonus "Grapple"
+rangedweapon 0 "Short-bow"
+meleeweaponbonus 0 "Grapple"
 rank
 aggressive
 selectmonster "Bandit King"
@@ -26801,7 +26810,7 @@ armor          0
 mr               4  # Magic Resistance
 mor              5  # Morale
 str              5  # Strength
-rangedweapon   9  # Crossbow
+rangedweapon 0 "Crossbow"
 meleeweapon  2   3  
 # Axe (value 2: D9 slash damage)
 meleeweaponbonus 2 "Grapple"
@@ -26814,7 +26823,7 @@ nametype 31
 spawnmon 25
 spawn1d6mon 5
 spawnoffs 3
-wander 8
+wander 5
 #saner -1 #Slowly goes insane over time turning into a Bandit Lord when insane
 growtime 100
 money1
@@ -26893,9 +26902,9 @@ armor          0
 mr               4  # Magic Resistance
 mor              3  # Morale
 str              4  # Strength
-rangedweapon   "Short-bow"
+rangedweapon 0 "Short-bow"
 meleeweapon  0  5  # Staff
-meleeweaponbonus "Grapple"
+meleeweaponbonus 0 "Grapple"
 money2              # Prefers Gold Income Sites
 human
 allitemslots
@@ -28002,7 +28011,7 @@ selectmonster "Master Arch Wizard"
 gathergems
 gatherrelics
 clearweapons
-meleeweapon  676  # Magic Scepter
+meleeweapon 11 "Large Magic Scepter"
 spellweapon   22   3  # Golden Magic at level 3
 spellweapon50 56   1  # Gold Arcana at level 1
 spellweapon50 53   1  # Silver Arcana at level 1
@@ -28625,7 +28634,7 @@ selectmonster "Dancing Sword"
 clearweapons
 clearmove
 frontpos
-meleeweapon "Broadsword" 
+meleeweapon 0 "Broadsword" 
 float
 slashres
 inanimate
@@ -33004,9 +33013,9 @@ clearweapons
 shockres 10
 fireres  10
 coldres  10
-rangedweapon "Longbow"
+rangedweapon 0 "Longbow"
 meleeweapon 0 "Dagger" # Dagger
-rangedweapon50 "Throwing Dagger"
+rangedweapon50 0 "Throwing Dagger"
 rangedweapon25 6 "Astral Arrow"
 mr 6
 #The Crystal amazons are now skilled knife throwers
@@ -33048,7 +33057,7 @@ clearweapons
 poisonres 75
 swamp
 prebatweapon 1 "Summon Snake"
-meleeweapon "Poison Spear"
+meleeweapon 0 "Poison Spear"
 fastheal
 
 selectmonster "Onyx Priestess"
@@ -33095,28 +33104,28 @@ meleeweaponbonus 50 "Parry"
 
 selectmonster "Scout"
 clearweapons
-rangedweapon  "Short-bow"
+rangedweapon 0 "Short-bow"
 meleeweapon  0  1  # Dagger
 
 
 selectmonster "Barbarian Cavalry" #   96
 clearweapons
-rangedweapon   "Short-bow" # Bow
+rangedweapon 0 "Short-bow" # Bow
 meleeweapon  1   4  # Spear (value 1: D5 pierce damage)
 
 selectmonster "Mounted Scout"     #  102
 clearweapons
-rangedweapon   "Short-bow" # Bow
+rangedweapon 0 "Short-bow" # Bow
 meleeweapon  1   4  # Spear (value 1: D5 pierce damage)
 
 selectmonster "Wolf Tribe Bowman" #  114
 clearweapons
-rangedweapon   "Short-bow" # Bow
+rangedweapon 0 "Short-bow" # Bow
 meleeweapon  0  1  # Dagger
 
 selectmonster "Deer Tribe Bowman" #  117
 clearweapons
-rangedweapon   "Short-bow" # Bow
+rangedweapon 0 "Short-bow" # Bow
 meleeweapon  0  1  # Dagger
 
 selectmonster "War Elephant"      #  147
@@ -33540,7 +33549,7 @@ clearweapons
 mr                4  # Magic Resistance
 #mor              4  # Morale
 #str              3  # Strength
-meleeweapon  19  # Club (value -1: D2 blunt damage)
+meleeweapon -1 19  # Club (value -1: D2 blunt damage)
 ## Bitflag13         # Small Humanoid
 #allitemslots
 #
@@ -35182,9 +35191,9 @@ clearweapons
 shockres 10
 fireres  10
 coldres  10
-rangedweapon "Longbow"
-meleeweapon  "Dagger" # Dagger
-rangedweapon50 "Throwing Dagger"
+rangedweapon 0 "Longbow"
+meleeweapon  0 "Dagger" # Dagger
+rangedweapon50 0 "Throwing Dagger"
 rangedweapon25 6 "Astral Arrow"
 fast
 mr 6
@@ -35257,7 +35266,7 @@ poisonres 85
 swamp
 terrstealth -20
 clearweapons
-meleeweapon "Poison Spear"
+meleeweapon 0 "Poison Spear"
 prebatweapon 1 "Summon Snake"
 fastheal
 awe 1
@@ -46568,6 +46577,7 @@ copystats " Demon Knight"
 copyspr   " Demon Knight"
 hp              35
 shrinkhp 20
+fireres        100  # Fire Immunity
 allitemslots
 fastheal
 nobootslots
@@ -46890,7 +46900,7 @@ selectmonster "Unicorn Knight"
 name " Unicorn Knight"
 
 newmonster "Unicorn Knight"
-descr "Elysium has many creatures that would make much better battle mounts than a horse, but unfortunately none of them have turned out to be sufficiently friendly to be tamed.  However, there is one exception, the Unicorn.  The Unicorn seems to have some defect that makes it like young girls, so by sacrificing a young girl, it is possible to gain this truly magnificent beast as a mount.  The magic of the Unicorn rubs off on its rider and makes him immune to poison and he will recover from wounds at an amazing speed.^^Unicorns can be found in ancient forests and sacred groves."
+descr "Elysium has many creatures that would make much better battle mounts than a horse, but unfortunately none of them have turned out to be sufficiently friendly to be tamed.  However, there is one exception, the Unicorn.  The Unicorn seems to have some defect that makes it like young girls, so by sacrificing a young girl, it is possible to gain this truly magnificent beast as a mount.  The magic of the Unicorn rubs off on its rider and makes him nearly immune to poison and he will recover from wounds at an amazing speed.^^Unicorns can be found in ancient forests and sacred groves."
 copystats " Unicorn Knight"
 copyspr   " Unicorn Knight"
 hp 33
@@ -48771,9 +48781,9 @@ str              6
 immobile            
 water               
 stationary          
-rangedweaponbonus "Leech Blood"
-rangedweaponbonus "Leech Blood"
-meleeweaponbonus "Leech Aura"
+rangedweaponbonus 0 "Leech Blood"
+rangedweaponbonus 0 "Leech Blood"
+meleeweaponbonus 0 "Leech Aura"
 poisonres       99  
 fireres         25  
 coldres         30  
@@ -53566,7 +53576,7 @@ forgetcurrit
 
 newritpow
 newritual     "Steal Son"
-descr "While the Witch survived the concoction it was not without damage to her mind. She now has a deep desire to steal and magically alter a highborn boy with turning him into her Troll son and eventually what she hopes could be a King."
+descr "While the Witch survived the concoction it was not without damage to her mind. She now has a deep desire to steal and magically alter a highborn offspring (boy) with turning him into her Troll son and eventually what she hopes could be a King."
 #ritpow 22
 level                  1
 #levelreq               2
@@ -54127,7 +54137,7 @@ promotion -1
 gainrit 8   # "Troll King's Court"
 gainrit 9   # "Rock Troll King's Court"
 gainrit 10   # "Forest Troll King's Court"
-gainrit 790   # "Lake Troll King's Court"
+gainrit 796   # "Lake Troll King's Court"
 addstring "Troll King"
 addstring "Troll King"
 addstring "Rock Troll King"
@@ -54747,7 +54757,7 @@ newrit 2
 newrit 1
 gainrit -40   # "Pillage"
 gainrit -39   # "Enslave"
-gainrit 749   # "Pale One Concubines"
+gainrit 755   # "Pale One Concubines"
 nostart
 
 newritual "Inaugurate Deep King"
@@ -55454,7 +55464,7 @@ power 0 2
 
 newritpow
 newritual "Coercive Power - Impersonal"
-descr "Coercive power uses the threat of force to gain compliance from another. Force may include physical, social, emotional, political, or economic means. Depending on the type of terrain it is cast it will change the hero into a different type of leader with potentially different powers.^^History is written by the victors and justice is nothing else than the interest of the stronger. The strong should rule the weak, as a right owed to their superiority.^^Keywords: hamlets, tent villages and villages, Brigand lair, Bandit Fort, Ziggurat, Temple City."
+descr "Coercive power uses the threat of force to gain compliance from another. Force may include physical, social, emotional, political, or economic means. Depending on the type of terrain it is cast it will change the hero into a different type of leader with potentially different powers.^^History is written by the victors and justice is nothing else than the interest of the stronger. The strong should rule the weak, as a right owed to their superiority.^^Keywords: farms, hamlets, tent villages and villages, Brigand lair, Bandit Fort, Ziggurat, Temple City."
 level 1
 levelreq 1
 apcost 2
@@ -55469,8 +55479,8 @@ addstring     "(125)Bandit Leader" #Brigand Lair
 addstring     "(125)Bandit Leader" #Brigand Lair
 addstring     "(508)Bandit Leader" #"Bandit Fort"
 addstring     "(508)Bandit Leader" #"Bandit Fort"
-addstring     "(-41)Barbarian Leader" #hamlets, tent villages and villages
-addstring     "(-41)Barbarian Leader" #hamlets, tent villages and villages
+addstring     "(-1037)Barbarian Leader" #farms, hamlets, tent villages and villages
+addstring     "(-1037)Barbarian Leader" #farms, hamlets, tent villages and villages
 addstring     "(-1005)Tribal Prince" #Ziggurat
 addstring     "(-1005)Tribal Prince" #Temple city
 addstring     "Unexpected Hero" #nothing
@@ -55484,13 +55494,13 @@ power 0 1
 
 newritpow
 newritual     "Build Barbarian Camp"
-descr "A new Barbarian Leader orders the construction of a barbarian camp by taking property and re-purposing local hamlets, tent villages and villages."
+descr "A new Barbarian Leader orders the construction of a barbarian camp by taking property and re-purposing local farms, hamlets, tent villages and villages."
 level                  1
 cost 0  250
 cost 1  10
 rebateterr20 -40 #Hamlets
 rebateterr50 109 #tent village
-terr -41 # Required terrain: hamlets, tent villages and villages
+terr -1037 # Required terrain: farms, hamlets, tent villages and villages
 apcost 3
 alterloc             113 
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp 
@@ -59015,7 +59025,7 @@ power 0 1
 
 newritpow
 newritual     "Bloodsworn Pact"
-descr "A Demon Knight may turn heavy infantry into Bloodsworn at a Citadel in Inferno."
+descr "A Demon Knight may turn heavy infantry into Bloodsworn at an Infernal Citadel in Inferno."
 level                  1
 cost 4   10 # Blood
 terr -36 # Citadel in Inferno
@@ -59031,7 +59041,7 @@ addstring     "Bloodsworn"
 #not sure how I want to expand out this and death lines
 
 newritual     "Demonic Order"
-descr "This turns Cavalryman into Demon Knights."
+descr "This turns Cavalryman into Demon Knights at an Infernal Citadel in Inferno."
 level                  2
 cost 4   50
 terr -36
@@ -59078,7 +59088,7 @@ gainrit 612   # "Verdant Pact"
 gainrit 613   # "Primal Pact"
 
 newritual "Infernal Path"
-descr "A Knight may become a Demon Knight commander at a Demonic Citadel."
+descr "A Knight may become a Demon Knight commander at a Demonologist Citadel."
 level 2
 soundfx 57
 cost 4 100 #blood
@@ -59121,6 +59131,12 @@ selectmonster "Knight"
 power 0 2
 
 selectmonster "Dismounted Knight" 
+power 0 2
+
+selectmonster "Royal Knight"
+power 0 2
+
+selectmonster "Dismounted Royal Knight"
 power 0 2
 
 newritpow
@@ -59480,16 +59496,16 @@ selectmonster 2:"Dismounted Paladin"
 power 0 1
 
 selectmonster "Loner Knight" 
-power 0 1
+power 0 2
 
 selectmonster "Dismounted Loner Knight" 
-power 0 1
+power 0 2
 
 selectmonster "Royal Knight" 
-power 0 1
+power 0 2
 
 selectmonster "Dismounted Royal Knight" 
-power 0 1
+power 0 2
 
 selectmonster "Baronet" 
 power 0 1
@@ -60688,7 +60704,6 @@ terr -1004
 # Required terrain: Plains
 #rebateterr20 119 
 # Plains slightly cheaper
-
 #terrboost 119            
 # Savannah
 alterloc            501 
@@ -61010,6 +61025,115 @@ soundfx               57
 # Sound effect when the ritual is cast: orchhit.smp
 apcost 2
 airare 1
+free
+
+
+newritual     "Restore House Ruins"
+descr "Clear rubble and rebuild a small farm from house ruins. Requires an Engineer on the tile."
+level                  1
+cost 0   100
+# Gold
+cost 1    10
+# Iron
+terr -1035
+# Required terrain: House Ruins.
+alterloc               5
+# Change target location's terrain to: Farm.
+soundfx               57
+# Sound effect when the ritual is cast: orchhit.smp (summoning).
+apcost 2
+# Actual AP cost: 3.
+castertarg
+free
+
+
+newritual     "Fortify City Ruins"
+descr "Salvage city rubble to erect a fortified Castle with a garrison. Only a Master Engineer can manage a project of this scale."
+level                  3
+cost 0  1000
+# Gold
+cost 1    75
+# Iron
+terr 185
+# Required terrain: City Ruins.
+alterloc              22
+# Change target location's terrain to: Castle.
+soundfx               57
+# Sound effect when the ritual is cast: orchhit.smp (summoning).
+apcost 7
+# Actual AP cost: 8.
+castertarg
+free
+summoning
+addstring  "10*Trained Guard"
+
+
+newritual     "Rebuild Port (East)"
+descr "Clear rubble and restore a sieged port to working order. Ship recruitment is restored. Requires an Engineer on the tile."
+level                  2
+cost 0   500
+# Gold
+cost 1    25
+# Iron
+terr 161
+# Required terrain: Deserted Port (east coast).
+alterloc              79
+# Change target location's terrain to: Port.
+soundfx               57
+# Sound effect when the ritual is cast: orchhit.smp (summoning).
+apcost 6
+castertarg
+free
+
+newritual     "Rebuild Port (South)"
+descr "Clear rubble and restore a sieged port to working order. Ship recruitment is restored. Requires an Engineer on the tile."
+level                  2
+cost 0   500
+# Gold
+cost 1    25
+# Iron
+terr 162
+# Required terrain: Deserted Port (south coast).
+alterloc              80
+# Change target location's terrain to: Port.
+soundfx               57
+# Sound effect when the ritual is cast: orchhit.smp (summoning).
+apcost 6
+castertarg
+free
+
+newritual     "Rebuild Port (West)"
+descr "Clear rubble and restore a sieged port to working order. Ship recruitment is restored. Requires an Engineer on the tile."
+level                  2
+cost 0   500
+# Gold
+cost 1    25
+# Iron
+terr 163
+# Required terrain: Deserted Port (west coast).
+alterloc              81
+# Change target location's terrain to: Port.
+soundfx               57
+# Sound effect when the ritual is cast: orchhit.smp (summoning).
+apcost 6
+castertarg
+free
+
+newritual     "Rebuild Port (North)"
+descr "Clear rubble and restore a sieged port to working order. Ship recruitment is restored. Requires an Engineer on the tile."
+level                  2
+cost 0   500
+# Gold
+cost 1    25
+# Iron
+terr 164
+# Required terrain: Deserted Port (north coast).
+alterloc              82
+# Change target location's terrain to: Port.
+soundfx               57
+# Sound effect when the ritual is cast: orchhit.smp (summoning).
+apcost 6
+castertarg
 free
 
 
@@ -62021,7 +62145,7 @@ alterloc 30 # Change target location
 nomonhomereq             # Monsters in strings beginning with "(-)" must not have their home at target location.
 aialways             100 # AI will always try to cast this ritual if it currently can, but it will not make long term plans to do so.
 promotion             -1 # Promote 1 unit to a commander and make it the target unit. Valid promotions are in paired strings not beginning with "(+)", "(-)", or "(&)".
-gainrit -93   # "Steward of Leadership"
+gainrit -99   # "Steward of Leadership"
 addstring "Baronet"
 addstring "Baron"
 updatehome               # Updates home (immortal resurrection location) for target unit to where he stands.
@@ -66876,8 +67000,8 @@ updatehome
 addstring     "Vampire Witch"
 castertarg
 gainrit 1   # "Relocate Soul" Note: Duplicate Ritual Name   # "Relocate Soul"
-gainrit -608        # "Crossbreeding"   # "Crossbreeding"
-gainrit -607        # "Improved Crossbreeding"   # "Improved Crossbreeding"
+gainrit -614        # "Crossbreeding"   # "Crossbreeding"
+gainrit -613        # "Improved Crossbreeding"   # "Improved Crossbreeding"
 newspell1 11 #Blood
 newspell1 38
 newspell2 38
@@ -67050,9 +67174,9 @@ transformtarg          1
 newrit 3
 newrit 2
 newrit 1
-gainrit -307   # "Shade Summoning"
-gainrit -309   # "Dust Summoning"
-gainrit -311   # "Unfrozen Summoning"
+gainrit -313   # "Shade Summoning"
+gainrit -315   # "Dust Summoning"
+gainrit -317   # "Unfrozen Summoning"
 gainrit 183   # "Dark Emperor's Path"
 forgetcurrit
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (summoning).
@@ -67377,7 +67501,7 @@ addstring "(-)Elder Druid"
 reducetown
 
 newritual     "Advanced Bloodhenge Crossbreeding"
-descr "Journal of a Bloodhenge Druid^-The sick and poor make perfect subjects and most are none of the wiser. Better to keep to smaller population centers else the population will be angered."
+descr "Journal of a Bloodhenge Druid^-The sick and poor make perfect subjects and most are none of the wiser. Larger settlements may resist with angry mobs or a defiant hero."
 level                  2
 cost 2   25 # Herbs
 cost 4   25 # Sacrifices
@@ -67400,13 +67524,6 @@ addstring     "2d3+1*Bloodhenge Crossbreed"
 nomonreq
 addstring "(-)Druid"
 addstring "(-)Elder Druid"
-addstring "(-)Senator"
-addstring "(-)Emperor"
-addstring "(-)Empress"
-addstring "(-)Baron"
-addstring "(-)Baroness"
-addstring "(-)Duke"
-addstring "(-)King" # 15
 
 newritual     "Greater Blood-lust Animals"
 descr "The Greater version enchants more animals per casting and can even affect great and monster boars."
@@ -71201,10 +71318,10 @@ soundfx 57
 forgetrits
 transformtarg 1
 newrit 2
-gainrit -748 #Burgmeister's Court   # "Burgmeister's Court"
-gainrit -703 #Raise Hoburg Militia   # "Raise Hoburg Militia"
-gainrit -486 #Coal mine   # "Build Coal Mine"
-gainrit -474 #Clear forest   # "Clear Forest"
+gainrit -754 #Burgmeister's Court   # "Burgmeister's Court"
+gainrit -709 #Raise Hoburg Militia   # "Raise Hoburg Militia"
+gainrit -486 #Coal mine   # "Buy Bulk Iron"
+gainrit -480 #Clear forest   # "Clear Forest"
 updatehome
 addstring "Burgmeister"
 addstring "(-)Burgmeister"
@@ -71220,9 +71337,9 @@ apcost -1
 free
 forgetcurrit #& nextoos
 gainrit -7   #"Urbanize Hoburg Settlement"   # "Urbanize Hoburg Settlement"
-gainrit -703 #Bulk arms   # "Bulk Purchase Hoburg Armaments"
-gainrit -702 #Quality Arms   # "Purchase Quality Hoburg Armaments"
-gainrit -701 #Hog Knight   # "Hog Knight"
+gainrit -709 #Bulk arms   # "Bulk Purchase Hoburg Armaments"
+gainrit -708 #Quality Arms   # "Purchase Quality Hoburg Armaments"
+gainrit -707 #Hog Knight   # "Hog Knight"
 gainrit 23  #"Create Hoburg Manufactury"# 272   # "Create Hoburg Manufactury"
 gainrit 24  #"Create Fortified Hoburg"# 272   # "Create Fortified Hoburg"
 
@@ -71820,7 +71937,7 @@ newrit                 2 # Caster will learn a new ritual of level 2.
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
 apcost -1
 forgetcurrit
-gainrit -527 #"Study Necromancy Poorly"   # "Study Necromancy Poorly"
+gainrit -533 #"Study Necromancy Poorly"   # "Study Necromancy Poorly"
 nostart
 
 newritual     "Oracle of the Temple"# 254
@@ -71908,12 +72025,12 @@ summoning
 #addstring    "c*5:Hedge Wizard" #Necromancer
 #addstring    "c*6:Hedge Wizard"  #Illusionism
 #addstring    "c*7:Hedge Wizard"
-#addstring    "c*8:Hedge Wizard" 
+addstring    "c*Bandit Leader" 
 #addstring     "!Error"                   #
 #addstring     "c*0:Renata & c*1:Renata & c*2:Renata & c*3:Renata & c*4:Renata"                   #
 #addstring     "!Error"                   #
 #addstring     "c*0:Priestess & c*1:Priestess & c*2:Priestess & c*3:Priestess & c*4:Priestess"   
-addstring     "2*Black Ant"
+#addstring     "c*Troll Witch & 1*Highborn Offspring "
 
 descr "Tests a particular ritual function used in modding and testing. Likely whatever the last thing tested."
 
@@ -72359,121 +72476,6 @@ addstring "(-)Abbot"     # This string will only be used by nomon[...] commands.
 addstring "Abbot"
 #add "Dark Abbot" # Make a seperate version for Dark Emperor only
 descr "A rank of Baron or higher may bestow land and sacred title unto a holy person outside the Church of El making them an Abbot. The location must have a temple or be fortified, though with an existing temple at the location the appointment is easier to convince a holy person to potentially go against the powerful Church of El."
-
-
-newritual     "Restore House Ruins"
-descr "Clear rubble and rebuild a small farm from house ruins. Requires an Engineer on the tile."
-ritpow                82
-level                  1
-cost 0   100
-# Gold
-cost 1    10
-# Iron
-terr -1035
-# Required terrain: House Ruins.
-alterloc               5
-# Change target location's terrain to: Farm.
-soundfx               57
-# Sound effect when the ritual is cast: orchhit.smp (summoning).
-apcost 2
-# Actual AP cost: 3.
-castertarg
-free
-
-
-newritual     "Fortify City Ruins"
-descr "Salvage city rubble to erect a fortified Castle with a garrison. Only a Master Engineer can manage a project of this scale."
-ritpow                82
-level                  3
-cost 0  1000
-# Gold
-cost 1    75
-# Iron
-terr 185
-# Required terrain: City Ruins.
-alterloc              22
-# Change target location's terrain to: Castle.
-soundfx               57
-# Sound effect when the ritual is cast: orchhit.smp (summoning).
-apcost 7
-# Actual AP cost: 8.
-castertarg
-free
-summoning
-addstring  "10*Trained Guard"
-
-
-newritual     "Rebuild Port (East)"
-descr "Clear rubble and restore a sieged port to working order. Ship recruitment is restored. Requires an Engineer on the tile."
-ritpow                82
-level                  2
-cost 0   500
-# Gold
-cost 1    25
-# Iron
-terr 161
-# Required terrain: Deserted Port (east coast).
-alterloc              79
-# Change target location's terrain to: Port.
-soundfx               57
-# Sound effect when the ritual is cast: orchhit.smp (summoning).
-apcost 6
-castertarg
-free
-
-newritual     "Rebuild Port (South)"
-descr "Clear rubble and restore a sieged port to working order. Ship recruitment is restored. Requires an Engineer on the tile."
-ritpow                82
-level                  2
-cost 0   500
-# Gold
-cost 1    25
-# Iron
-terr 162
-# Required terrain: Deserted Port (south coast).
-alterloc              80
-# Change target location's terrain to: Port.
-soundfx               57
-# Sound effect when the ritual is cast: orchhit.smp (summoning).
-apcost 6
-castertarg
-free
-
-newritual     "Rebuild Port (West)"
-descr "Clear rubble and restore a sieged port to working order. Ship recruitment is restored. Requires an Engineer on the tile."
-ritpow                82
-level                  2
-cost 0   500
-# Gold
-cost 1    25
-# Iron
-terr 163
-# Required terrain: Deserted Port (west coast).
-alterloc              81
-# Change target location's terrain to: Port.
-soundfx               57
-# Sound effect when the ritual is cast: orchhit.smp (summoning).
-apcost 6
-castertarg
-free
-
-newritual     "Rebuild Port (North)"
-descr "Clear rubble and restore a sieged port to working order. Ship recruitment is restored. Requires an Engineer on the tile."
-ritpow                82
-level                  2
-cost 0   500
-# Gold
-cost 1    25
-# Iron
-terr 164
-# Required terrain: Deserted Port (north coast).
-alterloc              82
-# Change target location's terrain to: Port.
-soundfx               57
-# Sound effect when the ritual is cast: orchhit.smp (summoning).
-apcost 6
-castertarg
-free
 
 
 newritual "Ant Brood"
@@ -78286,7 +78288,7 @@ hp 12
 selectmonster    "Master Thief"
 gold -1
 hp 11
-rangedweapon50 "Throwing Dagger"
+rangedweapon50 0 "Throwing Dagger"
 
 
 selectmonster    "Questing Knight"
@@ -84898,9 +84900,9 @@ descr "Bless five Princeps with a fire blessing making them elite Solaris soldie
 selectritual "Student of Solar"
 descr "Teach some limited solar magic to a nearby Solaris making them one of the deadly elite Leo super soldiers."
 selectritual "Coercive Power - Impersonal"
-descr "Coercive power uses the threat of force to gain compliance from another. Force may include physical, social, emotional, political, or economic means. Depending on the type of terrain it is cast it will change the hero into a different type of leader with potentially different powers.^^History is written by the victors and justice is nothing else than the interest of the stronger. The strong should rule the weak, as a right owed to their superiority.^^Keywords: hamlets, tent villages and villages, Brigand lair, Bandit Fort, Ziggurat, Temple City."
+descr "Coercive power uses the threat of force to gain compliance from another. Force may include physical, social, emotional, political, or economic means. Depending on the type of terrain it is cast it will change the hero into a different type of leader with potentially different powers.^^History is written by the victors and justice is nothing else than the interest of the stronger. The strong should rule the weak, as a right owed to their superiority.^^Keywords: farms, hamlets, tent villages and villages, Brigand lair, Bandit Fort, Ziggurat, Temple City."
 selectritual     "Build Barbarian Camp"
-descr "A new Barbarian Leader orders the construction of a barbarian camp by taking property and re-purposing local hamlets, tent villages and villages."
+descr "A new Barbarian Leader orders the construction of a barbarian camp by taking property and re-purposing local farms, hamlets, tent villages and villages."
 selectritual     "Forced Conscription"
 descr "The barbarian lord forcibly conscripts the nearby population in a settlement. Raising barbarian conscripts at a human settlement scales depending on the size of settlement and will always reduce it."
 selectritual     "Forced Tribal Conscription"
@@ -85254,15 +85256,15 @@ descr "Death Knight's may turn heavy infantry into Banes in a Citadel in Hades"
 selectritual     "Magical Equine Training"
 descr "The Unicorn Knight trains Cavalrymen to befriend, tend, and ride magical Unicorn mounts."
 selectritual     "Bloodsworn Pact"
-descr "A Demon Knight may turn heavy infantry into Bloodsworn at a Citadel in Inferno."
+descr "A Demon Knight may turn heavy infantry into Bloodsworn at an Infernal Citadel in Inferno."
 selectritual     "Demonic Order"
-descr "This turns Cavalryman into Demon Knights."
+descr "This turns Cavalryman into Demon Knights at an Infernal Citadel in Inferno."
 selectritual "Death Pact"
 descr "A Knight may become a Death Knight at a Dark Citadel, losing their powers associated with honor and law."
 selectritual "Natural Pact"
 descr "A Knight wanders into an Ancient forest or court of a Dryad Queen and offers gifts and in return is given a magical unicorn creature as steed and knowledge how to train others. The Knight will lose their powers associated with honor and law."
 selectritual "Infernal Path"
-descr "A Knight may become a Demon Knight commander at a Demonic Citadel. The Knight will lose their powers associated with honor and law."
+descr "A Knight may become a Demon Knight commander at a Demonologist Citadel. Regular castles and Dark Citadels will not work. The Knight will lose their powers associated with honor and law."
 selectritual "Vicious Faith"
 descr "A Knight may become a Paladin at a Temple of El. These do-gooders will not get along with some magical practitioners."
 selectritual "Knightly Paths"
@@ -85460,7 +85462,7 @@ descr "Enchants five Animated Armor with a burning enchantment."
 selectritual     "Build Farm"
 descr "Build a new farm on grassland or savanna, this will upset local wildlife, bandits, or people depending on location."
 selectritual "Build Citadel"
-descr "Construct a Demonologist Citadel."
+descr "Construct a Demonologist Citadel and garrison 4 Bloodsworn. Another Citadel may not be within the local area."
 selectritual "Build Dark Citadel"
 descr "Construct a Necromancer's Dark Citadel, another Dark Citadel can not be within the local area."
 selectritual "Hollow Ancient Tree"
@@ -86566,7 +86568,7 @@ forgetrits
 updatehome
 levelup 2
 free
-gainrit -40   # "Oracle of the Temple"
+gainrit -34   # "Oracle of the Temple"
 promotion -1
 addstring "Crystal Priestess"
 addstring "3:Renata"
@@ -86771,6 +86773,30 @@ selectmonster 2:"Knight"
 power 0 2
 
 selectmonster 2:"Dismounted Knight"
+power 0 2
+
+selectmonster "Royal Knight"
+power 0 2
+
+selectmonster "Dismounted Royal Knight"
+power 0 2
+
+selectmonster 0:"Royal Knight"
+power 0 2
+
+selectmonster 0:"Dismounted Royal Knight"
+power 0 2
+
+selectmonster 1:"Royal Knight"
+power 0 2
+
+selectmonster 1:"Dismounted Royal Knight"
+power 0 2
+
+selectmonster 2:"Royal Knight"
+power 0 2
+
+selectmonster 2:"Dismounted Royal Knight"
 power 0 2
 
 newritpow
@@ -87013,7 +87039,7 @@ addstring "2d6+2*Longdead"
 addstring "1d4+1*Longdead Archer"
 
 newritual "Raise Blood Cult Levy"
-descr "A Demon Knight summons bloodsworn fanatics and lesser demons from an infernal citadel."
+descr "A Demon Knight summons bloodsworn fanatics and lesser demons from an Infernal Citadel in Inferno."
 level 1
 terr -36
 cost 4 25 # Blood
@@ -87055,10 +87081,10 @@ selectmonster "Dismounted Death Knight"
 power 0 1
 
 selectmonster "Demon Knight"
-power 0 1
+power 0 2
 
 selectmonster "Dismounted Demon Knight"
-power 0 1
+power 0 2
 
 selectmonster "Loner Knight"
 power 0 1
@@ -87106,7 +87132,7 @@ descr "A Paladin raises zealots from a settlement to defend the faithful."
 selectritual "Raise Death Host"
 descr "A Death Knight raises longdead warriors from graves and dark places near a population center."
 selectritual "Raise Blood Cult Levy"
-descr "A Demon Knight summons bloodsworn fanatics and lesser demons from an infernal citadel."
+descr "A Demon Knight summons bloodsworn fanatics and lesser demons from an Infernal Citadel in Inferno."
 selectritual "Raise Crown Levy"
 descr "A Royal Knight raises professional guards from a settlement that lacks garrison troops."
 selectritual "Raise Band Levy"
