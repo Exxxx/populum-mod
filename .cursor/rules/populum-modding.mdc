@@ -60,7 +60,7 @@ python py_tools/validate_populum.py
 
 VS Code/Cursor: **Tasks → Run Test Task → Validate Populum (gainrit)** or **Validate Populum (fix + describe)**.
 
-Offset lookup between two rituals: `py_tools/gainrit_distance.py` (GUI).
+Offset lookup between two rituals: `python py_tools/gainrit_distance.py "Source Ritual" "Target Ritual"` (add `--gui` for the interactive window).
 
 ## Vanilla reference data (read-only)
 

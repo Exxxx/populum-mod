@@ -1,0 +1,55 @@
+---
+description: Produce patch notes when pushing updates to GitHub
+alwaysApply: true
+---
+
+# GitHub push patch notes
+
+When you push updates to GitHub (after commit, or when reporting a successful push), always include patch notes in your response.
+
+## Required format
+
+Plain text only — one change per line, each line starting with `- ` (dash + space). No other formatting:
+
+- No markdown headings (`## Patch notes`, etc.)
+- No bold, italics, or backticks
+- No code blocks wrapping the list
+- No numbered lists
+
+Output the bullets directly in the message body, like copy-paste ready changelog text:
+
+```text
+- Change 1
+- Change 2
+...
+- Change n
+```
+
+## How to build the list
+
+1. Review what is being pushed: `git diff` (uncommitted), `git log` / `git show` (commits), or `git diff [base]...HEAD` (branch).
+2. Group related edits into single bullets when they serve one purpose (e.g. several weapon bonus fixes → one bullet).
+3. Write for players/mod readers, not as a file manifest. Prefer outcomes over paths (`Fix Illusory Bite damage` not `edit populum.c5m line 18752`).
+4. Order bullets by impact: gameplay/content changes first, then tooling/docs, then housekeeping.
+5. If nothing meaningful changed, say so explicitly instead of an empty list.
+
+## Example
+
+After pushing settlement and weapon fixes:
+
+```text
+- Fix missing weapon damage bonuses on many units (bows, crossbows, spears, daggers, throwing weapons, Grapple, Leech Blood/Aura, Illusory Bite, Chaac magic staves, Apocalyptic Rider hoof, and others) — previously applied a hidden -1 damage penalty
+- Add Restore House Ruins — Engineer ritual to clear house rubble and rebuild a small farm (100 gold, 10 iron)
+- Add Fortify City Ruins — Master Engineer ritual to salvage city rubble into a fortified Castle with a 10-strong Trained Guard garrison (1000 gold, 75 iron)
+- Add Rebuild Port rituals (East, South, West, North) — Engineer rituals to restore sieged ports and ship recruitment (500 gold, 25 iron each)
+- Move engineer rebuild rituals into the correct ritual school block
+- Add farms, hamlets, tent villages, and villages as a shared terrain group; Barbarian Leader camp building now includes farms
+- Fix gainrit offsets for several classes after ritual reordering
+```
+
+## When to include
+
+- Always after a successful `git push`, even if the user only said "push to github".
+- Also when summarizing a push you just performed in the same turn (commit + push).
+- Also when the user asks for patch notes for a recent update.
+- Do not skip patch notes because the commit message already summarizes the work — the list is for the user, not git history.

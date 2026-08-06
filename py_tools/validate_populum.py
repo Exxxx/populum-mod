@@ -4,6 +4,9 @@
 Run after any change that adds, removes, or reorders newritual blocks. Inserting
 or deleting rituals shifts the global ritual index; unvalidated gainrit lines can
 grant the wrong ritual silently in-game.
+
+Also audit ritual level/levelreq against monster power assignments
+(--audit-levelreq / --fix-levelreq).
 """
 
 from __future__ import annotations
@@ -15,6 +18,11 @@ from pathlib import Path
 from gainrit_common import MOD_FILE, VANILLA_RITUALS
 from gainrit_describer import annotate_gainrit_lines
 from gainrit_validator import fix_gainrit_offsets, print_report, validate
+from levelreq_auditor import (
+    audit as audit_levelreq,
+    fix_uniform_mismatches,
+    print_report as print_levelreq_report,
+)
 
 
 def run_checks(
@@ -23,7 +31,26 @@ def run_checks(
     *,
     fix: bool = False,
     describe: bool = False,
+    audit_levelreq_flag: bool = False,
+    fix_levelreq: bool = False,
 ) -> int:
+    exit_code = 0
+    run_gainrit = fix or describe or not (audit_levelreq_flag or fix_levelreq)
+
+    if fix_levelreq or audit_levelreq_flag:
+        if fix_levelreq:
+            n, lr_issues = fix_uniform_mismatches(mod_path, vanilla_path)
+            if n:
+                print(f"Fixed {n} level/levelreq line(s)\n")
+        else:
+            lr_issues = audit_levelreq(mod_path, vanilla_path)
+        print_levelreq_report(lr_issues)
+        if any(i.severity == "error" for i in lr_issues):
+            exit_code = 1
+
+    if not run_gainrit:
+        return exit_code
+
     if fix:
         fixed, issues = fix_gainrit_offsets(mod_path, vanilla_path)
         if fixed:
@@ -35,11 +62,12 @@ def run_checks(
         n = annotate_gainrit_lines(mod_path, write=True)
         if n:
             print(f"Updated {n} gainrit # \"Target\" comment(s)\n")
-        if fix or describe:
-            issues = validate(mod_path, vanilla_path)
+        issues = validate(mod_path, vanilla_path)
 
     print_report(issues)
-    return 1 if issues else 0
+    if issues:
+        exit_code = 1
+    return exit_code
 
 
 def main() -> int:
@@ -50,6 +78,11 @@ def main() -> int:
 Typical workflow after editing newritual / gainrit in populum.c5m:
 
   python py_tools/validate_populum.py --fix --describe
+
+Level/levelreq vs monster power:
+
+  python py_tools/validate_populum.py --audit-levelreq
+  python py_tools/validate_populum.py --fix-levelreq
 
 Use --fix when ritual order changed and quoted # "Target" comments are still correct.
 Use --describe to refresh describer comments after fixing offsets or adding gainrit lines.
@@ -67,12 +100,24 @@ Use --describe to refresh describer comments after fixing offsets or adding gain
         action="store_true",
         help="Refresh trailing # \"Target\" comments on all gainrit lines",
     )
+    parser.add_argument(
+        "--audit-levelreq",
+        action="store_true",
+        help="Report ritual level/levelreq vs monster power mismatches",
+    )
+    parser.add_argument(
+        "--fix-levelreq",
+        action="store_true",
+        help="Lower level/levelreq on uniform-power school mismatches",
+    )
     args = parser.parse_args()
     return run_checks(
         args.mod,
         args.vanilla,
         fix=args.fix,
         describe=args.describe,
+        audit_levelreq_flag=args.audit_levelreq,
+        fix_levelreq=args.fix_levelreq,
     )
 
 

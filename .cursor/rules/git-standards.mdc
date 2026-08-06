@@ -18,6 +18,7 @@ Never include "Made with Cursor", "Built with Cursor", or `Co-authored-by: Curso
 - Only commit when explicitly asked
 - Never push unless explicitly asked
 - Never update global git config from this project
+- After every push, include patch notes in the response (see `git-push-patch-notes.mdc`)
 
 ## Commit messages
 

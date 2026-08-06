@@ -1551,6 +1551,8 @@ hp 12
 
 selectmonster "Rabbit"
 hp 2
+clearweapons
+meleeweapon 1 11 # Bite: d1 Slash (match Familiar / description)
 
 selectmonster "Murder Of Crows"
 hp 6
@@ -17177,6 +17179,24 @@ addterr 18 # Village
 addterr 78 # Coastal Hamlet
 addterr 109 # Tent Village
 
+# Forests/jungles safe for planting (excludes Recuperating Ancient Forest 314)
+selectterrgroup -1038
+setname "Plantable forests and jungles"
+addterr 2 # Forest
+addterr 4 # Ancient Forest
+addterr 8 # Enchanted Forest
+addterr 115 # Jungle
+addterr 127 # Elven Forest
+addterr 130 # Troll Forest
+addterr 131 # Ancient Troll Forest
+addterr 236 # Sacred Grove
+addterr 237 # Grove of Gaia
+addterr 238 # Primal Forest
+addterr 283 # Spider Thicket
+addterr 293 # Forest of the Horned One
+addterr 294 # Wild Forest
+addterr 311 # Kelp Forest
+
 #selectterrgroup ????
 #setname "Earth locations"
 #addterr 12
@@ -27736,7 +27756,7 @@ selectmonster "Archmage"
 name " Archmage"
 
 newmonster "Old Wizard"
-descr "An old and powerful wizard capable of rising to become an Archmage and teacher of other magic-users."
+descr "An old and powerful wizard capable of rising to become an Archmage and teacher of other magic-users. Cast Master of Magic at a level 2+ magic library (1000 gold, 100 gems) to become an Archmage; an Academy is not required for promotion."
 copystats " Old Wizard"
 copyspr " Old Wizard"
 spellweapon 51   2  # High Arcana at level 2
@@ -38709,6 +38729,29 @@ str              3  # Strength
 human
 allitemslots
 # Bitflag38         # Female
+goldcarrier     10
+awe 1
+noleader
+growtime 12
+growoffs 1
+growterr -3
+
+newmonster "Studious Princess"
+descr "After a year of study in a library, this princess has picked up a rudimentary grasp of hedge magic. She is still no court wizard, but she can cast a few useful spells."
+copyspr " Princess"
+copystats "Hedge Wizard"
+rank            -1  # Back
+hp               5
+armor            0
+mr               7  # Magic Resistance
+mor              4  # Morale
+str              3  # Strength
+clearweapons
+spellweapon 7 1 # Hedge Magic at level 1
+meleeweapon 0 5 # Staff
+human
+allitemslots
+female
 goldcarrier     10
 awe 1
 noleader
@@ -51895,7 +51938,6 @@ growtime 48 # ~4 years
 newmonster "Old Wizard"
 copyspr " Old Wizard"
 copystats " Old Wizard"
-mastery 1
 
 newmonster "Hidden Rat Colony"
 spr1 "pop/monster/blank64.tga"
@@ -52496,11 +52538,12 @@ selectmonster "Phoenix"
 reformloc 102 #Volcano reform
 hp 34 # Hit Points.
 growtime 24 #2 years
+growoffs 2387 # "Phoenix" (2841 - 454; recalculate if newmonsters are inserted before adult Phoenix)
 fireaura 1
 name "Young Phoenix"
 
 
-newmonster    "Phoenix" #  453
+newmonster    "Phoenix"
 copystats     "Young Phoenix"
 #descr "The Phoenix is a heavenly bird sprung from the Elemental Plane of Fire.  It appears as a great heron endowed with solar splendor.  The Phoenix is immortal.  Should it meet with death, it will immolate itself in a blazing pyre and be reborn at its master's citadel."
 ## sprite number            11050
@@ -54047,7 +54090,6 @@ addstring "(-)Faery Witch Queen"
 newritual "Study Faery Witch Magic"
 descr "Study complex faery magic at a faery circle that serves as a conduit between the natural constituent particles and the magical pseudoforce."
 level 1
-levelreq 3
 cost 15  10     # All gems
 newrit 3
 newrit 2
@@ -54064,6 +54106,9 @@ power 0 3
 
 selectmonster "Faery Witch Queen"
 power 0 4
+
+selectmonster "Faery Witch Chrysalis"
+power 0 1
 
 newritual     "Faery Form"
 descr "Transforms a Witch into a powerful magical creature called a Faery."
@@ -54137,7 +54182,7 @@ promotion -1
 gainrit 8   # "Troll King's Court"
 gainrit 9   # "Rock Troll King's Court"
 gainrit 10   # "Forest Troll King's Court"
-gainrit 796   # "Lake Troll King's Court"
+gainrit 797   # "Lake Troll King's Court"
 addstring "Troll King"
 addstring "Troll King"
 addstring "Rock Troll King"
@@ -54644,6 +54689,12 @@ power 0 2
 selectmonster "Malefic Master"
 power 0 3
 
+selectmonster "Ghoul Baron"
+power 0 1
+
+selectmonster "Ghoulgraf"
+power 0 2
+
 newritpow
 newritual "Burgmeister's Court"
 descr "The Burgmeister's Court is where Hogmeister, Horologists, and Horticulturists offer their services, occasionally a Markgraf may be more likely to join if court is held in an old castle.^^Keyword(s):Libraries, Old Castle Ruin"
@@ -54757,7 +54808,7 @@ newrit 2
 newrit 1
 gainrit -40   # "Pillage"
 gainrit -39   # "Enslave"
-gainrit 755   # "Pale One Concubines"
+gainrit 756   # "Pale One Concubines"
 nostart
 
 newritual "Inaugurate Deep King"
@@ -55320,6 +55371,9 @@ selectmonster "Respected Legate"
 power 0 1
 
 selectmonster "Renowned Legate"
+power 0 1
+
+selectmonster "Legate"
 power 0 1
 
 newritpow
@@ -55888,6 +55942,18 @@ selectmonster "Markmann"
 power 0 1
 
 selectmonster "Markgraf"
+power 0 2
+
+selectmonster "Malefic Markgraf"
+power 0 2
+
+selectmonster "Malefic Master"
+power 0 2
+
+selectmonster "Ghoul Baron"
+power 0 2
+
+selectmonster "Ghoulgraf"
 power 0 2
 
 
@@ -56733,7 +56799,6 @@ newritual "Study Forest Faery Magic"
 descr "Study complex faery magic at a faery circle that serves as a conduit between the magical pseudoforce."
 level 1
 #apcost -1
-levelreq 3
 newrit 3
 newrit 2
 newrit 1
@@ -56748,6 +56813,9 @@ power 0 3
 
 selectmonster "Forest Faery Queen"
 power 0 4
+
+selectmonster "Forest Faery Chrysalis"
+power 0 1
 
 #Faery queen immortal dryad
 newritual     "Faery Form"
@@ -56979,7 +57047,7 @@ scryloc 1000
 
 
 newritual     "Master of Magic"
-descr "A Grand Wizard becomes an Archmage at a magic library."
+descr "A Grand Wizard or Old Wizard becomes an Archmage at a level 2+ magic library (1000 gold, 100 gems). An Academy is not required; after promotion an Archmage can Magically Create Academy of Magic from a Magic Library."
 level                  2
 levelreq 2
 cost 0  1000
@@ -57033,7 +57101,7 @@ closewin                 # Closes cast ritual window.
 
 
 newritual "Magically Create Academy of Magic"
-descr "The Archmage constructs a great academy from an existing magic library using raw magical power. Tools come alive and materials begin to move themselves and within only a month the expansion will be completed working around the clock."
+descr "The Archmage constructs a great academy from an existing magic library using raw magical power. Tools come alive and materials begin to move themselves and within only a month the expansion will be completed working around the clock.^^Only an Archmage can cast this (promote first with Master of Magic). Senators and Empresses can instead Commission Academy of Magic with gold and iron."
 level                  3
 cost 15   300 # Gems
 cost 1   150 # Iron
@@ -59084,8 +59152,8 @@ forgetrits
 transformtarg 1
 addstring "Unicorn Knight"
 gainrit -4   # "Magical Equine Training"
-gainrit 612   # "Verdant Pact"
-gainrit 613   # "Primal Pact"
+gainrit 613   # "Verdant Pact"
+gainrit 614   # "Primal Pact"
 
 newritual "Infernal Path"
 descr "A Knight may become a Demon Knight commander at a Demonologist Citadel."
@@ -59121,7 +59189,7 @@ level 2
 apcost 3 # Actual AP cost: +1
 free
 newrit 2
-gainrit 603   # "Templar Oath"
+gainrit 604   # "Templar Oath"
 forgetcurrit
 
 selectmonster " Knight"
@@ -60446,11 +60514,31 @@ terr -20 # Required terrain: swamp
 rebateterr20 -26 # mid
 rebateterr50         -27 # south
 soundfx               57
+castertarg
+forgetrits
 transformtarg          1
 updatehome            
 free
 addstring     "Sauroman Reborn"
 newspell1 38
+newspell1 21
+newspell2 21
+gainrit 1   # "Naga Rebirth"
+
+newritual     "Naga Rebirth"
+descr "An improvement on the Sauroman Solution finishes the transformation allowing the brain to return to normal order and producing positive side-effects, becoming what is called a Naga. This ritual completes the serpent cult's path to immortality and can only be performed in controlled laboratory conditions."
+level                  2
+levelreq               2
+cost 3   75
+terr -3  # Required terrain: libraries
+rebateterr20 -26 # mid
+rebateterr50         -27 # south
+soundfx               57
+castertarg
+transformtarg          1
+updatehome
+free
+addstring     "Nagini"
 newspell1 21
 newspell2 21
 
@@ -60465,6 +60553,12 @@ power 0 2
 
 selectmonster "Serpent Acolyte"
 power 0 1
+
+selectmonster "Sauroman Reborn"
+power 0 2
+
+selectmonster "Nagini"
+power 0 3
 
 
 #These spells strengthen the summon legion ritual by creating new specific summoners
@@ -61899,7 +61993,7 @@ eventvarreq 375 #must have at least 1 in the migration population pool
 subeventvar 375
 
 newritual "Commission Academy of Magic"
-descr "A magic library is expanded with immense labor and material to construct a great Academy of Magic."
+descr "A magic library is expanded with immense labor and material to construct a great Academy of Magic.^^Senators and Emperors can commission this civic expansion (7500 gold, 250 iron). Archmages instead use Magically Create Academy of Magic."
 ritpow                 31 # Ritual power number
 level                  2
 cost 0  7500 # Gold
@@ -62145,7 +62239,7 @@ alterloc 30 # Change target location
 nomonhomereq             # Monsters in strings beginning with "(-)" must not have their home at target location.
 aialways             100 # AI will always try to cast this ritual if it currently can, but it will not make long term plans to do so.
 promotion             -1 # Promote 1 unit to a commander and make it the target unit. Valid promotions are in paired strings not beginning with "(+)", "(-)", or "(&)".
-gainrit -99   # "Steward of Leadership"
+gainrit -100   # "Steward of Leadership"
 addstring "Baronet"
 addstring "Baron"
 updatehome               # Updates home (immortal resurrection location) for target unit to where he stands.
@@ -63019,13 +63113,9 @@ apcost 1
 #newrit 1
 #newrit 2
 #levelupmon        2 # Level up to the monster in string if below level 2.
-newrit 1
 gainrit 1   # "Iron Grafting" Note: Duplicate Ritual Name   # "Iron Grafting"
 gainrit 2   # "Specialize Inorganic Matter"
-#gainrit 3
-#gainrit 4
-newspell1 40
-newspell1 40
+gainrit 41   # "Specialize Organic Matter"
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (summoning).
 nostart
 
@@ -67000,8 +67090,8 @@ updatehome
 addstring     "Vampire Witch"
 castertarg
 gainrit 1   # "Relocate Soul" Note: Duplicate Ritual Name   # "Relocate Soul"
-gainrit -614        # "Crossbreeding"   # "Crossbreeding"
-gainrit -613        # "Improved Crossbreeding"   # "Improved Crossbreeding"
+gainrit -615        # "Crossbreeding"   # "Crossbreeding"
+gainrit -614        # "Improved Crossbreeding"   # "Improved Crossbreeding"
 newspell1 11 #Blood
 newspell1 38
 newspell2 38
@@ -67772,6 +67862,14 @@ sum2chance 1
 sum3chance 1
 farsummon
 castertarg
+addstring     "!Error" #Any
+addstring     "1d8+1*Triton" #Any
+addstring     "1*Monster Fish" #Any
+addstring     "1*Giant Jellyfish" #Any
+addstring     "1*Asp Turtle" #Any
+addstring     "1*Sea Dragon" #Any
+addstring     "1d2*Great Shark" #Any
+addstring     "1d3*Sea Stag" #Any
 ornext 75
 alterloc 68          #Deepsea
 ornext 25
@@ -67783,24 +67881,16 @@ alterloc              172 #Deep Sea gems
 ornext 100
 alterloc              173 #Deep Sea gems
 soundfx               26 # Sound effect
-addstring     "!Error" #Any
-addstring     "1d8+1*Triton" #Any
-addstring     "1*Monster Fish" #Any
-addstring     "1*Giant Jellyfish" #Any
-addstring     "1*Asp Turtle" #Any
-addstring     "1*Sea Dragon" #Any
-addstring     "1d2*Great Shark" #Any
-addstring     "1d3*Sea Stag" #Any
-descr "Search the Deep Sea for gem deposits, there's about a 75% chance you'll find nothing else one of the four types of deep sea deposits may be found.^^Sea creatures will likely attack you in your search."
+descr "Search the Deep Sea for gem deposits. About a 25% chance to find one of the four deep sea gem deposit types; otherwise the square stays Deep Sea.^^Sea creatures will likely attack you on every search."
 
 
 
 newritual     "Plant Hamadryad"
-descr "Plant a Hamadryad."
+descr "Plant a Hamadryad in a forest or jungle. Cannot be cast on a Recuperating Ancient Forest while it is still growing."
 ritpow                 5 # Druidism
 level                  3
 cost 2  250 # Herbs
-terr -6 # Required terrain: forests/jungles.
+terr -1038 # Plantable forests/jungles (excludes Recuperating Ancient Forest).
 nomonreq                 # Monsters in strings beginning with "(-)" must not be here.
 summoning                # The ritual will summon the monsters specified in a random string.
 apcost 2 # Actual AP cost: 3.
@@ -69297,7 +69387,7 @@ nodemon
 newritual "Ba'alite Whispers"
 descr "The Hierodule whispers into local ears feelings of despair and hate to divide and conquer. Whispers are completely ineffective in larger than village settlements and are only capable of swaying a local hero and converting some locals, for greater effect a High Priestess must create magical propaganda.^^This may cause people to flee the settlement."
 #ritpow 8
-level 2
+level 1
 terr -1013 # Required terrain: human settlements
 #cost 4 1
 apcost 2
@@ -69710,7 +69800,7 @@ gainrit 2   # "Fill Fountain"
 newritpow
 newritual     "Undying Haema"
 descr "The spirit that inhabits the Fountain of Blood can use some of her life force to create a spirit of blood but this will cost the fountain lifeforce depleting it and can only be regained by refilling the fountain with the blood of others. Creating too many Haema Spirits can destroy the fountain."
-level                  2 
+level                  1 
 apcost 3 
 airare 1
 castertarg
@@ -70477,7 +70567,7 @@ level 9
 
 selectritual "Infernal Gate" 
 nostart
-level 9
+level 1
 
 newritual     "Imp Summoning"   #  61
 ritpow                 3 # Demonology
@@ -71031,9 +71121,10 @@ power 0 1
 
 newritpow
 newritual     "Call Ancestral Spirit Leader" # 272
-descr "Call Ancestral Spirit leader from another plane."
+descr "Call an Ancestral Spirit leader from another plane. Requires a library."
 level                  2
 cost 15   75 # Gems
+terr -3
 rebateterr20 -56
 rebateterr50      -57
 sum0chance 50
@@ -71046,7 +71137,7 @@ addstring     "c*Ancestral Chief"
 free
 
 newritual     "Call Ancestral Spirits from the Ether" # 272
-descr "Call Ancestral Spirits to fight for you from another plane."
+descr "Call Ancestral Spirits to fight for you from another plane. Requires a library."
 level                  1
 cost 15   75 # Gems
 rebateterr20 -56
@@ -71318,10 +71409,10 @@ soundfx 57
 forgetrits
 transformtarg 1
 newrit 2
-gainrit -754 #Burgmeister's Court   # "Burgmeister's Court"
-gainrit -709 #Raise Hoburg Militia   # "Raise Hoburg Militia"
-gainrit -486 #Coal mine   # "Buy Bulk Iron"
-gainrit -480 #Clear forest   # "Clear Forest"
+gainrit -755 #Burgmeister's Court   # "Burgmeister's Court"
+gainrit -710 #Raise Hoburg Militia   # "Raise Hoburg Militia"
+gainrit -487 #Coal mine   # "Buy Bulk Iron"
+gainrit -481 #Clear forest   # "Clear Forest"
 updatehome
 addstring "Burgmeister"
 addstring "(-)Burgmeister"
@@ -71337,9 +71428,9 @@ apcost -1
 free
 forgetcurrit #& nextoos
 gainrit -7   #"Urbanize Hoburg Settlement"   # "Urbanize Hoburg Settlement"
-gainrit -709 #Bulk arms   # "Bulk Purchase Hoburg Armaments"
-gainrit -708 #Quality Arms   # "Purchase Quality Hoburg Armaments"
-gainrit -707 #Hog Knight   # "Hog Knight"
+gainrit -710 #Bulk arms   # "Bulk Purchase Hoburg Armaments"
+gainrit -709 #Quality Arms   # "Purchase Quality Hoburg Armaments"
+gainrit -708 #Hog Knight   # "Hog Knight"
 gainrit 23  #"Create Hoburg Manufactury"# 272   # "Create Hoburg Manufactury"
 gainrit 24  #"Create Fortified Hoburg"# 272   # "Create Fortified Hoburg"
 
@@ -71353,7 +71444,7 @@ newritpow
 newritual     "Manual Labor"
 descr "This person can perform manual labor in rural settlements."
 level                  1
-levelreq 1
+levelreq 2
 planereq               0 
 # elysium only
 airare 5
@@ -71908,7 +71999,7 @@ terr 105 #coal mine
 alterloc             129 # Change target location's terrain to: Hoburg Manufactury
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
 free
-descr "The Hoburgs build a Manufactury in a coal mine increasing the output of the mine significantly for raw material."
+descr "The Hoburgs build a Manufactury in a coal mine, greatly increasing iron output while retaining the mine's gem income."
 
 newritual     "Create Fortified Hoburg"# 272
 level                  1
@@ -71937,7 +72028,7 @@ newrit                 2 # Caster will learn a new ritual of level 2.
 soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
 apcost -1
 forgetcurrit
-gainrit -533 #"Study Necromancy Poorly"   # "Study Necromancy Poorly"
+gainrit -534 #"Study Necromancy Poorly"   # "Study Necromancy Poorly"
 nostart
 
 newritual     "Oracle of the Temple"# 254
@@ -72270,7 +72361,7 @@ airare 1
 free                     # This ritual is free
 summoning
 addstring  "8*Trained Guard"
-descr "A magic library is expanded with immense labor and material to construct a great Academy of Magic.^^Trained guards will be permanently stationed in this location for no upkeep."
+descr "A magic library is expanded with immense labor and material to construct a great Academy of Magic.^^Empresses and Queens can commission this civic expansion (7500 gold, 250 iron). Archmages instead use Magically Create Academy of Magic.^^Trained guards will be permanently stationed in this location for no upkeep."
 
 
 newritual "Build Temple District"
@@ -74098,7 +74189,7 @@ addmercrec  "Brigand"                 20  5   100   0    0
 newclass
 setclassname     "Technocratic Mageocracy" 
 #28
-classdescr "A Technocratic Mageocracy where decision-makers are selected on the basis of magical knowledge. A variant start focusing on magic users but with very weak non-mage recruitment options.^^Abilities:^Starts with a level 2 library and Old Wizard who is capable of becoming an Archmage.^Access to many resources but weak standard troop recruitment."
+classdescr "A Technocratic Mageocracy where decision-makers are selected on the basis of magical knowledge. A variant start focusing on magic users but with very weak non-mage recruitment options.^^Abilities:^Starts with a level 2 Magic Library and an Old Wizard. Cast Master of Magic (1000 gold, 100 gems) at the library to become an Archmage, then Magically Create Academy of Magic for a level 3 Academy.^Access to many resources but weak standard troop recruitment."
 clearrec
 clearstartunits
 clearstartterr
@@ -74106,7 +74197,7 @@ nostdtroops
 classcitterr -3 #Libs
 setmaincom       "Old Wizard"
 hometerr 13  
-# Academy of Higher Magic
+# Magic Library (level 2)
 addstartunits    "Swordsman"            10
 addstartunits    "Guardian"             1
 addstartunits    "Colossus Guardian"    1
@@ -74639,7 +74730,7 @@ reclimiter  "=Boar"
 addmercrec  "Hog Hussar"                       25  2  150   2    3
 reclimiter  "=Boar"
 reclimiter  "+Markmeister"
-addmercrec  "Ghoul Guardian"                  100 10    0   0    5
+addunitrec  "Ghoul Guardian"                   50 10  150   0    5
 recxcost 5   5                            #  5 Hands additional cost.
 reclimiter  "+Ghoul Baron"                    # Owning a Ghoul Baron enables the preceding offer.
 reclimiter  "+Ghoulgraf"                      # Owning a Ghoulgraf enables the preceding offer.
@@ -80191,6 +80282,11 @@ nosight
 selectterr 24
 ownable
 gold 15
+citadel
+walls
+irongate
+farsight
+destroyto 151 # Dark Tower (not Old Castle Ruin)
 
 
 nosight
@@ -80878,7 +80974,8 @@ nosight
 
 selectterr 129
 ownable
-gold 1
+gold 2
+gems 4096 # Random gem A 1 (retain coal mine gem income)
 
 
 #defaultvision
@@ -82048,10 +82145,14 @@ hands 1
 
 selectterr 24 # dark citadel
 hands 1
+destroyto 151 # Dark Tower when destroyed
 selectterr 151 # dark tower
 hands 2
 selectterr 152 # dark citadel2
 hands 2
+
+selectterr 314 # Recuperating Ancient Forest
+tempimmune # Do not burn to wasteland on hot planes (e.g. Hades)
 
 #hoburgs and others
 selectterr 1
@@ -85046,13 +85147,13 @@ descr "Magic is nothing more than technology."
 selectritual     "Omniscience"
 descr "From the Arcane Nexus I see everything!."
 selectritual     "Master of Magic"
-descr "An Old Wizard becomes an Archmage at a magic library."
+descr "A Grand Wizard or Old Wizard becomes an Archmage at a level 2+ magic library (1000 gold, 100 gems). An Academy is not required; after promotion an Archmage can Magically Create Academy of Magic from a Magic Library."
 selectritual     "Secret Bookcase"
 descr "All magic libraries are connected through a system of secret magic bookcases but only the caster can travel. Be careful, there are stories of mages accidentally finding themselves in the laboratory of a dangerous mage."
 selectritual     "Teleport Self"
 descr "With four gems of each type a powerful caster can fuse them together and teleport anywhere in Elysium or the Planes if she knows of it.^^This ritual will harm the caster and repeated use may even kill a caster if they are already gravely injured."
 selectritual "Magically Create Academy of Magic"
-descr "The Archmage constructs a great academy from an existing magic library using raw magical power. Tools come alive and materials begin to move themselves and within only a month the expansion will be completed working around the clock."
+descr "The Archmage constructs a great academy from an existing magic library using raw magical power. Tools come alive and materials begin to move themselves and within only a month the expansion will be completed working around the clock.^^Only an Archmage can cast this (promote first with Master of Magic). Senators and Empresses can instead Commission Academy of Magic with gold and iron."
 selectritual     "Magic Gateway"
 descr "For the moderate cost of ten Astral pearls...^I mean ten elemental gems of each type... a mage can open a gateway long enough for even an army to move. Magic libraries are the only facilities capable of having the infrastructure to transfer so much magic so far."
 selectritual     "Mass Teleport"
@@ -85383,6 +85484,8 @@ selectritual     "Secular Justice"
 descr "Hunts down fanatical population that hate cultists and witches and brings them to justice."
 selectritual     "Sauroman Rebirth"
 descr "There are many paths to a long life and decreased mortality, the Sauroman solution is one of them. A form of genetic engineering that makes the host far more resiliant to harm, poison, and disease. This ritual requires a significant number of resources to cast if not done under the right conditions."
+selectritual     "Naga Rebirth"
+descr "An improvement on the Sauroman Solution finishes the transformation allowing the brain to return to normal order and producing positive side-effects, becoming what is called a Naga. This ritual completes the serpent cult's path to immortality and can only be performed in controlled laboratory conditions."
 selectritual     "Unfrozen Summoning" 
 descr "Summons the deadly Unfrozen warriors when in the cold northern mountains."
 selectritual     "Greater Unfrozen Summoning"
@@ -85498,7 +85601,7 @@ descr "Construct a temple next to any village or larger settlement.^^A couple of
 selectritual "Expand and Declare Capital"
 descr "Expand and declare a Capital city, only one capital can exist. There must be population available in the migration or growth pool.^^Trained guards will be permanently stationed in this location for no upkeep."
 selectritual "Commission Academy of Magic"
-descr "A magic library is expanded with immense labor and material to construct a great Academy of Magic.^^Trained guards will be permanently stationed in this location for no upkeep."
+descr "A magic library is expanded with immense labor and material to construct a great Academy of Magic.^^Senators, Emperors, Empresses, and Queens can commission this civic expansion (7500 gold, 250 iron). Archmages instead use Magically Create Academy of Magic.^^Trained guards will be permanently stationed in this location for no upkeep."
 selectritual "Build Temple District"
 descr "Expand a town's infrastructure into a Temple District requires considerable resources for mostly aesthetics.^^Trained guards will be permanently stationed in this location for no upkeep."
 selectritual "Commission Arena"
@@ -86068,9 +86171,13 @@ descr "An Emperor can attract a range of talented people depending on location."
 selectritual     "Lesser Water Summoning"                                    
 descr "This ritual will summon a water elemental and bind it to service.  Elementals are beings of pure elemental energies given life through magical rituals.  Sometimes the elemental energies used to create the elemental are diluted and impure.  This results in one or more elemental shards or lesser elementals instead."
 selectritual     "Develop Deep Sea Gem Deposits"                                  
-descr "Search the Deep Sea for gem deposits, there's about a 75% chance you'll find nothing else one of the four types of deep sea deposits may be found."
+descr "Search the Deep Sea for gem deposits. About a 25% chance to find one of the four deep sea gem deposit types; otherwise the square stays Deep Sea.^^Sea creatures will likely attack you on every search."
 selectritual     "Plant Hamadryad"
-descr "Plant a Hamadryad."
+terr -1038
+descr "Plant a Hamadryad in a forest or jungle. Cannot be cast on a Recuperating Ancient Forest while it is still growing."
+selectritual     "Plant Forest Guardians"
+terr -1038
+descr "This ritual can only be cast in wooded areas (not Recuperating Ancient Forest) and will create guardians suitable for defending it. The ritual does not require many resources, but it takes a long time to perform."
 selectritual     "Repair Iron Dragon Clockwork"
 descr "Spend a few months repairing a damaged Iron Dragon, Diamond is prioritized over Ruby then Sapphire and last Emerald.^^The Clockwork must manually repair the Iron Dragon taking significant time eventually reaching a worn state in about three months."
 selectritual	"Summon Small Fire"
@@ -86297,9 +86404,9 @@ descr "A powerful Demon may raid a smaller human settlement for sacrifices while
 selectritual     "Gather Souls"
 descr "A powerful Demon may raid a smaller human settlement for sacrifices while stealing their gold and other goods, only Ascended humans, the Duke and Duchess of Hell, and the Lord of Corruption may prevent this action if they are in the immediate area. This will almost assuredly bring about defiant forces willing to defend the settlement.^^This will cause people to flee the settlement."
 selectritual     "Call Ancestral Spirit Leader"                                           
-descr "Call Ancestral Spirit leader from another plane."
+descr "Call an Ancestral Spirit leader from another plane. Requires a library."
 selectritual     "Call Ancestral Spirits from the Ether"                       
-descr "Call Ancestral Spirits to fight for you from another plane."
+descr "Call Ancestral Spirits to fight for you from another plane. Requires a library."
 selectritual     "Monarchist's Lineage" 0
 descr "For those without access to magic the one way to achieve immortality is through one's offspring. The Emperor can meet with the Empress to produce offspring in capital locations."
 
@@ -86393,7 +86500,6 @@ addstring "Hero"
 selectmonster "Unexpected Hero"
 power 0 1
 
-newritpow
 newritual "Earn Respect"
 descr "In a town, city, or temple the Hero's renown spreads until common folk and magistrates treat him as a Respected Hero."
 level 2
@@ -86406,13 +86512,14 @@ forgetrits
 updatehome
 soundfx 57
 free
+gainrit -551   # "Legitimate Power - Position"
 gainrit 4   # "Expand Hamlet (Respected Hero)"
 gainrit 5   # "Noble Title at Castle"
 gainrit 7   # "Inspire Heroism"
 addstring "Respected Hero"
 
 selectmonster "Hero"
-power 0 1
+power 0 2
 
 newritpow
 newritual "Prove Valor"
@@ -86432,7 +86539,6 @@ addstring "Heroine"
 selectmonster "Untested Heroine"
 power 0 1
 
-newritpow
 newritual "Earn Renown"
 descr "At a capital or great temple a Heroine's deeds are sung until she is hailed as a Respected Heroine, fit for induction or noble marriage."
 level 2
@@ -86451,7 +86557,7 @@ gainrit 8   # "Inspire Heroine"
 addstring "Respected Heroine"
 
 selectmonster "Heroine"
-power 0 1
+power 0 2
 
 newritpow
 newritual "Field Leadership"
@@ -86472,7 +86578,7 @@ newritpow
 newritual "Expand Hamlet (Respected Hero)"
 descr "A Respected Hero may expand a hamlet on his domain into a village when migration is available and no village lies nearby."
 level 1
-levelreq 2
+levelreq 1
 nonearby1req -16
 cost 0  1000
 cost 1    50
@@ -86493,8 +86599,8 @@ power 0 1
 newritpow
 newritual "Noble Title at Castle"
 descr "A Respected Hero who holds a castle may take the title of Baronet without having served as a knight."
-level 2
-levelreq 2
+level 1
+levelreq 1
 cost 0  1000
 cost 1    15
 terr -9
@@ -86512,8 +86618,11 @@ addstring "Baronet"
 selectmonster "Respected Hero"
 power 0 1
 
+selectmonster "Baronet"
+power 0 1
+
 newritual "Claim Baronial Title (Respected Hero)"
-level 3
+level 1
 cost 0  2000
 cost 1  75
 terr -1018
@@ -86527,7 +86636,7 @@ addstring "(-)Baron"
 soundfx 114
 apcost 0
 updatehome
-gainrit -565   # "Steward of Leadership"
+gainrit -566   # "Steward of Leadership"
 free
 closewin
 descr "When no higher lord claims this castle a Respected Hero turned Baronet may claim the title of Baron."
@@ -86535,11 +86644,14 @@ descr "When no higher lord claims this castle a Respected Hero turned Baronet ma
 selectmonster "Respected Hero"
 power 0 1
 
+selectmonster "Baronet"
+power 0 1
+
 newritpow
 newritual "Inspire Heroism"
 descr "A Respected Hero inspires a militiaman or conscript with tales of glory, awakening the spark of an Unexpected Hero."
-level 2
-levelreq 2
+level 1
+levelreq 1
 cost 0 50
 apcost 2
 terr -1013
@@ -86558,8 +86670,8 @@ power 0 1
 newritpow
 newritual "Induct to the Priesthood"
 descr "At a temple a Respected Heroine or Amazon Priestess is inducted as Renata, oracle of her order, on the path to High Renata and imperial marriage."
-level 2
-levelreq 2
+level 1
+levelreq 1
 cost 12  50
 terr -2
 soundfx               88
@@ -86599,8 +86711,8 @@ power 0 1
 newritpow
 newritual "Elevate to Nobility"
 descr "At a castle a Respected Heroine is elevated to Warrior Princess, fit to wed a baron or king and anchor a noble dynasty."
-level 2
-levelreq 2
+level 1
+levelreq 1
 cost 0  500
 terr -9
 castertarg
@@ -86616,8 +86728,8 @@ power 0 1
 newritpow
 newritual "Inspire Heroine"
 descr "A Respected Heroine inspires raw Amazon recruits with visions of glory, raising an Untested Heroine."
-level 2
-levelreq 2
+level 1
+levelreq 1
 cost 0 50
 apcost 2
 terr -1013
@@ -86802,7 +86914,7 @@ power 0 2
 newritpow
 newritual "Fundamentalist Compact"
 descr "A Paladin forges an alliance with temple fundamentalists, gaining the power to radicalize faithful settlements."
-level 2
+level 1
 cost 12 15 # Relics
 terr -2
 soundfx 57
@@ -86813,7 +86925,7 @@ gainrit 11   # "Raise Faithful Levy"
 
 newritual "Zealous Crusade"
 descr "A Paladin raises zealots and fanatic leaders from faithful settlements near a temple."
-level 2
+level 1
 cost 0 50
 cost 12 1
 terr -1013
@@ -86830,7 +86942,7 @@ closewin
 
 newritual "Ba'alite Temptation"
 descr "At a Temple of Ba'al a Paladin may abandon the Church of El and become a fanatic knight of Ba'al instead."
-level 2
+level 1
 soundfx 57
 cost 4 50 # Blood
 terr 31 # Temple of Ba'al
@@ -86842,7 +86954,7 @@ addstring "Ba'alite Zealot Knight"
 
 newritual "Templar Zeal"
 descr "A Templar summons crusaders and temple guards from church settlements to fight for the holy order."
-level 2
+level 1
 cost 12 10 # Relics
 cost 0 75
 terr -1013
@@ -86858,7 +86970,7 @@ centerloc
 
 newritual "Embrace Extremism"
 descr "Only the most zealous Paladins abandon moderation entirely, becoming fanatic leaders of splinter sects."
-level 2
+level 1
 cost 12 30
 terr -2
 soundfx 57
@@ -86899,7 +87011,7 @@ power 0 1
 newritpow
 newritual "Verdant Pact"
 descr "The Unicorn Knight deepens their bond with the forest, gaining greater druidic power and the ability to commune with forest beings."
-level 2
+level 1
 cost 2 200 # Herbs
 cost 6 25 # Weed
 terr -62
@@ -86916,7 +87028,7 @@ newspell2 39
 
 newritual "Primal Pact"
 descr "The Unicorn Knight sheds armor and courtly restraint, embracing the barechested wild ways of the forest riders."
-level 2
+level 1
 cost 2 100 # Herbs
 terr -11
 rebateterr50 4
@@ -86930,7 +87042,7 @@ addstring "Dismounted Barechested Unicorn Knight"
 
 newritual "Forest Communion"
 descr "The Unicorn Knight summons forest beasts and beings appropriate to the local climate."
-level 2
+level 1
 terr -11
 rebateterr50 4
 apcost 2
@@ -86973,7 +87085,7 @@ power 0 1
 newritpow
 newritual "Royal Guard Commission"
 descr "A Royal Knight spends great resources to train and equip lower-tier soldiers as elite Royal Guard units."
-level 2
+level 1
 cost 0 500 # Gold
 cost 1 25 # Iron
 apcost 3
@@ -86992,7 +87104,7 @@ addstring "Royal Guard Heavy Infantry"
 
 newritual "Garrison the Royal Guard"
 descr "A Royal Knight posts elite Royal Guard at a settlement, promoting trained guards into stationary royal garrison troops."
-level 2
+level 1
 cost 0 750 # Gold
 cost 1 50 # Iron
 terr -1013
