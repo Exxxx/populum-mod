@@ -54182,7 +54182,7 @@ promotion -1
 gainrit 8   # "Troll King's Court"
 gainrit 9   # "Rock Troll King's Court"
 gainrit 10   # "Forest Troll King's Court"
-gainrit 797   # "Lake Troll King's Court"
+gainrit 798   # "Lake Troll King's Court"
 addstring "Troll King"
 addstring "Troll King"
 addstring "Rock Troll King"
@@ -54808,7 +54808,7 @@ newrit 2
 newrit 1
 gainrit -40   # "Pillage"
 gainrit -39   # "Enslave"
-gainrit 756   # "Pale One Concubines"
+gainrit 757   # "Pale One Concubines"
 nostart
 
 newritual "Inaugurate Deep King"
@@ -56000,8 +56000,8 @@ addstring "c*High Hoburg Offspring"
 free
 addstring     "(&)Baron"
 
-newritual "Head Hunting"
-descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from humans settlements, to hoburgs, goblins, and even kobolds. A councilor will not be able to search for new talent when a Dvala is present"
+newritual "Head Hunting (Mines and Mountains)"
+descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from mines and mountains. A councilor will not be able to search for new talent when a Dvala is present"
 ritpow                30 # Dwarf Councilor
 level 1
 cost 0 50 
@@ -56015,6 +56015,23 @@ summoning
 addstring "!Error"
 addstring "(-12)c*Black Kobold Settler" #Greater Mines
 addstring "(-1029)Dwarf Commander"
+addstring "(-)Young Dvala"          # This string will only be used by nomonreq or nomonworldreq.
+addstring "(-)Dvala"                # This string will only be used by nomonreq or nomonworldreq.
+addstring "(-)Daughter of Dvalin"   # This string will only be used by nomonreq or nomonworldreq.
+
+newritual "Head Hunting"
+descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from humans settlements, to hoburgs, and goblins."
+ritpow                30 # Dwarf Councilor
+level 1
+cost 0 50 
+cost 15 2
+rebateterr50 126
+free
+airare 5
+sum0chance 15
+summoning
+addstring "!Error"
+addstring "(-1029)Dwarf Commander"
 addstring "(-28)c*Untested Heroine"    # Towns+
 addstring "(-28)c*Peddlar"
 addstring "(-28)c*Hero"       # Towns+
@@ -56027,9 +56044,6 @@ addstring "(-6)c*Goblin Hero"        # 12       Forest
 addstring "(-3)c*Hedge Wizard"       # 13       Libs
 addstring "(-64)c*Reveler"           # 14       Farms-hamlets
 addstring "(-2)c*Priest"    		 # 15       Temple
-addstring "(-)Young Dvala"          # This string will only be used by nomonreq or nomonworldreq.
-addstring "(-)Dvala"                # This string will only be used by nomonreq or nomonworldreq.
-addstring "(-)Daughter of Dvalin"   # This string will only be used by nomonreq or nomonworldreq.
 
 newritual "Develop Coal Mine"
 descr "Construct a coal mine in any mountain using Dwarf Workers. Doing will attract animals, creatures, and locals depending on terrain and climate. Coal is cheapest and easiest mineral resource to develop though it can be dangerous as the creatures living in the area will likely attack. Councilor's have estimated that a coal mine is developed usually within a year's time."
@@ -60012,7 +60026,7 @@ airare 1
 forgetrits
 castertarg
 transformtarg 1
-gainrit -291   # "Enslave"
+gainrit -292   # "Enslave"
 addstring "Slaver"
 
 selectmonster "Captain"
@@ -67090,8 +67104,8 @@ updatehome
 addstring     "Vampire Witch"
 castertarg
 gainrit 1   # "Relocate Soul" Note: Duplicate Ritual Name   # "Relocate Soul"
-gainrit -615        # "Crossbreeding"   # "Crossbreeding"
-gainrit -614        # "Improved Crossbreeding"   # "Improved Crossbreeding"
+gainrit -616        # "Crossbreeding"   # "Crossbreeding"
+gainrit -615        # "Improved Crossbreeding"   # "Improved Crossbreeding"
 newspell1 11 #Blood
 newspell1 38
 newspell2 38
@@ -71409,8 +71423,8 @@ soundfx 57
 forgetrits
 transformtarg 1
 newrit 2
-gainrit -755 #Burgmeister's Court   # "Burgmeister's Court"
-gainrit -710 #Raise Hoburg Militia   # "Raise Hoburg Militia"
+gainrit -756 #Burgmeister's Court   # "Burgmeister's Court"
+gainrit -711 #Raise Hoburg Militia   # "Raise Hoburg Militia"
 gainrit -487 #Coal mine   # "Buy Bulk Iron"
 gainrit -481 #Clear forest   # "Clear Forest"
 updatehome
@@ -71428,9 +71442,9 @@ apcost -1
 free
 forgetcurrit #& nextoos
 gainrit -7   #"Urbanize Hoburg Settlement"   # "Urbanize Hoburg Settlement"
-gainrit -710 #Bulk arms   # "Bulk Purchase Hoburg Armaments"
-gainrit -709 #Quality Arms   # "Purchase Quality Hoburg Armaments"
-gainrit -708 #Hog Knight   # "Hog Knight"
+gainrit -711 #Bulk arms   # "Bulk Purchase Hoburg Armaments"
+gainrit -710 #Quality Arms   # "Purchase Quality Hoburg Armaments"
+gainrit -709 #Hog Knight   # "Hog Knight"
 gainrit 23  #"Create Hoburg Manufactury"# 272   # "Create Hoburg Manufactury"
 gainrit 24  #"Create Fortified Hoburg"# 272   # "Create Fortified Hoburg"
 
@@ -85040,8 +85054,10 @@ selectritual    "Spontaneous Metallic Conception"
 descr "A Dvala has the unique physiology capable of self-insemination, the process is expensive but will rapidly produce drones in a short period of time. Possible side-effects include psychopathic children and crossbreeds.^^This ritual will hurt the caster."
 selectritual    "Dvala's Boy Toy Baron"
 descr "While a Dvala has the unique physiology capable of self-insemination, the process is expensive and unreliable so instead the Dvala can bribe a Baron to service her. While this has a low chance of failure due to the Dvala's fertility magics it is not guaranteed to succeed."
+selectritual "Head Hunting (Mines and Mountains)"
+descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from mines and mountains. A councilor will not be able to search for new talent when a Dvala is present"
 selectritual "Head Hunting"
-descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from humans settlements, to hoburgs, and even goblins."
+descr "Dvala's bring together all manner of lower beings not just Dwarves but they never leave their courts letting their Councilors head hunt talent for them offering gold and gems but sometimes turning up nothing. Councilors can seek out all sorts of types from humans settlements, to hoburgs, and goblins."
 selectritual "Develop Coal Mine"
 descr "Construct a coal mine in any mountain using Dwarf Workers. Doing will attract animals, creatures, and locals depending on terrain and climate. Coal is cheapest and easiest mineral resource to develop though it can be dangerous as the creatures living in the area will likely attack. Councilor's have estimated that a coal mine is developed usually within a year's time."
 selectritual "Develop Proper Mine"
