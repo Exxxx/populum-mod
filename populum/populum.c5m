@@ -10435,7 +10435,7 @@ look 158
 sound -1
 
 newweapon "Huge Gore"
-range 2
+range 1
 init 2
 dmgtype 3
 aoe 2002
@@ -41377,7 +41377,6 @@ copystats "Ice Golem"
 noslots
 growhp 100
 shrinkhp 50
-growhp 
 shardexpl 2
 deployoutside 1
 aggressive
@@ -41603,7 +41602,7 @@ descr "This Golem has sustained significant damage and will be destroyed if not 
 copyspr "Silver Golem"
 copystats "Silver Golem"
 noslots
-growhp 138
+growhp 141
 deployoutside 1
 aggressive
 
@@ -52537,8 +52536,6 @@ power 27  3 # Monk, level 3.
 selectmonster "Phoenix"
 reformloc 102 #Volcano reform
 hp 34 # Hit Points.
-growtime 24 #2 years
-growoffs 2387 # "Phoenix" (2841 - 454; recalculate if newmonsters are inserted before adult Phoenix)
 fireaura 1
 name "Young Phoenix"
 
@@ -52574,6 +52571,10 @@ immortalap                     1 # When the monster dies, it costs 1 AP to respa
 ## fx156                        1 # Unhandled trait 156 with argument 1.
 reformloc 102
 firstshape -1
+
+selectmonster "Young Phoenix"
+growtime 24 # 2 years
+growoffs 2388 # adult 2841 - vanilla Phoenix 453 (v5.33). Extra vanilla monsters or mods loaded before Populum land short of the adult, but still inside the list. Do not copy this offset onto the adult.
 
 newmonster "Heroine"
 copyspr "Lady Knight"
@@ -57578,6 +57579,7 @@ newritual  "Void Soul"
 descr "At great cost to one's sanity, the High Priestess may call upon the power of the void becoming a terrifying horror for less than half a year before returning to her human form."
 level 3
 apcost -4
+aimaxcast 1
 castertarg
 transformtarg 1
 addstring "Void Soul"
@@ -61327,8 +61329,9 @@ centerloc
 # Center screen on target location.
 closewin                 
 # Closes cast ritual window.
-apcost -4
-# This ritual refunds 1 AP to the caster instead of costing any AP.
+apcost -2
+# Actual cost is apcost+1, so -2 refunds 1 AP. -4 refunded 3 and let the AI recast until its sapphires were gone.
+aimaxcast 1
 free
 
 
@@ -67129,6 +67132,7 @@ newritual     "Omniscience"
 descr "Reveal entire plane"
 level                  1
 apcost -1
+airare -1
 multiplane 2
 soundfx               23 # Sound effect when the ritual is cast: airduct.smp.
 castertarg
@@ -67140,9 +67144,9 @@ newritual     "Godly Endurance"
 descr "Regain AP"
 level                  1
 apcost -6
+airare -1
 soundfx               23 # Sound effect when the ritual is cast: airduct.smp.
 castertarg
-apcost
 closewin                 # Closes cast ritual window.
 free
 
@@ -67150,6 +67154,7 @@ newritual     "Travel"
 descr "Teleport anywhere"
 level                  2
 apcost -1
+airare -1
 chooseterrloc         -1 # Player chooses the target location
 multiplane 2
 teleportloc            2 # Teleport caster and army to target location.
@@ -67166,6 +67171,7 @@ setplayer 0
 farsummon
 addstring     "Change Team"
 apcost -1
+airare -1
 free
 
 newritual     "Change Team 24 (Independents)"
@@ -67177,6 +67183,7 @@ setplayer 24
 farsummon
 addstring     "Change Team"
 apcost -1
+airare -1
 free
 
 newritual     "Change Team 25 (Special monsters)"
@@ -67188,6 +67195,7 @@ setplayer 25
 farsummon
 addstring     "Change Team"
 apcost -1
+airare -1
 free
 
 newritual     "Change Team 26 (Horrors)"
@@ -67199,6 +67207,7 @@ setplayer 26
 farsummon
 addstring     "Change Team"
 apcost -1
+airare -1
 free
 
 newritual     "Change Team 27 (Hades)"
@@ -67210,6 +67219,7 @@ setplayer 27
 farsummon
 addstring     "Change Team"
 apcost -1
+airare -1
 free
 
 newritual     "Change Team 28 (Inferno)"
@@ -67221,6 +67231,7 @@ setplayer 28
 farsummon
 addstring     "Change Team"
 apcost -1
+airare -1
 free
 
 newritual     "Change Team 29 (Celestial)"
@@ -67232,6 +67243,7 @@ setplayer 29
 farsummon
 addstring     "Change Team"
 apcost -1
+airare -1
 free
 
 newritual     "Change Team 30 (Kingdom/Empire)"
@@ -67243,6 +67255,7 @@ setplayer 30
 farsummon
 addstring     "Change Team"
 apcost -1
+airare -1
 free
 
 newritual     "Kill Tile"
@@ -67254,6 +67267,7 @@ setplayer 25
 farsummon
 addstring     "Annihilation"
 apcost -1
+airare -1
 free
 
 selectmonster "Director Tool"
@@ -70060,6 +70074,7 @@ farsummon
 addstring     "1*Meteors"
 addstring     "1*Strong Meteor Showers"
 apcost -1
+airare -1
 free
 gainrit 1   # "Call Make Ruin"
 
@@ -70072,6 +70087,7 @@ setplayer 25
 farsummon
 addstring     "1*Make Ruin"
 apcost -1
+airare -1
 free
 
 
@@ -71848,8 +71864,9 @@ newritpow
 newritual "Deliver Iron"
 level 1
 aialways 999
+aimaxcast 1
 terr -1021
-apcost -1
+apcost 0
 cost 0 -500
 cost 1 -100
 free
@@ -71866,8 +71883,9 @@ newritpow
 newritual "Deliver Herbs"
 level 1
 aialways 999
+aimaxcast 1
 terr -1021
-apcost -1
+apcost 0
 cost 0 -500
 cost 2 -200
 free
@@ -71883,8 +71901,9 @@ newritpow
 newritual "Deliver Weed"
 level 1
 aialways 999
+aimaxcast 1
 terr -1021
-apcost -1
+apcost 0
 cost 0 -500
 cost 6  -50
 free
@@ -72111,6 +72130,7 @@ newritpow
 newritual "Plane Shifter"
 level                  3
 apcost -1
+airare -1
 planeloc               5  # e.g. 5 = Hades
 teleportloc            2 # Teleport caster's entire army to target location.
 centerloc                # Center screen on target location.
@@ -72123,6 +72143,7 @@ descr "Currently set to planeloc=hades"
 newritual "Debugger"
 level                  4
 apcost -1
+airare -1
 free                     # This ritual is learned for free and everyone will know it from the start if able to.
 summoning
 #addstring    "c*3:Hedge Wizard" # Elements
@@ -76939,6 +76960,7 @@ squareevent
 +hasunithere -3 "Mature Heart of the Forest"
 +terrain -6 #Any forest/jungle
 -terrain -23 #Not citadels
+-terrain 4 #Already ancient forest; converting again would retrigger this event
 alterterrain 4 #Ancient forest
 endevent
 
@@ -82866,6 +82888,7 @@ squareevent
 +hasunithere -3 "Mature Heart of the Forest"
 +terrain -6 #Any forest/jungle
 -terrain -23 #Not citadels
+-terrain 4 #Already ancient forest; converting again would retrigger this event
 alterterrain 4 #Ancient forest
 endevent
 
